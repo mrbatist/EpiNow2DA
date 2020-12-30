@@ -183,18 +183,9 @@ model {
 generated quantities {
   int imputed_reports[ot_h];
   vector[estimate_r > 0 ? 0: ot_h] gen_R;
-  real r[ot_h];
+  real r[ot_h] - 1;
   vector[return_likelihood ? ot : 0] log_lik;
-  if (estimate_r){
-    // estimate growth from estimated Rt
-    real set_gt_mean = (gt_mean_sd[1] > 0 ? gt_mean[1] : gt_mean_mean[1]);
-    real set_gt_sd = (gt_sd_sd [1]> 0 ? gt_sd[1] : gt_sd_mean[1]);
-<<<<<<< HEAD
-    r = R_to_growth(R, set_gt_mean, set_gt_sd);
-=======
-    vector[gt_max[1]] gt_pmf = combine_pmfs(gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1);
->>>>>>> 199a67db (switch to directly calculated growth rate)
-  } else {
+  if (estimate_r == 0){
     // sample generation time
     real gt_mean_sample[1];
     real gt_sd_sample[1];
@@ -211,10 +202,9 @@ generated quantities {
     gen_R = calculate_Rt(
       infections, seeding_time, gt_rev_pmf, rt_half_window
     );
-    // estimate growth from calculated Rt
   }
   // estimate growth from infections
-  r = calculate_growth(infections, seeding_time);
+  r = calculate_growth(infections, seeding_time + 1);
   // simulate reported cases
   imputed_reports = report_rng(reports, rep_phi, model_type);
   // log likelihood of model
