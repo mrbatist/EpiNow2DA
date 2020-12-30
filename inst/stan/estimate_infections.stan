@@ -189,7 +189,11 @@ generated quantities {
     // estimate growth from estimated Rt
     real set_gt_mean = (gt_mean_sd[1] > 0 ? gt_mean[1] : gt_mean_mean[1]);
     real set_gt_sd = (gt_sd_sd [1]> 0 ? gt_sd[1] : gt_sd_mean[1]);
+<<<<<<< HEAD
     r = R_to_growth(R, set_gt_mean, set_gt_sd);
+=======
+    vector[gt_max[1]] gt_pmf = combine_pmfs(gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1);
+>>>>>>> 199a67db (switch to directly calculated growth rate)
   } else {
     // sample generation time
     real gt_mean_sample[1];
@@ -208,8 +212,9 @@ generated quantities {
       infections, seeding_time, gt_rev_pmf, rt_half_window
     );
     // estimate growth from calculated Rt
-    r = R_to_growth(gen_R, gt_mean_sample[1], gt_sd_sample[1]);
   }
+  // estimate growth from infections
+  r = calculate_growth(infections, seeding_time);
   // simulate reported cases
   imputed_reports = report_rng(reports, rep_phi, model_type);
   // log likelihood of model
