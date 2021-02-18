@@ -68,9 +68,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-news">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -167,7 +173,7 @@
 <li>Added a new argument, <code>prior</code>, to <code>backcalc_opts</code>. This allows the use of different priors for the underlying latent infections when estimating using deconvolution/back-calculation rather than the package default of using a generated Rt model (enable this option by setting <code>rt = NULL</code>). The default prior remains smoothed mean delay shifted reported cases but optionally no prior can now also be used (for scenarios when the data is very untrustworthy but likely to perform extremely poorly in real time).In addition, the previously estimated infections can be used (i.e infections[t] = infections[t-1] * exp(GP)) with this being an approximate version of the generative Rt model that does not weight previous infections using the generation time.</li>
 <li>Updates the smoothing applied to mean shifted reported cases used as a prior for back calculation when <code>prior = "reports"</code> to be a partial centred moving average rather than a right aligned moving average. This choice means that increasing the <code>prior</code> window does not alter the location of epidemic peaks as when using a right alighted moving average.</li>
 <li>Updates the default smoothing applied to mean shifted reported cases to be 14 days rather than 7 as usage indicates this provided too much weight to small scale changes. This remains user set able.</li>
-<li>Adds a new argument <code>init_fit</code> to <code><a href="../reference/stan_opts.html">stan_opts()</a></code> that enables the user to pass in a <code>stanfit</code> to use to initialise a model fit in <code><a href="../reference/estimate_infections.html">estimate_infections()</a></code>. Optionally <code>init_fit = "cumulative"</code> can also be passed which first fits to cumulative data and then uses the result to initialise the full fit on incidence data. This approach is based on the approach used in <a href="https://github.com/ImperialCollegeLondon/epidemia/">epidemia</a> authored by James Scott. Currently <code>stan</code> warnings from this initial fit are broadcast to the user and may cause concern as the short run time and approximate settings often lead to poor convergence.</li>
+<li>Adds a new argument <code>init_fit</code> to <code><a href="../reference/stan_opts.html">stan_opts()</a></code> that enables the user to pass in a <code>stanfit</code> to use to initialise a model fit in <code><a href="../reference/estimate_infections.html">estimate_infections()</a></code>. Optionally <code>init_fit = "cumulative"</code> can also be passed which first fits to cumulative data and then uses the result to initialise the full fit on incidence data. This approach is based on the approach used in <a href="https://github.com/ImperialCollegeLondon/epidemia/" class="external-link">epidemia</a> authored by James Scott. Currently <code>stan</code> warnings from this initial fit are broadcast to the user and may cause concern as the short run time and approximate settings often lead to poor convergence.</li>
 <li>Adds <code>estimate_secondary</code> and <code>forecast_secondary</code> along with a <code>plot</code> method and a new option function (<code>secondary_opts</code>). These functions implement a generic model for forecasting a secondary observation (such as hospital bed usage, deaths in hospital) that entirely depends on a primary observation (such as hospital admissions) via a combination of convolving over a delay and adding/subtracting current observations. They share the same observation model and optional features used by <code>estimate_infections</code> and so support data truncation, scaling (between primary and secondary observations), multiple log normal delays, a day of the week effect, and various error models. <code>stationary_opts</code> allows for easy specification of the most common use cases (incidence and prevalence variables). See the documentation and examples for model details.</li>
 </ul>
 </div>
@@ -202,10 +208,10 @@
 <li>Updates the initialisation of the generative Rt model (the default) so that initial infections that occur in unobserved time (i.e before the first reported case) are generated using an exponential growth model with priors based on fitting the same model to the first week of data. This replaces the previous approach which was to use delay shifted reported cases multiplied by independent noise terms. It reduces degrees of freedom and fitting time at the cost of some model flexibility. Alternatives such as using the generative Rt model were considered but ultimately these approaches were not used as they introduced spurious variation to the gaussian process and result in unreliable Rt estimates due to the lack of historic infections.</li>
 <li>New <code>simulate_infections</code> function from <a href='https://github.com/sbfnk'>@sbfnk</a> which allows the simulation of different Rt traces when combined with estimates as produced by <code>estimate_infections</code>. This function is likely to form the basis for moving all forecasting out of <code>estimate_infections</code> which may improve model stability.</li>
 <li>Updates the implementation of the Gaussian process to support the Matern 3/2 Kernel (and set this as the default) in addition to the squared exponential kernel. Updates the handling of Gaussian process arguments so that only overridden settings need to be passed by the user when making changes. Settings are now defined, and documented, in <code>gp_opts</code>. The length scale is now defined using a log normal truncated prior with a mean of 21 days and a standard deviation of 7 days truncated at 3 days and the length of the data by default. This prior is an area of active research and so may change in future releases.</li>
-<li>Updates the over dispersion prior to be <code>1 / sqrt(half_normal(0, rho_prior))</code> based on <a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">this</a> advice and as the over dispersion being measured is in reports and not infections and hence a priori there is not strong evidence for over dispersion (which may be the case for infections) so the previous prior was overly weighted towards this.</li>
+<li>Updates the over dispersion prior to be <code>1 / sqrt(half_normal(0, rho_prior))</code> based on <a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations" class="external-link">this</a> advice and as the over dispersion being measured is in reports and not infections and hence a priori there is not strong evidence for over dispersion (which may be the case for infections) so the previous prior was overly weighted towards this.</li>
 <li>Updates the interface for the observation model with arguments now passed using <code>obs_opts</code>. This removes <code>week_effect</code> and <code>family</code> from the main argument list which will allow for future extensions. Also adds a new argument <code>scale</code> which controls the uncertain fraction of cases that are eventually observed (defined as normally distributed). Setting this parameter will not impact Rt estimates.</li>
 <li>Updates the interface to the Rt settings with all arguments passed via <code>rt</code>, using <code>rt_opts</code>, this includes the initial prior,<code>use_breakpoints</code>, and <code>future</code>. Adds a new helper argument <code>rw</code> which enables easy parameterisation of a fixed length random walk. These changes also help make it clear that these arguments only impact the Rt generative model and not the back calculation model.</li>
-<li>Adds an adjustment for population susceptibility based on that used in <a href="https://github.com/ImperialCollegeLondon/epidemia"><code>{epidemia}</code></a> when Rt is fixed into the future (set by passing a population to <code>rt_opts(pop = initial susceptible population)</code>. Note this only impacts case forecasts and not output Rt estimates and only impacts estimates at all beyond the forecast horizon as those based on data already account for population susceptibility by definition. The impact of this assumption can be explored using <code>simulate_infections</code> (by updating <code>est$arg$pop</code> in the example).</li>
+<li>Adds an adjustment for population susceptibility based on that used in <a href="https://github.com/ImperialCollegeLondon/epidemia" class="external-link"><code>{epidemia}</code></a> when Rt is fixed into the future (set by passing a population to <code>rt_opts(pop = initial susceptible population)</code>. Note this only impacts case forecasts and not output Rt estimates and only impacts estimates at all beyond the forecast horizon as those based on data already account for population susceptibility by definition. The impact of this assumption can be explored using <code>simulate_infections</code> (by updating <code>est$arg$pop</code> in the example).</li>
 <li>Adds <code>truncation</code> as a new argument to <code>estimate_infections</code> and higher level functions. This takes output from <code>trunc_opts</code> and allows for internally adjusting observed cases for truncation. A new method <code>estimate_truncation</code> has also been added to support estimating a log normal truncation distribution from archived versions of the same data set though this method is currently experimental.</li>
 <li>Adds <code>estimate_delay</code> as a user friendly wrapper around <code>bootstrapped_dist_fit</code>.</li>
 </ul>
@@ -226,7 +232,7 @@
 <li>Added a new function, <code>expose_stan_fns</code> that exposes the internal stan functions into R. The enables unit testing, exploration of the stan functionality and potentially within R use cases for these functions.</li>
 <li>Updates the default <code>warmup</code> to be 250 samples and the default <code>adapt_delta</code> to be 0.98.</li>
 <li>Adds a pooling parameter for the standard deviation of breakpoint effects.</li>
-<li>Updated all documentation and added <a href="https://lifecycle.r-lib.org/">lifecycle</a> badges to all functions to indicate development stage.</li>
+<li>Updated all documentation and added <a href="https://lifecycle.r-lib.org/" class="external-link">lifecycle</a> badges to all functions to indicate development stage.</li>
 </ul>
 </div>
 </div>
@@ -311,7 +317,7 @@
 <a href="#epinow2-100" class="anchor"></a>EpiNow2 1.0.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>Rebased package from <a href="https://epiforecasts.io/EpiNow/">EpiNow</a>
+<li>Rebased package from <a href="https://epiforecasts.io/EpiNow/" class="external-link">EpiNow</a>
 </li>
 <li>Implemented backcalculation, estimation, forecasting, and bootstrapped distribution fitting.</li>
 <li>Added options to estimate the time-varying reproduction number using a Gaussian process (both stationary and non-stationary), combined with optional user supplied breakpoints. Alternatively a static reproduction number can be assumed which when combined with breakpoints becomes piecewise linear.</li>
@@ -359,6 +365,8 @@
 </script>
 
 
+
+  
 
   </body>
 </html>
