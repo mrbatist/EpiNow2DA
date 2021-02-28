@@ -160,6 +160,13 @@
 <li>Updated the classification of growth to use stable rather than unsure when Rt is approximately 1.</li>
 </ul>
 </div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed a bug in the deconvolution Rt estimation method where the mean of the generation time was being used as the standard deviation. For the default package generation time these are close and so the impact will be limited but in cases where the standard deviation is &lt;&lt; than the mean this should result in more accurate Rt estimates.</li>
+</ul>
+</div>
 </div>
     <div id="epinow2-132" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.2">
@@ -262,9 +269,9 @@
 <li>Updated the <code>estimate_infections</code> interface and expanded the range of options for the <code>future_rt</code> argument. Users can now choose to set Rt from any time point referenced to the forecast date.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed y axis max for <code>plot_summary</code>.</li>
 <li>Fix to normalisation of delay and generation time distributions from <a href='https://github.com/sbfnk'>@sbfnk</a>. This will impact nowcast infections but not reproduction number estimate.</li>
