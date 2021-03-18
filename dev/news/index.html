@@ -90,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.3.3</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.3.4</span>
       </span>
     </div>
 
@@ -151,6 +151,15 @@
 <ul>
 <li>Added supported to <code>simulate_infections</code> so that a <code>data.frame</code> of R samples can be passed in instead of a vector of R values.</li>
 <li>Added extraction of posterior samples to the summary method for <code>estimate_infections</code>.</li>
+<li>Exposed <code>zero_threshold</code> to users allowing for control over when zeros or NAs in count data are treated as true zeros versus as reporting errors that require some smoothing.</li>
+<li>Added support for varying the length of the day of the week effect (see <code>obs_opts</code>). This allows, for example, fitting to data with cases only reported every 3 days.</li>
+</ul>
+</div>
+<div id="package-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-changes" class="anchor"></a>Package changes</h2>
+<ul>
+<li>Added a <code>contributing.md</code> to guide contributors and added <code>pre-commit</code> support to check new contributions styling.</li>
 </ul>
 </div>
 <div id="other-changes" class="section level2">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Custom Map Theme — theme_map • EpiNow2</title>
+<title>Adds a day of the week vector — add_day_of_week • EpiNow2</title>
 
 
 <!-- jquery -->
@@ -45,10 +45,8 @@
 
 
 
-<meta property="og:title" content="Custom Map Theme — theme_map" />
-<meta property="og:description" content="
-Applies a custom map theme to be used with global_map, country_map, and other ggplot2 maps. Status of
-this function is currently questioning as it is uncertain if it is in use. Future releases may depreciate it." />
+<meta property="og:title" content="Adds a day of the week vector — add_day_of_week" />
+<meta property="og:description" content="Adds a day of the week vector" />
 <meta property="og:image" content="epiforecasts.io/EpiNow2/reference/figures/unnamed-chunk-13-1.png" />
 <meta property="og:image:alt" content="Example estimates produced by EpiNow2 of the reproduction number, cases by date of infection and cases by date of report" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -139,74 +137,42 @@ this function is currently questioning as it is uncertain if it is in use. Futur
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Custom Map Theme</h1>
-    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/EpiNow2/blob/master/R/map.R'><code>R/map.R</code></a></small>
-    <div class="hidden name"><code>theme_map.Rd</code></div>
+    <h1>Adds a day of the week vector</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/EpiNow2/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
+    <div class="hidden name"><code>add_day_of_week.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#questioning'><img src='figures/lifecycle-questioning.svg' alt='[Questioning]' /></a>
-Applies a custom map theme to be used with <code>global_map</code>, <code>country_map</code>, and other <code>ggplot2</code> maps. Status of
-this function is currently questioning as it is uncertain if it is in use. Future releases may depreciate it.</p>
+    <p>Adds a day of the week vector</p>
     </div>
 
-    <pre class="usage"><span class='fu'>theme_map</span><span class='op'>(</span>
-  map <span class='op'>=</span> <span class='cn'>NULL</span>,
-  continuous <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  variable_label <span class='op'>=</span> <span class='cn'>NULL</span>,
-  trans <span class='op'>=</span> <span class='st'>"identity"</span>,
-  fill_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
-  scale_fill <span class='op'>=</span> <span class='cn'>NULL</span>,
-  breaks <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, week_effect <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>map</th>
-      <td><p><code>ggplot2</code> map object</p></td>
+      <th>dates</th>
+      <td><p>Vector of dates</p></td>
     </tr>
     <tr>
-      <th>continuous</th>
-      <td><p>Logical defaults to <code>FALSE</code>. Is the fill variable continuous.</p></td>
-    </tr>
-    <tr>
-      <th>variable_label</th>
-      <td><p>A character string indicating the variable label to use. If not supplied then the underlying
-variable name is used.</p></td>
-    </tr>
-    <tr>
-      <th>trans</th>
-      <td><p>A character string specifying the transform to use on the specified metric. Defaults to no
-transform ("identity"). Other options include log scaling ("log") and log base 10 scaling
-("log10"). For a complete list of options see <code>ggplot2::continous_scale</code>.</p></td>
-    </tr>
-    <tr>
-      <th>fill_labels</th>
-      <td><p>A function to use to allocate legend labels. An example (used below) is <code><a href='https://scales.r-lib.org//reference/label_percent.html'>scales::percent</a></code>,
-which can be used for percentage data.</p></td>
-    </tr>
-    <tr>
-      <th>scale_fill</th>
-      <td><p>Function to use for scaling the fill. Defaults to a custom <code><a href='https://ggplot2.tidyverse.org/reference/scale_manual.html'>ggplot2::scale_fill_manual</a></code>, which
-expects the possible values to be "Increasing", "Likely increasing", "Likely decreasing", "Decreasing" or "Stable".</p></td>
-    </tr>
-    <tr>
-      <th>breaks</th>
-      <td><p>Breaks to use in legend. Defaults to <code><a href='https://ggplot2.tidyverse.org/reference/waiver.html'>ggplot2::waiver</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to the <code>scale_fill</code> function</p></td>
+      <th>week_effect</th>
+      <td><p>Numeric from 1 to 7 defaults to 7</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot2</code> object</p>
+    <p>A numeric vector containing the period day of the week index</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>dates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2020-03-15"</span><span class='op'>)</span>, by <span class='op'>=</span> <span class='st'>"days"</span>, length.out <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
+<span class='co'># Add date based day of week</span>
+<span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, <span class='fl'>7</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 7 1 2 3 4 5 6 7 1 2 3 4 5 6 7</div><div class='input'>
+<span class='co'># Add shorter week</span>
+<span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, <span class='fl'>4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
