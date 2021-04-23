@@ -96,7 +96,7 @@
   <div class="contents col-md-9">
 <div id="epinow2-estimate-real-time-case-counts-and-time-varying-epidemiological-parameters" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#epinow2-estimate-real-time-case-counts-and-time-varying-epidemiological-parameters" class="anchor"></a>EpiNow2: Estimate real-time case counts and time-varying epidemiological parameters</h1></div>
+<a href="#epinow2-estimate-real-time-case-counts-and-time-varying-epidemiological-parameters" class="anchor" aria-hidden="true"></a>EpiNow2: Estimate real-time case counts and time-varying epidemiological parameters</h1></div>
 
 <p><a href="https://github.com/epiforecasts/EpiNow2/blob/master/LICENSE.md/" class="external-link"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT license"></a> <a href="https://github.com/epiforecasts/EpiNow2/graphs/contributors" class="external-link"><img src="https://img.shields.io/github/contributors/epiforecasts/EpiNow2" alt="GitHub contributors"></a> <a href="https://makeapullrequest.com/" class="external-link"><img src="https://img.shields.io/badge/PRs-welcome-yellow.svg" alt="PRs Welcome"></a> <a href="https://GitHub.com/epiforecasts/EpiNow2/commit/master/" class="external-link"><img src="https://img.shields.io/github/commits-since/epiforecasts/EpiNow2/v1.3.2.svg?color=orange" alt="GitHub commits"></a> <a href="https://zenodo.org/badge/latestdoi/272995211" class="external-link"><img src="https://zenodo.org/badge/272995211.svg" alt="DOI"></a></p>
 <p>This package estimates the time-varying reproduction number, rate of spread, and doubling time using a range of open-source tools (<a href="https://doi.org/10.12688/wellcomeopenres.16006.1" class="external-link">Abbott et al.</a>), and current best practices (<a href="https://doi.org/10.1371/journal.pcbi.1008409" class="external-link">Gostic et al.</a>). It aims to help users avoid some of the limitations of naive implementations in a framework that is informed by community feedback and is under active development.</p>
@@ -116,7 +116,7 @@
 <p>A simple example of using the package to estimate a national Rt for Covid-19 can be found <a href="https://gist.github.com/seabbs/163d0f195892cde685c70473e1f5e867" class="external-link">here</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>Install the stable version of the package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span><span class="op">)</span></code></pre></div>
@@ -132,14 +132,14 @@
 </div>
 <div id="quick-start" class="section level2">
 <h2 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h2>
+<a href="#quick-start" class="anchor" aria-hidden="true"></a>Quick start</h2>
 <p><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> is designed to be used with a single function call or to be used in an ad-hoc fashion via individual function calls. The core functions of <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> are the two single-call functions <a href="https://epiforecasts.io/EpiNow2/reference/epinow.html"><code>epinow</code></a>, <a href="https://epiforecasts.io/EpiNow2/reference/regional_epinow.html"><code>regional_epinow</code></a>, plus functions <a href="https://epiforecasts.io/EpiNow2/reference/estimate_infections.html"><code>estimate_infections</code></a>, and <a href="https://epiforecasts.io/EpiNow2/reference/forecast_infections.html"><code>forecast_infections</code></a>. In the following section we give an overview of the simple use case for <code>epinow</code> and <code>regional_epinow</code>. <a href="https://epiforecasts.io/EpiNow2/reference/estimate_infections.html"><code>estimate_infections</code></a> can be used on its own to infer the underlying infection case curve from reported cases and estimate Rt. Estimating the underlying infection case curve via back-calculation (and then calculating Rt) is substantially less computationally demanding than generating using default settings but may result in less reliable estimates of Rt. For more details on using each function see the <a href="https://epiforecasts.io/EpiNow2/reference/index.html">function documentation</a>.</p>
 <p>The first step to using the package is to load it as follows.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a></span><span class="op">)</span></code></pre></div>
 <div id="reporting-delays-incubation-period-and-generation-time" class="section level3">
 <h3 class="hasAnchor">
-<a href="#reporting-delays-incubation-period-and-generation-time" class="anchor"></a>Reporting delays, incubation period and generation time</h3>
+<a href="#reporting-delays-incubation-period-and-generation-time" class="anchor" aria-hidden="true"></a>Reporting delays, incubation period and generation time</h3>
 <p>Distributions can either be fitted using package functionality or determined elsewhere and then defined with uncertainty for use in <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a>. When data is supplied a subsampled bootstrapped lognormal will be fit (to account for uncertainty in the observed data without being biased by changes in incidence). An arbitrary number of delay distributions are supported with the most common use case likely to be a incubation period followed by a reporting delay.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_delay.html">estimate_delay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">1000</span>,  <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,
@@ -151,7 +151,7 @@
 </div>
 <div id="epinow" class="section level3">
 <h3 class="hasAnchor">
-<a href="#epinow" class="anchor"></a><a href="https://epiforecasts.io/EpiNow2/reference/epinow.html">epinow</a>
+<a href="#epinow" class="anchor" aria-hidden="true"></a><a href="https://epiforecasts.io/EpiNow2/reference/epinow.html">epinow</a>
 </h3>
 <p>This function represents the core functionality of the package and includes results reporting, plotting and optional saving. It requires a data frame of cases by date of report and the distributions defined above. An additional forecasting module is supported via <code>EpiSoon</code> and companion packages (see documentation for an example).</p>
 <p>Load example case data from <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a>.</p>
@@ -248,7 +248,7 @@
 </div>
 <div id="regional_epinow" class="section level3">
 <h3 class="hasAnchor">
-<a href="#regional_epinow" class="anchor"></a><a href="https://epiforecasts.io/EpiNow2/reference/regional_epinow.html">regional_epinow</a>
+<a href="#regional_epinow" class="anchor" aria-hidden="true"></a><a href="https://epiforecasts.io/EpiNow2/reference/regional_epinow.html">regional_epinow</a>
 </h3>
 <p>The <code>regional_epinow</code> function runs the <code>epinow</code> function across multiple regions in an efficient manner.</p>
 <p>Define cases in multiple regions delineated by the region variable.</p>
@@ -332,18 +332,18 @@
 </div>
 <div id="reporting-templates" class="section level3">
 <h3 class="hasAnchor">
-<a href="#reporting-templates" class="anchor"></a>Reporting templates</h3>
+<a href="#reporting-templates" class="anchor" aria-hidden="true"></a>Reporting templates</h3>
 <p>Rmarkdown templates are provided in the package (<code>templates</code>) for semi-automated reporting of estimates. These are currently undocumented but an example integration can be seen <a href="https://github.com/epiforecasts/covid/blob/master/_posts/national/united-kingdom/united-kingdom.Rmd" class="external-link">here</a>. If using these templates to report your results please highlight our <a href="https://doi.org/10.12688/wellcomeopenres.16006.1" class="external-link">limitations</a> as these are key to understanding the results from <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> .</p>
 </div>
 </div>
 <div id="interactive-figures" class="section level2">
 <h2 class="hasAnchor">
-<a href="#interactive-figures" class="anchor"></a>Interactive figures</h2>
+<a href="#interactive-figures" class="anchor" aria-hidden="true"></a>Interactive figures</h2>
 <p><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> is integrated with the <code>{RtD3}</code> package which provides interactive visualisations of Rt estimates. See the package <a href="https://epiforecasts.io/RtD3/" class="external-link">documentation</a> for details.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
+<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
 <p>File an issue <a href="https://github.com/epiforecasts/EpiNow2/issues" class="external-link">here</a> if you have identified an issue with the package. Please note that due to operational constraints priority will be given to users informing government policy or offering methodological insights. We welcome all contributions, in particular those that improve the approach or the robustness of the code base.</p>
 </div>
 </div>
