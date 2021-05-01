@@ -211,7 +211,7 @@ Defaults to <code>TRUE</code>.</p></td>
     <pre class="examples"><div class='input'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span>
 <span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>cases</span><span class='op'>[</span>, <span class='va'>cases</span> <span class='op'>:=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>confirm</span><span class='op'>)</span><span class='op'>]</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            date confirm cases
+</div><div class='co'>#&gt;            date confirm cases
 #&gt;   1: 2020-02-22      14    14
 #&gt;   2: 2020-02-23      62    62
 #&gt;   3: 2020-02-24      53    53
@@ -225,7 +225,7 @@ Defaults to <code>TRUE</code>.</p></td>
 #&gt; 130: 2020-06-30     126   126</div><div class='input'>
 <span class='co'># total cases</span>
 <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>$</span><span class='va'>cases</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 240581</div><div class='input'>
+</div><div class='co'>#&gt; [1] 240581</div><div class='input'>
 <span class='va'>delay_fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n</span>, <span class='va'>dist</span>, <span class='va'>cum</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='kw'>if</span> <span class='op'>(</span><span class='va'>dist</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>pgamma</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>+</span> <span class='fl'>0.9999</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span> <span class='op'>-</span> <span class='fu'><a href='https://rdrr.io/r/stats/GammaDist.html'>pgamma</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>-</span> <span class='fl'>1e-5</span>, <span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span>
@@ -241,7 +241,7 @@ Defaults to <code>TRUE</code>.</p></td>
 
 <span class='co'># estimated onset distribution</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>onsets</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;            date cases
+</div><div class='co'>#&gt;            date cases
 #&gt;   1: 2020-02-15     2
 #&gt;   2: 2020-02-16     0
 #&gt;   3: 2020-02-17     2
@@ -264,7 +264,7 @@ Defaults to <code>TRUE</code>.</p></td>
   <span class='op'>)</span>
 <span class='op'>)</span>
 <span class='va'>total_onsets</span>
-</div><div class='output co'>#&gt; [1] 240525</div><div class='input'>
+</div><div class='co'>#&gt; [1] 240525</div><div class='input'>
 
 <span class='co'># map from onset cases to reported</span>
 <span class='va'>reports</span> <span class='op'>&lt;-</span> <span class='fu'>sample_approx_dist</span><span class='op'>(</span>
