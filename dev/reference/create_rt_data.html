@@ -186,102 +186,105 @@ rather than generating infections using Rt.</p></td>
     <div class='dont-index'><p>rt_settings</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># default Rt data</span>
-<span class='fu'>create_rt_data</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $r_mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $r_sd
-#&gt; [1] 1
-#&gt; 
-#&gt; $estimate_r
-#&gt; [1] 1
-#&gt; 
-#&gt; $bp_n
-#&gt; [1] 0
-#&gt; 
-#&gt; $breakpoints
-#&gt; NULL
-#&gt; 
-#&gt; $future_fixed
-#&gt; [1] 1
-#&gt; 
-#&gt; $fixed_from
-#&gt; [1] 0
-#&gt; 
-#&gt; $pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $stationary
-#&gt; [1] 0
-#&gt; 
-#&gt; $future_time
-#&gt; [1] 0
-#&gt; </div><div class='input'>
-<span class='co'># settings when no Rt is desired</span>
-<span class='fu'>create_rt_data</span><span class='op'>(</span>rt <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $r_mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $r_sd
-#&gt; [1] 1
-#&gt; 
-#&gt; $estimate_r
-#&gt; [1] 0
-#&gt; 
-#&gt; $bp_n
-#&gt; [1] 0
-#&gt; 
-#&gt; $breakpoints
-#&gt; NULL
-#&gt; 
-#&gt; $future_fixed
-#&gt; [1] 0
-#&gt; 
-#&gt; $fixed_from
-#&gt; [1] 0
-#&gt; 
-#&gt; $pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $stationary
-#&gt; [1] 1
-#&gt; 
-#&gt; $future_time
-#&gt; [1] 0
-#&gt; </div><div class='input'>
-<span class='co'># using breakpoints</span>
-<span class='fu'>create_rt_data</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>use_breakpoints <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, breakpoints <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $r_mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $r_sd
-#&gt; [1] 1
-#&gt; 
-#&gt; $estimate_r
-#&gt; [1] 1
-#&gt; 
-#&gt; $bp_n
-#&gt; [1] 10
-#&gt; 
-#&gt; $breakpoints
-#&gt;  [1] 1 1 1 1 1 1 1 1 1 1
-#&gt; 
-#&gt; $future_fixed
-#&gt; [1] 1
-#&gt; 
-#&gt; $fixed_from
-#&gt; [1] 0
-#&gt; 
-#&gt; $pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $stationary
-#&gt; [1] 0
-#&gt; 
-#&gt; $future_time
-#&gt; [1] 0
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># default Rt data</span></span>
+<span class='r-in'><span class='fu'>create_rt_data</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $estimate_r</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bp_n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_fixed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $fixed_from</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $stationary</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_time</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># settings when no Rt is desired</span></span>
+<span class='r-in'><span class='fu'>create_rt_data</span><span class='op'>(</span>rt <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $estimate_r</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bp_n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_fixed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $fixed_from</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $stationary</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_time</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># using breakpoints</span></span>
+<span class='r-in'><span class='fu'>create_rt_data</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>use_breakpoints <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, breakpoints <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $r_sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $estimate_r</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $bp_n</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 1 1 1 1 1 1 1 1 1 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_fixed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $fixed_from</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $stationary</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future_time</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -199,62 +199,65 @@ distributed scaling factor.</p></td>
     <p>A list of observation model settings.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># default settings</span>
-<span class='fu'>obs_opts</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $family
-#&gt; [1] "negbin"
-#&gt; 
-#&gt; $weight
-#&gt; [1] 1
-#&gt; 
-#&gt; $week_effect
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $week_length
-#&gt; [1] 7
-#&gt; 
-#&gt; $scale
-#&gt; list()
-#&gt; </div><div class='input'>
-<span class='co'># Turn off day of the week effect</span>
-<span class='fu'>obs_opts</span><span class='op'>(</span>week_effect <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $family
-#&gt; [1] "negbin"
-#&gt; 
-#&gt; $weight
-#&gt; [1] 1
-#&gt; 
-#&gt; $week_effect
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $week_length
-#&gt; [1] 7
-#&gt; 
-#&gt; $scale
-#&gt; list()
-#&gt; </div><div class='input'>
-<span class='co'># Scale reported data</span>
-<span class='fu'>obs_opts</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0.2</span>, sd <span class='op'>=</span> <span class='fl'>0.02</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; $family
-#&gt; [1] "negbin"
-#&gt; 
-#&gt; $weight
-#&gt; [1] 1
-#&gt; 
-#&gt; $week_effect
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $week_length
-#&gt; [1] 7
-#&gt; 
-#&gt; $scale
-#&gt; $scale$mean
-#&gt; [1] 0.2
-#&gt; 
-#&gt; $scale$sd
-#&gt; [1] 0.02
-#&gt; 
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># default settings</span></span>
+<span class='r-in'><span class='fu'>obs_opts</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $family</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "negbin"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $weight</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_effect</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scale</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> list()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Turn off day of the week effect</span></span>
+<span class='r-in'><span class='fu'>obs_opts</span><span class='op'>(</span>week_effect <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $family</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "negbin"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $weight</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_effect</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scale</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> list()</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Scale reported data</span></span>
+<span class='r-in'><span class='fu'>obs_opts</span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0.2</span>, sd <span class='op'>=</span> <span class='fl'>0.02</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $family</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "negbin"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $weight</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_effect</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $week_length</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scale</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scale$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $scale$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

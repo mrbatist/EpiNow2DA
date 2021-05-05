@@ -194,53 +194,57 @@ of this range are resampled.</p></td>
     <p>A data.table defining the distribution as used by <code>dist_skel</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>def</span> <span class='op'>&lt;-</span> <span class='fu'>lognorm_dist_def</span><span class='op'>(</span>
-  mean <span class='op'>=</span> <span class='fl'>1.621</span>, mean_sd <span class='op'>=</span> <span class='fl'>0.0640</span>,
-  sd <span class='op'>=</span> <span class='fl'>0.418</span>, sd_sd <span class='op'>=</span> <span class='fl'>0.0691</span>,
-  max_value <span class='op'>=</span> <span class='fl'>20</span>, samples <span class='op'>=</span> <span class='fl'>10</span>
-<span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>def</span><span class='op'>)</span>
-</div><div class='co'>#&gt;       model    params max_value
-#&gt;  1: lognorm &lt;list[2]&gt;        20
-#&gt;  2: lognorm &lt;list[2]&gt;        20
-#&gt;  3: lognorm &lt;list[2]&gt;        20
-#&gt;  4: lognorm &lt;list[2]&gt;        20
-#&gt;  5: lognorm &lt;list[2]&gt;        20
-#&gt;  6: lognorm &lt;list[2]&gt;        20
-#&gt;  7: lognorm &lt;list[2]&gt;        20
-#&gt;  8: lognorm &lt;list[2]&gt;        20
-#&gt;  9: lognorm &lt;list[2]&gt;        20
-#&gt; 10: lognorm &lt;list[2]&gt;        20</div><div class='input'><span class='va'>def</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='co'>#&gt; $mean
-#&gt; [1] 1.619661
-#&gt; 
-#&gt; $sd
-#&gt; [1] 0.429595
-#&gt; </div><div class='input'>
-<span class='va'>def</span> <span class='op'>&lt;-</span> <span class='fu'>lognorm_dist_def</span><span class='op'>(</span>
-  mean <span class='op'>=</span> <span class='fl'>5</span>, mean_sd <span class='op'>=</span> <span class='fl'>1</span>,
-  sd <span class='op'>=</span> <span class='fl'>3</span>, sd_sd <span class='op'>=</span> <span class='fl'>1</span>,
-  max_value <span class='op'>=</span> <span class='fl'>20</span>, samples <span class='op'>=</span> <span class='fl'>10</span>,
-  to_log <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>def</span><span class='op'>)</span>
-</div><div class='co'>#&gt;       model    params max_value
-#&gt;  1: lognorm &lt;list[2]&gt;        20
-#&gt;  2: lognorm &lt;list[2]&gt;        20
-#&gt;  3: lognorm &lt;list[2]&gt;        20
-#&gt;  4: lognorm &lt;list[2]&gt;        20
-#&gt;  5: lognorm &lt;list[2]&gt;        20
-#&gt;  6: lognorm &lt;list[2]&gt;        20
-#&gt;  7: lognorm &lt;list[2]&gt;        20
-#&gt;  8: lognorm &lt;list[2]&gt;        20
-#&gt;  9: lognorm &lt;list[2]&gt;        20
-#&gt; 10: lognorm &lt;list[2]&gt;        20</div><div class='input'><span class='va'>def</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='co'>#&gt; $mean
-#&gt; [1] 1.558108
-#&gt; 
-#&gt; $sd
-#&gt; [1] 0.6497568
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>def</span> <span class='op'>&lt;-</span> <span class='fu'>lognorm_dist_def</span><span class='op'>(</span></span>
+<span class='r-in'>  mean <span class='op'>=</span> <span class='fl'>1.621</span>, mean_sd <span class='op'>=</span> <span class='fl'>0.0640</span>,</span>
+<span class='r-in'>  sd <span class='op'>=</span> <span class='fl'>0.418</span>, sd_sd <span class='op'>=</span> <span class='fl'>0.0691</span>,</span>
+<span class='r-in'>  max_value <span class='op'>=</span> <span class='fl'>20</span>, samples <span class='op'>=</span> <span class='fl'>10</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>def</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       model    params max_value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-in'><span class='va'>def</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.619661</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.429595</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>def</span> <span class='op'>&lt;-</span> <span class='fu'>lognorm_dist_def</span><span class='op'>(</span></span>
+<span class='r-in'>  mean <span class='op'>=</span> <span class='fl'>5</span>, mean_sd <span class='op'>=</span> <span class='fl'>1</span>,</span>
+<span class='r-in'>  sd <span class='op'>=</span> <span class='fl'>3</span>, sd_sd <span class='op'>=</span> <span class='fl'>1</span>,</span>
+<span class='r-in'>  max_value <span class='op'>=</span> <span class='fl'>20</span>, samples <span class='op'>=</span> <span class='fl'>10</span>,</span>
+<span class='r-in'>  to_log <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>def</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       model    params max_value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  4: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  5: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  7: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  8: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  9: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10: lognorm &lt;list[2]&gt;        20</span>
+<span class='r-in'><span class='va'>def</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.558108</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.6497568</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -193,31 +193,34 @@ which correspond to a summary combination (last item) and for the leading items
 and <code>summarised_estimates[variable == "growth_rate"]</code>, respectively.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'># define example cases</span>
-<span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span>
-
-<span class='co'># set up example delays</span>
-<span class='va'>generation_time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_generation_time.html'>get_generation_time</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"ganyani"</span><span class='op'>)</span>
-<span class='va'>incubation_period</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_incubation_period.html'>get_incubation_period</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"lauer"</span><span class='op'>)</span>
-<span class='va'>reporting_delay</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootstrapped_dist_fit.html'>bootstrapped_dist_fit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>rlnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span>, max_value <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
-
-<span class='co'># run model</span>
-<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='estimate_infections.html'>estimate_infections</a></span><span class='op'>(</span><span class='va'>cases</span>,
-  samples <span class='op'>=</span> <span class='fl'>100</span>,
-  generation_time <span class='op'>=</span> <span class='va'>generation_time</span>,
-  delays <span class='op'>=</span> <span class='fu'><a href='delay_opts.html'>delay_opts</a></span><span class='op'>(</span><span class='va'>incubation_period</span>, <span class='va'>reporting_delay</span><span class='op'>)</span>,
-  rt <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span>
-</div><div class='co'>#&gt; <span class='error'>Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL): </span>unused argument (samples = 100)</div><div class='input'>
-<span class='co'># plot infections</span>
-<span class='va'>plots</span> <span class='op'>&lt;-</span> <span class='fu'>report_plots</span><span class='op'>(</span>
-  summarised_estimates <span class='op'>=</span> <span class='va'>out</span><span class='op'>$</span><span class='va'>summarised</span>,
-  reported <span class='op'>=</span> <span class='va'>cases</span>
-<span class='op'>)</span>
-</div><div class='co'>#&gt; <span class='error'>Error in data.table::setDT(summarised_estimates): </span>object 'out' not found</div><div class='input'><span class='va'>plots</span>
-</div><div class='co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): </span>object 'plots' not found</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># define example cases</span></span>
+<span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># set up example delays</span></span>
+<span class='r-in'><span class='va'>generation_time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_generation_time.html'>get_generation_time</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"ganyani"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>incubation_period</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_incubation_period.html'>get_incubation_period</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"lauer"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>reporting_delay</span> <span class='op'>&lt;-</span> <span class='fu'><a href='bootstrapped_dist_fit.html'>bootstrapped_dist_fit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>rlnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>6</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span>, max_value <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># run model</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='estimate_infections.html'>estimate_infections</a></span><span class='op'>(</span><span class='va'>cases</span>,</span>
+<span class='r-in'>  samples <span class='op'>=</span> <span class='fl'>100</span>,</span>
+<span class='r-in'>  generation_time <span class='op'>=</span> <span class='va'>generation_time</span>,</span>
+<span class='r-in'>  delays <span class='op'>=</span> <span class='fu'><a href='delay_opts.html'>delay_opts</a></span><span class='op'>(</span><span class='va'>incubation_period</span>, <span class='va'>reporting_delay</span><span class='op'>)</span>,</span>
+<span class='r-in'>  rt <span class='op'>=</span> <span class='cn'>NULL</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL)</span> unused argument (samples = 100)</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># plot infections</span></span>
+<span class='r-in'><span class='va'>plots</span> <span class='op'>&lt;-</span> <span class='fu'>report_plots</span><span class='op'>(</span></span>
+<span class='r-in'>  summarised_estimates <span class='op'>=</span> <span class='va'>out</span><span class='op'>$</span><span class='va'>summarised</span>,</span>
+<span class='r-in'>  reported <span class='op'>=</span> <span class='va'>cases</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in data.table::setDT(summarised_estimates)</span> object 'out' not found</span>
+<span class='r-in'><span class='va'>plots</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in eval(expr, envir, enclos)</span> object 'plots' not found</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

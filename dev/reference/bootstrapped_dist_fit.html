@@ -209,30 +209,31 @@ allow (added to output but does impact fitting).</p></td>
     <p>A list summarising the bootstrapped distribution</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'># lognormal</span>
-<span class='va'>delays</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>rlnorm</a></span><span class='op'>(</span><span class='fl'>500</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>bootstrapped_dist_fit</span><span class='op'>(</span><span class='va'>delays</span>,
-  samples <span class='op'>=</span> <span class='fl'>1000</span>, bootstraps <span class='op'>=</span> <span class='fl'>10</span>,
-  dist <span class='op'>=</span> <span class='st'>"lognormal"</span>
-<span class='op'>)</span>
-<span class='va'>out</span>
-</div><div class='co'>#&gt; $mean
-#&gt; [1] 1.465199
-#&gt; 
-#&gt; $mean_sd
-#&gt; [1] 0.09012618
-#&gt; 
-#&gt; $sd
-#&gt; [1] 1.073386
-#&gt; 
-#&gt; $sd_sd
-#&gt; [1] 0.06952113
-#&gt; 
-#&gt; $max
-#&gt; [1] 96
-#&gt; </div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># lognormal</span></span>
+<span class='r-in'><span class='va'>delays</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Lognormal.html'>rlnorm</a></span><span class='op'>(</span><span class='fl'>500</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>bootstrapped_dist_fit</span><span class='op'>(</span><span class='va'>delays</span>,</span>
+<span class='r-in'>  samples <span class='op'>=</span> <span class='fl'>1000</span>, bootstraps <span class='op'>=</span> <span class='fl'>10</span>,</span>
+<span class='r-in'>  dist <span class='op'>=</span> <span class='st'>"lognormal"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.465199</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $mean_sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.09012618</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.073386</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $sd_sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.06952113</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $max</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

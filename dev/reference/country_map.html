@@ -222,65 +222,70 @@ expects the possible values to be "Increasing", "Likely increasing", "Likely dec
     <p>A <code>ggplot2</code> object containing a country map.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"rnaturalearth"</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"scales"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='co'># Example 1</span>
-  <span class='co'># if you know the provnum_ne codes you can use them directly</span>
-  <span class='va'>eg_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-      <span class='st'>"Increasing"</span>,
-      <span class='st'>"Decreasing"</span>,
-      <span class='st'>"Stable"</span>,
-      <span class='st'>"Likely decreasing"</span>,
-      <span class='st'>"Likely increasing"</span>
-    <span class='op'>)</span>,
-    region_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>7</span>, <span class='fl'>6</span>, <span class='fl'>8</span>, <span class='fl'>9</span><span class='op'>)</span>
-  <span class='op'>)</span>
-  <span class='co'># make variable a factor so the ordering is sensible</span>
-  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,
-    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,
-    <span class='st'>"Increasing"</span>
-  <span class='op'>)</span><span class='op'>)</span>
-
-  <span class='fu'>country_map</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>eg_data</span>, country <span class='op'>=</span> <span class='st'>"Australia"</span>, variable <span class='op'>=</span> <span class='st'>"variable"</span><span class='op'>)</span>
-
-
-  <span class='co'># Example 2</span>
-  <span class='co'># sometimes it will be more convenient to join your data by name than provnum_ne code:</span>
-  <span class='va'>us_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-      <span class='st'>"Increasing"</span>,
-      <span class='st'>"Decreasing"</span>,
-      <span class='st'>"Stable"</span>,
-      <span class='st'>"Likely decreasing"</span>,
-      <span class='st'>"Likely increasing"</span>
-    <span class='op'>)</span>,
-    region_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-      <span class='st'>"California"</span>,
-      <span class='st'>"Texas"</span>,
-      <span class='st'>"Florida"</span>,
-      <span class='st'>"Arizona"</span>,
-      <span class='st'>"New York"</span>
-    <span class='op'>)</span>
-  <span class='op'>)</span>
-  <span class='co'># make variable a factor so the ordering is sensible in the legend</span>
-  <span class='va'>us_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>us_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,
-    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,
-    <span class='st'>"Increasing"</span>
-  <span class='op'>)</span><span class='op'>)</span>
-
-  <span class='fu'>country_map</span><span class='op'>(</span>
-    data <span class='op'>=</span> <span class='va'>us_data</span>, country <span class='op'>=</span> <span class='st'>"United States of America"</span>,
-    variable <span class='op'>=</span> <span class='st'>"variable"</span>, region_col_ne <span class='op'>=</span> <span class='st'>"name"</span>
-  <span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; Loading required namespace: rnaturalearth</div><div class='co'>#&gt; The rnaturalearthhires package needs to be installed.</div><div class='co'>#&gt; Installing the rnaturalearthhires package.</div><div class='co'>#&gt; Installing package into ‘/Users/runner/work/_temp/Library’
-#&gt; (as ‘lib’ is unspecified)</div><div class='co'>#&gt; <span class='error'>Error in value[[3L]](cond): </span>Failed to install the rnaturalearthhires package.
-#&gt;   Please try installing the package for yourself using the following command: 
-#&gt;      install.packages("rnaturalearthhires", repos = "http://packages.ropensci.org", type = "source")</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"rnaturalearth"</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"scales"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='co'># Example 1</span></span>
+<span class='r-in'>  <span class='co'># if you know the provnum_ne codes you can use them directly</span></span>
+<span class='r-in'>  <span class='va'>eg_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span></span>
+<span class='r-in'>    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='st'>"Increasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Stable"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely increasing"</span></span>
+<span class='r-in'>    <span class='op'>)</span>,</span>
+<span class='r-in'>    region_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>7</span>, <span class='fl'>6</span>, <span class='fl'>8</span>, <span class='fl'>9</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'>  <span class='co'># make variable a factor so the ordering is sensible</span></span>
+<span class='r-in'>  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Increasing"</span></span>
+<span class='r-in'>  <span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='fu'>country_map</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>eg_data</span>, country <span class='op'>=</span> <span class='st'>"Australia"</span>, variable <span class='op'>=</span> <span class='st'>"variable"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># Example 2</span></span>
+<span class='r-in'>  <span class='co'># sometimes it will be more convenient to join your data by name than provnum_ne code:</span></span>
+<span class='r-in'>  <span class='va'>us_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span></span>
+<span class='r-in'>    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='st'>"Increasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Stable"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely increasing"</span></span>
+<span class='r-in'>    <span class='op'>)</span>,</span>
+<span class='r-in'>    region_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='st'>"California"</span>,</span>
+<span class='r-in'>      <span class='st'>"Texas"</span>,</span>
+<span class='r-in'>      <span class='st'>"Florida"</span>,</span>
+<span class='r-in'>      <span class='st'>"Arizona"</span>,</span>
+<span class='r-in'>      <span class='st'>"New York"</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'>  <span class='co'># make variable a factor so the ordering is sensible in the legend</span></span>
+<span class='r-in'>  <span class='va'>us_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>us_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Increasing"</span></span>
+<span class='r-in'>  <span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='fu'>country_map</span><span class='op'>(</span></span>
+<span class='r-in'>    data <span class='op'>=</span> <span class='va'>us_data</span>, country <span class='op'>=</span> <span class='st'>"United States of America"</span>,</span>
+<span class='r-in'>    variable <span class='op'>=</span> <span class='st'>"variable"</span>, region_col_ne <span class='op'>=</span> <span class='st'>"name"</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required namespace: rnaturalearth</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The rnaturalearthhires package needs to be installed.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Installing the rnaturalearthhires package.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Installing package into ‘/Users/runner/work/_temp/Library’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> (as ‘lib’ is unspecified)</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in value[[3L]](cond)</span> Failed to install the rnaturalearthhires package.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span>   Please try installing the package for yourself using the following command: </span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span>      install.packages("rnaturalearthhires", repos = "http://packages.ropensci.org", type = "source")</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

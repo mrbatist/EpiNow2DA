@@ -210,47 +210,51 @@ expects the possible values to be "Increasing", "Likely increasing", "Likely dec
     <p>A <code>ggplot2</code> object containing a global map.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"rnaturalearth"</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"scales"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='co'># Example 1 - categorical data</span>
-  <span class='co'># If values are "Increasing", "Likely increasing" etc (see ?EpiNow2::theme_map),</span>
-  <span class='co'># then the default fill scale works</span>
-  <span class='va'>eg_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span>
-    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-      <span class='st'>"Increasing"</span>,
-      <span class='st'>"Decreasing"</span>,
-      <span class='st'>"Stable"</span>,
-      <span class='st'>"Likely decreasing"</span>,
-      <span class='st'>"Likely increasing"</span>
-    <span class='op'>)</span>,
-    country <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-      <span class='st'>"France"</span>,
-      <span class='st'>"Germany"</span>,
-      <span class='st'>"United Kingdom"</span>,
-      <span class='st'>"Spain"</span>,
-      <span class='st'>"Australia"</span>
-    <span class='op'>)</span>
-  <span class='op'>)</span>
-  <span class='co'># make variable a factor so the ordering is sensible in the legend</span>
-  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,
-    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,
-    <span class='st'>"Increasing"</span>
-  <span class='op'>)</span><span class='op'>)</span>
-  <span class='fu'>global_map</span><span class='op'>(</span><span class='va'>eg_data</span>, variable <span class='op'>=</span> <span class='st'>"variable"</span>, variable_label <span class='op'>=</span> <span class='st'>"Direction\nof change"</span><span class='op'>)</span>
-
-
-  <span class='co'># Example 2 - numeric data</span>
-  <span class='co'># numeric data requires scale_fill and a global viridis_palette specified</span>
-  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>second_variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>)</span><span class='op'>)</span>
-  <span class='va'>viridis_palette</span> <span class='op'>&lt;-</span> <span class='st'>"A"</span>
-  <span class='fu'>global_map</span><span class='op'>(</span><span class='va'>eg_data</span>, variable <span class='op'>=</span> <span class='st'>"second_variable"</span>, scale_fill <span class='op'>=</span> <span class='va'>scale_fill_viridis_c</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; The rnaturalearthdata package needs to be installed.</div><div class='co'>#&gt; Installing the rnaturalearthdata package.</div><div class='co'>#&gt; Installing package into ‘/Users/runner/work/_temp/Library’
-#&gt; (as ‘lib’ is unspecified)</div><div class='co'>#&gt; <span class='error'>Error in value[[3L]](cond): </span>Failed to install the rnaturalearthdata package.
-#&gt;  Please try installing the package for yourself using the following command: 
-#&gt;  install.packages("rnaturalearthdata")</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"rnaturalearth"</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"scales"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='co'># Example 1 - categorical data</span></span>
+<span class='r-in'>  <span class='co'># If values are "Increasing", "Likely increasing" etc (see ?EpiNow2::theme_map),</span></span>
+<span class='r-in'>  <span class='co'># then the default fill scale works</span></span>
+<span class='r-in'>  <span class='va'>eg_data</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a></span><span class='op'>(</span></span>
+<span class='r-in'>    variable <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='st'>"Increasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Stable"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>      <span class='st'>"Likely increasing"</span></span>
+<span class='r-in'>    <span class='op'>)</span>,</span>
+<span class='r-in'>    country <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>      <span class='st'>"France"</span>,</span>
+<span class='r-in'>      <span class='st'>"Germany"</span>,</span>
+<span class='r-in'>      <span class='st'>"United Kingdom"</span>,</span>
+<span class='r-in'>      <span class='st'>"Spain"</span>,</span>
+<span class='r-in'>      <span class='st'>"Australia"</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>)</span></span>
+<span class='r-in'>  <span class='co'># make variable a factor so the ordering is sensible in the legend</span></span>
+<span class='r-in'>  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>$</span><span class='va'>variable</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='st'>"Decreasing"</span>, <span class='st'>"Likely decreasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Stable"</span>, <span class='st'>"Likely increasing"</span>,</span>
+<span class='r-in'>    <span class='st'>"Increasing"</span></span>
+<span class='r-in'>  <span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>global_map</span><span class='op'>(</span><span class='va'>eg_data</span>, variable <span class='op'>=</span> <span class='st'>"variable"</span>, variable_label <span class='op'>=</span> <span class='st'>"Direction\nof change"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># Example 2 - numeric data</span></span>
+<span class='r-in'>  <span class='co'># numeric data requires scale_fill and a global viridis_palette specified</span></span>
+<span class='r-in'>  <span class='va'>eg_data</span><span class='op'>$</span><span class='va'>second_variable</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>eg_data</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>viridis_palette</span> <span class='op'>&lt;-</span> <span class='st'>"A"</span></span>
+<span class='r-in'>  <span class='fu'>global_map</span><span class='op'>(</span><span class='va'>eg_data</span>, variable <span class='op'>=</span> <span class='st'>"second_variable"</span>, scale_fill <span class='op'>=</span> <span class='va'>scale_fill_viridis_c</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The rnaturalearthdata package needs to be installed.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Installing the rnaturalearthdata package.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Installing package into ‘/Users/runner/work/_temp/Library’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> (as ‘lib’ is unspecified)</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in value[[3L]](cond)</span> Failed to install the rnaturalearthdata package.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span>  Please try installing the package for yourself using the following command: </span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span>  install.packages("rnaturalearthdata")</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
