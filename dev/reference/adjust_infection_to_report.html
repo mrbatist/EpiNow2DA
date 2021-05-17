@@ -71,8 +71,6 @@ onset." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -153,14 +151,14 @@ Maps from cases by date of infection to date of report via date of
 onset.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>adjust_infection_to_report</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>adjust_infection_to_report</span><span class='op'>(</span>
   <span class='va'>infections</span>,
   <span class='va'>delay_defs</span>,
   <span class='va'>reporting_model</span>,
   <span class='va'>reporting_effect</span>,
   type <span class='op'>=</span> <span class='st'>"sample"</span>,
   truncate_future <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,7 +200,7 @@ Defaults to <code>TRUE</code>.</p></td>
 a third variable <code>reference</code> which indicates what the date variable refers to.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># define example cases</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># define example cases</span></span>
 <span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>example_confirmed</span><span class='op'>)</span><span class='op'>[</span>, <span class='va'>cases</span> <span class='op'>:=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>confirm</span><span class='op'>)</span><span class='op'>]</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># define a single report delay distribution</span></span>
@@ -298,7 +296,7 @@ a third variable <code>reference</code> which indicates what the date variable r
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 128: 2020-06-28   203</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 129: 2020-06-29   255</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 130: 2020-06-30   203</span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

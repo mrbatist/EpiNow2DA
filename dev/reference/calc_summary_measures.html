@@ -70,8 +70,6 @@ Calculate summary statistics and credible intervals from a data frame by group."
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -151,12 +149,12 @@ Calculate summary statistics and credible intervals from a data frame by group."
 Calculate summary statistics and credible intervals from a data frame by group.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calc_summary_measures</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>calc_summary_measures</span><span class='op'>(</span>
   <span class='va'>samples</span>,
   summarise_by <span class='op'>=</span> <span class='cn'>NULL</span>,
   order_by <span class='op'>=</span> <span class='cn'>NULL</span>,
   CrIs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>, <span class='fl'>0.5</span>, <span class='fl'>0.9</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +183,7 @@ variables.</p></td>
     <p>A data.table containing summary statistics by group.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='va'>samples</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>value <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type <span class='op'>=</span> <span class='st'>"car"</span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>samples</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>value <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, type <span class='op'>=</span> <span class='st'>"car"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'># default</span></span>
 <span class='r-in'><span class='fu'>calc_summary_measures</span><span class='op'>(</span><span class='va'>samples</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    type median mean      sd lower_90 lower_50 lower_20 upper_20 upper_50</span>
@@ -198,7 +196,7 @@ variables.</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 1:  car    5.5  5.5 3.02765     1.45     3.25      4.6      6.4     7.75</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    upper_90</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> 1:     9.55</span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -79,8 +79,6 @@ for an application forecasting Covid-19 deaths in Germany and Poland." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -169,7 +167,7 @@ may be used to estimate and forecast a secondary observation from a primary acro
 for an application forecasting Covid-19 deaths in Germany and Poland.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>estimate_secondary</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>estimate_secondary</span><span class='op'>(</span>
   <span class='va'>reports</span>,
   secondary <span class='op'>=</span> <span class='fu'><a href='secondary_opts.html'>secondary_opts</a></span><span class='op'>(</span><span class='op'>)</span>,
   delays <span class='op'>=</span> <span class='fu'><a href='delay_opts.html'>delay_opts</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>2.5</span>, mean_sd <span class='op'>=</span> <span class='fl'>0.5</span>, sd <span class='op'>=</span> <span class='fl'>0.47</span>, sd_sd <span class='op'>=</span> <span class='fl'>0.25</span>, max <span class='op'>=</span>
@@ -181,7 +179,7 @@ for an application forecasting Covid-19 deaths in Germany and Poland.</p>
   model <span class='op'>=</span> <span class='cn'>NULL</span>,
   verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -250,7 +248,7 @@ and secondary observations, and a summary of the model estimated secondary obser
 <code>data</code> (a list of data used to fit the model), and <code>fit</code> (the <code>stanfit</code> object).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># \donttest{</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
 <span class='r-in'><span class='co'># set number of cores to use</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>mc.cores <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-in'><span class='co'>#' # load data.table for manipulation</span></span>
@@ -349,7 +347,7 @@ and secondary observations, and a summary of the model estimated secondary obser
 <span class='r-in'><span class='fu'><a href='plot.estimate_infections.html'>plot</a></span><span class='op'>(</span><span class='va'>prev_preds</span>, new_obs <span class='op'>=</span> <span class='va'>cases</span>, from <span class='op'>=</span> <span class='st'>"2020-06-01"</span><span class='op'>)</span></span>
 <span class='r-plt'><img src='estimate_secondary-4.png' alt='' width='864' height='864' /></span>
 <span class='r-in'><span class='co'># }</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
