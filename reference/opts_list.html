@@ -61,6 +61,8 @@ externally)." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -72,9 +74,15 @@ externally)." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -88,7 +96,7 @@ externally)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.4</span>
       </span>
     </div>
 
@@ -102,7 +110,7 @@ externally)." />
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fas fa-file-code-o"></span>
      
     Functions
   </a>
@@ -111,7 +119,7 @@ externally)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -140,7 +148,7 @@ externally)." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a>
 Define a list of <code>_opts</code> to pass to <code>regional_epinow</code> <code>_opts</code> accepting arguments.
 This is useful when different settings are needed between regions within a single
 <code>regional_epinow</code> call. Using <code>opts_list</code> the defaults can be applied to all regions
@@ -148,7 +156,7 @@ present with an override passed to regions as necessary (either within <code>opt
 externally).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>opts_list</span><span class='op'>(</span><span class='va'>opts</span>, <span class='va'>reported_cases</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>opts_list</span><span class='op'>(</span><span class='va'>opts</span>, <span class='va'>reported_cases</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,188 +186,192 @@ accepting arguments of <code>regional_epinow</code></p>
     <div class='dont-index'><p>regional_epinow rt_opts</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># uses example case vector</span>
-<span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span>
-<span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>)</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"testland"</span><span class='op'>]</span>,
-  <span class='va'>cases</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"realland"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-  
-<span class='co'># default settings</span>
-<span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $testland
-#&gt; $testland$prior
-#&gt; $testland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $testland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $testland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $testland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; 
-#&gt; $realland
-#&gt; $realland$prior
-#&gt; $realland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $realland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $realland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $realland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $realland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $realland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; </div><div class='input'>
-<span class='co'># add a weekly random walk in realland</span>
-<span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span>, realland <span class='op'>=</span> <span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>rw <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $testland
-#&gt; $testland$prior
-#&gt; $testland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $testland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $testland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $testland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; 
-#&gt; $realland
-#&gt; $realland$prior
-#&gt; $realland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $realland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $realland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$rw
-#&gt; [1] 7
-#&gt; 
-#&gt; $realland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $realland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $realland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; </div><div class='input'>
-<span class='co'># add a weekly random walk externally</span>
-<span class='va'>rt</span> <span class='op'>&lt;-</span> <span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span>
-<span class='va'>rt</span><span class='op'>$</span><span class='va'>realland</span><span class='op'>$</span><span class='va'>rw</span> <span class='op'>&lt;-</span> <span class='fl'>7</span>
-<span class='va'>rt</span>
-</div><div class='output co'>#&gt; $testland
-#&gt; $testland$prior
-#&gt; $testland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $testland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $testland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $testland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $testland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $testland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; 
-#&gt; $realland
-#&gt; $realland$prior
-#&gt; $realland$prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $realland$prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $realland$use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$rw
-#&gt; [1] 7
-#&gt; 
-#&gt; $realland$use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $realland$future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $realland$pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $realland$gp_on
-#&gt; [1] "R_t-1"
-#&gt; 
-#&gt; </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># uses example case vector</span></span>
+<span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>)</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"testland"</span><span class='op'>]</span>,</span>
+<span class='r-in'>  <span class='va'>cases</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"realland"</span><span class='op'>]</span></span>
+<span class='r-in'><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># default settings</span></span>
+<span class='r-in'><span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># add a weekly random walk in realland</span></span>
+<span class='r-in'><span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span>, realland <span class='op'>=</span> <span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>rw <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># add a weekly random walk externally</span></span>
+<span class='r-in'><span class='va'>rt</span> <span class='op'>&lt;-</span> <span class='fu'>opts_list</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rt</span><span class='op'>$</span><span class='va'>realland</span><span class='op'>$</span><span class='va'>rw</span> <span class='op'>&lt;-</span> <span class='fl'>7</span></span>
+<span class='r-in'><span class='va'>rt</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $testland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $realland$gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -371,11 +383,11 @@ accepting arguments of <code>regional_epinow</code></p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, Robin Thompson, EpiForecasts, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>.</p>
+  <p><p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, EpiForecasts, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -400,6 +412,8 @@ accepting arguments of <code>regional_epinow</code></p>
 </script>
 
 
+
+  
 
   </body>
 </html>

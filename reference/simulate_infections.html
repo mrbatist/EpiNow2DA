@@ -59,6 +59,8 @@ Simulations can be run in parallel using future::plan." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -70,9 +72,15 @@ Simulations can be run in parallel using future::plan." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,7 +94,7 @@ Simulations can be run in parallel using future::plan." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.4</span>
       </span>
     </div>
 
@@ -100,7 +108,7 @@ Simulations can be run in parallel using future::plan." />
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fas fa-file-code-o"></span>
      
     Functions
   </a>
@@ -109,7 +117,7 @@ Simulations can be run in parallel using future::plan." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -138,20 +146,20 @@ Simulations can be run in parallel using future::plan." />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#stable'><img src='figures/lifecycle-stable.svg' alt='Stable lifecycle'></a>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#stable'><img src='figures/lifecycle-stable.svg' alt='[Stable]' /></a>
 This function simulates infections using an existing fit to observed cases but with a modified
 time-varying reproduction number. This can be used to explore forecast models or past counterfactuals.
 Simulations can be run in parallel using <code><a href='https://rdrr.io/pkg/future/man/plan.html'>future::plan</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_infections</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>simulate_infections</span><span class='op'>(</span>
   <span class='va'>estimates</span>,
   R <span class='op'>=</span> <span class='cn'>NULL</span>,
   model <span class='op'>=</span> <span class='cn'>NULL</span>,
   samples <span class='op'>=</span> <span class='cn'>NULL</span>,
   batch_size <span class='op'>=</span> <span class='fl'>10</span>,
   verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,7 +174,8 @@ output = "fit", or the result of <code>estimate_infections</code> with <code>ret
       <td><p>A numeric vector of reproduction numbers; these will overwrite the reproduction numbers
 contained in <code>estimates</code>, except elements set to NA. If it is longer than the time series
 of reproduction numbers contained in <code>estimates</code>, the values going beyond the length of
-estimated reproduction numbers are taken as forecast.</p></td>
+estimated reproduction numbers are taken as forecast. Alternatively accepts a data.frame containing
+at least <code>date</code> and <code>value</code> (integer) variables and optionally <code>sample</code>.</p></td>
     </tr>
     <tr>
       <th>model</th>
@@ -192,33 +201,57 @@ shown.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>#set number of cores to use</span>
-<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>mc.cores <span class='op'>=</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='co'># get example case counts</span>
-<span class='va'>reported_cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span><span class='op'>]</span>
-
-<span class='co'># set up example generation time</span>
-<span class='va'>generation_time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_generation_time.html'>get_generation_time</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"ganyani"</span><span class='op'>)</span>
-<span class='co'># set delays between infection and case report</span>
-<span class='va'>incubation_period</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_incubation_period.html'>get_incubation_period</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"lauer"</span><span class='op'>)</span>
-<span class='va'>reporting_delay</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fu'><a href='convert_to_logmean.html'>convert_to_logmean</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>, mean_sd <span class='op'>=</span> <span class='fl'>0.1</span>,
-                        sd <span class='op'>=</span> <span class='fu'><a href='convert_to_logsd.html'>convert_to_logsd</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>, sd_sd <span class='op'>=</span> <span class='fl'>0.1</span>, max <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span>
-                        
-<span class='co'># fit model to data to recover Rt estimates</span>
-<span class='va'>est</span> <span class='op'>&lt;-</span> <span class='fu'><a href='estimate_infections.html'>estimate_infections</a></span><span class='op'>(</span><span class='va'>reported_cases</span>, generation_time <span class='op'>=</span> <span class='va'>generation_time</span>,
-                           delays <span class='op'>=</span> <span class='fu'><a href='delay_opts.html'>delay_opts</a></span><span class='op'>(</span><span class='va'>incubation_period</span>, <span class='va'>reporting_delay</span><span class='op'>)</span>,
-                           rt <span class='op'>=</span> <span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>2</span>, sd <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>,
-                           gp <span class='op'>=</span> <span class='fu'><a href='gp_opts.html'>gp_opts</a></span><span class='op'>(</span>ls_min <span class='op'>=</span> <span class='fl'>10</span>, boundary_scale <span class='op'>=</span> <span class='fl'>1.5</span>,,
-                                        basis_prop <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>,
-                           obs <span class='op'>=</span> <span class='fu'><a href='obs_opts.html'>obs_opts</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0.1</span>, sd <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-                                  
-<span class='co'># update Rt trajectory and simulate new infections using it</span>
-<span class='va'>R</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA_real_</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>10</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.8</span>, <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>sims</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_infections</span><span class='op'>(</span><span class='va'>est</span>, <span class='va'>R</span><span class='op'>)</span>
-<span class='fu'><a href='plot.estimate_infections.html'>plot</a></span><span class='op'>(</span><span class='va'>sims</span><span class='op'>)</span>
-</div><div class='img'><img src='simulate_infections-1.png' alt='' width='864' height='864' /></div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># set number of cores to use</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>mc.cores <span class='op'>=</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># get example case counts</span></span>
+<span class='r-in'><span class='va'>reported_cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>50</span><span class='op'>]</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># set up example generation time</span></span>
+<span class='r-in'><span class='va'>generation_time</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_generation_time.html'>get_generation_time</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"ganyani"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># set delays between infection and case report</span></span>
+<span class='r-in'><span class='va'>incubation_period</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_incubation_period.html'>get_incubation_period</a></span><span class='op'>(</span>disease <span class='op'>=</span> <span class='st'>"SARS-CoV-2"</span>, source <span class='op'>=</span> <span class='st'>"lauer"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>reporting_delay</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>  mean <span class='op'>=</span> <span class='fu'><a href='convert_to_logmean.html'>convert_to_logmean</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>, mean_sd <span class='op'>=</span> <span class='fl'>0.1</span>,</span>
+<span class='r-in'>  sd <span class='op'>=</span> <span class='fu'><a href='convert_to_logsd.html'>convert_to_logsd</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>)</span>, sd_sd <span class='op'>=</span> <span class='fl'>0.1</span>, max <span class='op'>=</span> <span class='fl'>15</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># fit model to data to recover Rt estimates</span></span>
+<span class='r-in'><span class='va'>est</span> <span class='op'>&lt;-</span> <span class='fu'><a href='estimate_infections.html'>estimate_infections</a></span><span class='op'>(</span><span class='va'>reported_cases</span>,</span>
+<span class='r-in'>  generation_time <span class='op'>=</span> <span class='va'>generation_time</span>,</span>
+<span class='r-in'>  delays <span class='op'>=</span> <span class='fu'><a href='delay_opts.html'>delay_opts</a></span><span class='op'>(</span><span class='va'>incubation_period</span>, <span class='va'>reporting_delay</span><span class='op'>)</span>,</span>
+<span class='r-in'>  rt <span class='op'>=</span> <span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span>prior <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>2</span>, sd <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>  gp <span class='op'>=</span> <span class='fu'><a href='gp_opts.html'>gp_opts</a></span><span class='op'>(</span></span>
+<span class='r-in'>    ls_min <span class='op'>=</span> <span class='fl'>10</span>, boundary_scale <span class='op'>=</span> <span class='fl'>1.5</span>, ,</span>
+<span class='r-in'>    basis_prop <span class='op'>=</span> <span class='fl'>0.1</span></span>
+<span class='r-in'>  <span class='op'>)</span>,</span>
+<span class='r-in'>  obs <span class='op'>=</span> <span class='fu'><a href='obs_opts.html'>obs_opts</a></span><span class='op'>(</span>scale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>0.1</span>, sd <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># update Rt trajectory and simulate new infections using it</span></span>
+<span class='r-in'><span class='va'>R</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA_real_</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>10</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>0.8</span>, <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>sims</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_infections</span><span class='op'>(</span><span class='va'>est</span>, <span class='va'>R</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.estimate_infections.html'>plot</a></span><span class='op'>(</span><span class='va'>sims</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='simulate_infections-1.png' alt='' width='864' height='864' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># with a data.frame input of samples</span></span>
+<span class='r-in'><span class='va'>R_dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span></span>
+<span class='r-in'>  date <span class='op'>=</span> <span class='fu'><a href='summary.epinow.html'>summary</a></span><span class='op'>(</span><span class='va'>est</span>, type <span class='op'>=</span> <span class='st'>"parameters"</span>, param <span class='op'>=</span> <span class='st'>"R"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>date</span>,</span>
+<span class='r-in'>  value <span class='op'>=</span> <span class='va'>R</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>sims</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_infections</span><span class='op'>(</span><span class='va'>est</span>, <span class='va'>R_dt</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.estimate_infections.html'>plot</a></span><span class='op'>(</span><span class='va'>sims</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='simulate_infections-2.png' alt='' width='864' height='864' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>#' # with a data.frame input of samples</span></span>
+<span class='r-in'><span class='va'>R_samples</span> <span class='op'>&lt;-</span> <span class='fu'><a href='summary.epinow.html'>summary</a></span><span class='op'>(</span><span class='va'>est</span>, type <span class='op'>=</span> <span class='st'>"samples"</span>, param <span class='op'>=</span> <span class='st'>"R"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>R_samples</span> <span class='op'>&lt;-</span> <span class='va'>R_samples</span><span class='op'>[</span>, <span class='fu'>.</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>sample</span>, <span class='va'>value</span><span class='op'>)</span><span class='op'>]</span><span class='op'>[</span><span class='va'>sample</span> <span class='op'>&lt;=</span> <span class='fl'>1000</span><span class='op'>]</span><span class='op'>[</span><span class='va'>date</span> <span class='op'>&lt;=</span> <span class='st'>"2020-04-10"</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>R_samples</span> <span class='op'>&lt;-</span> <span class='va'>R_samples</span><span class='op'>[</span><span class='va'>date</span> <span class='op'>&gt;=</span> <span class='st'>"2020-04-01"</span>, <span class='va'>value</span> <span class='op'>:=</span> <span class='fl'>1.1</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>sims</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_infections</span><span class='op'>(</span><span class='va'>est</span>, <span class='va'>R_samples</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='plot.estimate_infections.html'>plot</a></span><span class='op'>(</span><span class='va'>sims</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='simulate_infections-3.png' alt='' width='864' height='864' /></span>
+<span class='r-in'><span class='co'># }</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -230,11 +263,11 @@ shown.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, Robin Thompson, EpiForecasts, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>.</p>
+  <p><p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, EpiForecasts, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -259,6 +292,8 @@ shown.</p></td>
 </script>
 
 
+
+  
 
   </body>
 </html>

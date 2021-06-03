@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Timeout Error — stop_timeout • EpiNow2</title>
+<title>Adds a day of the week vector — add_day_of_week • EpiNow2</title>
 
 
 <!-- jquery -->
@@ -45,13 +45,15 @@
 
 
 
-<meta property="og:title" content="Timeout Error — stop_timeout" />
-<meta property="og:description" content="Timeout Error" />
+<meta property="og:title" content="Adds a day of the week vector — add_day_of_week" />
+<meta property="og:description" content="Adds a day of the week vector" />
 <meta property="og:image" content="epiforecasts.io/EpiNow2/reference/figures/unnamed-chunk-13-1.png" />
 <meta property="og:image:alt" content="Example estimates produced by EpiNow2 of the reproduction number, cases by date of infection and cases by date of report" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@seabbs" />
 <meta name="twitter:site" content="@cmmid_lshtm" />
+
+
 
 
 
@@ -67,9 +69,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -83,7 +91,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.4</span>
       </span>
     </div>
 
@@ -97,7 +105,7 @@
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fas fa-file-code-o"></span>
      
     Functions
   </a>
@@ -106,7 +114,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -129,30 +137,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Timeout Error</h1>
-    
-    <div class="hidden name"><code>stop_timeout.Rd</code></div>
+    <h1>Adds a day of the week vector</h1>
+    <small class="dont-index">Source: <a href='https://github.com/epiforecasts/EpiNow2/blob/master/R/utilities.R'><code>R/utilities.R</code></a></small>
+    <div class="hidden name"><code>add_day_of_week.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Timeout Error</p>
+    <p>Adds a day of the week vector</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stop_timeout</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, week_effect <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>fit</th>
-      <td><p>A stan fit object</p></td>
+      <th>dates</th>
+      <td><p>Vector of dates</p></td>
+    </tr>
+    <tr>
+      <th>week_effect</th>
+      <td><p>Numeric from 1 to 7 defaults to 7</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Nothing</p>
+    <p>A numeric vector containing the period day of the week index</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>dates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='st'>"2020-03-15"</span><span class='op'>)</span>, by <span class='op'>=</span> <span class='st'>"days"</span>, length.out <span class='op'>=</span> <span class='fl'>15</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Add date based day of week</span></span>
+<span class='r-in'><span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 7 1 2 3 4 5 6 7 1 2 3 4 5 6 7</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Add shorter week</span></span>
+<span class='r-in'><span class='fu'>add_day_of_week</span><span class='op'>(</span><span class='va'>dates</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -164,11 +186,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>, Joel Hellewell, Robin Thompson, Katelyn Gostic, Katharine Sherratt, Sophie Meakin, James Munday, Nikos Bosse, Joe Hickson, EpiForecasts, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>.</p>
+  <p><p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, EpiForecasts, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -193,6 +215,8 @@
 </script>
 
 
+
+  
 
   </body>
 </html>

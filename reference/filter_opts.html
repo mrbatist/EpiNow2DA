@@ -58,6 +58,8 @@ present and otherwise applies the overarching settings" />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -69,9 +71,15 @@ present and otherwise applies the overarching settings" />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -85,7 +93,7 @@ present and otherwise applies the overarching settings" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.4</span>
       </span>
     </div>
 
@@ -99,7 +107,7 @@ present and otherwise applies the overarching settings" />
 </li>
 <li>
   <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
+    <span class="fas fa-file-code-o"></span>
      
     Functions
   </a>
@@ -108,7 +116,7 @@ present and otherwise applies the overarching settings" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
@@ -137,12 +145,12 @@ present and otherwise applies the overarching settings" />
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#maturing'><img src='figures/lifecycle-maturing.svg' alt='Maturing lifecycle'></a>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a>
 A helper function that allows the selection of region specific settings if
 present and otherwise applies the overarching settings</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>opts</span>, <span class='va'>region</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>opts</span>, <span class='va'>region</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,71 +171,75 @@ call to an <code>_opts</code> function.</p></td>
     <p>A list of options</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># uses example case vector</span>
-<span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span>
-<span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>)</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"testland"</span><span class='op'>]</span>,
-  <span class='va'>cases</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"realland"</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-  
-<span class='co'># regional options</span>
-<span class='va'>regional_opts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='opts_list.html'>opts_list</a></span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span>
-<span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='st'>"realland"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $prior
-#&gt; $prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $gp_on
-#&gt; [1] "R_t-1"
-#&gt; </div><div class='input'><span class='co'># default only</span>
-<span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"realland"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $prior
-#&gt; $prior$mean
-#&gt; [1] 1
-#&gt; 
-#&gt; $prior$sd
-#&gt; [1] 1
-#&gt; 
-#&gt; 
-#&gt; $use_rt
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $rw
-#&gt; [1] 0
-#&gt; 
-#&gt; $use_breakpoints
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $future
-#&gt; [1] "latest"
-#&gt; 
-#&gt; $pop
-#&gt; [1] 0
-#&gt; 
-#&gt; $gp_on
-#&gt; [1] "R_t-1"
-#&gt; </div><div class='input'><span class='co'>#settings are NULL in one regions</span>
-<span class='va'>regional_opts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='update_list.html'>update_list</a></span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>realland <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='st'>"realland"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># uses example case vector</span></span>
+<span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='va'>example_confirmed</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>40</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>cases</span> <span class='op'>&lt;-</span> <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/copy.html'>copy</a></span><span class='op'>(</span><span class='va'>cases</span><span class='op'>)</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"testland"</span><span class='op'>]</span>,</span>
+<span class='r-in'>  <span class='va'>cases</span><span class='op'>[</span>, <span class='va'>region</span> <span class='op'>:=</span> <span class='st'>"realland"</span><span class='op'>]</span></span>
+<span class='r-in'><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># regional options</span></span>
+<span class='r-in'><span class='va'>regional_opts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='opts_list.html'>opts_list</a></span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>cases</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='st'>"realland"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='co'># default only</span></span>
+<span class='r-in'><span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='fu'><a href='rt_opts.html'>rt_opts</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"realland"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior$mean</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $prior$sd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $use_rt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $rw</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $use_breakpoints</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $future</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "latest"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $pop</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $gp_on</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "R_t-1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='co'># settings are NULL in one regions</span></span>
+<span class='r-in'><span class='va'>regional_opts</span> <span class='op'>&lt;-</span> <span class='fu'><a href='update_list.html'>update_list</a></span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>realland <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>EpiNow2</span><span class='fu'>:::</span><span class='fu'>filter_opts</span><span class='op'>(</span><span class='va'>regional_opts</span>, <span class='st'>"realland"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,11 +251,11 @@ call to an <code>_opts</code> function.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://www.samabbott.co.uk/'>Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, Robin Thompson, EpiForecasts, <a href='https://www.lshtm.ac.uk/aboutus/people/funk.sebastian'>Sebastian Funk</a>.</p>
+  <p><p>Developed by <a href="https://www.samabbott.co.uk/" class="external-link">Sam Abbott</a>, Joel Hellewell, Katharine Sherratt, Katelyn Gostic, Joe Hickson, Hamada S. Badr, Michael DeWitt, EpiForecasts, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian" class="external-link">Sebastian Funk</a>.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -268,6 +280,8 @@ call to an <code>_opts</code> function.</p></td>
 </script>
 
 
+
+  
 
   </body>
 </html>
