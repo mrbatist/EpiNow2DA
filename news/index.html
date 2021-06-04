@@ -161,10 +161,14 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
-<ul><li><p>Updates to all synthetic delays to reduce runtime of examples.</p></li>
-<li><p>Additional statements to make it clear to users examples should be used for real world analysis.</p></li>
-<li><p>Additional context in the README on package functionality. ## Package changes</p></li>
-<li><p>Added a <code>contributing.md</code> to guide contributors and added <code>pre-commit</code> support to check new contributions styling.</p></li>
+<ul><li>Updates to all synthetic delays to reduce runtime of examples.</li>
+<li>Additional statements to make it clear to users examples should be used for real world analysis.</li>
+<li>Additional context in the README on package functionality.</li>
+</ul></div>
+<div id="package-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-changes" class="anchor" aria-hidden="true"></a>Package changes</h2>
+<ul><li>Added a <code>contributing.md</code> to guide contributors and added <code>pre-commit</code> support to check new contributions styling.</li>
 </ul></div>
 <div id="other-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -176,6 +180,7 @@
 <a href="#bug-fixes" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
 <ul><li>Fixed a bug in the deconvolution Rt estimation method where the mean of the generation time was being used as the standard deviation. For the default package generation time these are close and so the impact will be limited but in cases where the standard deviation is &lt;&lt; than the mean this should result in more accurate Rt estimates.</li>
 <li>Fixed a bug where the number of threads used by the data.table package were set to one in the global environment. Now the number of threads used by data.table are set to whatever the used specified on exit (<a href='https://github.com/medewitt'>@medewitt</a>).</li>
+<li>Fixed a bug in <code>simulate_infections</code> and <code>forecast_secondary</code> which meant that a Poisson observation model used for estimation would lead to a error.</li>
 </ul></div>
 </div>
     <div id="epinow2-132" class="section level1">
