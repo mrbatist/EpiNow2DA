@@ -94,7 +94,7 @@ will be used." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.5</span>
       </span>
     </div>
 
@@ -210,15 +210,15 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // calculate alpha and beta for gamma distribution</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real small = 1e-5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real large = 1e8;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = sigma &lt; small ? small : sigma;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = mu &lt; small ? small : mu;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = fmax(small, sigma);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = fmax(small, mu);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real alpha = ((c_mu) / c_sigma)^2;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real beta = (c_mu) / (c_sigma^2);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // account for numerical issues</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = alpha &lt; small ? small : alpha;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = alpha &gt; large ? large : alpha;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = beta &lt; small ? small : beta;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = beta &gt; large ? large : beta;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = fmax(small, alpha);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = fmin(large, alpha);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = fmax(small, beta);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = fmin(large, beta);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // calculate pmf</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   trunc_pmf = gamma_cdf(max_val + 1, alpha, beta) - gamma_cdf(1, alpha, beta);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   for (i in 1:n){</span>
@@ -233,8 +233,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int n = num_elements(y);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] pmf;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real small = 1e-5;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = sigma &lt; small ? small : sigma;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = mu &lt; small ? small : mu;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = fmax(small, sigma);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = fmax(small, mu);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] adj_y = to_vector(y) + small;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] upper_y = (log(adj_y + 1) - c_mu) / c_sigma;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] lower_y = (log(adj_y) - c_mu) / c_sigma;</span>
@@ -302,10 +302,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd, int weight){</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     int delays = num_elements(delay_mean);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     if (delays) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:delays) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (s in 1:delays) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
@@ -603,64 +603,67 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> void report_lp(int[] cases, vector reports,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                real[] rep_phi, int phi_prior,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                int model_type, real weight) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     // the reciprocal overdispersion parameter (phi)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     rep_phi[model_type] ~ normal(0, phi_prior) T[0,];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow or</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // if poisson specified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (sqrt_phi &gt; 1e4) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (weight == 1) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       cases ~ poisson(reports);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }else{</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       target += poisson_lpmf(cases | reports) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += neg_binomial_2_lpmf(cases | reports, sqrt_phi) * weight;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     target += poisson_lpmf(cases | reports) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (weight == 1) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       cases ~ neg_binomial_2(reports, sqrt_phi);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }else{</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += neg_binomial_2_lpmf(cases | reports, sqrt_phi);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> // update log likelihood (as above but not vectorised and returning log likelihood)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> vector report_log_lik(int[] cases, vector reports,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                       real[] rep_phi, int model_type, real weight) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     int t = num_elements(reports);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     vector[t] log_lik;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (model_type) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // the reciprocal overdispersion parameter (phi)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     real sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (i in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         log_lik[i] = poisson_lpmf(cases[i] | reports[i]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (i in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         log_lik[i] = neg_binomial_2_lpmf(cases[i] | reports[i], sqrt_phi) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int t = num_elements(reports);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[t] log_lik;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   // the reciprocal overdispersion parameter (phi)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   // defer to poisson if phi is large, to avoid overflow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (sqrt_phi &gt; 1e4) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     for (i in 1:t) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       log_lik[i] = poisson_lpmf(cases[i] | reports[i]) * weight;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (i in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       log_lik[i] = neg_binomial_2_lpmf(cases[i] | reports[i], sqrt_phi) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   return(log_lik);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> // sample reported cases from the observation model</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> int[] report_rng(vector reports, real[] rep_phi, int model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int t = num_elements(reports);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int sampled_reports[t];</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       if (sqrt_phi &gt; 1e4) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         sampled_reports[s] = poisson_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         sampled_reports[s] = neg_binomial_2_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s], sqrt_phi);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   }else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   for (s in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       sampled_reports[s] = poisson_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s]);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       sampled_reports[s] = neg_binomial_2_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s], sqrt_phi);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   return(sampled_reports);</span>
@@ -775,6 +778,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_scale_mean;               // mean scaling factor for observations</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_scale_sd;                 // standard deviation of observation scaling</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_weight;                   // weight given to observation in log density</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int likelihood;                    // Should the likelihood be included in the model</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int return_likelihood; // Should the likehood be returned by the model</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> transformed data{</span>
@@ -844,7 +849,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    reports = scale_obs(reports, frac_obs[1]);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  // truncate near time cases to observed reports</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  obs_reports = truncate(reports[1:ot], truncation_mean, truncation_sd, max_truncation, 0);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  obs_reports = truncate(reports[1:ot], truncation_mean, truncation_sd,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                         max_truncation, 0);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> model {</span>
@@ -870,14 +876,16 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     frac_obs[1] ~ normal(obs_scale_mean, obs_scale_sd) T[0,];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // observed reports from mean of reports (update likelihood)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   report_lp(cases, obs_reports, rep_phi, 1, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (likelihood) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     report_lp(cases, obs_reports, rep_phi, 1, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> generated quantities {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int imputed_reports[ot_h];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[estimate_r &gt; 0 ? 0: ot_h] gen_R;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real r[ot_h];</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[ot] log_lik;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[return_likelihood &gt; 1 ? ot : 0] log_lik;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (estimate_r){</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     // estimate growth from estimated Rt</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     r = R_to_growth(R, gt_mean[1], gt_sd[1]);</span>
@@ -894,7 +902,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // simulate reported cases</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   imputed_reports = report_rng(reports, rep_phi, model_type);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // log likelihood of model</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   log_lik = report_log_lik(cases, obs_reports, rep_phi, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (return_likelihood) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     log_lik = report_log_lik(cases, obs_reports, rep_phi, model_type,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                              obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> } </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $method</span>
@@ -923,7 +934,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control$adapt_delta</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.98</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.95</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control$max_treedepth</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 15</span>
@@ -956,15 +967,15 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // calculate alpha and beta for gamma distribution</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real small = 1e-5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real large = 1e8;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = sigma &lt; small ? small : sigma;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = mu &lt; small ? small : mu;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = fmax(small, sigma);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = fmax(small, mu);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real alpha = ((c_mu) / c_sigma)^2;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real beta = (c_mu) / (c_sigma^2);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // account for numerical issues</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = alpha &lt; small ? small : alpha;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = alpha &gt; large ? large : alpha;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = beta &lt; small ? small : beta;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = beta &gt; large ? large : beta;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = fmax(small, alpha);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   alpha = fmin(large, alpha);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = fmax(small, beta);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   beta = fmin(large, beta);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // calculate pmf</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   trunc_pmf = gamma_cdf(max_val + 1, alpha, beta) - gamma_cdf(1, alpha, beta);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   for (i in 1:n){</span>
@@ -979,8 +990,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int n = num_elements(y);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] pmf;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real small = 1e-5;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = sigma &lt; small ? small : sigma;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = mu &lt; small ? small : mu;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_sigma = fmax(small, sigma);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real c_mu = fmax(small, mu);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] adj_y = to_vector(y) + small;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] upper_y = (log(adj_y + 1) - c_mu) / c_sigma;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[n] lower_y = (log(adj_y) - c_mu) / c_sigma;</span>
@@ -1048,10 +1059,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd, int weight){</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     int delays = num_elements(delay_mean);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     if (delays) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:delays) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (s in 1:delays) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
@@ -1349,64 +1360,67 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> void report_lp(int[] cases, vector reports,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                real[] rep_phi, int phi_prior,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                int model_type, real weight) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     // the reciprocal overdispersion parameter (phi)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     rep_phi[model_type] ~ normal(0, phi_prior) T[0,];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow or</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // if poisson specified</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (sqrt_phi &gt; 1e4) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (weight == 1) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       cases ~ poisson(reports);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }else{</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       target += poisson_lpmf(cases | reports) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += neg_binomial_2_lpmf(cases | reports, sqrt_phi) * weight;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     target += poisson_lpmf(cases | reports) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (weight == 1) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       cases ~ neg_binomial_2(reports, sqrt_phi);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }else{</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       target += neg_binomial_2_lpmf(cases | reports, sqrt_phi);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> // update log likelihood (as above but not vectorised and returning log likelihood)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> vector report_log_lik(int[] cases, vector reports,</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>                       real[] rep_phi, int model_type, real weight) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     int t = num_elements(reports);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     vector[t] log_lik;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (model_type) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // the reciprocal overdispersion parameter (phi)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     real sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (i in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         log_lik[i] = poisson_lpmf(cases[i] | reports[i]) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       for (i in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         log_lik[i] = neg_binomial_2_lpmf(cases[i] | reports[i], sqrt_phi) * weight;</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int t = num_elements(reports);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[t] log_lik;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   // the reciprocal overdispersion parameter (phi)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   // defer to poisson if phi is large, to avoid overflow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (sqrt_phi &gt; 1e4) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     for (i in 1:t) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       log_lik[i] = poisson_lpmf(cases[i] | reports[i]) * weight;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (i in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       log_lik[i] = neg_binomial_2_lpmf(cases[i] | reports[i], sqrt_phi) * weight;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   return(log_lik);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> // sample reported cases from the observation model</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> int[] report_rng(vector reports, real[] rep_phi, int model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int t = num_elements(reports);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int sampled_reports[t];</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   real sqrt_phi = 1e5;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (model_type) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     sqrt_phi = 1 / sqrt(rep_phi[model_type]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:t) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       // defer to poisson if phi is large, to avoid overflow</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       if (sqrt_phi &gt; 1e4) {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         sampled_reports[s] = poisson_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s]);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       } else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>         sampled_reports[s] = neg_binomial_2_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s], sqrt_phi);</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>       }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   }else {</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>     for (s in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   for (s in 1:t) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     // defer to poisson if phi is large, to avoid overflow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     if (sqrt_phi &gt; 1e4) {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       sampled_reports[s] = poisson_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s]);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     } else {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       sampled_reports[s] = neg_binomial_2_rng(reports[s] &gt; 1e8 ? 1e8 : reports[s], sqrt_phi);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   return(sampled_reports);</span>
@@ -1521,6 +1535,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_scale_mean;               // mean scaling factor for observations</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_scale_sd;                 // standard deviation of observation scaling</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real obs_weight;                   // weight given to observation in log density</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int likelihood;                    // Should the likelihood be included in the model</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   int return_likelihood; // Should the likehood be returned by the model</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> transformed data{</span>
@@ -1590,7 +1606,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>    reports = scale_obs(reports, frac_obs[1]);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>  // truncate near time cases to observed reports</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  obs_reports = truncate(reports[1:ot], truncation_mean, truncation_sd, max_truncation, 0);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  obs_reports = truncate(reports[1:ot], truncation_mean, truncation_sd,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                         max_truncation, 0);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> model {</span>
@@ -1616,14 +1633,16 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     frac_obs[1] ~ normal(obs_scale_mean, obs_scale_sd) T[0,];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // observed reports from mean of reports (update likelihood)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   report_lp(cases, obs_reports, rep_phi, 1, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (likelihood) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     report_lp(cases, obs_reports, rep_phi, 1, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> generated quantities {</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   int imputed_reports[ot_h];</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[estimate_r &gt; 0 ? 0: ot_h] gen_R;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   real r[ot_h];</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[ot] log_lik;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   vector[return_likelihood &gt; 1 ? ot : 0] log_lik;</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   if (estimate_r){</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     // estimate growth from estimated Rt</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>     r = R_to_growth(R, gt_mean[1], gt_sd[1]);</span>
@@ -1640,7 +1659,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // simulate reported cases</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   imputed_reports = report_rng(reports, rep_phi, model_type);</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   // log likelihood of model</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   log_lik = report_log_lik(cases, obs_reports, rep_phi, model_type, obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   if (return_likelihood) {</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     log_lik = report_log_lik(cases, obs_reports, rep_phi, model_type,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                              obs_weight);</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> } </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $method</span>
@@ -1669,7 +1691,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control$adapt_delta</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.98</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.95</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $control$max_treedepth</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 15</span>
