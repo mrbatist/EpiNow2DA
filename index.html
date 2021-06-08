@@ -120,12 +120,10 @@
 <p>Install the stable version of the package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span><span class="op">)</span></code></pre></div>
-<p>Install the stable development version of the package using <a href="https://epiforecasts.io/drat/" class="external-link"><code>{drat}</code></a>:</p>
+<p>Install the stable development version of the package with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"drat"</span><span class="op">)</span>
-<span class="fu">drat</span><span class="fu">:::</span><span class="fu">add</span><span class="op">(</span><span class="st">"epiforecasts"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span><span class="op">)</span></code></pre></div>
-<p>Install the unstable development version of the package with:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span>, repos <span class="op">=</span> <span class="st">"https://epiforecasts.r-universe.dev"</span><span class="op">)</span></code></pre></div>
+<p>Install the unstable development version of the package with (few users should need to do this):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/EpiNow2"</span><span class="op">)</span></code></pre></div>
 <p>Windows users will need a working installation of Rtools in order to build the package from source. See <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#checking-the-c-toolchain" class="external-link">here</a> for a guide to installing Rtools for use with Stan (which is the statistical modelling platform used for the underlying model). For simple deployment/development a prebuilt docker image is also available (see documentation <a href="https://github.com/epiforecasts/EpiNow2/wiki/Docker" class="external-link">here</a>).</p>
