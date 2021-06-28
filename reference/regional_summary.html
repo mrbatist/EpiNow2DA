@@ -47,7 +47,8 @@
 
 <meta property="og:title" content="Regional Summary Output — regional_summary" />
 <meta property="og:description" content="
-Used to produce summary output either internally in regional_epinow or externally." />
+Used to produce summary output either internally in regional_epinow or
+externally." />
 <meta property="og:image" content="epiforecasts.io/EpiNow2/reference/figures/unnamed-chunk-13-1.png" />
 <meta property="og:image:alt" content="Example estimates produced by EpiNow2 of the reproduction number, cases by date of infection and cases by date of report" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -92,7 +93,7 @@ Used to produce summary output either internally in regional_epinow or externall
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.8</span>
       </span>
     </div>
 
@@ -145,7 +146,8 @@ Used to produce summary output either internally in regional_epinow or externall
 
     <div class="ref-description">
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a>
-Used to produce summary output either internally in <code>regional_epinow</code> or externally.</p>
+Used to produce summary output either internally in <code>regional_epinow</code> or
+externally.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>regional_summary</span><span class='op'>(</span>
@@ -157,7 +159,8 @@ Used to produce summary output either internally in <code>regional_epinow</code>
   region_scale <span class='op'>=</span> <span class='st'>"Region"</span>,
   all_regions <span class='op'>=</span> <span class='cn'>TRUE</span>,
   return_output <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  max_plot <span class='op'>=</span> <span class='fl'>10</span>
+  max_plot <span class='op'>=</span> <span class='fl'>10</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,7 +187,8 @@ in which to store summary of results.</p></td>
     </tr>
     <tr>
       <th>target_date</th>
-      <td><p>A character string giving the target date for which to extract results
+      <td><p>A character string giving the target date for which to
+extract results
 (in the format "yyyy-mm-dd"). Defaults to latest available estimates.</p></td>
     </tr>
     <tr>
@@ -193,8 +197,8 @@ in which to store summary of results.</p></td>
     </tr>
     <tr>
       <th>all_regions</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should summary plots for all regions be returned
-rather than just regions of interest.</p></td>
+      <td><p>Logical, defaults to <code>TRUE</code>. Should summary plots for all
+regions be returned rather than just regions of interest.</p></td>
     </tr>
     <tr>
       <th>return_output</th>
@@ -205,6 +209,10 @@ if no directory for saving is specified.</p></td>
       <th>max_plot</th>
       <td><p>Numeric, defaults to 10. A multiplicative upper bound on the number of cases shown on the plot. Based
 on the maximum number of reported cases.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed to <code>report_plots</code>.</p></td>
     </tr>
     </table>
 
@@ -237,27 +245,27 @@ on the maximum number of reported cases.</p></td>
 <span class='r-in'>  output <span class='op'>=</span> <span class='st'>"region"</span>,</span>
 <span class='r-in'>  rt <span class='op'>=</span> <span class='cn'>NULL</span></span>
 <span class='r-in'><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:07:41] Producing following optional outputs: regions</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:25:56] Producing following optional outputs: regions</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpnwLlIR/regional-epinow/2020-03-22.log</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpgJHwLS/regional-epinow/2020-03-22.log</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpnwLlIR/epinow/2020-03-22.log</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:07:41] Reporting estimates using data up to: 2020-03-22</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:07:41] No target directory specified so returning output</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:07:41] Producing estimates for: testland, realland</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:07:41] Regions excluded: none</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:09] Completed estimates for: testland</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] Completed estimates for: realland</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] Completed regional estimates</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] Regions with estimates: 2</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] Regions with runtime errors: 0</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] No target directory specified so returning timings</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpgJHwLS/epinow/2020-03-22.log</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:25:56] Reporting estimates using data up to: 2020-03-22</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:25:56] No target directory specified so returning output</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:25:56] Producing estimates for: testland, realland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:25:56] Regions excluded: none</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:25] Completed estimates for: testland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:57] Completed estimates for: realland</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:57] Completed regional estimates</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:57] Regions with estimates: 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:57] Regions with runtime errors: 0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:58] No target directory specified so returning timings</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='fu'>regional_summary</span><span class='op'>(</span></span>
 <span class='r-in'>  regional_output <span class='op'>=</span> <span class='va'>out</span><span class='op'>$</span><span class='va'>regional</span>,</span>
 <span class='r-in'>  reported_cases <span class='op'>=</span> <span class='va'>cases</span></span>
 <span class='r-in'><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-27 05:08:41] No summary directory specified so returning summary output</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> INFO [2021-06-28 17:26:58] No summary directory specified so returning summary output</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> $latest_date</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "2020-03-22"</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
