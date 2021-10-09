@@ -19,7 +19,7 @@ process. Custom settings can be supplied which override the defaults."><meta pro
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.10</span>
       </span>
     </div>
 
@@ -73,9 +73,9 @@ process. Custom settings can be supplied which override the defaults.</p>
   boundary_scale <span class="op">=</span> <span class="fl">1.5</span>,
   ls_mean <span class="op">=</span> <span class="fl">21</span>,
   ls_sd <span class="op">=</span> <span class="fl">7</span>,
-  ls_min <span class="op">=</span> <span class="fl">3</span>,
+  ls_min <span class="op">=</span> <span class="fl">0</span>,
   ls_max <span class="op">=</span> <span class="fl">60</span>,
-  alpha_sd <span class="op">=</span> <span class="fl">0.1</span>,
+  alpha_sd <span class="op">=</span> <span class="fl">0.05</span>,
   kernel <span class="op">=</span> <span class="st">"matern"</span>,
   matern_type <span class="op">=</span> <span class="fl">3</span><span class="op">/</span><span class="fl">2</span>
 <span class="op">)</span></code></pre></div>
@@ -95,14 +95,15 @@ default.</p></td>
       <td><p>Numeric, defaults to 21 days. The mean of the lognormal length scale.</p></td>
     </tr><tr><th>ls_sd</th>
       <td><p>Numeric, defaults to 7 days. The standard deviation of the log normal length
-scale with..</p></td>
+scale. If <code>ls_sd = 0</code>, inverse-gamma prior on Gaussian process length scale will
+be used with recommended parameters <code>inv_gamma(1.499007, 0.057277 * ls_max)</code>.</p></td>
     </tr><tr><th>ls_min</th>
-      <td><p>Numeric, defaults to 7. The minimum value of the length scale.</p></td>
+      <td><p>Numeric, defaults to 0. The minimum value of the length scale.</p></td>
     </tr><tr><th>ls_max</th>
       <td><p>Numeric, defaults to 60. The maximum value of the length scale. Updated in
 <code>create_gp_data</code> to be the length of the input data if this is smaller.</p></td>
     </tr><tr><th>alpha_sd</th>
-      <td><p>Numeric, defaults to 0.2. The standard deviation of the magnitude parameter of
+      <td><p>Numeric, defaults to 0.05. The standard deviation of the magnitude parameter of
 the Gaussian process kernel. Should be approximately the expected standard deviation of the logged Rt.</p></td>
     </tr><tr><th>kernel</th>
       <td><p>Character string, the type of kernel required. Currently supporting the squared exponential
@@ -131,13 +132,13 @@ in Rt and infections.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ls_min</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ls_max</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpha_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $kernel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "matern_3/2"</span>
@@ -161,13 +162,13 @@ in Rt and infections.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ls_min</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ls_max</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 60</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $alpha_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $kernel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "matern_3/2"</span>
