@@ -179,11 +179,11 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in"><span class="co"># real time estimates</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2220 (1118 -- 4118)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2196 (1139 -- 4142)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.       0.87 (0.6 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.037 (-0.12 -- 0.044)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -19 (16 -- -5.8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.       0.86 (0.6 -- 1.2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.038 (-0.12 -- 0.041)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -18 (17 -- -5.9)</span>
 <span class="r-in"><span class="co"># summary plot</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
 <span class="r-plt"><img src="estimate_infections-1.png" alt="" width="864" height="864"></span>
@@ -198,12 +198,12 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in">  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure               estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date    2292 (1234 -- 4177)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases      Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.     0.89 (0.65 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.032 (-0.1 -- 0.042)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)       -22 (16 -- -6.7)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2296 (1194 -- 4176)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.88 (0.62 -- 1.2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.033 (-0.11 -- 0.042)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -21 (17 -- -6.2)</span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span>
 <span class="r-plt"><img src="estimate_infections-2.png" alt="" width="864" height="864"></span>
 <span class="r-in"></span>
@@ -311,10 +311,10 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="co"># break point effect</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">bkp</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type     median       mean         sd   lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.6607015 -0.6607232 0.02644555 -0.7031806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type     median       mean        sd  lower_90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.6610011 -0.6621831 0.0260588 -0.705884</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      lower_50   lower_20   upper_20   upper_50   upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.6785419 -0.6670307 -0.6545027 -0.6437725 -0.6171465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.6782756 -0.6677684 -0.6556218 -0.6449863 -0.6201547</span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">bkp</span><span class="op">)</span></span>
 <span class="r-plt"><img src="estimate_infections-11.png" alt="" width="864" height="864"></span>
 <span class="r-in"></span>
@@ -329,23 +329,23 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in"><span class="co"># random walk effects</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">rw</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type      median        mean         sd   lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.12705071 -0.12649647 0.06797826 -0.2351525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt; breakpoints     2 &lt;NA&gt; -0.15115289 -0.14977556 0.08095864 -0.2840236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt; breakpoints     3 &lt;NA&gt; -0.21763874 -0.21790060 0.08354825 -0.3571796</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt; breakpoints     4 &lt;NA&gt; -0.28941586 -0.29013294 0.09402291 -0.4440723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt; breakpoints     5 &lt;NA&gt; -0.05550555 -0.05840937 0.09289399 -0.2142400</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt; breakpoints     6 &lt;NA&gt;  0.04200454  0.04290241 0.09389299 -0.1106444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; breakpoints     7 &lt;NA&gt; -0.05922923 -0.06032336 0.10706980 -0.2399661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;NA&gt; breakpoints     8 &lt;NA&gt; -0.02386648 -0.02378138 0.16443783 -0.2958001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.12914998 -0.12866978 0.06470978 -0.2298765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt; breakpoints     2 &lt;NA&gt; -0.14569882 -0.14852967 0.07899748 -0.2886914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt; breakpoints     3 &lt;NA&gt; -0.21985388 -0.21883963 0.08757073 -0.3597418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt; breakpoints     4 &lt;NA&gt; -0.29037580 -0.29066384 0.09165817 -0.4494040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt; breakpoints     5 &lt;NA&gt; -0.06030320 -0.05739912 0.09476367 -0.2094261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt; breakpoints     6 &lt;NA&gt;  0.04279533  0.04285935 0.09829799 -0.1137566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; breakpoints     7 &lt;NA&gt; -0.06118728 -0.06168444 0.10904504 -0.2390115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;NA&gt; breakpoints     8 &lt;NA&gt; -0.01488621 -0.01928406 0.16692713 -0.2923809</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       lower_50    lower_20    upper_20     upper_50    upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.17411532 -0.14486563 -0.10861518 -0.080367280 -0.01562159</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: -0.20285059 -0.17173965 -0.12791938 -0.093354144 -0.01756505</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: -0.27298013 -0.23804527 -0.19918765 -0.165708539 -0.07806038</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: -0.35182490 -0.31150172 -0.26670792 -0.230618873 -0.13641748</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: -0.12022629 -0.07785850 -0.03650211 -0.001618861  0.09112652</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: -0.02039691  0.01806618  0.06721741  0.104536134  0.19615823</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: -0.13084239 -0.08648858 -0.03215467  0.012316539  0.11187289</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: -0.13177128 -0.06599098  0.01652412  0.085827104  0.24663679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.17249499 -0.14566030 -0.11255534 -0.085158972 -0.02040126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: -0.19521522 -0.16432881 -0.12992146 -0.097811271 -0.02087499</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: -0.27934436 -0.24108738 -0.19857378 -0.162321236 -0.07620431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: -0.34873942 -0.31197994 -0.26849561 -0.230833793 -0.14128202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: -0.11895591 -0.08242513 -0.03678790  0.004222645  0.09830233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: -0.01928591  0.01809129  0.06464012  0.107578050  0.20193260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: -0.13212826 -0.09027915 -0.03538999  0.006341213  0.12368646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8: -0.12775744 -0.05562298  0.02300122  0.090263823  0.25104982</span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">rw</span><span class="op">)</span></span>
 <span class="r-plt"><img src="estimate_infections-12.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span class="co"># }</span></span>
