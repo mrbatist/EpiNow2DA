@@ -74,7 +74,8 @@ on which the back calculation method (see <code><a href="backcalc_opts.html">bac
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">shift</span>, <span class="va">smoothing_window</span>, <span class="va">horizon</span><span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>reported_cases</th>
       <td><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
 in date format.</p></td>
@@ -85,11 +86,15 @@ in date format.</p></td>
 to apply. Must be odd in order to be defined as a centred average.</p></td>
     </tr><tr><th>horizon</th>
       <td><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value</h2>
     <p>A data frame for shifted reported cases</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">example_confirmed</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">7</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-03-07    3028</span>
@@ -104,6 +109,7 @@ to apply. Must be odd in order to be defined as a centred average.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 115: 2020-06-29     217</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 116: 2020-06-30     215</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

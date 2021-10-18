@@ -107,7 +107,8 @@ progressr::handlers and enable it in batch by setting <code>R_PROGRESSR_ENABLE=T
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>reported_cases</th>
       <td><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></td>
     </tr><tr><th>generation_time</th>
@@ -170,14 +171,19 @@ the code for <code>setup_default_logging</code> and the <code>setup_logging</cod
 place to start.</p></td>
     </tr><tr><th>...</th>
       <td><p>Pass additional arguments to <code>epinow</code>. See the documentation for <code>epinow</code> for details.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value</h2>
     <p>A list of output stratified at the top level into regional output and across region output summary output</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p>epinow estimate_infections forecast_infections setup_future regional_summary</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># set number of cores to use</span></span>
@@ -213,23 +219,23 @@ place to start.</p></td>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:40:47] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:40:47] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:40:47] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:40:47] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:40:47] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:46:23] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:15:01] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] No target directory specified so returning timings</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply a different rt method per region</span></span>
 <span class="r-in"><span class="co"># (here a gaussian process and a weekly random walk)</span></span>
@@ -248,25 +254,26 @@ place to start.</p></td>
 <span class="r-in">  <span class="op">)</span>,</span>
 <span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:26] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:51:27] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 00:56:58] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:12] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:24:17] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] No target directory specified so returning timings</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

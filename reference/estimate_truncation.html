@@ -113,7 +113,8 @@ prior for the mean, standard deviation and 1 over the square root of the over di
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>obs</th>
       <td><p>A list of data frames each containing a date variable
 and a confirm (integer) variable. Each data set should be a snapshot
@@ -131,16 +132,20 @@ useful for package developers or those developing extensions.</p></td>
       <td><p>Logical, should model fitting progress be returned.</p></td>
     </tr><tr><th>...</th>
       <td><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code>.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value</h2>
     <p>A list containing: the summary parameters of the truncation distribution
 (<code>dist</code>), the estimated CMF of the truncation distribution (<code>cmf</code>, can be used to adjusted
 new data), a data frame containing the observed truncated data, latest observed data
 and the adjusted for truncation observations (<code>obs</code>), a data frame containing the last
 observed data (<code>last_obs</code>, useful for plotting and validation), the data used for fitting
 (<code>data</code>) and the fit object (<code>fit</code>).</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># set number of cores to use</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># get example case counts</span></span>
@@ -306,6 +311,7 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">est</span><span class="op">)</span></span>
 <span class="r-plt"><img src="estimate_truncation-1.png" alt="" width="864" height="864"></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

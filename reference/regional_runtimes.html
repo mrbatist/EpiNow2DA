@@ -73,7 +73,8 @@ Used internally by <code>regional_epinow</code> to summarise region run times.</
   return_output <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <div id="arguments">
+    <h2>Arguments</h2>
     <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>regional_output</th>
       <td><p>A list of output as produced by <code>regional_epinow</code> and stored in the
 <code>regional</code> list.</p></td>
@@ -86,14 +87,19 @@ extract results
     </tr><tr><th>return_output</th>
       <td><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
 if no directory for saving is specified.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    </tr></table></div>
 
+    <div id="value">
+    <h2>Value</h2>
     <p>A data.table of region run times</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p>regional_summary regional_epinow</p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div id="examples">
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># example delays</span></span>
 <span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
@@ -116,21 +122,22 @@ if no directory for saving is specified.</p></td>
 <span class="r-in">  samples <span class="op">=</span> <span class="fl">100</span>, stan_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>warmup <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
 <span class="r-in">  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"region"</span>, <span class="st">"timing"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] Producing following optional outputs: regions, timing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] Producing following optional outputs: regions, timing</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/regional-epinow/2020-03-22.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-03-22.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpKk1ktz/epinow/2020-03-22.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] Reporting estimates using data up to: 2020-03-22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-12 01:04:13] Regions excluded: none</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-03-22.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] Reporting estimates using data up to: 2020-03-22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] Regions excluded: none</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in delay_opts(incubation_period, reporting_delay)</span> object 'reporting_delay' not found</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">regional_runtimes</span><span class="op">(</span>regional_output <span class="op">=</span> <span class="va">regional_out</span><span class="op">$</span><span class="va">regional</span><span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in regional_runtimes(regional_output = regional_out$regional)</span> object 'regional_out' not found</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
