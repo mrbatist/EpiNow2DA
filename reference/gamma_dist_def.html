@@ -38,7 +38,7 @@ are available for gamma distributed parameters. See rgamma for distribution info
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,12 +58,12 @@ are available for gamma distributed parameters. See rgamma for distribution info
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate a Gamma Distribution Definition Based on Parameter Estimates</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R"><code>R/dist.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
     <div class="hidden name"><code>gamma_dist_def.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated" class="external-link"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a>
 Generates a distribution definition when only parameter estimates
 are available for gamma distributed parameters. See <code>rgamma</code> for distribution information.</p>
     </div>
@@ -81,34 +81,27 @@ are available for gamma distributed parameters. See <code>rgamma</code> for dist
   <span class="va">samples</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>shape</th>
-      <td><p>Numeric, shape parameter of the gamma distribution.</p></td>
-    </tr><tr><th>shape_sd</th>
-      <td><p>Numeric, standard deviation of the shape parameter.</p></td>
-    </tr><tr><th>scale</th>
-      <td><p>Numeric, scale parameter of the gamma distribution.</p></td>
-    </tr><tr><th>scale_sd</th>
-      <td><p>Numeric, standard deviation of the scale parameter.</p></td>
-    </tr><tr><th>mean</th>
-      <td><p>Numeric, log mean parameter of the gamma distribution.</p></td>
-    </tr><tr><th>mean_sd</th>
-      <td><p>Numeric, standard deviation of the log mean parameter.</p></td>
-    </tr><tr><th>sd</th>
-      <td><p>Numeric, log sd parameter of the gamma distribution.</p></td>
-    </tr><tr><th>sd_sd</th>
-      <td><p>Numeric, standard deviation of the log sd parameter.</p></td>
-    </tr><tr><th>max_value</th>
-      <td><p>Numeric, the maximum value to allow. Defaults to 120. Samples outside
-of this range are resampled.</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, number of sample distributions to generate.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>shape</dt><dd><p>Numeric, shape parameter of the gamma distribution.</p></dd>
+</dl><dl><dt>shape_sd</dt><dd><p>Numeric, standard deviation of the shape parameter.</p></dd>
+</dl><dl><dt>scale</dt><dd><p>Numeric, scale parameter of the gamma distribution.</p></dd>
+</dl><dl><dt>scale_sd</dt><dd><p>Numeric, standard deviation of the scale parameter.</p></dd>
+</dl><dl><dt>mean</dt><dd><p>Numeric, log mean parameter of the gamma distribution.</p></dd>
+</dl><dl><dt>mean_sd</dt><dd><p>Numeric, standard deviation of the log mean parameter.</p></dd>
+</dl><dl><dt>sd</dt><dd><p>Numeric, log sd parameter of the gamma distribution.</p></dd>
+</dl><dl><dt>sd_sd</dt><dd><p>Numeric, standard deviation of the log sd parameter.</p></dd>
+</dl><dl><dt>max_value</dt><dd><p>Numeric, the maximum value to allow. Defaults to 120. Samples outside
+of this range are resampled.</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, number of sample distributions to generate.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A data.table defining the distribution as used by <code>dist_skel</code></p>
+    </div>
     </div>
 
     <div id="examples">
@@ -119,7 +112,7 @@ of this range are resampled.</p></td>
 <span class="r-in">  scale <span class="op">=</span> <span class="fl">0.9</span>, scale_sd <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span class="r-in">  max_value <span class="op">=</span> <span class="fl">20</span>, samples <span class="op">=</span> <span class="fl">10</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     model    params max_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: gamma &lt;list[2]&gt;        20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: gamma &lt;list[2]&gt;        20</span>
@@ -145,7 +138,7 @@ of this range are resampled.</p></td>
 <span class="r-in">  sd <span class="op">=</span> <span class="fl">3</span>, sd_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span class="r-in">  max_value <span class="op">=</span> <span class="fl">20</span>, samples <span class="op">=</span> <span class="fl">10</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     model    params max_value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: gamma &lt;list[2]&gt;        20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: gamma &lt;list[2]&gt;        20</span>

@@ -39,7 +39,7 @@ for details."><meta property="og:image" content="epiforecasts.io/EpiNow2/referen
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -59,12 +59,12 @@ for details."><meta property="og:image" content="epiforecasts.io/EpiNow2/referen
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create Clean Reported Cases</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/create.R"><code>R/create.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/create.R" class="external-link"><code>R/create.R</code></a></small>
     <div class="hidden name"><code>create_clean_reported_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Cleans a data frame of reported cases by replacing missing dates with 0 cases and applies an optional
 threshold at which point 0 cases are replaced with a moving average of observed cases. See <code>zero_threshold</code>
 for details.</p>
@@ -72,23 +72,23 @@ for details.</p>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">create_clean_reported_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">horizon</span>, zero_threshold <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>reported_cases</th>
-      <td><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
-in date format.</p></td>
-    </tr><tr><th>horizon</th>
-      <td><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></td>
-    </tr><tr><th>zero_threshold</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
+    
+
+<dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
+in date format.</p></dd>
+</dl><dl><dt>horizon</dt><dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+</dl><dl><dt>zero_threshold</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
 cases are meaningful by using a threshold of 50 cases on average over the last 7 days. If the average is
 above this threshold then the zero is replaced with the backwards looking rolling average. If set to infinity
-then no changes are made.</p></td>
-    </tr></table></div>
-
+then no changes are made.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A cleaned data frame of reported cases</p>
+    </div>
     </div>
 
   </div>

@@ -38,7 +38,7 @@ externally."><meta property="og:image" content="epiforecasts.io/EpiNow2/referenc
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,12 +58,12 @@ externally."><meta property="og:image" content="epiforecasts.io/EpiNow2/referenc
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Regional Summary Output</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/summarise.R"><code>R/summarise.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/summarise.R" class="external-link"><code>R/summarise.R</code></a></small>
     <div class="hidden name"><code>regional_summary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
 Used to produce summary output either internally in <code>regional_epinow</code> or
 externally.</p>
     </div>
@@ -81,38 +81,30 @@ externally.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>regional_output</th>
-      <td><p>A list of output as produced by <code>regional_epinow</code> and stored in the
-<code>regional</code> list.</p></td>
-    </tr><tr><th>reported_cases</th>
-      <td><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></td>
-    </tr><tr><th>results_dir</th>
-      <td><p>An optional character string indicating the location of the results directory to extract results
-from.</p></td>
-    </tr><tr><th>summary_dir</th>
-      <td><p>A character string giving the directory
-in which to store summary of results.</p></td>
-    </tr><tr><th>target_date</th>
-      <td><p>A character string giving the target date for which to
-extract results
-(in the format "yyyy-mm-dd"). Defaults to latest available estimates.</p></td>
-    </tr><tr><th>region_scale</th>
-      <td><p>A character string indicating the name to give the regions being summarised.</p></td>
-    </tr><tr><th>all_regions</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should summary plots for all
-regions be returned rather than just regions of interest.</p></td>
-    </tr><tr><th>return_output</th>
-      <td><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
-if no directory for saving is specified.</p></td>
-    </tr><tr><th>max_plot</th>
-      <td><p>Numeric, defaults to 10. A multiplicative upper bound on the number of cases shown on the plot. Based
-on the maximum number of reported cases.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional arguments passed to <code>report_plots</code>.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>regional_output</dt><dd><p>A list of output as produced by <code>regional_epinow</code> and stored in the
+<code>regional</code> list.</p></dd>
+</dl><dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></dd>
+</dl><dl><dt>results_dir</dt><dd><p>An optional character string indicating the location of the results directory to extract results
+from.</p></dd>
+</dl><dl><dt>summary_dir</dt><dd><p>A character string giving the directory
+in which to store summary of results.</p></dd>
+</dl><dl><dt>target_date</dt><dd><p>A character string giving the target date for which to
+extract results
+(in the format "yyyy-mm-dd"). Defaults to latest available estimates.</p></dd>
+</dl><dl><dt>region_scale</dt><dd><p>A character string indicating the name to give the regions being summarised.</p></dd>
+</dl><dl><dt>all_regions</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should summary plots for all
+regions be returned rather than just regions of interest.</p></dd>
+</dl><dl><dt>return_output</dt><dd><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
+if no directory for saving is specified.</p></dd>
+</dl><dl><dt>max_plot</dt><dd><p>Numeric, defaults to 10. A multiplicative upper bound on the number of cases shown on the plot. Based
+on the maximum number of reported cases.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional arguments passed to <code>report_plots</code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of summary measures and plots</p>
@@ -121,6 +113,7 @@ on the maximum number of reported cases.</p></td>
     <h2>See also</h2>
     <div class="dont-index"><p>regional_epinow</p></div>
     </div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
@@ -128,12 +121,12 @@ on the maximum number of reported cases.</p></td>
 <span class="r-in"><span class="co"># example delays</span></span>
 <span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="estimate_delay.html">estimate_delay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="estimate_delay.html">estimate_delay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># example case vector from EpiSoon</span></span>
 <span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
+<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
 <span class="r-in">  <span class="va">cases</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"realland"</span><span class="op">]</span></span>
 <span class="r-in"><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -145,27 +138,27 @@ on the maximum number of reported cases.</p></td>
 <span class="r-in">  output <span class="op">=</span> <span class="st">"region"</span>,</span>
 <span class="r-in">  rt <span class="op">=</span> <span class="cn">NULL</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:45] Producing following optional outputs: regions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:18] Producing following optional outputs: regions</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-03-22.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/2020-03-22.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-03-22.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:45] Reporting estimates using data up to: 2020-03-22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:45] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:45] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:45] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:12] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/2020-03-22.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:18] Reporting estimates using data up to: 2020-03-22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:18] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:18] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:18] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:45] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] No target directory specified so returning timings</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">regional_summary</span><span class="op">(</span></span>
 <span class="r-in">  regional_output <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">regional</span>,</span>
 <span class="r-in">  reported_cases <span class="op">=</span> <span class="va">cases</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:31:40] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:25:12] No summary directory specified so returning summary output</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $latest_date</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2020-03-22"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

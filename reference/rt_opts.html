@@ -38,7 +38,7 @@ Custom settings can be supplied which override the defaults."><meta property="og
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,18 +58,18 @@ Custom settings can be supplied which override the defaults."><meta property="og
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Time-Varying Reproduction Number Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>rt_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the optional arguments for the time-varying reproduction number.
 Custom settings can be supplied which override the defaults.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">rt_opts</span><span class="op">(</span>
-  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
   use_rt <span class="op">=</span> <span class="cn">TRUE</span>,
   rw <span class="op">=</span> <span class="fl">0</span>,
   use_breakpoints <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -78,45 +78,41 @@ Custom settings can be supplied which override the defaults.</p>
   pop <span class="op">=</span> <span class="fl">0</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>prior</th>
-      <td><p>List containing named numeric elements "mean" and "sd". The mean and
+    
+
+<dl><dt>prior</dt><dd><p>List containing named numeric elements "mean" and "sd". The mean and
 standard deviation of the log normal Rt prior. Defaults to mean of 1 and standard
-deviation of 1.</p></td>
-    </tr><tr><th>use_rt</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should Rt be used to generate infections
-and hence reported cases.</p></td>
-    </tr><tr><th>rw</th>
-      <td><p>Numeric step size of the random walk, defaults to 0. To specify a weekly random
+deviation of 1.</p></dd>
+</dl><dl><dt>use_rt</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should Rt be used to generate infections
+and hence reported cases.</p></dd>
+</dl><dl><dt>rw</dt><dd><p>Numeric step size of the random walk, defaults to 0. To specify a weekly random
 walk set <code>rw = 7</code>. For more custom break point settings consider passing in a <code>breakpoints</code>
-variable as outlined in the next section.</p></td>
-    </tr><tr><th>use_breakpoints</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should break points be used if present
+variable as outlined in the next section.</p></dd>
+</dl><dl><dt>use_breakpoints</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should break points be used if present
 as a <code>breakpoint</code> variable in the input data. Break points should be defined as 1 if present
 and otherwise 0. By default breakpoints are fit jointly with a global non-parametric effect
-and so represent a conservative estimate of break point changes (alter this by setting <code>gp = NULL</code>).</p></td>
-    </tr><tr><th>future</th>
-      <td><p>A character string or integer. This argument indicates how to set future Rt values. Supported
+and so represent a conservative estimate of break point changes (alter this by setting <code>gp = NULL</code>).</p></dd>
+</dl><dl><dt>future</dt><dd><p>A character string or integer. This argument indicates how to set future Rt values. Supported
 options are to project using the Rt model ("project"), to use the latest estimate based on partial data ("latest"),
 to use the latest estimate based on data that is over 50% complete ("estimate"). If an integer is supplied then the Rt estimate
-from this many days into the future (or past if negative) past will be used forwards in time.</p></td>
-    </tr><tr><th>gp_on</th>
-      <td><p>Character string, defaulting to  "R_t-1". Indicates how the Gaussian process,
+from this many days into the future (or past if negative) past will be used forwards in time.</p></dd>
+</dl><dl><dt>gp_on</dt><dd><p>Character string, defaulting to  "R_t-1". Indicates how the Gaussian process,
 if in use, should be applied to Rt.  Currently supported options are applying the Gaussian
 process to the last estimated Rt (i.e Rt = Rt-1 * GP), and applying the Gaussian process to
 a global mean (i.e Rt = R0 * GP). Both should produced comparable results when data is not
 sparse but the method relying on a global mean will revert to this for real time estimates,
-which may not be desirable.</p></td>
-    </tr><tr><th>pop</th>
-      <td><p>Integer, defaults to 0. Susceptible population initially present. Used to adjust
+which may not be desirable.</p></dd>
+</dl><dl><dt>pop</dt><dd><p>Integer, defaults to 0. Susceptible population initially present. Used to adjust
 Rt estimates when otherwise fixed based on the proportion of the population that is
-susceptible. When set to 0 no population adjustment is done.</p></td>
-    </tr></table></div>
-
+susceptible. When set to 0 no population adjustment is done.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of settings defining the time-varying reproduction number</p>
+    </div>
     </div>
 
     <div id="examples">
@@ -151,7 +147,7 @@ susceptible. When set to 0 no population adjustment is done.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># add a custom length scale</span></span>
-<span class="r-in"><span class="fu">rt_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">rt_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior$mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>

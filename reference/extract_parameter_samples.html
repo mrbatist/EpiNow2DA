@@ -38,7 +38,7 @@ dates where appropriate."><meta property="og:image" content="epiforecasts.io/Epi
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,12 +58,12 @@ dates where appropriate."><meta property="og:image" content="epiforecasts.io/Epi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Parameter Samples from a Stan Model</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R"><code>R/extract.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R" class="external-link"><code>R/extract.R</code></a></small>
     <div class="hidden name"><code>extract_parameter_samples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Extracts a custom set of parameters from a stan object and adds stratification and
 dates where appropriate.</p>
     </div>
@@ -77,27 +77,24 @@ dates where appropriate.</p>
   merge <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>stan_fit</th>
-      <td><p>A fit Stan model as returned by <code>rstan:sampling</code></p></td>
-    </tr><tr><th>data</th>
-      <td><p>A list of the data supplied to the <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code> call.</p></td>
-    </tr><tr><th>reported_dates</th>
-      <td><p>A vector of dates to report estimates for.</p></td>
-    </tr><tr><th>reported_inf_dates</th>
-      <td><p>A vector of dates to report infection estimates for.</p></td>
-    </tr><tr><th>drop_length_1</th>
-      <td><p>Logical; whether the first dimension should be dropped if it
-is if length 1; this is necessary when processing simulation results</p></td>
-    </tr><tr><th>merge</th>
-      <td><p>if TRUE, merge samples and data so that parameters can be
-extracted from data</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>stan_fit</dt><dd><p>A fit Stan model as returned by <code>rstan:sampling</code></p></dd>
+</dl><dl><dt>data</dt><dd><p>A list of the data supplied to the <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code> call.</p></dd>
+</dl><dl><dt>reported_dates</dt><dd><p>A vector of dates to report estimates for.</p></dd>
+</dl><dl><dt>reported_inf_dates</dt><dd><p>A vector of dates to report infection estimates for.</p></dd>
+</dl><dl><dt>drop_length_1</dt><dd><p>Logical; whether the first dimension should be dropped if it
+is if length 1; this is necessary when processing simulation results</p></dd>
+</dl><dl><dt>merge</dt><dd><p>if TRUE, merge samples and data so that parameters can be
+extracted from data</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of dataframes each containing the posterior of a parameter</p>
+    </div>
     </div>
 
   </div>

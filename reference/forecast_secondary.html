@@ -42,7 +42,7 @@ for an example of forecasting Covid-19 deaths from Covid-19 cases."><meta proper
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -62,17 +62,17 @@ for an example of forecasting Covid-19 deaths from Covid-19 cases."><meta proper
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Forecast Secondary Observations Given a Fit from estimate_secondary</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_secondary.R"><code>R/estimate_secondary.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_secondary.R" class="external-link"><code>R/estimate_secondary.R</code></a></small>
     <div class="hidden name"><code>forecast_secondary.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 This function forecasts secondary observations using the output of <code><a href="estimate_secondary.html">estimate_secondary()</a></code> and either
 observed primary data or a forecast of primary observations. See the examples of <code><a href="estimate_secondary.html">estimate_secondary()</a></code>
 for one use case. It can also be combined with <code><a href="estimate_infections.html">estimate_infections()</a></code> to produce a forecast for a secondary
 observation from a forecast of a primary observation. See the examples of <code><a href="estimate_secondary.html">estimate_secondary()</a></code> for
-example use cases on synthetic data. See <a href="https://gist.github.com/seabbs/4f09d7609df298db7a86c31612ff9d17">here</a>
+example use cases on synthetic data. See <a href="https://gist.github.com/seabbs/4f09d7609df298db7a86c31612ff9d17" class="external-link">here</a>
 for an example of forecasting Covid-19 deaths from Covid-19 cases.</p>
     </div>
 
@@ -83,34 +83,29 @@ for an example of forecasting Covid-19 deaths from Covid-19 cases.</p>
   model <span class="op">=</span> <span class="cn">NULL</span>,
   samples <span class="op">=</span> <span class="cn">NULL</span>,
   all_dates <span class="op">=</span> <span class="cn">FALSE</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>estimate</th>
-      <td><p>An object of class "estimate_secondary" as produced by <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.</p></td>
-    </tr><tr><th>primary</th>
-      <td><p>A data.frame containing at least <code>date</code> and <code>value</code> (integer) variables and optionally
+    
+
+<dl><dt>estimate</dt><dd><p>An object of class "estimate_secondary" as produced by <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.</p></dd>
+</dl><dl><dt>primary</dt><dd><p>A data.frame containing at least <code>date</code> and <code>value</code> (integer) variables and optionally
 <code>sample</code>. Used as the primary observation used to forecast the secondary observations. Alternatively,
 this may be an object of class "estimate_infections" as produced by <code><a href="estimate_infections.html">estimate_infections()</a></code>. If <code>primary</code>
 is of class "estimate_infections" then the internal samples will be filtered to have a minimum date ahead of
-those observed in the <code>estimate</code> object.</p></td>
-    </tr><tr><th>primary_variable</th>
-      <td><p>A character string indicating the primary variable, defaulting to "reported_cases".
-Only used when primary is of class "estimate_infections".</p></td>
-    </tr><tr><th>model</th>
-      <td><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html">rstan::stan_model</a></code>.</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, number of posterior samples to simulate from. The default is to use all
-samples in the <code>primary</code> input when present. If not present the default is to use 1000 samples.</p></td>
-    </tr><tr><th>all_dates</th>
-      <td><p>Logical, defaults to FALSE. Should a forecast for all dates and not just those in
-the forecast horizon be returned.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr></table></div>
-
+those observed in the <code>estimate</code> object.</p></dd>
+</dl><dl><dt>primary_variable</dt><dd><p>A character string indicating the primary variable, defaulting to "reported_cases".
+Only used when primary is of class "estimate_infections".</p></dd>
+</dl><dl><dt>model</dt><dd><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html" class="external-link">rstan::stan_model</a></code>.</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, number of posterior samples to simulate from. The default is to use all
+samples in the <code>primary</code> input when present. If not present the default is to use 1000 samples.</p></dd>
+</dl><dl><dt>all_dates</dt><dd><p>Logical, defaults to FALSE. Should a forecast for all dates and not just those in
+the forecast horizon be returned.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list containing: <code>predictions</code> (a data frame ordered by date with the primary,
@@ -122,6 +117,7 @@ summary of the forecast secondary observation posterior.</p>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>estimate_secondary</p></div>
+    </div>
     </div>
 
   </div>

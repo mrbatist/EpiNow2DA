@@ -43,7 +43,7 @@ authored by James Scott.'><meta property="og:image" content="epiforecasts.io/Epi
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -63,18 +63,18 @@ authored by James Scott.'><meta property="og:image" content="epiforecasts.io/Epi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate initial conditions by fitting to cumulative cases</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_infections.R"><code>R/estimate_infections.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_infections.R" class="external-link"><code>R/estimate_infections.R</code></a></small>
     <div class="hidden name"><code>init_cumulative_fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 Fits a model to cumulative cases. This may be a useful approach to initialising
 a full model fit for certain data sets where the sampler gets stuck or cannot easily
 be initialised as fitting to cumulative cases changes the shape of the posterior
 distribution. In <code><a href="estimate_infections.html">estimate_infections()</a></code>, <code><a href="epinow.html">epinow()</a></code> and <code><a href="regional_epinow.html">regional_epinow()</a></code> this option can be
 engaged by setting <code>stan_opts(init_fit = "cumulative")</code>.</p>
-<p>This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/">epidemia</a>
+<p>This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/" class="external-link">epidemia</a>
 authored by James Scott.</p>
     </div>
 
@@ -86,24 +86,22 @@ authored by James Scott.</p>
   verbose <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>args</th>
-      <td><p>List of stan arguments</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, defaults to 50. Number of posterior samples.</p></td>
-    </tr><tr><th>warmup</th>
-      <td><p>Numeric, defaults to 50. Number of warmup samples.</p></td>
-    </tr><tr><th>id</th>
-      <td><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
-to assign errors to regions. Alter the default to run with error catching.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, should fitting progress be returned. Defaults to <code>FALSE</code>.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>args</dt><dd><p>List of stan arguments</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, defaults to 50. Number of posterior samples.</p></dd>
+</dl><dl><dt>warmup</dt><dd><p>Numeric, defaults to 50. Number of warmup samples.</p></dd>
+</dl><dl><dt>id</dt><dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
+to assign errors to regions. Alter the default to run with error catching.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, should fitting progress be returned. Defaults to <code>FALSE</code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A stanfit object</p>
+    </div>
     </div>
 
   </div>

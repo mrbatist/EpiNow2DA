@@ -38,7 +38,7 @@ cannot log stan errors or progress."><meta property="og:image" content="epiforec
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,45 +58,45 @@ cannot log stan errors or progress."><meta property="og:image" content="epiforec
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Setup Default Logging</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/setup.R"><code>R/setup.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/setup.R" class="external-link"><code>R/setup.R</code></a></small>
     <div class="hidden name"><code>setup_default_logging.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning" class="external-link"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
 Sets up default logging. Usage of logging is currently being explored as the current setup
 cannot log stan errors or progress.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">setup_default_logging</span><span class="op">(</span>
-  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   mirror_epinow <span class="op">=</span> <span class="cn">FALSE</span>,
   target_date <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>logs</th>
-      <td><p>Character path indicating the target folder in which to store log
+    
+
+<dl><dt>logs</dt><dd><p>Character path indicating the target folder in which to store log
 information. Defaults to the temporary directory if not specified. Default logging
 can be disabled if <code>logs</code> is set to NULL. If specifying a custom logging setup then
 the code for <code>setup_default_logging</code> and the <code>setup_logging</code> function are a sensible
-place to start.</p></td>
-    </tr><tr><th>mirror_epinow</th>
-      <td><p>Logical, defaults to FALSE. Should internal logging be
-returned from <code>epinow</code> to the console.</p></td>
-    </tr><tr><th>target_date</th>
-      <td><p>Date, defaults to maximum found in the data if not specified.</p></td>
-    </tr></table></div>
-
+place to start.</p></dd>
+</dl><dl><dt>mirror_epinow</dt><dd><p>Logical, defaults to FALSE. Should internal logging be
+returned from <code>epinow</code> to the console.</p></dd>
+</dl><dl><dt>target_date</dt><dd><p>Date, defaults to maximum found in the data if not specified.</p></dd>
+</dl></div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">setup_default_logging</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/latest.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/latest.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/latest.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/latest.log</span>
 </code></pre></div>
     </div>
   </div>

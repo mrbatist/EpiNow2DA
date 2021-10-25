@@ -38,7 +38,7 @@ rstan::sampling. Custom settings can be supplied which override the defaults."><
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,67 +58,60 @@ rstan::sampling. Custom settings can be supplied which override the defaults."><
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Rstan Sampling Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>rstan_sampling_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the arguments passed to
-<code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code>. Custom settings can be supplied which override the defaults.</p>
+<code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>. Custom settings can be supplied which override the defaults.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">rstan_sampling_opts</span><span class="op">(</span>
-  cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">1L</span><span class="op">)</span>,
+  cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">1L</span><span class="op">)</span>,
   warmup <span class="op">=</span> <span class="fl">250</span>,
   samples <span class="op">=</span> <span class="fl">2000</span>,
   chains <span class="op">=</span> <span class="fl">4</span>,
-  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
+  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   save_warmup <span class="op">=</span> <span class="cn">FALSE</span>,
-  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1e+08</span><span class="op">)</span><span class="op">)</span>,
+  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1e+08</span><span class="op">)</span><span class="op">)</span>,
   future <span class="op">=</span> <span class="cn">FALSE</span>,
   max_execution_time <span class="op">=</span> <span class="cn">Inf</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>cores</th>
-      <td><p>Number of cores to use when executing the chains in parallel,
+    
+
+<dl><dt>cores</dt><dd><p>Number of cores to use when executing the chains in parallel,
 which defaults to 1 but it is recommended to set the mc.cores option to be as
-many processors as the hardware and RAM allow (up to the number of chains).</p></td>
-    </tr><tr><th>warmup</th>
-      <td><p>Numeric, defaults to 250. Number of warmup samples per chain.</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, default 2000. Overall number of posterior samples.
-When using multiple chains iterations per chain is samples / chains.</p></td>
-    </tr><tr><th>chains</th>
-      <td><p>Numeric, defaults to 4. Number of MCMC chains to use.</p></td>
-    </tr><tr><th>control</th>
-      <td><p>List, defaults to empty. control parameters to pass to underlying
+many processors as the hardware and RAM allow (up to the number of chains).</p></dd>
+</dl><dl><dt>warmup</dt><dd><p>Numeric, defaults to 250. Number of warmup samples per chain.</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, default 2000. Overall number of posterior samples.
+When using multiple chains iterations per chain is samples / chains.</p></dd>
+</dl><dl><dt>chains</dt><dd><p>Numeric, defaults to 4. Number of MCMC chains to use.</p></dd>
+</dl><dl><dt>control</dt><dd><p>List, defaults to empty. control parameters to pass to underlying
 <code>rstan</code> function. By default <code>adapt_delta = 0.95</code> and <code>max_treedepth = 15</code>
-though these settings can be overwritten.</p></td>
-    </tr><tr><th>save_warmup</th>
-      <td><p>Logical, defaults to FALSE. Should warmup progress be saved.</p></td>
-    </tr><tr><th>seed</th>
-      <td><p>Numeric, defaults uniform random number between 1 and 1e8. Seed of
-sampling process.</p></td>
-    </tr><tr><th>future</th>
-      <td><p>Logical, defaults to <code>FALSE</code>. Should stan chains be run in parallel
+though these settings can be overwritten.</p></dd>
+</dl><dl><dt>save_warmup</dt><dd><p>Logical, defaults to FALSE. Should warmup progress be saved.</p></dd>
+</dl><dl><dt>seed</dt><dd><p>Numeric, defaults uniform random number between 1 and 1e8. Seed of
+sampling process.</p></dd>
+</dl><dl><dt>future</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should stan chains be run in parallel
 using <code>future</code>. This allows users to have chains fail gracefully (i.e when combined with
-<code>max_execution_time</code>). Should be combined with a call to <code><a href="https://future.futureverse.org/reference/plan.html">future::plan</a></code></p></td>
-    </tr><tr><th>max_execution_time</th>
-      <td><p>Numeric, defaults to Inf (seconds). If set will kill off
+<code>max_execution_time</code>). Should be combined with a call to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code></p></dd>
+</dl><dl><dt>max_execution_time</dt><dd><p>Numeric, defaults to Inf (seconds). If set will kill off
 processing of each chain if not finished within the specified timeout. When more than 2 chains
 finish successfully estimates will still be returned. If less than 2 chains return within the
-allowed time then estimation will fail with an informative error.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code>.</p></td>
-    </tr></table></div>
-
+allowed time then estimation will fail with an informative error.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of arguments to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code></p>
+    <p>A list of arguments to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code></p>
+    </div>
     </div>
 
     <div id="examples">

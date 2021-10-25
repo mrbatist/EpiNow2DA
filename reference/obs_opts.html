@@ -38,7 +38,7 @@ model. Custom settings can be supplied which override the defaults."><meta prope
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,62 +58,57 @@ model. Custom settings can be supplied which override the defaults."><meta prope
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Observation Model Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>obs_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the structure of the observation
 model. Custom settings can be supplied which override the defaults.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">obs_opts</span><span class="op">(</span>
   family <span class="op">=</span> <span class="st">"negbin"</span>,
-  phi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+  phi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
   weight <span class="op">=</span> <span class="fl">1</span>,
   week_effect <span class="op">=</span> <span class="cn">TRUE</span>,
   week_length <span class="op">=</span> <span class="fl">7</span>,
-  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
+  scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   likelihood <span class="op">=</span> <span class="cn">TRUE</span>,
   return_likelihood <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>family</th>
-      <td><p>Character string defining the observation model. Options are
-Negative binomial ("negbin"), the default, and Poisson.</p></td>
-    </tr><tr><th>phi</th>
-      <td><p>A numeric vector of length 2, defaults to 0, 1. Indicates the
+    
+
+<dl><dt>family</dt><dd><p>Character string defining the observation model. Options are
+Negative binomial ("negbin"), the default, and Poisson.</p></dd>
+</dl><dl><dt>phi</dt><dd><p>A numeric vector of length 2, defaults to 0, 1. Indicates the
 mean and standard deviation of the normal prior used for the observation
-process.</p></td>
-    </tr><tr><th>weight</th>
-      <td><p>Numeric, defaults to 1. Weight to give the observed data in
-the log density.</p></td>
-    </tr><tr><th>week_effect</th>
-      <td><p>Logical defaulting to <code>TRUE</code>. Should a day of the week effect
-be used in the observation model.</p></td>
-    </tr><tr><th>week_length</th>
-      <td><p>Numeric assumed length of the week in days, defaulting to
+process.</p></dd>
+</dl><dl><dt>weight</dt><dd><p>Numeric, defaults to 1. Weight to give the observed data in
+the log density.</p></dd>
+</dl><dl><dt>week_effect</dt><dd><p>Logical defaulting to <code>TRUE</code>. Should a day of the week effect
+be used in the observation model.</p></dd>
+</dl><dl><dt>week_length</dt><dd><p>Numeric assumed length of the week in days, defaulting to
 7 days. This can be modified if data aggregated over a period other than a week
-or if data has a non-weekly periodicity.</p></td>
-    </tr><tr><th>scale</th>
-      <td><p>List, defaulting to an empty list. Should an scaling factor be applied
+or if data has a non-weekly periodicity.</p></dd>
+</dl><dl><dt>scale</dt><dd><p>List, defaulting to an empty list. Should an scaling factor be applied
 to map latent infections (convolved to date of report). If none empty a mean
 (<code>mean</code>) and standard deviation (<code>sd</code>) needs to be supplied defining the normally
-distributed scaling factor.</p></td>
-    </tr><tr><th>likelihood</th>
-      <td><p>Logical, defaults to <code>TRUE</code>. Should the likelihood be
-included in the model</p></td>
-    </tr><tr><th>return_likelihood</th>
-      <td><p>Logical, defaults to <code>FALSE</code>. Should the likelihood
-be returned by the model.</p></td>
-    </tr></table></div>
-
+distributed scaling factor.</p></dd>
+</dl><dl><dt>likelihood</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should the likelihood be
+included in the model</p></dd>
+</dl><dl><dt>return_likelihood</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should the likelihood
+be returned by the model.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of observation model settings.</p>
+    </div>
     </div>
 
     <div id="examples">
@@ -173,7 +168,7 @@ be returned by the model.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Scale reported data</span></span>
-<span class="r-in"><span class="fu">obs_opts</span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.2</span>, sd <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">obs_opts</span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.2</span>, sd <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $family</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "negbin"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

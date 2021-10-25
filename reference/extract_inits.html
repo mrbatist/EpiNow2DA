@@ -42,7 +42,7 @@ authored by James Scott."><meta property="og:image" content="epiforecasts.io/Epi
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -62,39 +62,38 @@ authored by James Scott."><meta property="og:image" content="epiforecasts.io/Epi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate initial conditions from a Stan fit</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R"><code>R/extract.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R" class="external-link"><code>R/extract.R</code></a></small>
     <div class="hidden name"><code>extract_inits.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 Extracts posterior samples to use to initialise a full model fit. This may be useful
 for certain data sets where the sampler gets stuck or cannot easily be initialised.
 In <code><a href="estimate_infections.html">estimate_infections()</a></code>, <code><a href="epinow.html">epinow()</a></code> and <code><a href="regional_epinow.html">regional_epinow()</a></code> this option can be
 engaged by setting <code>stan_opts(init_fit = &lt;stanfit&gt;)</code>.</p>
-<p>This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/">epidemia</a>
+<p>This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/" class="external-link">epidemia</a>
 authored by James Scott.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">extract_inits</span><span class="op">(</span><span class="va">fit</span>, <span class="va">current_inits</span>, exclude_list <span class="op">=</span> <span class="cn">NULL</span>, samples <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>fit</th>
-      <td><p>A stanfit object</p></td>
-    </tr><tr><th>current_inits</th>
-      <td><p>A function that returns a list of initial conditions (such as
-<code><a href="create_initial_conditions.html">create_initial_conditions()</a></code>). Only used in <code>exclude_list</code> is specified.</p></td>
-    </tr><tr><th>exclude_list</th>
-      <td><p>A character vector of parameters to not initialise from the fit
-object, defaulting to <code>NULL</code>.</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, defaults to 50. Number of posterior samples.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>fit</dt><dd><p>A stanfit object</p></dd>
+</dl><dl><dt>current_inits</dt><dd><p>A function that returns a list of initial conditions (such as
+<code><a href="create_initial_conditions.html">create_initial_conditions()</a></code>). Only used in <code>exclude_list</code> is specified.</p></dd>
+</dl><dl><dt>exclude_list</dt><dd><p>A character vector of parameters to not initialise from the fit
+object, defaulting to <code>NULL</code>.</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, defaults to 50. Number of posterior samples.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A function that when called returns a set of initial conditions as a named list.</p>
+    </div>
     </div>
 
   </div>

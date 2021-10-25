@@ -40,7 +40,7 @@ in new releases as forecast_infections evolves to be based on stan functionality
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -60,12 +60,12 @@ in new releases as forecast_infections evolves to be based on stan functionality
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Estimate Cases by Report Date</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/epinow-internal.R"><code>R/epinow-internal.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/epinow-internal.R" class="external-link"><code>R/epinow-internal.R</code></a></small>
     <div class="hidden name"><code>estimates_by_report_date.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning" class="external-link"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
 Either extracts or converts reported cases from an input data table. For output from
 <code>estimate_infections</code> this is a simple filtering step but for output from <code>forecast_infection</code>
 this is currently an approximate convolution. This step is likely to be updated/deprecated
@@ -76,31 +76,28 @@ in new releases as <code>forecast_infections</code> evolves to be based on <code
   <span class="va">estimates</span>,
   <span class="va">forecast</span>,
   <span class="va">delays</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
   target_folder <span class="op">=</span> <span class="cn">NULL</span>,
   samples <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>estimates</th>
-      <td><p>List of data frames as output by <code>estimate_infections</code></p></td>
-    </tr><tr><th>forecast</th>
-      <td><p>A list of data frames as output by <code>forecast_infections</code></p></td>
-    </tr><tr><th>delays</th>
-      <td><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
-and the examples below for details.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr><tr><th>target_folder</th>
-      <td><p>Character string specifying where to save results (will create if not present).</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Logical, defaults to TRUE. Should samples be saved</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>estimates</dt><dd><p>List of data frames as output by <code>estimate_infections</code></p></dd>
+</dl><dl><dt>forecast</dt><dd><p>A list of data frames as output by <code>forecast_infections</code></p></dd>
+</dl><dl><dt>delays</dt><dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
+and the examples below for details.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl><dl><dt>target_folder</dt><dd><p>Character string specifying where to save results (will create if not present).</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Logical, defaults to TRUE. Should samples be saved</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of samples and summarised estimates of estimated cases by date of report</p>
+    </div>
     </div>
 
   </div>

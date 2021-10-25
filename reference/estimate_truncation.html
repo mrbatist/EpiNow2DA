@@ -59,7 +59,7 @@ Truncation is log normally distributed.
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -79,15 +79,15 @@ Truncation is log normally distributed.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Estimate Truncation of Observed Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_truncation.R"><code>R/estimate_truncation.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_truncation.R" class="external-link"><code>R/estimate_truncation.R</code></a></small>
     <div class="hidden name"><code>estimate_truncation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 Estimates a truncation distribution from multiple snapshots of the same
 data source over time. This distribution can then be used in <code>regional_epinow</code>,
-<code>epinow</code>, and <code>estimate_infections</code> to adjust for truncated data. See <a href="https://gist.github.com/seabbs/176b0c7f83eab1a7192a25b28bbd116a">here</a>
+<code>epinow</code>, and <code>estimate_infections</code> to adjust for truncated data. See <a href="https://gist.github.com/seabbs/176b0c7f83eab1a7192a25b28bbd116a" class="external-link">here</a>
 for an example of using this approach on Covid-19 data in England.</p>
 <p>The model of truncation is as follows:</p><ol><li><p>The truncation distribution is assumed to be log normal with a mean and
 standard deviation that is informed by the data.</p></li>
@@ -108,32 +108,28 @@ prior for the mean, standard deviation and 1 over the square root of the over di
   <span class="va">obs</span>,
   max_truncation <span class="op">=</span> <span class="fl">10</span>,
   model <span class="op">=</span> <span class="cn">NULL</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
   verbose <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>obs</th>
-      <td><p>A list of data frames each containing a date variable
+    
+
+<dl><dt>obs</dt><dd><p>A list of data frames each containing a date variable
 and a confirm (integer) variable. Each data set should be a snapshot
 of the reported data over time. All data sets must contain a complete vector
-of dates.</p></td>
-    </tr><tr><th>max_truncation</th>
-      <td><p>Integer, defaults to 10. Maximum number of
-days to include in the truncation distribution.</p></td>
-    </tr><tr><th>model</th>
-      <td><p>A compiled stan model to override the default model. May be
-useful for package developers or those developing extensions.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, should model fitting progress be returned.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html">rstan::sampling</a></code>.</p></td>
-    </tr></table></div>
-
+of dates.</p></dd>
+</dl><dl><dt>max_truncation</dt><dd><p>Integer, defaults to 10. Maximum number of
+days to include in the truncation distribution.</p></dd>
+</dl><dl><dt>model</dt><dd><p>A compiled stan model to override the default model. May be
+useful for package developers or those developing extensions.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, should model fitting progress be returned.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list containing: the summary parameters of the truncation distribution
@@ -143,16 +139,17 @@ and the adjusted for truncation observations (<code>obs</code>), a data frame co
 observed data (<code>last_obs</code>, useful for plotting and validation), the data used for fitting
 (<code>data</code>) and the fit object (<code>fit</code>).</p>
     </div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># set number of cores to use</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># get example case counts</span></span>
 <span class="r-in"><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># define example truncation distribution (note not integer adjusted)</span></span>
-<span class="r-in"><span class="va">trunc_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span class="r-in"><span class="va">trunc_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span class="r-in">  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span class="r-in">  mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span class="r-in">  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span>
@@ -162,21 +159,21 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply truncation to example data</span></span>
 <span class="r-in"><span class="va">construct_truncation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">index</span>, <span class="va">cases</span>, <span class="va">dist</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="va">index</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">dlnorm</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="va">index</span><span class="op">)</span></span>
+<span class="r-in">  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span></span>
 <span class="r-in">      <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">dist</span><span class="op">$</span><span class="va">max</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">dist</span><span class="op">$</span><span class="va">mean</span>, <span class="va">dist</span><span class="op">$</span><span class="va">mean_sd</span><span class="op">)</span>,</span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">dist</span><span class="op">$</span><span class="va">sd</span>, <span class="va">dist</span><span class="op">$</span><span class="va">sd_sd</span><span class="op">)</span></span>
+<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">dist</span><span class="op">$</span><span class="va">mean</span>, <span class="va">dist</span><span class="op">$</span><span class="va">mean_sd</span><span class="op">)</span>,</span>
+<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">dist</span><span class="op">$</span><span class="va">sd</span>, <span class="va">dist</span><span class="op">$</span><span class="va">sd_sd</span><span class="op">)</span></span>
 <span class="r-in">    <span class="op">)</span></span>
 <span class="r-in">  <span class="op">)</span></span>
 <span class="r-in">  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="va">cmf</span> <span class="op">/</span> <span class="va">cmf</span><span class="op">[</span><span class="va">dist</span><span class="op">$</span><span class="va">max</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span></span>
-<span class="r-in">  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="va">cmf</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
-<span class="r-in">  <span class="va">trunc_cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="va">index</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in">  <span class="va">trunc_cases</span><span class="op">[</span><span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cmf</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>, <span class="va">confirm</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">confirm</span> <span class="op">*</span> <span class="va">cmf</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">trunc_cases</span><span class="op">)</span></span>
+<span class="r-in">  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">cmf</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span class="r-in">  <span class="va">trunc_cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="va">index</span><span class="op">)</span><span class="op">]</span></span>
+<span class="r-in">  <span class="va">trunc_cases</span><span class="op">[</span><span class="op">(</span><span class="va">.N</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">cmf</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="va">.N</span>, <span class="va">confirm</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">confirm</span> <span class="op">*</span> <span class="va">cmf</span><span class="op">)</span><span class="op">]</span></span>
+<span class="r-in">  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">trunc_cases</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span class="r-in"><span class="va">example_data</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">15</span>, <span class="fl">10</span>, <span class="fl">0</span><span class="op">)</span>,</span>
 <span class="r-in">  <span class="va">construct_truncation</span>,</span>
 <span class="r-in">  cases <span class="op">=</span> <span class="va">reported_cases</span>,</span>
 <span class="r-in">  dist <span class="op">=</span> <span class="va">trunc_dist</span></span>
@@ -184,7 +181,7 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># fit model to example data</span></span>
 <span class="r-in"><span class="va">est</span> <span class="op">&lt;-</span> <span class="fu">estimate_truncation</span><span class="op">(</span><span class="va">example_data</span>,</span>
-<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span class="r-in">  chains <span class="op">=</span> <span class="fl">2</span>, iter <span class="op">=</span> <span class="fl">2000</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -206,7 +203,7 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="co"># summary of the estimated truncation cmf (can be applied to new data)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">cmf</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">cmf</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     index      mean      se_mean           sd  lower_90  lower_50  lower_20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1:    10 1.0000000 1.229709e-16 1.232606e-16 1.0000000 1.0000000 1.0000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2:     9 0.9897167 9.540969e-05 2.517766e-03 0.9852316 0.9881352 0.9892874</span>
@@ -230,7 +227,7 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-out co"><span class="r-pr">#&gt;</span>  9: 0.4919453 0.4964692 0.5032356 0.5217425</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10: 0.1928419 0.1955930 0.2005729 0.2136926</span>
 <span class="r-in"><span class="co"># observations linked to truncation adjusted estimates</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">obs</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">est</span><span class="op">$</span><span class="va">obs</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           date confirm last_confirm report_date mean se_mean  sd lower_90</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2020-03-24    4751         4789  2020-04-01 4800       0  12     4782</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2020-03-25    5163         5249  2020-04-01 5293       1  30     5248</span>

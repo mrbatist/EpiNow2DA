@@ -38,7 +38,7 @@ are enhanced."><meta property="og:image" content="epiforecasts.io/EpiNow2/refere
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,33 +58,30 @@ are enhanced."><meta property="og:image" content="epiforecasts.io/EpiNow2/refere
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Report plots</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/report.R"><code>R/report.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/report.R" class="external-link"><code>R/report.R</code></a></small>
     <div class="hidden name"><code>report_plots.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#questioning" class="external-link"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
 Returns key summary plots for estimates. May be depreciated in later releases as current S3 methods
 are enhanced.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">report_plots</span><span class="op">(</span><span class="va">summarised_estimates</span>, <span class="va">reported</span>, target_folder <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>summarised_estimates</th>
-      <td><p>A data.table of summarised estimates containing
-the following variables: variable, median, bottom, and top.</p>
-<p>It should also contain the following estimates: R, infections,
-reported_cases_rt, and r (rate of growth).</p></td>
-    </tr><tr><th>reported</th>
-      <td><p>A data.table of reported cases with the following variables: date, confirm.</p></td>
-    </tr><tr><th>target_folder</th>
-      <td><p>Character string specifying where to save results (will create if not present).</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional arguments passed to <code><a href="plot_estimates.html">plot_estimates()</a></code>.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>summarised_estimates</dt><dd><p>A data.table of summarised estimates containing
+the following variables: variable, median, bottom, and top.It should also contain the following estimates: R, infections,
+reported_cases_rt, and r (rate of growth).</p></dd>
+</dl><dl><dt>reported</dt><dd><p>A data.table of reported cases with the following variables: date, confirm.</p></dd>
+</dl><dl><dt>target_folder</dt><dd><p>Character string specifying where to save results (will create if not present).</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional arguments passed to <code><a href="plot_estimates.html">plot_estimates()</a></code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A named list of <code>ggplot2</code> objects, <code>list(infections, reports, R, growth_rate, summary)</code>,
@@ -92,6 +89,7 @@ which correspond to a summary combination (last item) and for the leading items
 @seealso <code><a href="plot_estimates.html">plot_estimates()</a></code> of <code>summarised_estimates[variable == "infections"]</code>,
 <code>summarised_estimates[variable == "reported_cases"]</code>, <code>summarised_estimates[variable == "R"]</code>,
 and <code>summarised_estimates[variable == "growth_rate"]</code>, respectively.</p>
+    </div>
     </div>
 
     <div id="examples">
@@ -103,7 +101,7 @@ and <code>summarised_estimates[variable == "growth_rate"]</code>, respectively.<
 <span class="r-in"><span class="co"># set up example delays</span></span>
 <span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="bootstrapped_dist_fit.html">bootstrapped_dist_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="bootstrapped_dist_fit.html">bootstrapped_dist_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># run model</span></span>
 <span class="r-in"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="estimate_infections.html">estimate_infections</a></span><span class="op">(</span><span class="va">cases</span>,</span>

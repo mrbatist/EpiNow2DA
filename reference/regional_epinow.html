@@ -46,7 +46,7 @@ progressr::handlers and enable it in batch by setting R_PROGRESSR_ENABLE=TRUE as
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -66,12 +66,12 @@ progressr::handlers and enable it in batch by setting R_PROGRESSR_ENABLE=TRUE as
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Real-time Rt Estimation, Forecasting and Reporting by Region</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/regional_epinow.R"><code>R/regional_epinow.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/regional_epinow.R" class="external-link"><code>R/regional_epinow.R</code></a></small>
     <div class="hidden name"><code>regional_epinow.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
 Efficiently runs <code><a href="epinow.html">epinow()</a></code> across multiple regions in an efficient manner and conducts basic data checks and
 cleaning such as removing regions with fewer than <code>non_zero_points</code> as these are unlikely to produce reasonable
 results whilst consuming significant resources. See the documentation for <code>epinow</code> for further information.</p>
@@ -95,84 +95,66 @@ progressr::handlers and enable it in batch by setting <code>R_PROGRESSR_ENABLE=T
   obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span><span class="op">)</span>,
   stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span><span class="op">)</span>,
   horizon <span class="op">=</span> <span class="fl">7</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
   target_folder <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">target_date</span>,
   non_zero_points <span class="op">=</span> <span class="fl">2</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"regions"</span>, <span class="st">"summary"</span>, <span class="st">"samples"</span>, <span class="st">"plots"</span>, <span class="st">"latest"</span><span class="op">)</span>,
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regions"</span>, <span class="st">"summary"</span>, <span class="st">"samples"</span>, <span class="st">"plots"</span>, <span class="st">"latest"</span><span class="op">)</span>,
   return_output <span class="op">=</span> <span class="cn">FALSE</span>,
-  summary_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
+  summary_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   verbose <span class="op">=</span> <span class="cn">FALSE</span>,
-  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span>check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>reported_cases</th>
-      <td><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></td>
-    </tr><tr><th>generation_time</th>
-      <td><p>A list containing the mean, standard deviation of the mean (mean_sd),
+    
+
+<dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></dd>
+</dl><dl><dt>generation_time</dt><dd><p>A list containing the mean, standard deviation of the mean (mean_sd),
 standard deviation (sd), standard deviation of the standard deviation and the maximum allowed value for the
-generation time (assuming a gamma distribution).</p></td>
-    </tr><tr><th>delays</th>
-      <td><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
-and the examples below for details.</p></td>
-    </tr><tr><th>truncation</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> A list of options as generated by <code><a href="trunc_opts.html">trunc_opts()</a></code>
+generation time (assuming a gamma distribution).</p></dd>
+</dl><dl><dt>delays</dt><dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
+and the examples below for details.</p></dd>
+</dl><dl><dt>truncation</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> A list of options as generated by <code><a href="trunc_opts.html">trunc_opts()</a></code>
 defining the truncation of observed data. Defaults to <code><a href="trunc_opts.html">trunc_opts()</a></code>. See <code><a href="estimate_truncation.html">estimate_truncation()</a></code>
-for an approach to estimating truncation from data.</p></td>
-    </tr><tr><th>rt</th>
-      <td><p>A list of options as generated by <code><a href="rt_opts.html">rt_opts()</a></code> defining Rt estimation.
+for an approach to estimating truncation from data.</p></dd>
+</dl><dl><dt>rt</dt><dd><p>A list of options as generated by <code><a href="rt_opts.html">rt_opts()</a></code> defining Rt estimation.
 Defaults to <code><a href="rt_opts.html">rt_opts()</a></code>. Set to <code>NULL</code> to switch to using  back calculation
-rather than generating infections using Rt.</p></td>
-    </tr><tr><th>backcalc</th>
-      <td><p>A list of options as generated by <code><a href="backcalc_opts.html">backcalc_opts()</a></code> to define the
-back calculation. Defaults to <code><a href="backcalc_opts.html">backcalc_opts()</a></code>.</p></td>
-    </tr><tr><th>gp</th>
-      <td><p>A list of options as generated by <code><a href="gp_opts.html">gp_opts()</a></code> to define the
+rather than generating infections using Rt.</p></dd>
+</dl><dl><dt>backcalc</dt><dd><p>A list of options as generated by <code><a href="backcalc_opts.html">backcalc_opts()</a></code> to define the
+back calculation. Defaults to <code><a href="backcalc_opts.html">backcalc_opts()</a></code>.</p></dd>
+</dl><dl><dt>gp</dt><dd><p>A list of options as generated by <code><a href="gp_opts.html">gp_opts()</a></code> to define the
 Gaussian process. Defaults to <code><a href="gp_opts.html">gp_opts()</a></code>.Set to NULL to disable the
-Gaussian process.</p></td>
-    </tr><tr><th>obs</th>
-      <td><p>A list of options as generated by <code><a href="obs_opts.html">obs_opts()</a></code> defining the
-observation model. Defaults to <code><a href="obs_opts.html">obs_opts()</a></code>.</p></td>
-    </tr><tr><th>stan</th>
-      <td><p>A list of stan options as generated by <code><a href="stan_opts.html">stan_opts()</a></code>. Defaults to <code><a href="stan_opts.html">stan_opts()</a></code>. Can be used to override
-<code>data</code>, <code>init</code>, and <code>verbose</code> settings if desired.</p></td>
-    </tr><tr><th>horizon</th>
-      <td><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr><tr><th>target_folder</th>
-      <td><p>Character string specifying where to save results (will create if not present).</p></td>
-    </tr><tr><th>target_date</th>
-      <td><p>Date, defaults to maximum found in the data if not specified.</p></td>
-    </tr><tr><th>non_zero_points</th>
-      <td><p>Numeric, the minimum number of time points with non-zero cases in a region required for
-that region to be evaluated. Defaults to 7.</p></td>
-    </tr><tr><th>output</th>
-      <td><p>A character vector of optional output to return. Supported options are the individual regional estimates
+Gaussian process.</p></dd>
+</dl><dl><dt>obs</dt><dd><p>A list of options as generated by <code><a href="obs_opts.html">obs_opts()</a></code> defining the
+observation model. Defaults to <code><a href="obs_opts.html">obs_opts()</a></code>.</p></dd>
+</dl><dl><dt>stan</dt><dd><p>A list of stan options as generated by <code><a href="stan_opts.html">stan_opts()</a></code>. Defaults to <code><a href="stan_opts.html">stan_opts()</a></code>. Can be used to override
+<code>data</code>, <code>init</code>, and <code>verbose</code> settings if desired.</p></dd>
+</dl><dl><dt>horizon</dt><dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl><dl><dt>target_folder</dt><dd><p>Character string specifying where to save results (will create if not present).</p></dd>
+</dl><dl><dt>target_date</dt><dd><p>Date, defaults to maximum found in the data if not specified.</p></dd>
+</dl><dl><dt>non_zero_points</dt><dd><p>Numeric, the minimum number of time points with non-zero cases in a region required for
+that region to be evaluated. Defaults to 7.</p></dd>
+</dl><dl><dt>output</dt><dd><p>A character vector of optional output to return. Supported options are the individual regional estimates
 ("regions"),  samples ("samples"), plots ("plots"), copying the individual region dated folder into
 a latest folder (if <code>target_folder</code> is not null, set using "latest"), the stan fit of the underlying model ("fit"), and an
 overall summary across regions ("summary"). The default is to return samples and plots alongside summarised estimates and
-summary statistics. If <code>target_folder</code> is not NULL then the default is also to copy all results into a latest folder.</p></td>
-    </tr><tr><th>return_output</th>
-      <td><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
-if no directory for saving is specified.</p></td>
-    </tr><tr><th>summary_args</th>
-      <td><p>A list of arguments passed to <code>regional_summary</code>. See the <code>regional_summary</code> documentation for details.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical defaults to FALSE. Outputs verbose progress messages to the console from <code>epinow</code>.</p></td>
-    </tr><tr><th>logs</th>
-      <td><p>Character path indicating the target folder in which to store log
+summary statistics. If <code>target_folder</code> is not NULL then the default is also to copy all results into a latest folder.</p></dd>
+</dl><dl><dt>return_output</dt><dd><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
+if no directory for saving is specified.</p></dd>
+</dl><dl><dt>summary_args</dt><dd><p>A list of arguments passed to <code>regional_summary</code>. See the <code>regional_summary</code> documentation for details.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical defaults to FALSE. Outputs verbose progress messages to the console from <code>epinow</code>.</p></dd>
+</dl><dl><dt>logs</dt><dd><p>Character path indicating the target folder in which to store log
 information. Defaults to the temporary directory if not specified. Default logging
 can be disabled if <code>logs</code> is set to NULL. If specifying a custom logging setup then
 the code for <code>setup_default_logging</code> and the <code>setup_logging</code> function are a sensible
-place to start.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Pass additional arguments to <code>epinow</code>. See the documentation for <code>epinow</code> for details.</p></td>
-    </tr></table></div>
-
+place to start.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Pass additional arguments to <code>epinow</code>. See the documentation for <code>epinow</code> for details.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of output stratified at the top level into regional output and across region output summary output</p>
@@ -181,18 +163,19 @@ place to start.</p></td>
     <h2>See also</h2>
     <div class="dont-index"><p>epinow estimate_infections forecast_infections setup_future regional_summary</p></div>
     </div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># set number of cores to use</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># construct example distributions</span></span>
 <span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span class="r-in">  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span class="r-in">  mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span class="r-in">  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
@@ -201,8 +184,8 @@ place to start.</p></td>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># uses example case vector</span></span>
 <span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
+<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
 <span class="r-in">  <span class="va">cases</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"realland"</span><span class="op">]</span></span>
 <span class="r-in"><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -212,35 +195,35 @@ place to start.</p></td>
 <span class="r-in">  reported_cases <span class="op">=</span> <span class="va">cases</span>,</span>
 <span class="r-in">  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span>
 <span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
-<span class="r-in">  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span class="r-in">  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span class="r-in">  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span></span>
 <span class="r-in">    samples <span class="op">=</span> <span class="fl">100</span>, warmup <span class="op">=</span> <span class="fl">200</span>,</span>
-<span class="r-in">    control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span class="r-in">    control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:03:40] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:10:10] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:15:01] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:29] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:03:40] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:03:40] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:03:40] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:03:40] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:08:33] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:58] No target directory specified so returning timings</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply a different rt method per region</span></span>
 <span class="r-in"><span class="co"># (here a gaussian process and a weekly random walk)</span></span>
 <span class="r-in"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="opts_list.html">opts_list</a></span><span class="op">(</span><span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cases</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="update_list.html">update_list</a></span><span class="op">(</span><span class="va">gp</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>realland <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">gp</span> <span class="op">&lt;-</span> <span class="fu"><a href="update_list.html">update_list</a></span><span class="op">(</span><span class="va">gp</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>realland <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in list_recurse(.x, dots, function(x, y) y)</span> `...` arguments must be either all named, or all unnamed</span>
 <span class="r-in"><span class="va">rt</span> <span class="op">&lt;-</span> <span class="fu"><a href="opts_list.html">opts_list</a></span><span class="op">(</span><span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">cases</span>, realland <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>rw <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">region_rt</span> <span class="op">&lt;-</span> <span class="fu">regional_epinow</span><span class="op">(</span></span>
@@ -250,27 +233,27 @@ place to start.</p></td>
 <span class="r-in">  rt <span class="op">=</span> <span class="va">rt</span>, gp <span class="op">=</span> <span class="va">gp</span>,</span>
 <span class="r-in">  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span></span>
 <span class="r-in">    samples <span class="op">=</span> <span class="fl">100</span>, warmup <span class="op">=</span> <span class="fl">200</span>,</span>
-<span class="r-in">    control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span class="r-in">    control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in">  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:59] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:19:30] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:24:17] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:37] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-18 03:30:38] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:59] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:59] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:59] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:12:59] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:17:49] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:10] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2021-10-25 03:24:11] No target directory specified so returning timings</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>

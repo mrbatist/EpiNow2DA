@@ -39,7 +39,7 @@ or updated to depend on stan code."><meta property="og:image" content="epiforeca
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -59,12 +59,12 @@ or updated to depend on stan code."><meta property="og:image" content="epiforeca
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Simulate Cases by Date of Infection, Onset and Report</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/simulate.R"><code>R/simulate.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/simulate.R" class="external-link"><code>R/simulate.R</code></a></small>
     <div class="hidden name"><code>simulate_cases.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>\@description <a href="https://lifecycle.r-lib.org/articles/stages.html#questioning"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
+    <p>\@description <a href="https://lifecycle.r-lib.org/articles/stages.html#questioning" class="external-link"><img src="figures/lifecycle-questioning.svg" alt="[Questioning]"></a>
 Simulate cases from a single Rt trace, an initial number of cases, and a reporting model
 This functionality has largely been superseded by <code>simulate_infections</code> and will likely to replaced
 or updated to depend on <code>stan</code> code.</p>
@@ -83,38 +83,30 @@ or updated to depend on <code>stan</code> code.</p>
   type <span class="op">=</span> <span class="st">"sample"</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>rts</th>
-      <td><p>A dataframe of containing two variables <code>rt</code> and  <code>date</code> with
-<code>rt</code> being numeric and <code>date</code> being a date.</p></td>
-    </tr><tr><th>initial_cases</th>
-      <td><p>Integer, initial number of cases.</p></td>
-    </tr><tr><th>initial_date</th>
-      <td><p>Date, (i.e <code>as.Date("2020-02-01")</code>). Starting date of the simulation.</p></td>
-    </tr><tr><th>generation_interval</th>
-      <td><p>Numeric vector describing the generation interval probability density</p></td>
-    </tr><tr><th>rdist</th>
-      <td><p>A function to be used to sample the number of cases. Must take two
-arguments with the first specifying the number of samples and the second the mean. Defaults
-to <code>rpois</code> if not supplied</p></td>
-    </tr><tr><th>delay_defs</th>
-      <td><p>A list of single row data.tables that each  defines a delay distribution (model, parameters and maximum delay for each model).
-See <code>lognorm_dist_def</code> for an example of the structure.</p></td>
-    </tr><tr><th>reporting_effect</th>
-      <td><p>A numeric vector of length 7 that allows the scaling of reported cases
-by the day on which they report (1 = Monday, 7 = Sunday). By default no scaling occurs.</p></td>
-    </tr><tr><th>reporting_model</th>
-      <td><p>A function that takes a single numeric vector as an argument and returns a
-single numeric vector. Can be used to apply stochastic reporting effects. See the examples for details.</p></td>
-    </tr><tr><th>truncate_future</th>
-      <td><p>Logical, should cases be truncated if they occur after the first date reported in the data.
-Defaults to <code>TRUE</code>.</p></td>
-    </tr><tr><th>type</th>
-      <td><p>Character string indicating the method to use to transform counts. Supports either "sample"
-which approximates sampling or "median" would shift by the median of the distribution.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>rts</dt><dd><p>A dataframe of containing two variables <code>rt</code> and  <code>date</code> with
+<code>rt</code> being numeric and <code>date</code> being a date.</p></dd>
+</dl><dl><dt>initial_cases</dt><dd><p>Integer, initial number of cases.</p></dd>
+</dl><dl><dt>initial_date</dt><dd><p>Date, (i.e <code>as.Date("2020-02-01")</code>). Starting date of the simulation.</p></dd>
+</dl><dl><dt>generation_interval</dt><dd><p>Numeric vector describing the generation interval probability density</p></dd>
+</dl><dl><dt>rdist</dt><dd><p>A function to be used to sample the number of cases. Must take two
+arguments with the first specifying the number of samples and the second the mean. Defaults
+to <code>rpois</code> if not supplied</p></dd>
+</dl><dl><dt>delay_defs</dt><dd><p>A list of single row data.tables that each  defines a delay distribution (model, parameters and maximum delay for each model).
+See <code>lognorm_dist_def</code> for an example of the structure.</p></dd>
+</dl><dl><dt>reporting_effect</dt><dd><p>A numeric vector of length 7 that allows the scaling of reported cases
+by the day on which they report (1 = Monday, 7 = Sunday). By default no scaling occurs.</p></dd>
+</dl><dl><dt>reporting_model</dt><dd><p>A function that takes a single numeric vector as an argument and returns a
+single numeric vector. Can be used to apply stochastic reporting effects. See the examples for details.</p></dd>
+</dl><dl><dt>truncate_future</dt><dd><p>Logical, should cases be truncated if they occur after the first date reported in the data.
+Defaults to <code>TRUE</code>.</p></dd>
+</dl><dl><dt>type</dt><dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
+which approximates sampling or "median" would shift by the median of the distribution.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A dataframe containing three variables: <code>date</code>, <code>cases</code> and <code>reference</code>.</p>
@@ -122,6 +114,7 @@ which approximates sampling or "median" would shift by the median of the distrib
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>simulate_infections</p></div>
+    </div>
     </div>
 
   </div>

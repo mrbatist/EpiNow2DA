@@ -38,7 +38,7 @@ process. Custom settings can be supplied which override the defaults."><meta pro
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,12 +58,12 @@ process. Custom settings can be supplied which override the defaults."><meta pro
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Approximate Gaussian Process Settings</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>gp_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the structure of the approximate Gaussian
 process. Custom settings can be supplied which override the defaults.</p>
     </div>
@@ -80,44 +80,38 @@ process. Custom settings can be supplied which override the defaults.</p>
   matern_type <span class="op">=</span> <span class="fl">3</span><span class="op">/</span><span class="fl">2</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>basis_prop</th>
-      <td><p>Numeric, proportion of time points to use as basis functions. Defaults to 0.1. Decreasing
+    
+
+<dl><dt>basis_prop</dt><dd><p>Numeric, proportion of time points to use as basis functions. Defaults to 0.1. Decreasing
 this value results in a decrease in accuracy but a faster compute time (with increasing it having the first
 effect). In general smaller posterior length scales require a higher proportion of basis functions.
-See (Riutort-Mayol et al. 2020 <a href="https://arxiv.org/abs/2004.11408">https://arxiv.org/abs/2004.11408</a>) for advice on updating this default.
-This setting is an area of active research.</p></td>
-    </tr><tr><th>boundary_scale</th>
-      <td><p>Numeric, defaults to 1.5. Boundary scale of the approximate Gaussian process. See
-(Riutort-Mayol et al. 2020 <a href="https://arxiv.org/abs/2004.11408">https://arxiv.org/abs/2004.11408</a>) for advice on updating this
-default.</p></td>
-    </tr><tr><th>ls_mean</th>
-      <td><p>Numeric, defaults to 21 days. The mean of the lognormal length scale.</p></td>
-    </tr><tr><th>ls_sd</th>
-      <td><p>Numeric, defaults to 7 days. The standard deviation of the log normal length
+See (Riutort-Mayol et al. 2020 <a href="https://arxiv.org/abs/2004.11408" class="external-link">https://arxiv.org/abs/2004.11408</a>) for advice on updating this default.
+This setting is an area of active research.</p></dd>
+</dl><dl><dt>boundary_scale</dt><dd><p>Numeric, defaults to 1.5. Boundary scale of the approximate Gaussian process. See
+(Riutort-Mayol et al. 2020 <a href="https://arxiv.org/abs/2004.11408" class="external-link">https://arxiv.org/abs/2004.11408</a>) for advice on updating this
+default.</p></dd>
+</dl><dl><dt>ls_mean</dt><dd><p>Numeric, defaults to 21 days. The mean of the lognormal length scale.</p></dd>
+</dl><dl><dt>ls_sd</dt><dd><p>Numeric, defaults to 7 days. The standard deviation of the log normal length
 scale. If <code>ls_sd = 0</code>, inverse-gamma prior on Gaussian process length scale will
-be used with recommended parameters <code>inv_gamma(1.499007, 0.057277 * ls_max)</code>.</p></td>
-    </tr><tr><th>ls_min</th>
-      <td><p>Numeric, defaults to 0. The minimum value of the length scale.</p></td>
-    </tr><tr><th>ls_max</th>
-      <td><p>Numeric, defaults to 60. The maximum value of the length scale. Updated in
-<code>create_gp_data</code> to be the length of the input data if this is smaller.</p></td>
-    </tr><tr><th>alpha_sd</th>
-      <td><p>Numeric, defaults to 0.05. The standard deviation of the magnitude parameter of
-the Gaussian process kernel. Should be approximately the expected standard deviation of the logged Rt.</p></td>
-    </tr><tr><th>kernel</th>
-      <td><p>Character string, the type of kernel required. Currently supporting the squared exponential
+be used with recommended parameters <code>inv_gamma(1.499007, 0.057277 * ls_max)</code>.</p></dd>
+</dl><dl><dt>ls_min</dt><dd><p>Numeric, defaults to 0. The minimum value of the length scale.</p></dd>
+</dl><dl><dt>ls_max</dt><dd><p>Numeric, defaults to 60. The maximum value of the length scale. Updated in
+<code>create_gp_data</code> to be the length of the input data if this is smaller.</p></dd>
+</dl><dl><dt>alpha_sd</dt><dd><p>Numeric, defaults to 0.05. The standard deviation of the magnitude parameter of
+the Gaussian process kernel. Should be approximately the expected standard deviation of the logged Rt.</p></dd>
+</dl><dl><dt>kernel</dt><dd><p>Character string, the type of kernel required. Currently supporting the squared exponential
 kernel ("se") and the 3 over 2 Matern kernel ("matern", with <code>matern_type = 3/2</code>). Defaulting to the Matern 3 over 2 kernel as discontinuities are expected
-in Rt and infections.</p></td>
-    </tr><tr><th>matern_type</th>
-      <td><p>Numeric, defaults to 3/2. Type of Matern Kernel to use. Currently only the Matern
-3/2 kernel is supported.</p></td>
-    </tr></table></div>
-
+in Rt and infections.</p></dd>
+</dl><dl><dt>matern_type</dt><dd><p>Numeric, defaults to 3/2. Type of Matern Kernel to use. Currently only the Matern
+3/2 kernel is supported.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of settings defining the Gaussian process</p>
+    </div>
     </div>
 
     <div id="examples">

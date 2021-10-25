@@ -41,7 +41,7 @@ example of using epinow to estimate Rt for Covid-19 in a country from the ECDC d
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -61,16 +61,16 @@ example of using epinow to estimate Rt for Covid-19 in a country from the ECDC d
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Real-time Rt Estimation, Forecasting and Reporting</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/epinow.R"><code>R/epinow.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/epinow.R" class="external-link"><code>R/epinow.R</code></a></small>
     <div class="hidden name"><code>epinow.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
 This function wraps the functionality of <code><a href="estimate_infections.html">estimate_infections()</a></code> and <code><a href="forecast_infections.html">forecast_infections()</a></code> in order
 to estimate Rt and cases by date of infection, forecast into these infections into the future. It also contains
 additional functionality to convert forecasts to date of report and produce summary output useful for reporting
-results and interpreting them. See <a href="https://gist.github.com/seabbs/163d0f195892cde685c70473e1f5e867">here</a> for an
+results and interpreting them. See <a href="https://gist.github.com/seabbs/163d0f195892cde685c70473e1f5e867" class="external-link">here</a> for an
 example of using <code>epinow</code> to estimate Rt for Covid-19 in a country from the ECDC data source.</p>
     </div>
 
@@ -85,92 +85,73 @@ example of using <code>epinow</code> to estimate Rt for Covid-19 in a country fr
   obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span><span class="op">)</span>,
   stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span><span class="op">)</span>,
   horizon <span class="op">=</span> <span class="fl">7</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
   zero_threshold <span class="op">=</span> <span class="fl">50</span>,
   return_output <span class="op">=</span> <span class="cn">FALSE</span>,
-  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"samples"</span>, <span class="st">"plots"</span>, <span class="st">"latest"</span>, <span class="st">"fit"</span>, <span class="st">"timing"</span><span class="op">)</span>,
-  plot_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>,
+  output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"samples"</span>, <span class="st">"plots"</span>, <span class="st">"latest"</span>, <span class="st">"fit"</span>, <span class="st">"timing"</span><span class="op">)</span>,
+  plot_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
   target_folder <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">target_date</span>,
   forecast_args <span class="op">=</span> <span class="cn">NULL</span>,
-  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
+  logs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
   id <span class="op">=</span> <span class="st">"epinow"</span>,
-  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>
+  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>reported_cases</th>
-      <td><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
-in date format.</p></td>
-    </tr><tr><th>generation_time</th>
-      <td><p>A list containing the mean, standard deviation of the mean (mean_sd),
+    
+
+<dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
+in date format.</p></dd>
+</dl><dl><dt>generation_time</dt><dd><p>A list containing the mean, standard deviation of the mean (mean_sd),
 standard deviation (sd), standard deviation of the standard deviation and the maximum allowed value for the
-generation time (assuming a gamma distribution).</p></td>
-    </tr><tr><th>delays</th>
-      <td><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
-and the examples below for details.</p></td>
-    </tr><tr><th>truncation</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> A list of options as generated by <code><a href="trunc_opts.html">trunc_opts()</a></code>
+generation time (assuming a gamma distribution).</p></dd>
+</dl><dl><dt>delays</dt><dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
+and the examples below for details.</p></dd>
+</dl><dl><dt>truncation</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> A list of options as generated by <code><a href="trunc_opts.html">trunc_opts()</a></code>
 defining the truncation of observed data. Defaults to <code><a href="trunc_opts.html">trunc_opts()</a></code>. See <code><a href="estimate_truncation.html">estimate_truncation()</a></code>
-for an approach to estimating truncation from data.</p></td>
-    </tr><tr><th>rt</th>
-      <td><p>A list of options as generated by <code><a href="rt_opts.html">rt_opts()</a></code> defining Rt estimation.
+for an approach to estimating truncation from data.</p></dd>
+</dl><dl><dt>rt</dt><dd><p>A list of options as generated by <code><a href="rt_opts.html">rt_opts()</a></code> defining Rt estimation.
 Defaults to <code><a href="rt_opts.html">rt_opts()</a></code>. Set to <code>NULL</code> to switch to using  back calculation
-rather than generating infections using Rt.</p></td>
-    </tr><tr><th>backcalc</th>
-      <td><p>A list of options as generated by <code><a href="backcalc_opts.html">backcalc_opts()</a></code> to define the
-back calculation. Defaults to <code><a href="backcalc_opts.html">backcalc_opts()</a></code>.</p></td>
-    </tr><tr><th>gp</th>
-      <td><p>A list of options as generated by <code><a href="gp_opts.html">gp_opts()</a></code> to define the
+rather than generating infections using Rt.</p></dd>
+</dl><dl><dt>backcalc</dt><dd><p>A list of options as generated by <code><a href="backcalc_opts.html">backcalc_opts()</a></code> to define the
+back calculation. Defaults to <code><a href="backcalc_opts.html">backcalc_opts()</a></code>.</p></dd>
+</dl><dl><dt>gp</dt><dd><p>A list of options as generated by <code><a href="gp_opts.html">gp_opts()</a></code> to define the
 Gaussian process. Defaults to <code><a href="gp_opts.html">gp_opts()</a></code>.Set to NULL to disable the
-Gaussian process.</p></td>
-    </tr><tr><th>obs</th>
-      <td><p>A list of options as generated by <code><a href="obs_opts.html">obs_opts()</a></code> defining the
-observation model. Defaults to <code><a href="obs_opts.html">obs_opts()</a></code>.</p></td>
-    </tr><tr><th>stan</th>
-      <td><p>A list of stan options as generated by <code><a href="stan_opts.html">stan_opts()</a></code>. Defaults to <code><a href="stan_opts.html">stan_opts()</a></code>. Can be used to override
-<code>data</code>, <code>init</code>, and <code>verbose</code> settings if desired.</p></td>
-    </tr><tr><th>horizon</th>
-      <td><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr><tr><th>zero_threshold</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
+Gaussian process.</p></dd>
+</dl><dl><dt>obs</dt><dd><p>A list of options as generated by <code><a href="obs_opts.html">obs_opts()</a></code> defining the
+observation model. Defaults to <code><a href="obs_opts.html">obs_opts()</a></code>.</p></dd>
+</dl><dl><dt>stan</dt><dd><p>A list of stan options as generated by <code><a href="stan_opts.html">stan_opts()</a></code>. Defaults to <code><a href="stan_opts.html">stan_opts()</a></code>. Can be used to override
+<code>data</code>, <code>init</code>, and <code>verbose</code> settings if desired.</p></dd>
+</dl><dl><dt>horizon</dt><dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl><dl><dt>zero_threshold</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
 cases are meaningful by using a threshold of 50 cases on average over the last 7 days. If the average is
 above this threshold then the zero is replaced with the backwards looking rolling average. If set to infinity
-then no changes are made.</p></td>
-    </tr><tr><th>return_output</th>
-      <td><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
-if no directory for saving is specified.</p></td>
-    </tr><tr><th>output</th>
-      <td><p>A character vector of optional output to return. Supported options are samples ("samples"),
+then no changes are made.</p></dd>
+</dl><dl><dt>return_output</dt><dd><p>Logical, defaults to FALSE. Should output be returned, this automatically updates to TRUE
+if no directory for saving is specified.</p></dd>
+</dl><dl><dt>output</dt><dd><p>A character vector of optional output to return. Supported options are samples ("samples"),
 plots ("plots"), the run time ("timing"), copying the dated folder into a latest folder (if <code>target_folder</code> is not null,
 set using "latest"), and the stan fit ("fit"). The default is to return all options. This argument uses partial matching
-so for example passing "sam" will lead to samples being reported.</p></td>
-    </tr><tr><th>plot_args</th>
-      <td><p>A list of optional arguments passed to <code><a href="plot.epinow.html">plot.epinow()</a></code>.</p></td>
-    </tr><tr><th>target_folder</th>
-      <td><p>Character string specifying where to save results (will create if not present).</p></td>
-    </tr><tr><th>target_date</th>
-      <td><p>Date, defaults to maximum found in the data if not specified.</p></td>
-    </tr><tr><th>forecast_args</th>
-      <td><p>A list of arguments to pass to <code><a href="forecast_infections.html">forecast_infections()</a></code>. Unless at a minimum a <code>forecast_model</code> is passed
-then <code>forecast_infections</code> will be bypassed.</p></td>
-    </tr><tr><th>logs</th>
-      <td><p>Character path indicating the target folder in which to store log
+so for example passing "sam" will lead to samples being reported.</p></dd>
+</dl><dl><dt>plot_args</dt><dd><p>A list of optional arguments passed to <code><a href="plot.epinow.html">plot.epinow()</a></code>.</p></dd>
+</dl><dl><dt>target_folder</dt><dd><p>Character string specifying where to save results (will create if not present).</p></dd>
+</dl><dl><dt>target_date</dt><dd><p>Date, defaults to maximum found in the data if not specified.</p></dd>
+</dl><dl><dt>forecast_args</dt><dd><p>A list of arguments to pass to <code><a href="forecast_infections.html">forecast_infections()</a></code>. Unless at a minimum a <code>forecast_model</code> is passed
+then <code>forecast_infections</code> will be bypassed.</p></dd>
+</dl><dl><dt>logs</dt><dd><p>Character path indicating the target folder in which to store log
 information. Defaults to the temporary directory if not specified. Default logging
 can be disabled if <code>logs</code> is set to NULL. If specifying a custom logging setup then
 the code for <code>setup_default_logging</code> and the <code>setup_logging</code> function are a sensible
-place to start.</p></td>
-    </tr><tr><th>id</th>
-      <td><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
-to assign errors to regions. Alter the default to run with error catching.</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, defaults to <code>TRUE</code> when used interactively and otherwise <code>FALSE</code>. Should verbose debug progress messages be printed. Corresponds to the "DEBUG" level from
-<code>futile.logger</code>. See <code>setup_logging</code> for more detailed logging options.</p></td>
-    </tr></table></div>
-
+place to start.</p></dd>
+</dl><dl><dt>id</dt><dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
+to assign errors to regions. Alter the default to run with error catching.</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>TRUE</code> when used interactively and otherwise <code>FALSE</code>. Should verbose debug progress messages be printed. Corresponds to the "DEBUG" level from
+<code>futile.logger</code>. See <code>setup_logging</code> for more detailed logging options.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of output from estimate_infections, forecast_infections,  report_cases, and report_summary.</p>
@@ -179,16 +160,17 @@ to assign errors to regions. Alter the default to run with error catching.</p></
     <h2>See also</h2>
     <div class="dont-index"><p>estimate_infections simulate_infections forecast_infections regional_epinow</p></div>
     </div>
+    </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># set number of cores to use</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># construct example distributions</span></span>
 <span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span class="r-in">  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span class="r-in">  mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
 <span class="r-in">  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span>
@@ -202,26 +184,26 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in"><span class="co"># estimate Rt and nowcast/forecast cases by date of infection</span></span>
 <span class="r-in"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">epinow</span><span class="op">(</span></span>
 <span class="r-in">  reported_cases <span class="op">=</span> <span class="va">reported_cases</span>, generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span>
-<span class="r-in">  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span>
+<span class="r-in">  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span>
 <span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/regional-epinow/2020-04-01.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/2020-04-01.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTu8z8g/epinow/2020-04-01.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2021-10-18 01:55:08] epinow: There were 6 divergent transitions after warmup. See</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/2020-04-01.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2021-10-25 01:46:29] epinow: There were 9 divergent transitions after warmup. See</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them. - </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2021-10-18 01:55:08] epinow: Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WARN [2021-10-25 01:46:29] epinow: Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - </span>
 <span class="r-in"><span class="co"># summary of the latest estimates</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     3297 (1446 -- 7076)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     3237 (1460 -- 7259)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.78 (0.51 -- 1.1)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.063 (-0.15 -- 0.026)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -11 (26 -- -4.7)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.77 (0.52 -- 1.1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.067 (-0.15 -- 0.032)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -10 (21 -- -4.8)</span>
 <span class="r-in"><span class="co"># plot estimates</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span>
 <span class="r-plt"><img src="epinow-1.png" alt="" width="864" height="864"></span>
@@ -229,151 +211,151 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 <span class="r-in"><span class="co"># summary of R estimates</span></span>
 <span class="r-in"><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">out</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           date variable strat                           type    median</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2020-02-22        R  &lt;NA&gt;                       estimate 2.0460040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2020-02-23        R  &lt;NA&gt;                       estimate 2.0342467</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2020-02-24        R  &lt;NA&gt;                       estimate 2.0213210</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2020-02-25        R  &lt;NA&gt;                       estimate 2.0044316</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2020-02-26        R  &lt;NA&gt;                       estimate 1.9854871</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2020-02-27        R  &lt;NA&gt;                       estimate 1.9632953</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2020-02-28        R  &lt;NA&gt;                       estimate 1.9381916</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2020-02-29        R  &lt;NA&gt;                       estimate 1.9121503</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 2020-03-01        R  &lt;NA&gt;                       estimate 1.8807184</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 2020-03-02        R  &lt;NA&gt;                       estimate 1.8470882</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 2020-03-03        R  &lt;NA&gt;                       estimate 1.8120377</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 2020-03-04        R  &lt;NA&gt;                       estimate 1.7735553</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 2020-03-05        R  &lt;NA&gt;                       estimate 1.7353218</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 2020-03-06        R  &lt;NA&gt;                       estimate 1.6955058</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 2020-03-07        R  &lt;NA&gt;                       estimate 1.6542364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 2020-03-08        R  &lt;NA&gt;                       estimate 1.6110136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 2020-03-09        R  &lt;NA&gt;                       estimate 1.5665644</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 2020-03-10        R  &lt;NA&gt;                       estimate 1.5217283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 2020-03-11        R  &lt;NA&gt;                       estimate 1.4752600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 2020-03-12        R  &lt;NA&gt;                       estimate 1.4287526</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 2020-03-13        R  &lt;NA&gt;                       estimate 1.3832875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 2020-03-14        R  &lt;NA&gt;                       estimate 1.3365070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 2020-03-15        R  &lt;NA&gt;                       estimate 1.2912720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 2020-03-16        R  &lt;NA&gt;                       estimate 1.2469372</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 2020-03-17        R  &lt;NA&gt;                       estimate 1.2031462</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 2020-03-18        R  &lt;NA&gt;                       estimate 1.1600123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 2020-03-19        R  &lt;NA&gt;                       estimate 1.1181558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 2020-03-20        R  &lt;NA&gt;                       estimate 1.0785858</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 2020-03-21        R  &lt;NA&gt;                       estimate 1.0414152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 2020-03-22        R  &lt;NA&gt;                       estimate 1.0059720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 2020-03-23        R  &lt;NA&gt;                       estimate 0.9728392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 2020-03-24        R  &lt;NA&gt;                       estimate 0.9418613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 2020-03-25        R  &lt;NA&gt;                       estimate 0.9127854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 2020-03-26        R  &lt;NA&gt; estimate based on partial data 0.8865990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 2020-03-27        R  &lt;NA&gt; estimate based on partial data 0.8612216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 2020-03-28        R  &lt;NA&gt; estimate based on partial data 0.8403169</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 2020-03-29        R  &lt;NA&gt; estimate based on partial data 0.8229528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 2020-03-30        R  &lt;NA&gt; estimate based on partial data 0.8064259</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 2020-03-31        R  &lt;NA&gt; estimate based on partial data 0.7909039</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 2020-04-01        R  &lt;NA&gt; estimate based on partial data 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 2020-04-02        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 2020-04-03        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 2020-04-04        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 2020-04-05        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 2020-04-06        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 2020-04-07        R  &lt;NA&gt;                       forecast 0.7788102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 2020-04-08        R  &lt;NA&gt;                       forecast 0.7788102</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2020-02-22        R  &lt;NA&gt;                       estimate 2.0460751</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2020-02-23        R  &lt;NA&gt;                       estimate 2.0332291</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2020-02-24        R  &lt;NA&gt;                       estimate 2.0184381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2020-02-25        R  &lt;NA&gt;                       estimate 2.0007757</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2020-02-26        R  &lt;NA&gt;                       estimate 1.9826787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2020-02-27        R  &lt;NA&gt;                       estimate 1.9603429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2020-02-28        R  &lt;NA&gt;                       estimate 1.9364104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2020-02-29        R  &lt;NA&gt;                       estimate 1.9088487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 2020-03-01        R  &lt;NA&gt;                       estimate 1.8795409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 2020-03-02        R  &lt;NA&gt;                       estimate 1.8464610</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 2020-03-03        R  &lt;NA&gt;                       estimate 1.8113496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 2020-03-04        R  &lt;NA&gt;                       estimate 1.7749062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 2020-03-05        R  &lt;NA&gt;                       estimate 1.7365899</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 2020-03-06        R  &lt;NA&gt;                       estimate 1.6963166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 2020-03-07        R  &lt;NA&gt;                       estimate 1.6545763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 2020-03-08        R  &lt;NA&gt;                       estimate 1.6108276</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 2020-03-09        R  &lt;NA&gt;                       estimate 1.5676013</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 2020-03-10        R  &lt;NA&gt;                       estimate 1.5235313</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 2020-03-11        R  &lt;NA&gt;                       estimate 1.4782478</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 2020-03-12        R  &lt;NA&gt;                       estimate 1.4315855</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 2020-03-13        R  &lt;NA&gt;                       estimate 1.3857659</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 2020-03-14        R  &lt;NA&gt;                       estimate 1.3402651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 2020-03-15        R  &lt;NA&gt;                       estimate 1.2940443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 2020-03-16        R  &lt;NA&gt;                       estimate 1.2484879</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 2020-03-17        R  &lt;NA&gt;                       estimate 1.2037279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 2020-03-18        R  &lt;NA&gt;                       estimate 1.1599479</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 2020-03-19        R  &lt;NA&gt;                       estimate 1.1185164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 2020-03-20        R  &lt;NA&gt;                       estimate 1.0773822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 2020-03-21        R  &lt;NA&gt;                       estimate 1.0404101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 2020-03-22        R  &lt;NA&gt;                       estimate 1.0058355</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 2020-03-23        R  &lt;NA&gt;                       estimate 0.9715689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 2020-03-24        R  &lt;NA&gt;                       estimate 0.9398858</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 2020-03-25        R  &lt;NA&gt;                       estimate 0.9105078</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 2020-03-26        R  &lt;NA&gt; estimate based on partial data 0.8841469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 2020-03-27        R  &lt;NA&gt; estimate based on partial data 0.8618718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 2020-03-28        R  &lt;NA&gt; estimate based on partial data 0.8398379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 2020-03-29        R  &lt;NA&gt; estimate based on partial data 0.8187366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 2020-03-30        R  &lt;NA&gt; estimate based on partial data 0.7997106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 2020-03-31        R  &lt;NA&gt; estimate based on partial data 0.7830341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 2020-04-01        R  &lt;NA&gt; estimate based on partial data 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 2020-04-02        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 2020-04-03        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 2020-04-04        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 2020-04-05        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 2020-04-06        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 2020-04-07        R  &lt;NA&gt;                       forecast 0.7667195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 2020-04-08        R  &lt;NA&gt;                       forecast 0.7667195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           date variable strat                           type    median</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          mean         sd  lower_90  lower_50  lower_20  upper_20  upper_50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2.0465119 0.08709027 1.9038036 1.9843696 2.0248197 2.0674935 2.1048762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2.0350972 0.07810243 1.9047177 1.9793357 2.0169900 2.0547576 2.0870030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2.0214068 0.07372076 1.8993424 1.9699951 2.0031241 2.0405279 2.0696783</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2.0051563 0.07235274 1.8898192 1.9579272 1.9871821 2.0224219 2.0512824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 1.9861368 0.07214468 1.8664866 1.9389245 1.9688112 2.0018929 2.0325106</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 1.9642306 0.07173485 1.8473582 1.9176053 1.9469860 1.9796644 2.0081091</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 1.9394171 0.07046849 1.8255190 1.8945960 1.9226134 1.9542752 1.9825216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 1.9117658 0.06826641 1.8031993 1.8683347 1.8953723 1.9249215 1.9539179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 1.8814199 0.06540056 1.7794316 1.8401071 1.8650695 1.8952617 1.9219725</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 1.8485745 0.06228270 1.7500325 1.8084001 1.8323626 1.8620683 1.8865103</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 1.8134549 0.05929934 1.7186809 1.7760503 1.7968622 1.8253724 1.8495836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 1.7762975 0.05671063 1.6852147 1.7410873 1.7605373 1.7886536 1.8116090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 1.7373358 0.05462273 1.6506288 1.7028111 1.7222471 1.7488709 1.7715568</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 1.6967927 0.05302277 1.6136381 1.6628344 1.6829522 1.7088147 1.7290789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 1.6548772 0.05184072 1.5701704 1.6207683 1.6413224 1.6667598 1.6870496</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 1.6117851 0.05099581 1.5299282 1.5788664 1.5991406 1.6231398 1.6428346</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 1.5677029 0.05040578 1.4884628 1.5361377 1.5539964 1.5786606 1.5981900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 1.5228136 0.04997076 1.4434480 1.4902009 1.5097878 1.5330329 1.5532570</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 1.4773049 0.04956464 1.3999859 1.4442884 1.4643731 1.4870662 1.5075438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 1.4313780 0.04905773 1.3554916 1.3996467 1.4187064 1.4401986 1.4609308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 1.3852552 0.04836468 1.3104092 1.3543473 1.3719182 1.3948251 1.4143878</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 1.3391838 0.04749036 1.2662424 1.3097380 1.3258711 1.3490665 1.3671843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 1.2934360 0.04655160 1.2214772 1.2642426 1.2800844 1.3035064 1.3217968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 1.2483038 0.04577106 1.1760519 1.2193988 1.2355735 1.2580497 1.2753224</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 1.2040896 0.04544974 1.1325531 1.1752849 1.1922824 1.2138315 1.2309327</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 1.1610951 0.04592247 1.0872199 1.1316036 1.1496098 1.1704868 1.1891998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 1.1196102 0.04750039 1.0452405 1.0885879 1.1074597 1.1297552 1.1491894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 1.0799018 0.05041613 0.9994252 1.0468181 1.0670668 1.0916371 1.1108543</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 1.0422062 0.05479544 0.9526655 1.0071304 1.0275354 1.0553771 1.0761878</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 1.0067228 0.06066543 0.9069260 0.9664831 0.9915301 1.0209986 1.0441859</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.9736112 0.06798369 0.8632358 0.9289545 0.9557593 0.9892370 1.0161827</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.9429902 0.07666595 0.8194887 0.8923619 0.9215778 0.9609696 0.9916991</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.9149386 0.08660226 0.7737971 0.8577730 0.8919644 0.9355416 0.9707202</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.8894971 0.09766505 0.7331345 0.8244106 0.8632232 0.9103351 0.9532331</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.8666698 0.10971504 0.6954306 0.7944270 0.8377762 0.8910630 0.9367299</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.8464270 0.12260777 0.6531530 0.7663376 0.8151272 0.8710725 0.9218367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.8287072 0.13619940 0.6143810 0.7396384 0.7929284 0.8551755 0.9103067</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.8134194 0.15034919 0.5737430 0.7171848 0.7737066 0.8432703 0.9020125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.8004457 0.16491699 0.5401502 0.6963668 0.7546078 0.8302690 0.8987934</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.7896436 0.17975652 0.5098904 0.6778535 0.7374818 0.8194834 0.8956591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2.0453023 0.09399246 1.8941714 1.9795245 2.0217371 2.0678360 2.1078612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2.0341243 0.08249473 1.9024666 1.9769384 2.0126676 2.0535821 2.0906000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2.0205545 0.07619497 1.8991941 1.9700167 1.9992456 2.0380719 2.0736508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2.0043447 0.07346718 1.8855753 1.9571739 1.9840841 2.0206880 2.0513889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 1.9853306 0.07229007 1.8687625 1.9374859 1.9655504 1.9995549 2.0287408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 1.9634397 0.07115642 1.8485598 1.9179048 1.9444687 1.9769283 2.0057180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 1.9386873 0.06937406 1.8287424 1.8944302 1.9206288 1.9520255 1.9797300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 1.9111629 0.06691083 1.8041869 1.8680888 1.8942751 1.9242094 1.9498401</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 1.8810114 0.06410417 1.7783681 1.8404084 1.8639447 1.8931170 1.9174484</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 1.8484125 0.06138749 1.7499702 1.8095151 1.8318227 1.8595670 1.8842806</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 1.8135643 0.05908882 1.7223287 1.7758149 1.7988987 1.8252130 1.8490153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 1.7766717 0.05733387 1.6874714 1.7388035 1.7623946 1.7886513 1.8134160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 1.7379405 0.05606138 1.6486553 1.7006410 1.7228358 1.7497371 1.7740594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 1.6975749 0.05511373 1.6100574 1.6621391 1.6826495 1.7097573 1.7330801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 1.6557772 0.05433575 1.5683504 1.6215660 1.6423825 1.6672284 1.6907549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 1.6127482 0.05363101 1.5267435 1.5781117 1.5994676 1.6247260 1.6471695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 1.5686869 0.05296429 1.4831772 1.5349251 1.5551953 1.5798155 1.6030623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 1.5237929 0.05232872 1.4369413 1.4898717 1.5104174 1.5351355 1.5578686</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 1.4782687 0.05170791 1.3916831 1.4453344 1.4650554 1.4901784 1.5111476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 1.4323234 0.05105878 1.3500526 1.3996132 1.4199888 1.4444472 1.4645022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 1.3861776 0.05032409 1.3061409 1.3532737 1.3731959 1.3974196 1.4175181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 1.3400666 0.04946328 1.2629041 1.3070944 1.3270471 1.3508853 1.3698224</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 1.2942420 0.04848449 1.2167431 1.2618540 1.2820573 1.3053532 1.3234476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 1.2489712 0.04747374 1.1725616 1.2172738 1.2368332 1.2597720 1.2785835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 1.2045340 0.04662783 1.1325463 1.1742506 1.1923506 1.2150522 1.2342125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 1.1612179 0.04628519 1.0899383 1.1315072 1.1486912 1.1714062 1.1913674</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 1.1193101 0.04691597 1.0458125 1.0877564 1.1070474 1.1301829 1.1504040</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 1.0790888 0.04902419 1.0009848 1.0469066 1.0658084 1.0902861 1.1120795</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 1.0408126 0.05298072 0.9545586 1.0071341 1.0263049 1.0537250 1.0762813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 1.0047112 0.05890615 0.9078474 0.9656767 0.9894250 1.0193454 1.0434015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 0.9709775 0.06669623 0.8616199 0.9262868 0.9548826 0.9874237 1.0148562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 0.9397627 0.07613878 0.8160488 0.8888780 0.9194189 0.9593526 0.9890386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 0.9111748 0.08701630 0.7751173 0.8524806 0.8883254 0.9329010 0.9654264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 0.8852781 0.09915310 0.7320082 0.8172367 0.8590997 0.9083288 0.9451743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 0.8620938 0.11242096 0.6871293 0.7835015 0.8326409 0.8862347 0.9306939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 0.8416013 0.12672460 0.6502218 0.7542598 0.8074093 0.8687071 0.9175460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 0.8237381 0.14197778 0.6082688 0.7264930 0.7830040 0.8515449 0.9068085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 0.8084019 0.15807426 0.5757407 0.7032566 0.7617527 0.8358463 0.9000298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 0.7954534 0.17485853 0.5425977 0.6821621 0.7430661 0.8212793 0.8920981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 0.7847220 0.19210393 0.5152486 0.6618187 0.7259275 0.8098177 0.8876676</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          mean         sd  lower_90  lower_50  lower_20  upper_20  upper_50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2.194102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2.165863</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2.143190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2.125998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2.104798</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2.079087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2.054528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2.022745</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 1.989672</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 1.951950</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 1.911485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 1.873213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 1.827490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 1.785791</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 1.742499</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 1.697141</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 1.652190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 1.607494</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 1.558936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 1.514041</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 1.468830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 1.419321</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 1.372993</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 1.324011</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 1.280632</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 1.238714</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 1.198825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 1.163279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 1.134097</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 1.108701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 1.087045</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 1.071127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 1.058911</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 1.053734</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 1.051979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 1.055325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 1.059894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 1.068136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 1.077674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 1.096701</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 1.096701</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1: 2.203004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2: 2.169006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3: 2.149656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4: 2.127246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5: 2.104153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  6: 2.084425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7: 2.060790</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8: 2.029857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9: 1.994400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10: 1.951967</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11: 1.913415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12: 1.872731</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13: 1.831133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14: 1.788618</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15: 1.745974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16: 1.702168</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17: 1.654065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18: 1.606685</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19: 1.563866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20: 1.516928</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21: 1.471720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22: 1.422054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23: 1.374423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24: 1.328336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25: 1.281901</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26: 1.236614</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27: 1.196146</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28: 1.158522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29: 1.128643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30: 1.103657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31: 1.083394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32: 1.068256</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33: 1.056734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34: 1.053055</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35: 1.054581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36: 1.062294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37: 1.070310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38: 1.082566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39: 1.101881</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46: 1.116661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47: 1.116661</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_90</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>

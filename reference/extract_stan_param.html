@@ -39,7 +39,7 @@ EpiNow2."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/f
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -59,12 +59,12 @@ EpiNow2."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/f
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract a Parameter Summary from a Stan Object</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R"><code>R/extract.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R" class="external-link"><code>R/extract.R</code></a></small>
     <div class="hidden name"><code>extract_stan_param.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Extracts summarised parameter posteriors from a <code>stanfit</code> object using
 <code>rstan::summary</code> in a format consistent with other summary functions in
 <code>EpiNow2</code>.</p>
@@ -73,28 +73,27 @@ Extracts summarised parameter posteriors from a <code>stanfit</code> object usin
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">extract_stan_param</span><span class="op">(</span>
   <span class="va">fit</span>,
   params <span class="op">=</span> <span class="cn">NULL</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
+  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
   var_names <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>fit</th>
-      <td><p>A <code>stanfit</code> object</p></td>
-    </tr><tr><th>params</th>
-      <td><p>A character vector of parameters to extract. Defaults to all parameters.</p></td>
-    </tr><tr><th>CrIs</th>
-      <td><p>Numeric vector of credible intervals to calculate.</p></td>
-    </tr><tr><th>var_names</th>
-      <td><p>Logical defaults to <code>FALSE</code>. Should variables be named. Automatically set
-to TRUE if multiple parameters are to be extracted.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>fit</dt><dd><p>A <code>stanfit</code> object</p></dd>
+</dl><dl><dt>params</dt><dd><p>A character vector of parameters to extract. Defaults to all parameters.</p></dd>
+</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+</dl><dl><dt>var_names</dt><dd><p>Logical defaults to <code>FALSE</code>. Should variables be named. Automatically set
+to TRUE if multiple parameters are to be extracted.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A <code>data.table</code> summarising parameter posteriors. Contains a following variables:
 <code>variable</code>, <code>mean</code>, <code>mean_se</code>, <code>sd</code>, <code>median</code>, and <code>lower_</code>, <code>upper_</code> followed by
 credible interval labels indicating the credible intervals present.</p>
+    </div>
     </div>
 
   </div>

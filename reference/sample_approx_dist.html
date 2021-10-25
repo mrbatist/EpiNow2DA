@@ -38,7 +38,7 @@ more robust stan implementation."><meta property="og:image" content="epiforecast
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,12 +58,12 @@ more robust stan implementation."><meta property="og:image" content="epiforecast
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Approximate Sampling a Distribution using Counts</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R"><code>R/dist.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
     <div class="hidden name"><code>sample_approx_dist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated" class="external-link"><img src="figures/lifecycle-soft-deprecated.svg" alt="[Soft-deprecated]"></a>
 Convolves cases by a PMF function. This function will soon be removed or replaced with a
 more robust <code>stan</code> implementation.</p>
     </div>
@@ -78,41 +78,37 @@ more robust <code>stan</code> implementation.</p>
   truncate_future <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>cases</th>
-      <td><p>A dataframe of cases (in date order) with the following variables:
-<code>date</code> and <code>cases</code>.</p></td>
-    </tr><tr><th>dist_fn</th>
-      <td><p>Function that takes two arguments with the first being numeric and the second being logical (and
-defined as <code>dist</code>). Should return the probability density or a sample from the defined distribution. See
-the examples for more.</p></td>
-    </tr><tr><th>max_value</th>
-      <td><p>Numeric, maximum value to allow. Defaults to 120 days</p></td>
-    </tr><tr><th>earliest_allowed_mapped</th>
-      <td><p>A character string representing a date ("2020-01-01"). Indicates
-the earliest allowed mapped value.</p></td>
-    </tr><tr><th>direction</th>
-      <td><p>Character string, defato "backwards". Direction in which to map cases. Supports
-either "backwards" or "forwards".</p></td>
-    </tr><tr><th>type</th>
-      <td><p>Character string indicating the method to use to transform counts. Supports either "sample"
-which approximates sampling or "median" would shift by the median of the distribution.</p></td>
-    </tr><tr><th>truncate_future</th>
-      <td><p>Logical, should cases be truncated if they occur after the first date reported in the data.
-Defaults to <code>TRUE</code>.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>cases</dt><dd><p>A dataframe of cases (in date order) with the following variables:
+<code>date</code> and <code>cases</code>.</p></dd>
+</dl><dl><dt>dist_fn</dt><dd><p>Function that takes two arguments with the first being numeric and the second being logical (and
+defined as <code>dist</code>). Should return the probability density or a sample from the defined distribution. See
+the examples for more.</p></dd>
+</dl><dl><dt>max_value</dt><dd><p>Numeric, maximum value to allow. Defaults to 120 days</p></dd>
+</dl><dl><dt>earliest_allowed_mapped</dt><dd><p>A character string representing a date ("2020-01-01"). Indicates
+the earliest allowed mapped value.</p></dd>
+</dl><dl><dt>direction</dt><dd><p>Character string, defato "backwards". Direction in which to map cases. Supports
+either "backwards" or "forwards".</p></dd>
+</dl><dl><dt>type</dt><dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
+which approximates sampling or "median" would shift by the median of the distribution.</p></dd>
+</dl><dl><dt>truncate_future</dt><dd><p>Logical, should cases be truncated if they occur after the first date reported in the data.
+Defaults to <code>TRUE</code>.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A <code>data.table</code> of cases by date of onset</p>
+    </div>
     </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span></span>
-<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">cases</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">confirm</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">cases</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">confirm</span><span class="op">)</span><span class="op">]</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-02-22      14    14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-02-23      62    62</span>
@@ -127,14 +123,14 @@ Defaults to <code>TRUE</code>.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126   126</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># total cases</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">cases</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">cases</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 240581</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">delay_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>, <span class="va">dist</span>, <span class="va">cum</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="kw">if</span> <span class="op">(</span><span class="va">dist</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">pgamma</a></span><span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">0.9999</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">pgamma</a></span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1e-5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">pgamma</a></span><span class="op">(</span><span class="va">n</span> <span class="op">+</span> <span class="fl">0.9999</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">pgamma</a></span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1e-5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">rgamma</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">rgamma</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
@@ -144,7 +140,7 @@ Defaults to <code>TRUE</code>.</p></td>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># estimated onset distribution</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">onsets</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">onsets</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            date cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-02-16     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-02-17     2</span>
@@ -159,10 +155,10 @@ Defaults to <code>TRUE</code>.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 136: 2020-06-30    37</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># check that sum is equal to reported cases</span></span>
-<span class="r-in"><span class="va">total_onsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span></span>
+<span class="r-in"><span class="va">total_onsets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span></span>
 <span class="r-in">    <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>,</span>
-<span class="r-in">    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu">sample_approx_dist</span><span class="op">(</span></span>
+<span class="r-in">    <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu">sample_approx_dist</span><span class="op">(</span></span>
 <span class="r-in">      cases <span class="op">=</span> <span class="va">cases</span>,</span>
 <span class="r-in">      dist_fn <span class="op">=</span> <span class="va">delay_fn</span></span>
 <span class="r-in">    <span class="op">)</span><span class="op">$</span><span class="va">cases</span><span class="op">)</span></span>

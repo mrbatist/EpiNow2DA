@@ -40,7 +40,7 @@ the size of the available reporting delay sample may not be representative of th
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -60,12 +60,12 @@ the size of the available reporting delay sample may not be representative of th
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Fit a Subsampled Bootstrap to Integer Values and Summarise Distribution Parameters</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R"><code>R/dist.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
     <div class="hidden name"><code>bootstrapped_dist_fit.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Fits an integer adjusted distribution to a subsampled bootstrap of data and then integrates
 the posterior samples into a single set of summary statistics. Can be used to generate a robust
 reporting delay that accounts for the fact the underlying delay likely varies over time or that
@@ -82,57 +82,53 @@ the size of the available reporting delay sample may not be representative of th
   verbose <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>values</th>
-      <td><p>Integer vector of values.</p></td>
-    </tr><tr><th>dist</th>
-      <td><p>Character string, which distribution to fit. Defaults to lognormal (<code>"lognormal"</code>) but
-gamma (<code>"gamma"</code>) is also supported.</p></td>
-    </tr><tr><th>samples</th>
-      <td><p>Numeric, number of samples to take overall from the bootstrapped posteriors.</p></td>
-    </tr><tr><th>bootstraps</th>
-      <td><p>Numeric, defaults to 1. The number of bootstrap samples (with replacement)
-of the delay distribution to take.</p></td>
-    </tr><tr><th>bootstrap_samples</th>
-      <td><p>Numeric, defaults to 100. The number of samples to take in each bootstrap.
-When the sample size of the supplied delay distribution is less than 100 this is used instead.</p></td>
-    </tr><tr><th>max_value</th>
-      <td><p>Numeric, defaults to  the maximum value in the observed data. Maximum delay to
-allow (added to output but does impact fitting).</p></td>
-    </tr><tr><th>verbose</th>
-      <td><p>Logical, defaults to <code>FALSE</code>. Should progress messages be printed</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>values</dt><dd><p>Integer vector of values.</p></dd>
+</dl><dl><dt>dist</dt><dd><p>Character string, which distribution to fit. Defaults to lognormal (<code>"lognormal"</code>) but
+gamma (<code>"gamma"</code>) is also supported.</p></dd>
+</dl><dl><dt>samples</dt><dd><p>Numeric, number of samples to take overall from the bootstrapped posteriors.</p></dd>
+</dl><dl><dt>bootstraps</dt><dd><p>Numeric, defaults to 1. The number of bootstrap samples (with replacement)
+of the delay distribution to take.</p></dd>
+</dl><dl><dt>bootstrap_samples</dt><dd><p>Numeric, defaults to 100. The number of samples to take in each bootstrap.
+When the sample size of the supplied delay distribution is less than 100 this is used instead.</p></dd>
+</dl><dl><dt>max_value</dt><dd><p>Numeric, defaults to  the maximum value in the observed data. Maximum delay to
+allow (added to output but does impact fitting).</p></dd>
+</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should progress messages be printed</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list summarising the bootstrapped distribution</p>
+    </div>
     </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># lognormal</span></span>
-<span class="r-in"><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">bootstrapped_dist_fit</span><span class="op">(</span><span class="va">delays</span>,</span>
 <span class="r-in">  samples <span class="op">=</span> <span class="fl">1000</span>, bootstraps <span class="op">=</span> <span class="fl">10</span>,</span>
 <span class="r-in">  dist <span class="op">=</span> <span class="st">"lognormal"</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">out</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.540947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.474051</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1200914</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1158041</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.088706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.165451</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07407937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08710269</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $max</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 130</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>

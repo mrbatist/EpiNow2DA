@@ -38,7 +38,7 @@ present and otherwise applies the overarching settings"><meta property="og:image
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,38 +58,39 @@ present and otherwise applies the overarching settings"><meta property="og:image
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Filter Options for a Target Region</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>filter_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing" class="external-link"><img src="figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
 A helper function that allows the selection of region specific settings if
 present and otherwise applies the overarching settings</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">filter_opts</span><span class="op">(</span><span class="va">opts</span>, <span class="va">region</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>opts</th>
-      <td><p>Either a list of calls to an <code>_opts()</code> function or a single
-call to an <code>_opts()</code> function.</p></td>
-    </tr><tr><th>region</th>
-      <td><p>A character string indicating a region of interest.</p></td>
-    </tr></table></div>
+    
 
+<dl><dt>opts</dt><dd><p>Either a list of calls to an <code>_opts()</code> function or a single
+call to an <code>_opts()</code> function.</p></dd>
+</dl><dl><dt>region</dt><dd><p>A character string indicating a region of interest.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of options</p>
+    </div>
     </div>
 
     <div id="examples">
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># uses example case vector</span></span>
 <span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">40</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
+<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span class="r-in">  <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
 <span class="r-in">  <span class="va">cases</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"realland"</span><span class="op">]</span></span>
 <span class="r-in"><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -151,7 +152,7 @@ call to an <code>_opts()</code> function.</p></td>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "R_t-1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="co"># settings are NULL in one regions</span></span>
-<span class="r-in"><span class="va">regional_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="update_list.html">update_list</a></span><span class="op">(</span><span class="va">regional_opts</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>realland <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">regional_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="update_list.html">update_list</a></span><span class="op">(</span><span class="va">regional_opts</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>realland <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in list_recurse(.x, dots, function(x, y) y)</span> `...` arguments must be either all named, or all unnamed</span>
 <span class="r-in"><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">filter_opts</span><span class="op">(</span><span class="va">regional_opts</span>, <span class="st">"realland"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>

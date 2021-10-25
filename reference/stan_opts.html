@@ -39,7 +39,7 @@ can be supplied which override the defaults."><meta property="og:image" content=
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -59,12 +59,12 @@ can be supplied which override the defaults."><meta property="og:image" content=
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Stan Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>stan_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the arguments passed to underlying stan
 backend functions via <code><a href="rstan_sampling_opts.html">rstan_sampling_opts()</a></code> and <code><a href="rstan_vb_opts.html">rstan_vb_opts()</a></code>. Custom settings
 can be supplied which override the defaults.</p>
@@ -78,29 +78,26 @@ can be supplied which override the defaults.</p>
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>samples</th>
-      <td><p>Numeric, default 2000. Overall number of posterior samples.
-When using multiple chains iterations per chain is samples / chains.</p></td>
-    </tr><tr><th>backend</th>
-      <td><p>Character string indicating the backend to use for fitting stan models.
-Currently only "rstan" is supported.</p></td>
-    </tr><tr><th>init_fit</th>
-      <td><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    
+
+<dl><dt>samples</dt><dd><p>Numeric, default 2000. Overall number of posterior samples.
+When using multiple chains iterations per chain is samples / chains.</p></dd>
+</dl><dl><dt>backend</dt><dd><p>Character string indicating the backend to use for fitting stan models.
+Currently only "rstan" is supported.</p></dd>
+</dl><dl><dt>init_fit</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 Character string or <code>stanfit</code> object, defaults to NULL. Should an initial fit be used to
 initialise the full fit. An example scenario would be using a national level fit to parametrise
 regional level fits. Optionally a character string can be passed with the currently supported
 option being "cumulative". This fits the model to cumulative cases and may be useful for certain
 data sets where the sampler gets stuck or struggles to initialise. See <code><a href="init_cumulative_fit.html">init_cumulative_fit()</a></code> for details.
-This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/">epidemia</a>
-authored by James Scott.</p></td>
-    </tr><tr><th>return_fit</th>
-      <td><p>Logical, defaults to TRUE. Should the fit stan model be returned.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Additional parameters to pass  underlying option functions.</p></td>
-    </tr></table></div>
-
+This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/" class="external-link">epidemia</a>
+authored by James Scott.</p></dd>
+</dl><dl><dt>return_fit</dt><dd><p>Logical, defaults to TRUE. Should the fit stan model be returned.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Additional parameters to pass  underlying option functions.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of arguments to pass to the appropriate rstan functions.</p>
@@ -108,6 +105,7 @@ authored by James Scott.</p></td>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>rstan_opts</p></div>
+    </div>
     </div>
 
     <div id="examples">

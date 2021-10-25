@@ -38,7 +38,7 @@ of cases. Only used if rt = NULL."><meta property="og:image" content="epiforecas
   </a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/epiforecasts/EpiNow2">
+  <a href="https://github.com/epiforecasts/EpiNow2" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -58,42 +58,42 @@ of cases. Only used if rt = NULL."><meta property="og:image" content="epiforecas
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Back Calculation Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>backcalc_opts.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Defines a list specifying the optional arguments for the back calculation
 of cases. Only used if <code>rt = NULL</code>.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">backcalc_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"reports"</span>, prior_window <span class="op">=</span> <span class="fl">14</span>, rt_window <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>prior</th>
-      <td><p>A character string defaulting to "reports". Defines the prior to use
+    
+
+<dl><dt>prior</dt><dd><p>A character string defaulting to "reports". Defines the prior to use
 when deconvolving. Currently implemented options are to use smoothed mean delay
 shifted reported cases ("reports"), to use the estimated infections from the
 previous time step seeded for the first time step using mean shifted reported cases
 ("infections"), or no prior ("none"). Using no prior will result in poor real time performance.
 No prior and using infections are only supported when a Gaussian process is present. If observed
 data is not reliable then it a sensible first step is to explore increasing the <code>prior_window</code> with
-a sensible second step being to no longer use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></td>
-    </tr><tr><th>prior_window</th>
-      <td><p>Integer, defaults to 14 days. The mean centred smoothing window
+a sensible second step being to no longer use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></dd>
+</dl><dl><dt>prior_window</dt><dd><p>Integer, defaults to 14 days. The mean centred smoothing window
 to apply to mean shifted reports (used as a prior during back calculation). 7 days is minimum recommended
 settings as this smooths day of the week effects but depending on the quality of the data and the
-amount of information users wish to use as a prior (higher values equalling a less informative prior).</p></td>
-    </tr><tr><th>rt_window</th>
-      <td><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
-Rt. This must be odd so that the central estimate is included.</p></td>
-    </tr></table></div>
-
+amount of information users wish to use as a prior (higher values equalling a less informative prior).</p></dd>
+</dl><dl><dt>rt_window</dt><dd><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
+Rt. This must be odd so that the central estimate is included.</p></dd>
+</dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of back calculation settings</p>
+    </div>
     </div>
 
     <div id="examples">
