@@ -58,7 +58,7 @@ more robust stan implementation."><meta property="og:image" content="epiforecast
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Approximate Sampling a Distribution using Counts</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
     <div class="hidden name"><code>sample_approx_dist.Rd</code></div>
     </div>
 
@@ -81,21 +81,26 @@ more robust <code>stan</code> implementation.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>cases</dt><dd><p>A dataframe of cases (in date order) with the following variables:
+    <dl><dt>cases</dt>
+<dd><p>A dataframe of cases (in date order) with the following variables:
 <code>date</code> and <code>cases</code>.</p></dd>
-</dl><dl><dt>dist_fn</dt><dd><p>Function that takes two arguments with the first being numeric and the second being logical (and
+<dt>dist_fn</dt>
+<dd><p>Function that takes two arguments with the first being numeric and the second being logical (and
 defined as <code>dist</code>). Should return the probability density or a sample from the defined distribution. See
 the examples for more.</p></dd>
-</dl><dl><dt>max_value</dt><dd><p>Numeric, maximum value to allow. Defaults to 120 days</p></dd>
-</dl><dl><dt>earliest_allowed_mapped</dt><dd><p>A character string representing a date ("2020-01-01"). Indicates
+<dt>max_value</dt>
+<dd><p>Numeric, maximum value to allow. Defaults to 120 days</p></dd>
+<dt>earliest_allowed_mapped</dt>
+<dd><p>A character string representing a date ("2020-01-01"). Indicates
 the earliest allowed mapped value.</p></dd>
-</dl><dl><dt>direction</dt><dd><p>Character string, defato "backwards". Direction in which to map cases. Supports
+<dt>direction</dt>
+<dd><p>Character string, defato "backwards". Direction in which to map cases. Supports
 either "backwards" or "forwards".</p></dd>
-</dl><dl><dt>type</dt><dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
+<dt>type</dt>
+<dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
 which approximates sampling or "median" would shift by the median of the distribution.</p></dd>
-</dl><dl><dt>truncate_future</dt><dd><p>Logical, should cases be truncated if they occur after the first date reported in the data.
+<dt>truncate_future</dt>
+<dd><p>Logical, should cases be truncated if they occur after the first date reported in the data.
 Defaults to <code>TRUE</code>.</p></dd>
 </dl></div>
     <div id="value">

@@ -58,7 +58,7 @@ future with error catching, timeouts and merging of completed chains."><meta pro
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Fit a Stan Model using the NUTs sampler</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_infections.R" class="external-link"><code>R/estimate_infections.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/estimate_infections.R" class="external-link"><code>R/estimate_infections.R</code></a></small>
     <div class="hidden name"><code>fit_model_with_nuts.Rd</code></div>
     </div>
 
@@ -78,13 +78,15 @@ Fits a stan model using <code><a href="https://mc-stan.org/rstan/reference/stanm
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>args</dt><dd><p>List of stan arguments</p></dd>
-</dl><dl><dt>future</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should <code>future</code> be used to run stan chains in parallel.</p></dd>
-</dl><dl><dt>max_execution_time</dt><dd><p>Numeric, defaults to Inf. What is the maximum execution time per chain in seconds.
+    <dl><dt>args</dt>
+<dd><p>List of stan arguments</p></dd>
+<dt>future</dt>
+<dd><p>Logical, defaults to <code>FALSE</code>. Should <code>future</code> be used to run stan chains in parallel.</p></dd>
+<dt>max_execution_time</dt>
+<dd><p>Numeric, defaults to Inf. What is the maximum execution time per chain in seconds.
 Results will still be returned as long as at least 2 chains complete successfully within the timelimit.</p></dd>
-</dl><dl><dt>id</dt><dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
+<dt>id</dt>
+<dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
 to assign errors to regions. Alter the default to run with error catching.</p></dd>
 </dl></div>
     <div id="value">

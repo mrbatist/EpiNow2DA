@@ -60,7 +60,7 @@ the size of the available reporting delay sample may not be representative of th
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Fit a Subsampled Bootstrap to Integer Values and Summarise Distribution Parameters</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/dist.R" class="external-link"><code>R/dist.R</code></a></small>
     <div class="hidden name"><code>bootstrapped_dist_fit.Rd</code></div>
     </div>
 
@@ -85,19 +85,24 @@ the size of the available reporting delay sample may not be representative of th
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>values</dt><dd><p>Integer vector of values.</p></dd>
-</dl><dl><dt>dist</dt><dd><p>Character string, which distribution to fit. Defaults to lognormal (<code>"lognormal"</code>) but
+    <dl><dt>values</dt>
+<dd><p>Integer vector of values.</p></dd>
+<dt>dist</dt>
+<dd><p>Character string, which distribution to fit. Defaults to lognormal (<code>"lognormal"</code>) but
 gamma (<code>"gamma"</code>) is also supported.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, number of samples to take overall from the bootstrapped posteriors.</p></dd>
-</dl><dl><dt>bootstraps</dt><dd><p>Numeric, defaults to 1. The number of bootstrap samples (with replacement)
+<dt>samples</dt>
+<dd><p>Numeric, number of samples to take overall from the bootstrapped posteriors.</p></dd>
+<dt>bootstraps</dt>
+<dd><p>Numeric, defaults to 1. The number of bootstrap samples (with replacement)
 of the delay distribution to take.</p></dd>
-</dl><dl><dt>bootstrap_samples</dt><dd><p>Numeric, defaults to 100. The number of samples to take in each bootstrap.
+<dt>bootstrap_samples</dt>
+<dd><p>Numeric, defaults to 100. The number of samples to take in each bootstrap.
 When the sample size of the supplied delay distribution is less than 100 this is used instead.</p></dd>
-</dl><dl><dt>max_value</dt><dd><p>Numeric, defaults to  the maximum value in the observed data. Maximum delay to
+<dt>max_value</dt>
+<dd><p>Numeric, defaults to  the maximum value in the observed data. Maximum delay to
 allow (added to output but does impact fitting).</p></dd>
-</dl><dl><dt>verbose</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should progress messages be printed</p></dd>
+<dt>verbose</dt>
+<dd><p>Logical, defaults to <code>FALSE</code>. Should progress messages be printed</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -116,19 +121,19 @@ allow (added to output but does impact fitting).</p></dd>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">out</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.474051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.529737</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1158041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1052777</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.165451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.083805</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08710269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09059683</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $max</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>

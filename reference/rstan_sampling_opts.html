@@ -58,7 +58,7 @@ rstan::sampling. Custom settings can be supplied which override the defaults."><
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Rstan Sampling Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>rstan_sampling_opts.Rd</code></div>
     </div>
 
@@ -84,29 +84,37 @@ Defines a list specifying the arguments passed to
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>cores</dt><dd><p>Number of cores to use when executing the chains in parallel,
+    <dl><dt>cores</dt>
+<dd><p>Number of cores to use when executing the chains in parallel,
 which defaults to 1 but it is recommended to set the mc.cores option to be as
 many processors as the hardware and RAM allow (up to the number of chains).</p></dd>
-</dl><dl><dt>warmup</dt><dd><p>Numeric, defaults to 250. Number of warmup samples per chain.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, default 2000. Overall number of posterior samples.
+<dt>warmup</dt>
+<dd><p>Numeric, defaults to 250. Number of warmup samples per chain.</p></dd>
+<dt>samples</dt>
+<dd><p>Numeric, default 2000. Overall number of posterior samples.
 When using multiple chains iterations per chain is samples / chains.</p></dd>
-</dl><dl><dt>chains</dt><dd><p>Numeric, defaults to 4. Number of MCMC chains to use.</p></dd>
-</dl><dl><dt>control</dt><dd><p>List, defaults to empty. control parameters to pass to underlying
+<dt>chains</dt>
+<dd><p>Numeric, defaults to 4. Number of MCMC chains to use.</p></dd>
+<dt>control</dt>
+<dd><p>List, defaults to empty. control parameters to pass to underlying
 <code>rstan</code> function. By default <code>adapt_delta = 0.95</code> and <code>max_treedepth = 15</code>
 though these settings can be overwritten.</p></dd>
-</dl><dl><dt>save_warmup</dt><dd><p>Logical, defaults to FALSE. Should warmup progress be saved.</p></dd>
-</dl><dl><dt>seed</dt><dd><p>Numeric, defaults uniform random number between 1 and 1e8. Seed of
+<dt>save_warmup</dt>
+<dd><p>Logical, defaults to FALSE. Should warmup progress be saved.</p></dd>
+<dt>seed</dt>
+<dd><p>Numeric, defaults uniform random number between 1 and 1e8. Seed of
 sampling process.</p></dd>
-</dl><dl><dt>future</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should stan chains be run in parallel
+<dt>future</dt>
+<dd><p>Logical, defaults to <code>FALSE</code>. Should stan chains be run in parallel
 using <code>future</code>. This allows users to have chains fail gracefully (i.e when combined with
 <code>max_execution_time</code>). Should be combined with a call to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code></p></dd>
-</dl><dl><dt>max_execution_time</dt><dd><p>Numeric, defaults to Inf (seconds). If set will kill off
+<dt>max_execution_time</dt>
+<dd><p>Numeric, defaults to Inf (seconds). If set will kill off
 processing of each chain if not finished within the specified timeout. When more than 2 chains
 finish successfully estimates will still be returned. If less than 2 chains return within the
 allowed time then estimation will fail with an informative error.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
+<dt>...</dt>
+<dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

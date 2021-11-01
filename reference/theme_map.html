@@ -58,7 +58,7 @@ this function is currently questioning as it is uncertain if it is in use. Futur
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Custom Map Theme</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/map.R" class="external-link"><code>R/map.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/map.R" class="external-link"><code>R/map.R</code></a></small>
     <div class="hidden name"><code>theme_map.Rd</code></div>
     </div>
 
@@ -82,21 +82,27 @@ this function is currently questioning as it is uncertain if it is in use. Futur
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>map</dt><dd><p><code>ggplot2</code> map object</p></dd>
-</dl><dl><dt>continuous</dt><dd><p>Logical defaults to <code>FALSE</code>. Is the fill variable continuous.</p></dd>
-</dl><dl><dt>variable_label</dt><dd><p>A character string indicating the variable label to use. If not supplied then the underlying
+    <dl><dt>map</dt>
+<dd><p><code>ggplot2</code> map object</p></dd>
+<dt>continuous</dt>
+<dd><p>Logical defaults to <code>FALSE</code>. Is the fill variable continuous.</p></dd>
+<dt>variable_label</dt>
+<dd><p>A character string indicating the variable label to use. If not supplied then the underlying
 variable name is used.</p></dd>
-</dl><dl><dt>trans</dt><dd><p>A character string specifying the transform to use on the specified metric. Defaults to no
+<dt>trans</dt>
+<dd><p>A character string specifying the transform to use on the specified metric. Defaults to no
 transform ("identity"). Other options include log scaling ("log") and log base 10 scaling
 ("log10"). For a complete list of options see <code>ggplot2::continous_scale</code>.</p></dd>
-</dl><dl><dt>fill_labels</dt><dd><p>A function to use to allocate legend labels. An example (used below) is <code><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">scales::percent</a></code>,
+<dt>fill_labels</dt>
+<dd><p>A function to use to allocate legend labels. An example (used below) is <code><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">scales::percent</a></code>,
 which can be used for percentage data.</p></dd>
-</dl><dl><dt>scale_fill</dt><dd><p>Function to use for scaling the fill. Defaults to a custom <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_fill_manual</a></code>, which
+<dt>scale_fill</dt>
+<dd><p>Function to use for scaling the fill. Defaults to a custom <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_fill_manual</a></code>, which
 expects the possible values to be "Increasing", "Likely increasing", "Likely decreasing", "Decreasing" or "Stable".</p></dd>
-</dl><dl><dt>breaks</dt><dd><p>Breaks to use in legend. Defaults to <code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">ggplot2::waiver</a></code>.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional arguments passed to the <code>scale_fill</code> function</p></dd>
+<dt>breaks</dt>
+<dd><p>Breaks to use in legend. Defaults to <code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">ggplot2::waiver</a></code>.</p></dd>
+<dt>...</dt>
+<dd><p>Additional arguments passed to the <code>scale_fill</code> function</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

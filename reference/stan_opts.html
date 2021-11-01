@@ -59,7 +59,7 @@ can be supplied which override the defaults."><meta property="og:image" content=
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Stan Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>stan_opts.Rd</code></div>
     </div>
 
@@ -81,13 +81,14 @@ can be supplied which override the defaults.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>samples</dt><dd><p>Numeric, default 2000. Overall number of posterior samples.
+    <dl><dt>samples</dt>
+<dd><p>Numeric, default 2000. Overall number of posterior samples.
 When using multiple chains iterations per chain is samples / chains.</p></dd>
-</dl><dl><dt>backend</dt><dd><p>Character string indicating the backend to use for fitting stan models.
+<dt>backend</dt>
+<dd><p>Character string indicating the backend to use for fitting stan models.
 Currently only "rstan" is supported.</p></dd>
-</dl><dl><dt>init_fit</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+<dt>init_fit</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
 Character string or <code>stanfit</code> object, defaults to NULL. Should an initial fit be used to
 initialise the full fit. An example scenario would be using a national level fit to parametrise
 regional level fits. Optionally a character string can be passed with the currently supported
@@ -95,8 +96,10 @@ option being "cumulative". This fits the model to cumulative cases and may be us
 data sets where the sampler gets stuck or struggles to initialise. See <code><a href="init_cumulative_fit.html">init_cumulative_fit()</a></code> for details.
 This implementation is based on the approach taken in <a href="https://github.com/ImperialCollegeLondon/epidemia/" class="external-link">epidemia</a>
 authored by James Scott.</p></dd>
-</dl><dl><dt>return_fit</dt><dd><p>Logical, defaults to TRUE. Should the fit stan model be returned.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional parameters to pass  underlying option functions.</p></dd>
+<dt>return_fit</dt>
+<dd><p>Logical, defaults to TRUE. Should the fit stan model be returned.</p></dd>
+<dt>...</dt>
+<dd><p>Additional parameters to pass  underlying option functions.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

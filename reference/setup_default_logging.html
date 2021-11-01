@@ -58,7 +58,7 @@ cannot log stan errors or progress."><meta property="og:image" content="epiforec
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Setup Default Logging</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/setup.R" class="external-link"><code>R/setup.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/setup.R" class="external-link"><code>R/setup.R</code></a></small>
     <div class="hidden name"><code>setup_default_logging.Rd</code></div>
     </div>
 
@@ -77,16 +77,17 @@ cannot log stan errors or progress.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>logs</dt><dd><p>Character path indicating the target folder in which to store log
+    <dl><dt>logs</dt>
+<dd><p>Character path indicating the target folder in which to store log
 information. Defaults to the temporary directory if not specified. Default logging
 can be disabled if <code>logs</code> is set to NULL. If specifying a custom logging setup then
 the code for <code>setup_default_logging</code> and the <code>setup_logging</code> function are a sensible
 place to start.</p></dd>
-</dl><dl><dt>mirror_epinow</dt><dd><p>Logical, defaults to FALSE. Should internal logging be
+<dt>mirror_epinow</dt>
+<dd><p>Logical, defaults to FALSE. Should internal logging be
 returned from <code>epinow</code> to the console.</p></dd>
-</dl><dl><dt>target_date</dt><dd><p>Date, defaults to maximum found in the data if not specified.</p></dd>
+<dt>target_date</dt>
+<dd><p>Date, defaults to maximum found in the data if not specified.</p></dd>
 </dl></div>
     </div>
 
@@ -94,9 +95,9 @@ returned from <code>epinow</code> to the console.</p></dd>
     <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">setup_default_logging</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/regional-epinow/latest.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpnYBIya/regional-epinow/latest.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpcdOiQ0/epinow/latest.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpnYBIya/epinow/latest.log</span>
 </code></pre></div>
     </div>
   </div>

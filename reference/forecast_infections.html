@@ -59,7 +59,7 @@ available here."><meta property="og:image" content="epiforecasts.io/EpiNow2/refe
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Forecast Infections and the Time-Varying Reproduction Number</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/forecast_infections.R" class="external-link"><code>R/forecast_infections.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/forecast_infections.R" class="external-link"><code>R/forecast_infections.R</code></a></small>
     <div class="hidden name"><code>forecast_infections.Rd</code></div>
     </div>
 
@@ -86,20 +86,28 @@ available <a href="https://epiforecasts.io/EpiSoon/" class="external-link">here<
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>infections</dt><dd><p>A data frame of cases by date of infection containing the following variables: date, mean, sd</p></dd>
-</dl><dl><dt>rts</dt><dd><p>A data frame of Rt estimates by date of infection containing the following variables: date, mean, sd</p></dd>
-</dl><dl><dt>gt_mean</dt><dd><p>Numeric, the mean of the gamma distributed generation time.</p></dd>
-</dl><dl><dt>gt_sd</dt><dd><p>Numeric, the standard deviation of the gamma distributed generation time.</p></dd>
-</dl><dl><dt>gt_max</dt><dd><p>Numeric, the maximum allowed value of the gamma distributed generation time.</p></dd>
-</dl><dl><dt>ensemble_type</dt><dd><p>Character string indicating the type of ensemble to use. By default this is
+    <dl><dt>infections</dt>
+<dd><p>A data frame of cases by date of infection containing the following variables: date, mean, sd</p></dd>
+<dt>rts</dt>
+<dd><p>A data frame of Rt estimates by date of infection containing the following variables: date, mean, sd</p></dd>
+<dt>gt_mean</dt>
+<dd><p>Numeric, the mean of the gamma distributed generation time.</p></dd>
+<dt>gt_sd</dt>
+<dd><p>Numeric, the standard deviation of the gamma distributed generation time.</p></dd>
+<dt>gt_max</dt>
+<dd><p>Numeric, the maximum allowed value of the gamma distributed generation time.</p></dd>
+<dt>ensemble_type</dt>
+<dd><p>Character string indicating the type of ensemble to use. By default this is
 an unweighted ensemble ("mean") with no other types currently supported.</p></dd>
-</dl><dl><dt>forecast_model</dt><dd><p>An uninitialised forecast model function to be passed to <code><a href="https://rdrr.io/pkg/EpiSoon/man/forecast_rt.html" class="external-link">EpiSoon::forecast_rt</a></code>. Used
+<dt>forecast_model</dt>
+<dd><p>An uninitialised forecast model function to be passed to <code><a href="https://rdrr.io/pkg/EpiSoon/man/forecast_rt.html" class="external-link">EpiSoon::forecast_rt</a></code>. Used
 for forecasting future Rt and case co An example of the required structure is: <code>function(ss, y){bsts::AddSemilocalLinearTrend(ss, y = y)}</code>.</p></dd>
-</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
-</dl><dl><dt>horizon</dt><dd><p>Numeric, defaults to 14. The horizon over which to forecast Rts and cases.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, the number of forecast samples to take.</p></dd>
+<dt>CrIs</dt>
+<dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+<dt>horizon</dt>
+<dd><p>Numeric, defaults to 14. The horizon over which to forecast Rts and cases.</p></dd>
+<dt>samples</dt>
+<dd><p>Numeric, the number of forecast samples to take.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

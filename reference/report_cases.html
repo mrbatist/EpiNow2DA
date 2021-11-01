@@ -58,7 +58,7 @@ in later releases by functionality drawing on the stan implementation."><meta pr
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Report case counts by date of report</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/report.R" class="external-link"><code>R/report.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/report.R" class="external-link"><code>R/report.R</code></a></small>
     <div class="hidden name"><code>report_cases.Rd</code></div>
     </div>
 
@@ -80,19 +80,23 @@ in later releases by functionality drawing on the <code>stan</code> implementati
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>case_estimates</dt><dd><p>A data.table of case estimates with the following variables: date, sample, cases</p></dd>
-</dl><dl><dt>case_forecast</dt><dd><p>A data.table of case forecasts with the following variables: date, sample, cases. If not supplied the
+    <dl><dt>case_estimates</dt>
+<dd><p>A data.table of case estimates with the following variables: date, sample, cases</p></dd>
+<dt>case_forecast</dt>
+<dd><p>A data.table of case forecasts with the following variables: date, sample, cases. If not supplied the
 default is not to incorporate forecasts.</p></dd>
-</dl><dl><dt>delays</dt><dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
+<dt>delays</dt>
+<dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
 and the examples below for details.</p></dd>
-</dl><dl><dt>type</dt><dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
+<dt>type</dt>
+<dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
 which approximates sampling or "median" would shift by the median of the distribution.</p></dd>
-</dl><dl><dt>reporting_effect</dt><dd><p>A <code>data.table</code> giving the weekly reporting effect with the following variables:
+<dt>reporting_effect</dt>
+<dd><p>A <code>data.table</code> giving the weekly reporting effect with the following variables:
 <code>sample</code> (must be the same as in <code>nowcast</code>), <code>effect</code> (numeric scaling factor for each weekday), <code>day</code>
 (numeric 1 - 7 (1 = Monday and 7 = Sunday)). If not supplied then no weekly reporting effect is assumed.</p></dd>
-</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+<dt>CrIs</dt>
+<dd><p>Numeric vector of credible intervals to calculate.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -119,7 +123,7 @@ being summarised across samples.</p>
 <span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
 <span class="r-in">  rt <span class="op">=</span> <span class="cn">NULL</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL)</span> unused argument (samples = 100)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL):</span> unused argument (samples = 100)</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="fu">report_cases</span><span class="op">(</span></span>
 <span class="r-in">  case_estimates <span class="op">=</span></span>
@@ -130,9 +134,9 @@ being summarised across samples.</p>
 <span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
 <span class="r-in">  type <span class="op">=</span> <span class="st">"sample"</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in unique(case_estimates$sample)</span> object 'out' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in unique(case_estimates$sample):</span> object 'out' not found</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print(reported_cases)</span> object 'reported_cases' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print(reported_cases):</span> object 'reported_cases' not found</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>

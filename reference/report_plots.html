@@ -58,7 +58,7 @@ are enhanced."><meta property="og:image" content="epiforecasts.io/EpiNow2/refere
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Report plots</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/report.R" class="external-link"><code>R/report.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/report.R" class="external-link"><code>R/report.R</code></a></small>
     <div class="hidden name"><code>report_plots.Rd</code></div>
     </div>
 
@@ -73,14 +73,17 @@ are enhanced.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>summarised_estimates</dt><dd><p>A data.table of summarised estimates containing
-the following variables: variable, median, bottom, and top.It should also contain the following estimates: R, infections,
+    <dl><dt>summarised_estimates</dt>
+<dd><p>A data.table of summarised estimates containing
+the following variables: variable, median, bottom, and top.</p>
+<p>It should also contain the following estimates: R, infections,
 reported_cases_rt, and r (rate of growth).</p></dd>
-</dl><dl><dt>reported</dt><dd><p>A data.table of reported cases with the following variables: date, confirm.</p></dd>
-</dl><dl><dt>target_folder</dt><dd><p>Character string specifying where to save results (will create if not present).</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional arguments passed to <code><a href="plot_estimates.html">plot_estimates()</a></code>.</p></dd>
+<dt>reported</dt>
+<dd><p>A data.table of reported cases with the following variables: date, confirm.</p></dd>
+<dt>target_folder</dt>
+<dd><p>Character string specifying where to save results (will create if not present).</p></dd>
+<dt>...</dt>
+<dd><p>Additional arguments passed to <code><a href="plot_estimates.html">plot_estimates()</a></code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -110,16 +113,16 @@ and <code>summarised_estimates[variable == "growth_rate"]</code>, respectively.<
 <span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
 <span class="r-in">  rt <span class="op">=</span> <span class="cn">NULL</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL)</span> unused argument (samples = 100)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL):</span> unused argument (samples = 100)</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># plot infections</span></span>
 <span class="r-in"><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu">report_plots</span><span class="op">(</span></span>
 <span class="r-in">  summarised_estimates <span class="op">=</span> <span class="va">out</span><span class="op">$</span><span class="va">summarised</span>,</span>
 <span class="r-in">  reported <span class="op">=</span> <span class="va">cases</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in data.table::setDT(summarised_estimates)</span> object 'out' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in data.table::setDT(summarised_estimates):</span> object 'out' not found</span>
 <span class="r-in"><span class="va">plots</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos)</span> object 'plots' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'plots' not found</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>

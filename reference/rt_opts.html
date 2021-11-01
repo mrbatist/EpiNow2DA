@@ -58,7 +58,7 @@ Custom settings can be supplied which override the defaults."><meta property="og
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Time-Varying Reproduction Number Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>rt_opts.Rd</code></div>
     </div>
 
@@ -81,31 +81,36 @@ Custom settings can be supplied which override the defaults.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>prior</dt><dd><p>List containing named numeric elements "mean" and "sd". The mean and
+    <dl><dt>prior</dt>
+<dd><p>List containing named numeric elements "mean" and "sd". The mean and
 standard deviation of the log normal Rt prior. Defaults to mean of 1 and standard
 deviation of 1.</p></dd>
-</dl><dl><dt>use_rt</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should Rt be used to generate infections
+<dt>use_rt</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should Rt be used to generate infections
 and hence reported cases.</p></dd>
-</dl><dl><dt>rw</dt><dd><p>Numeric step size of the random walk, defaults to 0. To specify a weekly random
+<dt>rw</dt>
+<dd><p>Numeric step size of the random walk, defaults to 0. To specify a weekly random
 walk set <code>rw = 7</code>. For more custom break point settings consider passing in a <code>breakpoints</code>
 variable as outlined in the next section.</p></dd>
-</dl><dl><dt>use_breakpoints</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should break points be used if present
+<dt>use_breakpoints</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should break points be used if present
 as a <code>breakpoint</code> variable in the input data. Break points should be defined as 1 if present
 and otherwise 0. By default breakpoints are fit jointly with a global non-parametric effect
 and so represent a conservative estimate of break point changes (alter this by setting <code>gp = NULL</code>).</p></dd>
-</dl><dl><dt>future</dt><dd><p>A character string or integer. This argument indicates how to set future Rt values. Supported
+<dt>future</dt>
+<dd><p>A character string or integer. This argument indicates how to set future Rt values. Supported
 options are to project using the Rt model ("project"), to use the latest estimate based on partial data ("latest"),
 to use the latest estimate based on data that is over 50% complete ("estimate"). If an integer is supplied then the Rt estimate
 from this many days into the future (or past if negative) past will be used forwards in time.</p></dd>
-</dl><dl><dt>gp_on</dt><dd><p>Character string, defaulting to  "R_t-1". Indicates how the Gaussian process,
+<dt>gp_on</dt>
+<dd><p>Character string, defaulting to  "R_t-1". Indicates how the Gaussian process,
 if in use, should be applied to Rt.  Currently supported options are applying the Gaussian
 process to the last estimated Rt (i.e Rt = Rt-1 * GP), and applying the Gaussian process to
 a global mean (i.e Rt = R0 * GP). Both should produced comparable results when data is not
 sparse but the method relying on a global mean will revert to this for real time estimates,
 which may not be desirable.</p></dd>
-</dl><dl><dt>pop</dt><dd><p>Integer, defaults to 0. Susceptible population initially present. Used to adjust
+<dt>pop</dt>
+<dd><p>Integer, defaults to 0. Susceptible population initially present. Used to adjust
 Rt estimates when otherwise fixed based on the proportion of the population that is
 susceptible. When set to 0 no population adjustment is done.</p></dd>
 </dl></div>

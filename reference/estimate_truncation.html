@@ -79,7 +79,7 @@ Truncation is log normally distributed.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Estimate Truncation of Observed Data</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_truncation.R" class="external-link"><code>R/estimate_truncation.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/estimate_truncation.R" class="external-link"><code>R/estimate_truncation.R</code></a></small>
     <div class="hidden name"><code>estimate_truncation.Rd</code></div>
     </div>
 
@@ -116,19 +116,23 @@ prior for the mean, standard deviation and 1 over the square root of the over di
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>obs</dt><dd><p>A list of data frames each containing a date variable
+    <dl><dt>obs</dt>
+<dd><p>A list of data frames each containing a date variable
 and a confirm (integer) variable. Each data set should be a snapshot
 of the reported data over time. All data sets must contain a complete vector
 of dates.</p></dd>
-</dl><dl><dt>max_truncation</dt><dd><p>Integer, defaults to 10. Maximum number of
+<dt>max_truncation</dt>
+<dd><p>Integer, defaults to 10. Maximum number of
 days to include in the truncation distribution.</p></dd>
-</dl><dl><dt>model</dt><dd><p>A compiled stan model to override the default model. May be
+<dt>model</dt>
+<dd><p>A compiled stan model to override the default model. May be
 useful for package developers or those developing extensions.</p></dd>
-</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
-</dl><dl><dt>verbose</dt><dd><p>Logical, should model fitting progress be returned.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
+<dt>CrIs</dt>
+<dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+<dt>verbose</dt>
+<dd><p>Logical, should model fitting progress be returned.</p></dd>
+<dt>...</dt>
+<dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -306,7 +310,7 @@ observed data (<code>last_obs</code>, useful for plotting and validation), the d
 <span class="r-out co"><span class="r-pr">#&gt;</span>     lower_50 lower_20 median upper_20 upper_50 upper_90</span>
 <span class="r-in"><span class="co"># validation plot of observations vs estimates</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">est</span><span class="op">)</span></span>
-<span class="r-plt"><img src="estimate_truncation-1.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="estimate_truncation-1.png" alt="" width="864" height="864"></span>
 </code></pre></div>
     </div>
   </div>

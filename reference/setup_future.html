@@ -60,7 +60,7 @@ available resources."><meta property="og:image" content="epiforecasts.io/EpiNow2
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set up Future Backend</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/setup.R" class="external-link"><code>R/setup.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/setup.R" class="external-link"><code>R/setup.R</code></a></small>
     <div class="hidden name"><code>setup_future.Rd</code></div>
     </div>
 
@@ -81,14 +81,15 @@ available resources.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></dd>
-</dl><dl><dt>strategies</dt><dd><p>A vector length 1 to 2 of strategies to pass to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code>. Nesting
+    <dl><dt>reported_cases</dt>
+<dd><p>A data frame of confirmed cases (confirm) by date (date), and region (<code>region</code>).</p></dd>
+<dt>strategies</dt>
+<dd><p>A vector length 1 to 2 of strategies to pass to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code>. Nesting
 of parallisation is from the top level down. The default is to set up nesting parallisation
 with both using <code><a href="https://future.futureverse.org/reference/multiprocess.html" class="external-link">future::multiprocess</a></code>. For single level parallisation use a single strategy
 or <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code> directly. See <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">?future::plan</a></code> for options.</p></dd>
-</dl><dl><dt>min_cores_per_worker</dt><dd><p>Numeric, the minimum number of cores per worker.
+<dt>min_cores_per_worker</dt>
+<dd><p>Numeric, the minimum number of cores per worker.
 Defaults to 4 which assumes 4 MCMC chains are in use per region.</p></dd>
 </dl></div>
     <div id="value">

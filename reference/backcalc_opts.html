@@ -58,7 +58,7 @@ of cases. Only used if rt = NULL."><meta property="og:image" content="epiforecas
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Back Calculation Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>backcalc_opts.Rd</code></div>
     </div>
 
@@ -73,9 +73,8 @@ of cases. Only used if <code>rt = NULL</code>.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>prior</dt><dd><p>A character string defaulting to "reports". Defines the prior to use
+    <dl><dt>prior</dt>
+<dd><p>A character string defaulting to "reports". Defines the prior to use
 when deconvolving. Currently implemented options are to use smoothed mean delay
 shifted reported cases ("reports"), to use the estimated infections from the
 previous time step seeded for the first time step using mean shifted reported cases
@@ -83,11 +82,13 @@ previous time step seeded for the first time step using mean shifted reported ca
 No prior and using infections are only supported when a Gaussian process is present. If observed
 data is not reliable then it a sensible first step is to explore increasing the <code>prior_window</code> with
 a sensible second step being to no longer use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></dd>
-</dl><dl><dt>prior_window</dt><dd><p>Integer, defaults to 14 days. The mean centred smoothing window
+<dt>prior_window</dt>
+<dd><p>Integer, defaults to 14 days. The mean centred smoothing window
 to apply to mean shifted reports (used as a prior during back calculation). 7 days is minimum recommended
 settings as this smooths day of the week effects but depending on the quality of the data and the
 amount of information users wish to use as a prior (higher values equalling a less informative prior).</p></dd>
-</dl><dl><dt>rt_window</dt><dd><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
+<dt>rt_window</dt>
+<dd><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
 Rt. This must be odd so that the central estimate is included.</p></dd>
 </dl></div>
     <div id="value">

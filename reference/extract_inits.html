@@ -62,7 +62,7 @@ authored by James Scott."><meta property="og:image" content="epiforecasts.io/Epi
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate initial conditions from a Stan fit</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/extract.R" class="external-link"><code>R/extract.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/extract.R" class="external-link"><code>R/extract.R</code></a></small>
     <div class="hidden name"><code>extract_inits.Rd</code></div>
     </div>
 
@@ -81,14 +81,16 @@ authored by James Scott.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>fit</dt><dd><p>A stanfit object</p></dd>
-</dl><dl><dt>current_inits</dt><dd><p>A function that returns a list of initial conditions (such as
+    <dl><dt>fit</dt>
+<dd><p>A stanfit object</p></dd>
+<dt>current_inits</dt>
+<dd><p>A function that returns a list of initial conditions (such as
 <code><a href="create_initial_conditions.html">create_initial_conditions()</a></code>). Only used in <code>exclude_list</code> is specified.</p></dd>
-</dl><dl><dt>exclude_list</dt><dd><p>A character vector of parameters to not initialise from the fit
+<dt>exclude_list</dt>
+<dd><p>A character vector of parameters to not initialise from the fit
 object, defaulting to <code>NULL</code>.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, defaults to 50. Number of posterior samples.</p></dd>
+<dt>samples</dt>
+<dd><p>Numeric, defaults to 50. Number of posterior samples.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

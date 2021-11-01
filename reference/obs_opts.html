@@ -58,7 +58,7 @@ model. Custom settings can be supplied which override the defaults."><meta prope
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Observation Model Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/opts.R" class="external-link"><code>R/opts.R</code></a></small>
     <div class="hidden name"><code>obs_opts.Rd</code></div>
     </div>
 
@@ -82,27 +82,33 @@ model. Custom settings can be supplied which override the defaults.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>family</dt><dd><p>Character string defining the observation model. Options are
+    <dl><dt>family</dt>
+<dd><p>Character string defining the observation model. Options are
 Negative binomial ("negbin"), the default, and Poisson.</p></dd>
-</dl><dl><dt>phi</dt><dd><p>A numeric vector of length 2, defaults to 0, 1. Indicates the
+<dt>phi</dt>
+<dd><p>A numeric vector of length 2, defaults to 0, 1. Indicates the
 mean and standard deviation of the normal prior used for the observation
 process.</p></dd>
-</dl><dl><dt>weight</dt><dd><p>Numeric, defaults to 1. Weight to give the observed data in
+<dt>weight</dt>
+<dd><p>Numeric, defaults to 1. Weight to give the observed data in
 the log density.</p></dd>
-</dl><dl><dt>week_effect</dt><dd><p>Logical defaulting to <code>TRUE</code>. Should a day of the week effect
+<dt>week_effect</dt>
+<dd><p>Logical defaulting to <code>TRUE</code>. Should a day of the week effect
 be used in the observation model.</p></dd>
-</dl><dl><dt>week_length</dt><dd><p>Numeric assumed length of the week in days, defaulting to
+<dt>week_length</dt>
+<dd><p>Numeric assumed length of the week in days, defaulting to
 7 days. This can be modified if data aggregated over a period other than a week
 or if data has a non-weekly periodicity.</p></dd>
-</dl><dl><dt>scale</dt><dd><p>List, defaulting to an empty list. Should an scaling factor be applied
+<dt>scale</dt>
+<dd><p>List, defaulting to an empty list. Should an scaling factor be applied
 to map latent infections (convolved to date of report). If none empty a mean
 (<code>mean</code>) and standard deviation (<code>sd</code>) needs to be supplied defining the normally
 distributed scaling factor.</p></dd>
-</dl><dl><dt>likelihood</dt><dd><p>Logical, defaults to <code>TRUE</code>. Should the likelihood be
+<dt>likelihood</dt>
+<dd><p>Logical, defaults to <code>TRUE</code>. Should the likelihood be
 included in the model</p></dd>
-</dl><dl><dt>return_likelihood</dt><dd><p>Logical, defaults to <code>FALSE</code>. Should the likelihood
+<dt>return_likelihood</dt>
+<dd><p>Logical, defaults to <code>FALSE</code>. Should the likelihood
 be returned by the model.</p></dd>
 </dl></div>
     <div id="value">

@@ -59,7 +59,7 @@ for details."><meta property="og:image" content="epiforecasts.io/EpiNow2/referen
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create Clean Reported Cases</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/create.R" class="external-link"><code>R/create.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/create.R" class="external-link"><code>R/create.R</code></a></small>
     <div class="hidden name"><code>create_clean_reported_cases.Rd</code></div>
     </div>
 
@@ -75,12 +75,13 @@ for details.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>reported_cases</dt><dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
+    <dl><dt>reported_cases</dt>
+<dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
 in date format.</p></dd>
-</dl><dl><dt>horizon</dt><dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
-</dl><dl><dt>zero_threshold</dt><dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
+<dt>horizon</dt>
+<dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+<dt>zero_threshold</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
 cases are meaningful by using a threshold of 50 cases on average over the last 7 days. If the average is
 above this threshold then the zero is replaced with the backwards looking rolling average. If set to infinity
 then no changes are made.</p></dd>

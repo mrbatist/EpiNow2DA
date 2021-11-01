@@ -59,7 +59,7 @@ Simulations can be run in parallel using future::plan."><meta property="og:image
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Simulate infections using a given trajectory of the time-varying reproduction number</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/simulate_infections.R" class="external-link"><code>R/simulate_infections.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/simulate_infections.R" class="external-link"><code>R/simulate_infections.R</code></a></small>
     <div class="hidden name"><code>simulate_infections.Rd</code></div>
     </div>
 
@@ -82,22 +82,26 @@ Simulations can be run in parallel using <code><a href="https://future.futurever
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>estimates</dt><dd><p>The <code>estimates</code> element of an <code>epinow</code> run that has been done with
+    <dl><dt>estimates</dt>
+<dd><p>The <code>estimates</code> element of an <code>epinow</code> run that has been done with
 output = "fit", or the result of <code>estimate_infections</code> with <code>return_fit</code> set to TRUE.</p></dd>
-</dl><dl><dt>R</dt><dd><p>A numeric vector of reproduction numbers; these will overwrite the reproduction numbers
+<dt>R</dt>
+<dd><p>A numeric vector of reproduction numbers; these will overwrite the reproduction numbers
 contained in <code>estimates</code>, except elements set to NA. If it is longer than the time series
 of reproduction numbers contained in <code>estimates</code>, the values going beyond the length of
 estimated reproduction numbers are taken as forecast. Alternatively accepts a data.frame containing
 at least <code>date</code> and <code>value</code> (integer) variables and optionally <code>sample</code>.</p></dd>
-</dl><dl><dt>model</dt><dd><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html" class="external-link">rstan::stan_model</a></code>.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, number of posterior samples to simulate from. The default is to use all
+<dt>model</dt>
+<dd><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html" class="external-link">rstan::stan_model</a></code>.</p></dd>
+<dt>samples</dt>
+<dd><p>Numeric, number of posterior samples to simulate from. The default is to use all
 samples in the <code>estimates</code> input.</p></dd>
-</dl><dl><dt>batch_size</dt><dd><p>Numeric, defaults to 10. Size of batches in which to simulate. May decrease
+<dt>batch_size</dt>
+<dd><p>Numeric, defaults to 10. Size of batches in which to simulate. May decrease
 run times due to reduced IO costs but this is still being evaluated. If set to NULL then all
 simulations are done at once.</p></dd>
-</dl><dl><dt>verbose</dt><dd><p>Logical defaults to <code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code>. Should a progress bar (from <code>progressr</code>) be
+<dt>verbose</dt>
+<dd><p>Logical defaults to <code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code>. Should a progress bar (from <code>progressr</code>) be
 shown.</p></dd>
 </dl></div>
     </div>
@@ -135,7 +139,7 @@ shown.</p></dd>
 <span class="r-in"><span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">NA_real_</span>, <span class="fl">40</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">sims</span> <span class="op">&lt;-</span> <span class="fu">simulate_infections</span><span class="op">(</span><span class="va">est</span>, <span class="va">R</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">sims</span><span class="op">)</span></span>
-<span class="r-plt"><img src="simulate_infections-1.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="simulate_infections-1.png" alt="" width="864" height="864"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># with a data.frame input of samples</span></span>
 <span class="r-in"><span class="va">R_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -144,7 +148,7 @@ shown.</p></dd>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">sims</span> <span class="op">&lt;-</span> <span class="fu">simulate_infections</span><span class="op">(</span><span class="va">est</span>, <span class="va">R_dt</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">sims</span><span class="op">)</span></span>
-<span class="r-plt"><img src="simulate_infections-2.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="simulate_infections-2.png" alt="" width="864" height="864"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">#' # with a data.frame input of samples</span></span>
 <span class="r-in"><span class="va">R_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">est</span>, type <span class="op">=</span> <span class="st">"samples"</span>, param <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span></span>
@@ -152,7 +156,7 @@ shown.</p></dd>
 <span class="r-in"><span class="va">R_samples</span> <span class="op">&lt;-</span> <span class="va">R_samples</span><span class="op">[</span><span class="va">date</span> <span class="op">&gt;=</span> <span class="st">"2020-04-01"</span>, <span class="va">value</span> <span class="op">:=</span> <span class="fl">1.1</span><span class="op">]</span></span>
 <span class="r-in"><span class="va">sims</span> <span class="op">&lt;-</span> <span class="fu">simulate_infections</span><span class="op">(</span><span class="va">est</span>, <span class="va">R_samples</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">sims</span><span class="op">)</span></span>
-<span class="r-plt"><img src="simulate_infections-3.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="simulate_infections-3.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>

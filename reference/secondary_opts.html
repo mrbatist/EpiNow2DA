@@ -62,7 +62,7 @@ currently supported options."><meta property="og:image" content="epiforecasts.io
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Secondary Reports Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_secondary.R" class="external-link"><code>R/estimate_secondary.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/estimate_secondary.R" class="external-link"><code>R/estimate_secondary.R</code></a></small>
     <div class="hidden name"><code>secondary_opts.Rd</code></div>
     </div>
 
@@ -81,25 +81,23 @@ currently supported options.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>type</dt><dd><p>A character string indicating the type of observation the secondary reports
-are. Options include:
-</p><ul><li><p>"incidence": Assumes that secondary reports equal a convolution of previously
+    <dl><dt>type</dt>
+<dd><p>A character string indicating the type of observation the secondary reports
+are. Options include:</p><ul><li><p>"incidence": Assumes that secondary reports equal a convolution of previously
 observed primary reported cases. An example application is deaths from an infectious
 disease predicted by reported cases of that disease (or estimated infections).</p></li>
 <li><p>"prevalence": Assumes that secondary reports are cumulative and are defined by
 currently observed primary reports minus a convolution of secondary reports. An example
 application is hospital bed usage predicted by hospital admissions.</p></li>
 </ul></dd>
-</dl><dl><dt>...</dt><dd><p>Overwrite options defined by type. See the returned values for all
+<dt>...</dt>
+<dd><p>Overwrite options defined by type. See the returned values for all
 options that can be passed.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>A list of binary options summarising secondary model used in <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.
-Options returned are <code>cumulative</code> (should the secondary report be cumulative), <code>historic</code>
-(should a convolution of primary reported cases be used to predict secondary reported
+Options returned are <code>cumulative</code> (should the secondary report be cumulative), <code>historic</code>(should a convolution of primary reported cases be used to predict secondary reported
 cases), <code>primary_hist_additive</code> (should the historic convolution of primary reported cases
 be additive or subtractive), <code>current</code> (should currently observed primary reported cases
 contribute to current secondary reported cases), <code>primary_current_additive</code> (should current

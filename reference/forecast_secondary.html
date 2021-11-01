@@ -62,7 +62,7 @@ for an example of forecasting Covid-19 deaths from Covid-19 cases."><meta proper
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Forecast Secondary Observations Given a Fit from estimate_secondary</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/estimate_secondary.R" class="external-link"><code>R/estimate_secondary.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/estimate_secondary.R" class="external-link"><code>R/estimate_secondary.R</code></a></small>
     <div class="hidden name"><code>forecast_secondary.Rd</code></div>
     </div>
 
@@ -89,22 +89,27 @@ for an example of forecasting Covid-19 deaths from Covid-19 cases.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>estimate</dt><dd><p>An object of class "estimate_secondary" as produced by <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.</p></dd>
-</dl><dl><dt>primary</dt><dd><p>A data.frame containing at least <code>date</code> and <code>value</code> (integer) variables and optionally
+    <dl><dt>estimate</dt>
+<dd><p>An object of class "estimate_secondary" as produced by <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.</p></dd>
+<dt>primary</dt>
+<dd><p>A data.frame containing at least <code>date</code> and <code>value</code> (integer) variables and optionally
 <code>sample</code>. Used as the primary observation used to forecast the secondary observations. Alternatively,
 this may be an object of class "estimate_infections" as produced by <code><a href="estimate_infections.html">estimate_infections()</a></code>. If <code>primary</code>
 is of class "estimate_infections" then the internal samples will be filtered to have a minimum date ahead of
 those observed in the <code>estimate</code> object.</p></dd>
-</dl><dl><dt>primary_variable</dt><dd><p>A character string indicating the primary variable, defaulting to "reported_cases".
+<dt>primary_variable</dt>
+<dd><p>A character string indicating the primary variable, defaulting to "reported_cases".
 Only used when primary is of class "estimate_infections".</p></dd>
-</dl><dl><dt>model</dt><dd><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html" class="external-link">rstan::stan_model</a></code>.</p></dd>
-</dl><dl><dt>samples</dt><dd><p>Numeric, number of posterior samples to simulate from. The default is to use all
+<dt>model</dt>
+<dd><p>A compiled stan model as returned by <code><a href="https://mc-stan.org/rstan/reference/stan_model.html" class="external-link">rstan::stan_model</a></code>.</p></dd>
+<dt>samples</dt>
+<dd><p>Numeric, number of posterior samples to simulate from. The default is to use all
 samples in the <code>primary</code> input when present. If not present the default is to use 1000 samples.</p></dd>
-</dl><dl><dt>all_dates</dt><dd><p>Logical, defaults to FALSE. Should a forecast for all dates and not just those in
+<dt>all_dates</dt>
+<dd><p>Logical, defaults to FALSE. Should a forecast for all dates and not just those in
 the forecast horizon be returned.</p></dd>
-</dl><dl><dt>CrIs</dt><dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+<dt>CrIs</dt>
+<dd><p>Numeric vector of credible intervals to calculate.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

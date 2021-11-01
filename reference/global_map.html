@@ -60,7 +60,7 @@ if it is in use. Future releases may depreciate it."><meta property="og:image" c
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate a global map for a single variable.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/master/R/map.R" class="external-link"><code>R/map.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/epiforecasts/EpiNow2/blob/HEAD/R/map.R" class="external-link"><code>R/map.R</code></a></small>
     <div class="hidden name"><code>global_map.Rd</code></div>
     </div>
 
@@ -85,20 +85,25 @@ if it is in use. Future releases may depreciate it.</p>
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>data</dt><dd><p>Dataframe containing variables to be mapped. Must contain a <code>country</code> variable.</p></dd>
-</dl><dl><dt>variable</dt><dd><p>A character string indicating the variable to map data for. This must be supplied.</p></dd>
-</dl><dl><dt>variable_label</dt><dd><p>A character string indicating the variable label to use. If not supplied then the underlying
+    <dl><dt>data</dt>
+<dd><p>Dataframe containing variables to be mapped. Must contain a <code>country</code> variable.</p></dd>
+<dt>variable</dt>
+<dd><p>A character string indicating the variable to map data for. This must be supplied.</p></dd>
+<dt>variable_label</dt>
+<dd><p>A character string indicating the variable label to use. If not supplied then the underlying
 variable name is used.</p></dd>
-</dl><dl><dt>trans</dt><dd><p>A character string specifying the transform to use on the specified metric. Defaults to no
+<dt>trans</dt>
+<dd><p>A character string specifying the transform to use on the specified metric. Defaults to no
 transform ("identity"). Other options include log scaling ("log") and log base 10 scaling
 ("log10"). For a complete list of options see <code>ggplot2::continous_scale</code>.</p></dd>
-</dl><dl><dt>fill_labels</dt><dd><p>A function to use to allocate legend labels. An example (used below) is <code><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">scales::percent</a></code>,
+<dt>fill_labels</dt>
+<dd><p>A function to use to allocate legend labels. An example (used below) is <code><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">scales::percent</a></code>,
 which can be used for percentage data.</p></dd>
-</dl><dl><dt>scale_fill</dt><dd><p>Function to use for scaling the fill. Defaults to a custom <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_fill_manual</a></code>, which
+<dt>scale_fill</dt>
+<dd><p>Function to use for scaling the fill. Defaults to a custom <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_fill_manual</a></code>, which
 expects the possible values to be "Increasing", "Likely increasing", "Likely decreasing", "Decreasing" or "Stable".</p></dd>
-</dl><dl><dt>...</dt><dd><p>Additional arguments passed to the <code>scale_fill</code> function</p></dd>
+<dt>...</dt>
+<dd><p>Additional arguments passed to the <code>scale_fill</code> function</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -148,7 +153,7 @@ expects the possible values to be "Increasing", "Likely increasing", "Likely dec
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Installing the rnaturalearthdata package.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Installing package into ‘/Users/runner/work/_temp/Library’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> (as ‘lib’ is unspecified)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in value[[3L]](cond)</span> Failed to install the rnaturalearthdata package.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in value[[3L]](cond):</span> Failed to install the rnaturalearthdata package.</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span>  Please try installing the package for yourself using the following command: </span>
 <span class="r-err co"><span class="r-pr">#&gt;</span>  install.packages("rnaturalearthdata")</span>
 <span class="r-in"><span class="co"># }</span></span>
