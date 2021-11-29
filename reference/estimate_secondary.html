@@ -84,7 +84,7 @@ may be used to estimate and forecast a secondary observation from a primary acro
 for an application forecasting Covid-19 deaths in Germany and Poland.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_secondary</span><span class="op">(</span>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_secondary</span><span class="op">(</span>
   <span class="va">reports</span>,
   secondary <span class="op">=</span> <span class="fu"><a href="secondary_opts.html">secondary_opts</a></span><span class="op">(</span><span class="op">)</span>,
   delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2.5</span>, mean_sd <span class="op">=</span> <span class="fl">0.5</span>, sd <span class="op">=</span> <span class="fl">0.47</span>, sd_sd <span class="op">=</span> <span class="fl">0.25</span>, max <span class="op">=</span>
@@ -96,9 +96,8 @@ for an application forecasting Covid-19 deaths in Germany and Poland.</p>
   model <span class="op">=</span> <span class="cn">NULL</span>,
   verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,
   <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>reports</dt>
@@ -143,11 +142,10 @@ useful for package developers or those developing extensions.</p></dd>
 and secondary observations, and a summary of the model estimated secondary observations),
 <code>data</code> (a list of data used to fit the model), and <code>fit</code> (the <code>stanfit</code> object).</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># set number of cores to use</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="co">#' # load data.table for manipulation</span></span>

@@ -68,16 +68,15 @@ Convolves latent infections to reported cases via an observation model. Likely t
 in later releases by functionality drawing on the <code>stan</code> implementation.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">report_cases</span><span class="op">(</span>
+    <div id="ref-usage">Usage,<div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">report_cases</span><span class="op">(</span>
   <span class="va">case_estimates</span>,
   case_forecast <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">delays</span>,
   type <span class="op">=</span> <span class="st">"sample"</span>,
   <span class="va">reporting_effect</span>,
   CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div></div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>case_estimates</dt>
@@ -103,11 +102,10 @@ which approximates sampling or "median" would shift by the median of the distrib
     <p>A list of <code>data.table</code>s. The first entry contains the following variables <code>sample</code>, <code>date</code> and <code>cases</code> with the second
 being summarised across samples.</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># define example cases</span></span>
 <span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">40</span><span class="op">]</span></span>
 <span class="r-in"></span>
