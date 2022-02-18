@@ -21,7 +21,7 @@ available resources."><meta property="og:image" content="epiforecasts.io/EpiNow2
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
       </span>
     </div>
 
@@ -75,7 +75,7 @@ available resources.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">setup_future</span><span class="op">(</span>
   <span class="va">reported_cases</span>,
-  strategies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"multiprocess"</span>, <span class="st">"multiprocess"</span><span class="op">)</span>,
+  strategies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"multisession"</span>, <span class="st">"multisession"</span><span class="op">)</span>,
   min_cores_per_worker <span class="op">=</span> <span class="fl">4</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -87,7 +87,8 @@ available resources.</p>
 <dt>strategies</dt>
 <dd><p>A vector length 1 to 2 of strategies to pass to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code>. Nesting
 of parallisation is from the top level down. The default is to set up nesting parallisation
-with both using <code><a href="https://future.futureverse.org/reference/multiprocess.html" class="external-link">future::multiprocess</a></code>. For single level parallisation use a single strategy
+with both using <code><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">future::multisession</a></code> (<code><a href="https://future.futureverse.org/reference/multicore.html" class="external-link">future::multicore</a></code> will likely be a faster option on
+supported platforms). For single level parallisation use a single strategy
 or <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code> directly. See <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">?future::plan</a></code> for options.</p></dd>
 <dt>min_cores_per_worker</dt>
 <dd><p>Numeric, the minimum number of cores per worker.
