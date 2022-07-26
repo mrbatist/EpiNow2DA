@@ -2,7 +2,6 @@ functions {
 #include functions/convolve.stan
 #include functions/pmfs.stan
 #include functions/gaussian_process.stan
-#include functions/rt.stan
 #include functions/infections.stan
 #include functions/observation_model.stan
 #include functions/generated_quantities.stan
@@ -32,6 +31,7 @@ generated quantities {
   matrix[n, t - seeding_time] reports; // observed cases
   int imputed_reports[n, t - seeding_time];
   real r[n, t - seeding_time - 1];
+  vector[seeding_time] uobs_inf;
   for (i in 1:n) {
     // generate infections from Rt trace
     vector[gt_max[1]] gt_rev_pmf;
@@ -45,10 +45,10 @@ generated quantities {
       delay_max_total, 0, 1
     );
 
-    infections[i] = to_row_vector(generate_infections(
-      to_vector(R[i]), seeding_time, gt_rev_pmf, initial_infections[i],
-      initial_growth[i], pop, future_time
-    ));
+    uobs_inf = generate_seed(initial_infections[i], initial_growth[i], seeding_time);
+     // generate infections from Rt trace
+    infections[i] = to_row_vector(renewal_model(to_vector(R[i]), uobs_inf,
+                                                gt_rev_pmf, pop, future_time));
     // convolve from latent infections to mean of observations
     reports[i] = to_row_vector(convolve_to_report(
       to_vector(infections[i]), delay_rev_pmf, seeding_time)
@@ -64,7 +64,7 @@ generated quantities {
       reports[i] = to_row_vector(scale_obs(to_vector(reports[i]), frac_obs[i, 1]));
     }
    // simulate reported cases
-   imputed_reports[i] = report_rng(to_vector(reports[i]), rep_phi[i], model_type);
+   imputed_reports[i] = report_rng(to_vector(reports[i]), rep_phi[i], obs_dist);
    r[i] = calculate_growth(to_vector(infections[i]), seeding_time + 1);
   }
 }

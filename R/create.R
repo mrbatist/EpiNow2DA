@@ -357,7 +357,7 @@ create_gp_data <- function(gp = gp_opts(), data) {
 #' create_obs_model(obs_opts(week_length = 3), dates = dates)
 create_obs_model <- function(obs = obs_opts(), dates) {
   data <- list(
-    model_type = ifelse(obs$family %in% "poisson", 0, 1),
+    obs_dist = ifelse(obs$family %in% "poisson", 0, 1),
     phi_mean = obs$phi[1],
     phi_sd = obs$phi[2],
     week_effect = ifelse(obs$week_effect, obs$week_length, 1),
@@ -407,7 +407,8 @@ create_obs_model <- function(obs = obs_opts(), dates) {
 create_stan_data <- function(reported_cases, generation_time,
                              rt, gp, obs, delays, horizon,
                              backcalc, shifted_cases,
-                             truncation) {
+                             truncation, process_model) {
+
   ## make sure we have at least gt_max seeding time
   delays$seeding_time <- max(delays$seeding_time, generation_time$max)
 
@@ -424,7 +425,8 @@ create_stan_data <- function(reported_cases, generation_time,
     shifted_cases = shifted_cases,
     t = length(reported_cases$date),
     horizon = horizon,
-    burn_in = 0
+    burn_in = 0,
+    process_model = process_model
   )
   # add gt data
   data <- c(data, generation_time)
@@ -544,7 +546,7 @@ create_initial_conditions <- function(data) {
       )
       out$alpha <- array(truncnorm::rtruncnorm(1, a = 0, mean = 0, sd = data$alpha_sd))
     }
-    if (data$model_type == 1) {
+    if (data$obs_dist == 1) {
       out$rep_phi <- array(
         truncnorm::rtruncnorm(
           1,
@@ -557,10 +559,10 @@ create_initial_conditions <- function(data) {
       if (data$seeding_time > 1) {
         out$initial_growth <- array(rnorm(1, data$prior_growth, 0.01))
       }
-      out$log_R <- array(rnorm(
+      out$base_cov <- rnorm(
         n = 1, mean = convert_to_logmean(data$r_mean, data$r_sd),
         sd = convert_to_logsd(data$r_mean, data$r_sd) * 0.1
-      ))
+      )
       if (data$gt_mean_sd > 0) {
         out$gt_mean <- array(truncnorm::rtruncnorm(1,
           a = 0, mean = data$gt_mean_mean,

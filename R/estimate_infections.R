@@ -218,6 +218,7 @@
 #' options(old_opts)
 #' }
 estimate_infections <- function(reported_cases,
+                                model = "R",
                                 generation_time = generation_time_opts(),
                                 delays = delay_opts(),
                                 truncation = trunc_opts(),
@@ -280,6 +281,10 @@ estimate_infections <- function(reported_cases,
   )
   reported_cases <- reported_cases[-(1:backcalc$prior_window)]
 
+  model_choices <- c("infections", "growth", "R")
+  model <- match.arg(model_choices, choices = model_choices)
+  process_model <- which(model == model_choices) - 1
+
   # Define stan model parameters
   data <- create_stan_data(
     reported_cases = reported_cases,
@@ -291,7 +296,8 @@ estimate_infections <- function(reported_cases,
     obs = obs,
     backcalc = backcalc,
     shifted_cases = shifted_cases$confirm,
-    horizon = horizon
+    horizon = horizon,
+    process_model = process_model
   )
 
   # Set up default settings
