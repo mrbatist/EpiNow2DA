@@ -207,7 +207,7 @@ generated quantities {
   if (estimate_r == 0){
 =======
   vector[estimate_r > 0 ? 0: ot_h] R;
-  real r[ot_h - 1];
+  real r[ot_h];
   vector[return_likelihood > 1 ? ot : 0] log_lik;
   if (estimate_r){
     // estimate growth from estimated Rt
@@ -240,8 +240,7 @@ generated quantities {
 >>>>>>> 7bc2510b (implement different model types)
     );
   }
-  // estimate growth from infections
-  r = calculate_growth(infections, seeding_time + 1);
+  r = calculate_growth(infections, seeding_time);
   // simulate reported cases
   imputed_reports = report_rng(reports, rep_phi, obs_dist);
   // log likelihood of model
