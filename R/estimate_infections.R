@@ -282,7 +282,7 @@ estimate_infections <- function(reported_cases,
   reported_cases <- reported_cases[-(1:backcalc$prior_window)]
 
   model_choices <- c("infections", "growth", "R")
-  model <- match.arg(model_choices, choices = model_choices)
+  model <- match.arg(model, choices = model_choices)
   process_model <- which(model == model_choices) - 1
 
   # Define stan model parameters
