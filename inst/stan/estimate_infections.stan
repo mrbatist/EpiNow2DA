@@ -145,7 +145,6 @@ model {
       rho[1], alpha[1], eta, ls_meanlog, ls_sdlog, ls_min, ls_max, alpha_sd
     );
   }
-<<<<<<< HEAD
   // penalised priors for delay distributions
   delays_lp(
     delay_mean, delay_mean_mean[uncertain_mean_delays],
@@ -160,17 +159,6 @@ model {
     trunc_sd_mean, trunc_sd_sd,
     trunc_dist, 1
   );
-=======
-  if (delays > 0) {
-    // penalised priors for delay distributions
-    delays_lp(delay_mean, delay_mean_mean, delay_mean_sd, delay_sd, delay_sd_mean, delay_sd_sd, t);
-  }
-  // priors for truncation
-  if (truncation) {
-    truncation_lp(truncation_mean, truncation_sd, trunc_mean_mean, trunc_mean_sd,
-                  trunc_sd_mean, trunc_sd_sd);
-  }
->>>>>>> 7bc2510b (implement different model types)
   if (estimate_r) {
     // priors on Rt
     rt_lp(
@@ -201,6 +189,7 @@ model {
 generated quantities {
   int imputed_reports[ot_h];
 <<<<<<< HEAD
+<<<<<<< HEAD
   vector[estimate_r > 0 ? 0: ot_h] gen_R;
   real r[ot_h] - 1;
   vector[return_likelihood ? ot : 0] log_lik;
@@ -216,6 +205,12 @@ generated quantities {
     vector[gt_max[1]] gt_pmf = combine_pmfs(gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1);
   } else {
 >>>>>>> 7bc2510b (implement different model types)
+=======
+  vector[estimate_r > 0 ? ot_h : 0] R;
+  real r[ot_h];
+  vector[return_likelihood > 1 ? ot : 0] log_lik;
+  if (estimate_r) {
+>>>>>>> fe3d94be (generate R if estimate_r > 0)
     // sample generation time
     real gt_mean_sample[1];
     real gt_sd_sample[1];
