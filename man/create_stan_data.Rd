@@ -14,7 +14,8 @@ create_stan_data(
   horizon,
   backcalc,
   shifted_cases,
-  truncation
+  truncation,
+  process_model
 )
 }
 \arguments{
