@@ -1,6 +1,8 @@
-// update a vector of Rts
-vector update_Rt(int t, real log_R, vector noise, int[] bps,
-                 real[] bp_effects, int stationary) {
+// update combined covariates
+vector update_covariate(vector log_cov_mean, vector cov_t,
+                        vector noise, int[] bps,
+                        real[] bp_effects, int stationary,
+                        int t) {
   // define control parameters
   int bp_n = num_elements(bp_effects);
   int bp_c = 0;
@@ -32,17 +34,24 @@ vector update_Rt(int t, real log_R, vector noise, int[] bps,
       gp = cumulative_sum(gp);
     }
   }
-  // Calculate Rt
-  R = rep_vector(log_R, t) + bp + gp;
-  R = exp(R);
-  return(R);
+  if (num_elements(log_cov_mean) > 0) {
+    cov = rep(log_cov_mean, t);
+  } else {
+    cov = log(cov_t);
+  }
+  // Calculate combined covariates
+  cov = cov + bp + gp;
+  cov = exp(cov);
+  return(cov);
 }
 
-void covariate_lp(real base_cov,
+void covariate_lp(real[] log_cov_mean,
                   real[] bp_effects, real[] bp_sd, int bp_n,
-                  real r_logmean, real r_logsd) {
+                  real cov_mean_logmean, real cov_mean_logsd) {
   // initial prior
-  base_cov ~ normal(r_logmean, r_logsd);
+  if (num_elements(log_cov_mean) > 0) {
+    log_cov_mean ~ normal(cov_mean_logmean, cov_mean_logsd);
+  }
   //breakpoint effects on Rt
   if (bp_n > 0) {
     bp_sd[1] ~ normal(0, 0.1) T[0,];

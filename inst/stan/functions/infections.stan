@@ -72,11 +72,12 @@ vector growth_model(vector r, vector uobs_inf, int ht) {
   int nht = ot - ht;
   int t = ot + uot;
   vector[t] infections = rep_vector(1e-5, t);
+  vector[ot] exp_r = exp(r);
   vector[ot] obs_inf;
   // Update observed infections
-  obs_inf[1] = uobs_inf[uot] * r[1];
+  obs_inf[1] = uobs_inf[uot] * exp_r[1];
   for (i in 2:t) {
-    obs_inf[i] = obs_inf[i - 1] * r[i];
+    obs_inf[i] = obs_inf[i - 1] * exp_r[i];
   }
   infections[1:uot] = infections[1:uot] + uobs_inf;
   infections[(uot + 1):t] = infections[(uot + 1):t] + obs_inf;
