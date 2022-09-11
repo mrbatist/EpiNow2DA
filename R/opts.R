@@ -55,7 +55,8 @@ generation_time_opts <- function(mean = 1, mean_sd = 0, sd = 0, sd_sd = 0,
       )
     }
     if (gt$gt_max != gt$gt_mean) {
-      gt$gt_max <- gt$gt_mean
+      ## generation time includes time 0 so need to shift by 1
+      gt$gt_max <- gt$gt_mean + 1
     }
     if (gt$gt_mean_sd > 0) {
       stop("Error in generation time definition: if sd_mean is 0 and ",

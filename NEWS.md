@@ -10,11 +10,12 @@ Thanks to @seabbs, and @sbfnk.
 
 ## Model changes
 
+* Switched to using optimised versions of the discretised distributions supported for the
+reporting delay and the generation time. These are based on an implementation in [`epinowcast`](https://package.epinowcast.org/) by Adrian Lison and Sam Abbott.
+
 ## Documentation
 
 * Updated examples to make use of fixed distributions to improve run-times where appropriate.
-
-## Deprecated features
 
 # EpiNow2 1.3.3
 
