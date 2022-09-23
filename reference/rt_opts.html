@@ -19,7 +19,7 @@ Custom settings can be supplied which override the defaults."><meta property="og
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,15 +69,15 @@ Custom settings can be supplied which override the defaults.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rt_opts</span><span class="op">(</span>
-  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  use_rt <span class="op">=</span> <span class="cn">TRUE</span>,
-  rw <span class="op">=</span> <span class="fl">0</span>,
-  use_breakpoints <span class="op">=</span> <span class="cn">TRUE</span>,
-  future <span class="op">=</span> <span class="st">"latest"</span>,
-  gp_on <span class="op">=</span> <span class="st">"R_t-1"</span>,
-  pop <span class="op">=</span> <span class="fl">0</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rt_opts</span><span class="op">(</span></span>
+<span>  prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  use_rt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  rw <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  use_breakpoints <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  future <span class="op">=</span> <span class="st">"latest"</span>,</span>
+<span>  gp_on <span class="op">=</span> <span class="st">"R_t-1"</span>,</span>
+<span>  pop <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,23 +86,33 @@ Custom settings can be supplied which override the defaults.</p>
 <dd><p>List containing named numeric elements "mean" and "sd". The mean and
 standard deviation of the log normal Rt prior. Defaults to mean of 1 and standard
 deviation of 1.</p></dd>
+
+
 <dt>use_rt</dt>
 <dd><p>Logical, defaults to <code>TRUE</code>. Should Rt be used to generate infections
 and hence reported cases.</p></dd>
+
+
 <dt>rw</dt>
 <dd><p>Numeric step size of the random walk, defaults to 0. To specify a weekly random
 walk set <code>rw = 7</code>. For more custom break point settings consider passing in a <code>breakpoints</code>
 variable as outlined in the next section.</p></dd>
+
+
 <dt>use_breakpoints</dt>
 <dd><p>Logical, defaults to <code>TRUE</code>. Should break points be used if present
 as a <code>breakpoint</code> variable in the input data. Break points should be defined as 1 if present
 and otherwise 0. By default breakpoints are fit jointly with a global non-parametric effect
 and so represent a conservative estimate of break point changes (alter this by setting <code>gp = NULL</code>).</p></dd>
+
+
 <dt>future</dt>
 <dd><p>A character string or integer. This argument indicates how to set future Rt values. Supported
 options are to project using the Rt model ("project"), to use the latest estimate based on partial data ("latest"),
 to use the latest estimate based on data that is over 50% complete ("estimate"). If an integer is supplied then the Rt estimate
 from this many days into the future (or past if negative) past will be used forwards in time.</p></dd>
+
+
 <dt>gp_on</dt>
 <dd><p>Character string, defaulting to  "R_t-1". Indicates how the Gaussian process,
 if in use, should be applied to Rt.  Currently supported options are applying the Gaussian
@@ -110,20 +120,25 @@ process to the last estimated Rt (i.e Rt = Rt-1 * GP), and applying the Gaussian
 a global mean (i.e Rt = R0 * GP). Both should produced comparable results when data is not
 sparse but the method relying on a global mean will revert to this for real time estimates,
 which may not be desirable.</p></dd>
+
+
 <dt>pop</dt>
 <dd><p>Integer, defaults to 0. Susceptible population initially present. Used to adjust
 Rt estimates when otherwise fixed based on the proportion of the population that is
 susceptible. When set to 0 no population adjustment is done.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of settings defining the time-varying reproduction number</p>
+    
+
+<p>A list of settings defining the time-varying reproduction number</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># default settings</span></span>
-<span class="r-in"><span class="fu">rt_opts</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># default settings</span></span></span>
+<span class="r-in"><span><span class="fu">rt_opts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior$mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
@@ -150,9 +165,9 @@ susceptible. When set to 0 no population adjustment is done.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $gp_on</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "R_t-1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># add a custom length scale</span></span>
-<span class="r-in"><span class="fu">rt_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add a custom length scale</span></span></span>
+<span class="r-in"><span><span class="fu">rt_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior$mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
@@ -179,9 +194,9 @@ susceptible. When set to 0 no population adjustment is done.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $gp_on</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "R_t-1"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># add a weekly random walk</span></span>
-<span class="r-in"><span class="fu">rt_opts</span><span class="op">(</span>rw <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add a weekly random walk</span></span></span>
+<span class="r-in"><span><span class="fu">rt_opts</span><span class="op">(</span>rw <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior$mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
@@ -222,7 +237,7 @@ susceptible. When set to 0 no population adjustment is done.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

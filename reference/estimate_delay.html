@@ -19,7 +19,7 @@ Currently this function is a simple wrapper for bootstrapped_dist_fit."><meta pr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,19 +69,24 @@ Currently this function is a simple wrapper for <code>bootstrapped_dist_fit</cod
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_delay</span><span class="op">(</span><span class="va">delays</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimate_delay</span><span class="op">(</span><span class="va">delays</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>delays</dt>
 <dd><p>Integer vector of delays</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to pass to internal methods.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list summarising the bootstrapped distribution</p>
+    
+
+<p>A list summarising the bootstrapped distribution</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -90,25 +95,25 @@ Currently this function is a simple wrapper for <code>bootstrapped_dist_fit</cod
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">estimate_delay</span><span class="op">(</span><span class="va">delays</span>, samples <span class="op">=</span> <span class="fl">1000</span>, bootstraps <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="va">delays</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">estimate_delay</span><span class="op">(</span><span class="va">delays</span>, samples <span class="op">=</span> <span class="fl">1000</span>, bootstraps <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.48288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.434905</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1114195</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09155574</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.077544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.171547</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd_sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09939218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09169787</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $max</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 97</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -123,7 +128,7 @@ Currently this function is a simple wrapper for <code>bootstrapped_dist_fit</cod
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

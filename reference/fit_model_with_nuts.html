@@ -19,7 +19,7 @@ future with error catching, timeouts and merging of completed chains."><meta pro
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,30 +69,39 @@ Fits a stan model using <code><a href="https://mc-stan.org/rstan/reference/stanm
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fit_model_with_nuts</span><span class="op">(</span>
-  <span class="va">args</span>,
-  future <span class="op">=</span> <span class="cn">FALSE</span>,
-  max_execution_time <span class="op">=</span> <span class="cn">Inf</span>,
-  id <span class="op">=</span> <span class="st">"stan"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fit_model_with_nuts</span><span class="op">(</span></span>
+<span>  <span class="va">args</span>,</span>
+<span>  future <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  max_execution_time <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">"stan"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>args</dt>
 <dd><p>List of stan arguments</p></dd>
+
+
 <dt>future</dt>
 <dd><p>Logical, defaults to <code>FALSE</code>. Should <code>future</code> be used to run stan chains in parallel.</p></dd>
+
+
 <dt>max_execution_time</dt>
 <dd><p>Numeric, defaults to Inf. What is the maximum execution time per chain in seconds.
 Results will still be returned as long as at least 2 chains complete successfully within the timelimit.</p></dd>
+
+
 <dt>id</dt>
 <dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
 to assign errors to regions. Alter the default to run with error catching.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A stan model object</p>
+    
+
+<p>A stan model object</p>
     </div>
 
   </div>
@@ -107,7 +116,7 @@ to assign errors to regions. Alter the default to run with error catching.</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

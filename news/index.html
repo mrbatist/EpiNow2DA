@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -61,14 +61,15 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.3" id="epinow2-133">EpiNow2 1.3.3<a class="anchor" aria-label="anchor" href="#epinow2-133"></a></h2>
-<p>This release is under development and the features outlined below may change before release.</p>
+<p>This maintenance release adds a range of new minor features, squashes bugs, and removes some obsolete features.</p>
+<p>Thanks to <a href="https://github.com/Bisaloo" class="external-link">@Bisaloo</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>, <a href="https://github.com/medewitt" class="external-link">@medewitt</a>, and <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>.</p>
 <div class="section level3">
 <h3 id="new-features-1-3-3">New features<a class="anchor" aria-label="anchor" href="#new-features-1-3-3"></a></h3>
-<ul><li>Added supported to <code>simulate_infections</code> so that a <code>data.frame</code> of R samples can be passed in instead of a vector of R values.</li>
-<li>Added extraction of posterior samples to the summary method for <code>estimate_infections</code>.</li>
-<li>Exposed <code>zero_threshold</code> to users allowing for control over when zeros or NAs in count data are treated as true zeros versus as reporting errors that require some smoothing.</li>
-<li>Added support for varying the length of the day of the week effect (see <code><a href="../reference/obs_opts.html">obs_opts()</a></code>). This allows, for example, fitting to data with cases only reported every 3 days.</li>
-<li>Adds option to <code><a href="../reference/plot_estimates.html">plot_estimates()</a></code> and higher level functions to choose which estimate type to plot.</li>
+<ul><li>Added supported to <code>simulate_infections</code> so that a <code>data.frame</code> of R samples can be passed in instead of a vector of R values. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Added extraction of posterior samples to the summary method for <code>estimate_infections</code>. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Exposed <code>zero_threshold</code> to users allowing for control over when zeros or NAs in count data are treated as true zeros versus as reporting errors that require some smoothing. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Added support for varying the length of the day of the week effect (see <code><a href="../reference/obs_opts.html">obs_opts()</a></code>). This allows, for example, fitting to data with cases only reported every 3 days. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Adds option to <code><a href="../reference/plot_estimates.html">plot_estimates()</a></code> and higher level functions to choose which estimate type to plot. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
 <li>Adds support for fixed generation times (either mean only or fixed gamma distributed). By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>.</li>
 <li>Adds support for optionally using an inverse gamma prior for the lengthscale of the gaussian process. This scaled prior has been tested for both short and long simulations where the default prior may make the model unstable. The new prior is more stable for long simulations and adaptively change the distribution based on the simulation length (total number of days) without relying on the user inputs or the fixed defaults. It can be tested by setting ls_sd = 0 in gp_opts(). By <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>.</li>
 <li>Updated the prior on the magnitude of the gaussian process to be 0.05 vs 0.1 leading to slightly more stable estimates. By <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>.</li>
@@ -76,30 +77,43 @@
 <div class="section level3">
 <h3 id="model-changes-1-3-3">Model changes<a class="anchor" aria-label="anchor" href="#model-changes-1-3-3"></a></h3>
 <ul><li>Added support for varying the length of the day of the week effect (see <code><a href="../reference/obs_opts.html">obs_opts()</a></code>). This allows, for example, fitting to data with cases only reported every 3 days.</li>
-<li>Minor optimisations in the observation model by only using the <code>target</code> likelihood definition approach when required and in the use of <code>fmax</code> and <code>fmin</code> over using if statements.</li>
-<li>Added support for users setting the overdispersion (parameterised as one over the square root of phi) of the reporting process. This is accessible via the <code>phi</code> argument of <code>obs_opts</code> with the default of a normal distribution with mean 0 and standard deviation of 1 truncated at 0 remaining unchanged.</li>
+<li>Minor optimisations in the observation model by only using the <code>target</code> likelihood definition approach when required and in the use of <code>fmax</code> and <code>fmin</code> over using if statements. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Added support for users setting the overdispersion (parameterised as one over the square root of phi) of the reporting process. This is accessible via the <code>phi</code> argument of <code>obs_opts</code> with the default of a normal distribution with mean 0 and standard deviation of 1 truncated at 0 remaining unchanged. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Added additive noise term to the <code>estimate_truncation</code> model to deal with zeroes. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-3-3">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-3-3"></a></h3>
-<ul><li>Updates to all synthetic delays to reduce runtime of examples.</li>
-<li>Additional statements to make it clear to users examples should be used for real world analysis.</li>
-<li>Additional context in the README on package functionality.</li>
+<ul><li>Updates to all synthetic delays to reduce runtime of examples. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Additional statements to make it clear to users examples should be used for real world analysis. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Additional context in the README on package functionality. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="package-changes-1-3-3">Package changes<a class="anchor" aria-label="anchor" href="#package-changes-1-3-3"></a></h3>
-<ul><li>Added a <code>contributing.md</code> to guide contributors and added <code>pre-commit</code> support to check new contributions styling.</li>
+<ul><li>Added a <code>contributing.md</code> to guide contributors and added <code>pre-commit</code> support to check new contributions styling. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
 <li>Better test skipping thanks to <a href="https://github.com/Bisaloo" class="external-link">@Bisaloo</a>.</li>
+<li>Switched from <code>cowplot::theme_cowplot()</code> to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">ggplot2::theme_bw()</a></code>. This allows the removal of <code>cowplot</code> as a dependency as well making plots visuable for users saving as pngs and using a dark theme. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="other-changes-1-3-3">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-1-3-3"></a></h3>
-<ul><li>Updated the classification of growth to use stable rather than unsure when Rt is approximately 1.</li>
-<li>The default parallisation has been changed to <code><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">future::multisession()</a></code> from <code><a href="https://future.futureverse.org/reference/multiprocess.html" class="external-link">future::multiprocess()</a></code> as the latter is being depreciated in the <code>future</code> package.</li>
+<ul><li>Updated the classification of growth to use stable rather than unsure when Rt is approximately 1. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>The default parallisation has been changed to <code><a href="https://future.futureverse.org/reference/multisession.html" class="external-link">future::multisession()</a></code> from <code><a href="https://future.futureverse.org/reference/multiprocess.html" class="external-link">future::multiprocess()</a></code> as the latter is being depreciated in the <code>future</code> package. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a> and <a href="https://github.com/snfnk" class="external-link">@snfnk</a>.</li>
+<li>Ensure the seeding time is at least the maximum generation time (<a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="deprecated-features-1-3-3">Deprecated features<a class="anchor" aria-label="anchor" href="#deprecated-features-1-3-3"></a></h3>
+<ul><li>
+<code>simulate_cases()</code> and <code>forecast_infections()</code> have been deprecated and have been removed. These functions depend on <code>EpiSoon</code> which itself is archived and near equivalent functionality is available within <code>EpiNow2</code> and in other packages (<a href="https://github.com/seabbs" class="external-link">@seabbs</a>).</li>
+<li>Functions supporting secondary forecasting using <code>forecast_infections()</code> (i.e in `epinow()) have been removed along with the arguments that supported them (<a href="https://github.com/seabbs" class="external-link">@seabbs</a>).</li>
+<li>
+<code>global_map()</code>, <code>country_map()</code>, and <code>theme_map()</code> have all been deprecated and have been removed. These functions were used to support reporting of reproduction number estimates and are considered out of scope for <code>EpiNow2</code>. If finding useful contacting the <code>EpiNow2</code> developers (<a href="https://github.com/seabbs" class="external-link">@seabbs</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-3-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-3"></a></h3>
-<ul><li>Fixed a bug in the deconvolution Rt estimation method where the mean of the generation time was being used as the standard deviation. For the default package generation time these are close and so the impact will be limited but in cases where the standard deviation is &lt;&lt; than the mean this should result in more accurate Rt estimates.</li>
-<li>Fixed a bug where the number of threads used by the data.table package were set to one in the global environment. Now the number of threads used by data.table are set to whatever the used specified on exit (<a href="https://github.com/medewitt" class="external-link">@medewitt</a>).</li>
-<li>Fixed a bug in <code>simulate_infections</code> and <code>forecast_secondary</code> which meant that a Poisson observation model used for estimation would lead to a error.</li>
+<ul><li>Fixed a bug in the deconvolution Rt estimation method where the mean of the generation time was being used as the standard deviation. For the default package generation time these are close and so the impact will be limited but in cases where the standard deviation is &lt;&lt; than the mean this should result in more accurate Rt estimates. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Fixed a bug where the number of threads used by the data.table package were set to one in the global environment. Now the number of threads used by data.table are set to whatever the used specified on exit. By <a href="https://github.com/medewitt" class="external-link">@medewitt</a>.</li>
+<li>Fixed a bug in <code>simulate_infections</code> and <code>forecast_secondary</code> which meant that a Poisson observation model used for estimation would lead to a error. By <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Fixed a bug where <code>use_rt = FALSE</code> did not properly cancel user settings. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>.</li>
+<li>Fixed a bug in <code>estimate_truncation</code> where phi was not initialised. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a>.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -242,7 +256,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ of cases. Only used if rt = NULL."><meta property="og:image" content="epiforecas
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@ of cases. Only used if <code>rt = NULL</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">backcalc_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"reports"</span>, prior_window <span class="op">=</span> <span class="fl">14</span>, rt_window <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">backcalc_opts</span><span class="op">(</span>prior <span class="op">=</span> <span class="st">"reports"</span>, prior_window <span class="op">=</span> <span class="fl">14</span>, rt_window <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,24 +83,31 @@ previous time step seeded for the first time step using mean shifted reported ca
 No prior and using infections are only supported when a Gaussian process is present. If observed
 data is not reliable then it a sensible first step is to explore increasing the <code>prior_window</code> with
 a sensible second step being to no longer use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></dd>
+
+
 <dt>prior_window</dt>
 <dd><p>Integer, defaults to 14 days. The mean centred smoothing window
 to apply to mean shifted reports (used as a prior during back calculation). 7 days is minimum recommended
 settings as this smooths day of the week effects but depending on the quality of the data and the
 amount of information users wish to use as a prior (higher values equalling a less informative prior).</p></dd>
+
+
 <dt>rt_window</dt>
 <dd><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
 Rt. This must be odd so that the central estimate is included.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of back calculation settings</p>
+    
+
+<p>A list of back calculation settings</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># default settings</span></span>
-<span class="r-in"><span class="fu">backcalc_opts</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># default settings</span></span></span>
+<span class="r-in"><span><span class="fu">backcalc_opts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prior</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "reports"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -124,7 +131,7 @@ Rt. This must be odd so that the central estimate is included.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

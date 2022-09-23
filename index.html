@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -119,13 +119,13 @@
 </h2>
 <p>Install the stable version of the package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span><span class="op">)</span></span></code></pre></div>
 <p>Install the stable development version of the package with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span>, repos <span class="op">=</span> <span class="st">"https://epiforecasts.r-universe.dev"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"EpiNow2"</span>, repos <span class="op">=</span> <span class="st">"https://epiforecasts.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
 <p>Install the unstable development version of the package with (few users should need to do this):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/EpiNow2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"epiforecasts/EpiNow2"</span><span class="op">)</span></span></code></pre></div>
 <p>Windows users will need a working installation of Rtools in order to build the package from source. See <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started#checking-the-c-toolchain" class="external-link">here</a> for a guide to installing Rtools for use with Stan (which is the statistical modelling platform used for the underlying model). For simple deployment/development a prebuilt docker image is also available (see documentation <a href="https://github.com/epiforecasts/EpiNow2/wiki/Docker" class="external-link">here</a>).</p>
 </div>
 <div class="section level2">
@@ -134,26 +134,26 @@
 <p><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> is designed to be used with a single function call or to be used in an ad-hoc fashion via individual function calls. The core functions of <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a> are the two single-call functions <a href="https://epiforecasts.io/EpiNow2/reference/epinow.html"><code>epinow()</code></a>, <a href="https://epiforecasts.io/EpiNow2/reference/regional_epinow.html"><code>regional_epinow()</code></a>, plus functions <a href="https://epiforecasts.io/EpiNow2/reference/estimate_infections.html"><code>estimate_infections()</code></a>, <a href="https://epiforecasts.io/EpiNow2/reference/forecast_infections.html"><code>forecast_infections()</code></a>, <a href="https://epiforecasts.io/EpiNow2/reference/estimate_secondary.html"><code>estimate_secondary()</code></a> and <a href="https://epiforecasts.io/EpiNow2/reference/estimate_truncation.html"><code>estimate_truncation()</code></a>. In the following section we give an overview of the simple use case for <code>epinow</code> and <code>regional_epinow</code>. <a href="https://epiforecasts.io/EpiNow2/reference/estimate_infections.html"><code>estimate_infections()</code></a> can be used on its own to infer the underlying infection case curve from reported cases and estimate Rt. Estimating the underlying infection case curve via back-calculation (and then calculating Rt) is substantially less computationally demanding than generating using default settings but may result in less reliable estimates of Rt. For more details on using each function see the <a href="https://epiforecasts.io/EpiNow2/reference/index.html">function documentation</a>.</p>
 <p>The first step to using the package is to load it as follows.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="reporting-delays-incubation-period-and-generation-time">Reporting delays, incubation period and generation time<a class="anchor" aria-label="anchor" href="#reporting-delays-incubation-period-and-generation-time"></a>
 </h3>
 <p>Distributions can either be fitted using package functionality or determined elsewhere and then defined with uncertainty for use in <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a>. When data is supplied a subsampled bootstrapped lognormal will be fit (to account for uncertainty in the observed data without being biased by changes in incidence). An arbitrary number of delay distributions are supported with the most common use case likely to be a incubation period followed by a reporting delay.</p>
 <p>For example if data on the delay between onset and infection was available we could fit a distribution to it with appropriate uncertainty as follows (note this is a synthetic example),</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_delay.html">estimate_delay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,
-                                  max_value <span class="op">=</span> <span class="fl">15</span>, bootstraps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_delay.html">estimate_delay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                                  max_value <span class="op">=</span> <span class="fl">15</span>, bootstraps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>If data was not available we could instead make an informed estimate of the likely delay (note this is a synthetic example and not applicable to real world use cases),</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  mean <span class="op">=</span> <span class="fu"><a href="reference/convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mean_sd <span class="op">=</span> <span class="fl">0.1</span>,
-  sd <span class="op">=</span> <span class="fu"><a href="reference/convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, sd_sd <span class="op">=</span> <span class="fl">0.1</span>,
-  max <span class="op">=</span> <span class="fl">10</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  mean <span class="op">=</span> <span class="fu"><a href="reference/convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  sd <span class="op">=</span> <span class="fu"><a href="reference/convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, sd_sd <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  max <span class="op">=</span> <span class="fl">10</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Here we define the incubation period and generation time based on literature estimates for Covid-19 (see <a href="https://github.com/epiforecasts/EpiNow2/tree/master/data-raw" class="external-link">here</a> for the code that generates these estimates). Note that these distributions may not be applicable for your use case.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span>
-<span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
+<span><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="epinow">
@@ -162,34 +162,34 @@
 <p>This function represents the core functionality of the package and includes results reporting, plotting and optional saving. It requires a data frame of cases by date of report and the distributions defined above. An additional forecasting module is supported via <code>EpiSoon</code> and companion packages (see documentation for an example).</p>
 <p>Load example case data from <a href="https://epiforecasts.io/EpiNow2/">EpiNow2</a>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">90</span><span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span>
-<span class="co">#&gt;          date confirm</span>
-<span class="co">#&gt; 1: 2020-02-22      14</span>
-<span class="co">#&gt; 2: 2020-02-23      62</span>
-<span class="co">#&gt; 3: 2020-02-24      53</span>
-<span class="co">#&gt; 4: 2020-02-25      97</span>
-<span class="co">#&gt; 5: 2020-02-26      93</span>
-<span class="co">#&gt; 6: 2020-02-27      78</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">90</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          date confirm</span></span>
+<span><span class="co">#&gt; 1: 2020-02-22      14</span></span>
+<span><span class="co">#&gt; 2: 2020-02-23      62</span></span>
+<span><span class="co">#&gt; 3: 2020-02-24      53</span></span>
+<span><span class="co">#&gt; 4: 2020-02-25      97</span></span>
+<span><span class="co">#&gt; 5: 2020-02-26      93</span></span>
+<span><span class="co">#&gt; 6: 2020-02-27      78</span></span></code></pre></div>
 <p>Estimate cases by date of infection, the time-varying reproduction number, the rate of growth and forecast these estimates into the future by 7 days. Summarise the posterior and return a summary table and plots for reporting purposes. If a <code>target_folder</code> is supplied results can be internally saved (with the option to also turn off explicit returning of results). <em>Note: For real use cases more samples and a longer warm up may be needed</em>. See fitting progress by setting <code>verbose = TRUE</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/epinow.html">epinow</a></span><span class="op">(</span>reported_cases <span class="op">=</span> <span class="va">reported_cases</span>,
-                    generation_time <span class="op">=</span> <span class="va">generation_time</span>,
-                    delays <span class="op">=</span> <span class="fu"><a href="reference/delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,
-                    rt <span class="op">=</span> <span class="fu"><a href="reference/rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,
-                    stan <span class="op">=</span> <span class="fu"><a href="reference/stan_opts.html">stan_opts</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; WARN [2021-06-03 17:34:10] epinow: There were 12 divergent transitions after warmup. See</span>
-<span class="co">#&gt; http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="co">#&gt; to find out why this is a problem and how to eliminate them. - </span>
-<span class="co">#&gt; WARN [2021-06-03 17:34:10] epinow: Examine the pairs() plot to diagnose sampling problems</span>
-<span class="co">#&gt;  -</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span>
-<span class="co">#&gt; [1] "estimates"                "estimated_reported_cases"</span>
-<span class="co">#&gt; [3] "summary"                  "plots"                   </span>
-<span class="co">#&gt; [5] "timing"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/epinow.html">epinow</a></span><span class="op">(</span>reported_cases <span class="op">=</span> <span class="va">reported_cases</span>,</span>
+<span>                    generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span>
+<span>                    delays <span class="op">=</span> <span class="fu"><a href="reference/delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
+<span>                    rt <span class="op">=</span> <span class="fu"><a href="reference/rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    stan <span class="op">=</span> <span class="fu"><a href="reference/stan_opts.html">stan_opts</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; WARN [2021-06-03 17:34:10] epinow: There were 12 divergent transitions after warmup. See</span></span>
+<span><span class="co">#&gt; http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span></span>
+<span><span class="co">#&gt; to find out why this is a problem and how to eliminate them. - </span></span>
+<span><span class="co">#&gt; WARN [2021-06-03 17:34:10] epinow: Examine the pairs() plot to diagnose sampling problems</span></span>
+<span><span class="co">#&gt;  -</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "estimates"                "estimated_reported_cases"</span></span>
+<span><span class="co">#&gt; [3] "summary"                  "plots"                   </span></span>
+<span><span class="co">#&gt; [5] "timing"</span></span></code></pre></div>
 <p>Both summary measures and posterior samples are returned for all parameters in an easily explored format which can be accessed using <code>summary</code>. The default is to return a summary table of estimates for key parameters at the latest date partially supported by data.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">measure</th>
@@ -220,41 +220,41 @@
 </table>
 <p>Summarised parameter estimates can also easily be returned, either filtered for a single parameter or for all parameters.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;          date variable strat     type   median     mean         sd lower_90</span>
-<span class="co">#&gt; 1: 2020-02-22        R  &lt;NA&gt; estimate 2.133093 2.137658 0.13137620 1.926917</span>
-<span class="co">#&gt; 2: 2020-02-23        R  &lt;NA&gt; estimate 2.109117 2.112571 0.11083424 1.931201</span>
-<span class="co">#&gt; 3: 2020-02-24        R  &lt;NA&gt; estimate 2.082687 2.085759 0.09354013 1.934617</span>
-<span class="co">#&gt; 4: 2020-02-25        R  &lt;NA&gt; estimate 2.055390 2.057204 0.07947132 1.931348</span>
-<span class="co">#&gt; 5: 2020-02-26        R  &lt;NA&gt; estimate 2.026786 2.026924 0.06851200 1.917109</span>
-<span class="co">#&gt; 6: 2020-02-27        R  &lt;NA&gt; estimate 1.994271 1.994970 0.06041157 1.898286</span>
-<span class="co">#&gt;    lower_50 lower_20 upper_20 upper_50 upper_90</span>
-<span class="co">#&gt; 1: 2.049114 2.101994 2.163746 2.223936 2.357658</span>
-<span class="co">#&gt; 2: 2.036474 2.081873 2.134224 2.187256 2.297180</span>
-<span class="co">#&gt; 3: 2.020257 2.058613 2.104525 2.152345 2.238099</span>
-<span class="co">#&gt; 4: 2.002585 2.034048 2.076017 2.112149 2.189332</span>
-<span class="co">#&gt; 5: 1.981163 2.006801 2.043096 2.073449 2.140342</span>
-<span class="co">#&gt; 6: 1.954004 1.978110 2.009518 2.035002 2.094222</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"R"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          date variable strat     type   median     mean         sd lower_90</span></span>
+<span><span class="co">#&gt; 1: 2020-02-22        R  &lt;NA&gt; estimate 2.133093 2.137658 0.13137620 1.926917</span></span>
+<span><span class="co">#&gt; 2: 2020-02-23        R  &lt;NA&gt; estimate 2.109117 2.112571 0.11083424 1.931201</span></span>
+<span><span class="co">#&gt; 3: 2020-02-24        R  &lt;NA&gt; estimate 2.082687 2.085759 0.09354013 1.934617</span></span>
+<span><span class="co">#&gt; 4: 2020-02-25        R  &lt;NA&gt; estimate 2.055390 2.057204 0.07947132 1.931348</span></span>
+<span><span class="co">#&gt; 5: 2020-02-26        R  &lt;NA&gt; estimate 2.026786 2.026924 0.06851200 1.917109</span></span>
+<span><span class="co">#&gt; 6: 2020-02-27        R  &lt;NA&gt; estimate 1.994271 1.994970 0.06041157 1.898286</span></span>
+<span><span class="co">#&gt;    lower_50 lower_20 upper_20 upper_50 upper_90</span></span>
+<span><span class="co">#&gt; 1: 2.049114 2.101994 2.163746 2.223936 2.357658</span></span>
+<span><span class="co">#&gt; 2: 2.036474 2.081873 2.134224 2.187256 2.297180</span></span>
+<span><span class="co">#&gt; 3: 2.020257 2.058613 2.104525 2.152345 2.238099</span></span>
+<span><span class="co">#&gt; 4: 2.002585 2.034048 2.076017 2.112149 2.189332</span></span>
+<span><span class="co">#&gt; 5: 1.981163 2.006801 2.043096 2.073449 2.140342</span></span>
+<span><span class="co">#&gt; 6: 1.954004 1.978110 2.009518 2.035002 2.094222</span></span></code></pre></div>
 <p>Reported cases are returned in a separate data frame in order to streamline the reporting of forecasts and for model evaluation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span>, output <span class="op">=</span> <span class="st">"estimated_reported_cases"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;          date  type median     mean       sd lower_90 lower_50 lower_20</span>
-<span class="co">#&gt; 1: 2020-02-22 gp_rt     52  52.4710 13.62152       32    43.00       48</span>
-<span class="co">#&gt; 2: 2020-02-23 gp_rt     66  67.3205 16.38692       43    56.00       62</span>
-<span class="co">#&gt; 3: 2020-02-24 gp_rt     72  72.9440 17.46079       47    60.00       68</span>
-<span class="co">#&gt; 4: 2020-02-25 gp_rt     72  74.3385 17.97564       47    62.00       69</span>
-<span class="co">#&gt; 5: 2020-02-26 gp_rt     95  96.7315 23.17449       61    81.00       90</span>
-<span class="co">#&gt; 6: 2020-02-27 gp_rt    128 129.6315 29.29839       85   108.75      121</span>
-<span class="co">#&gt;    upper_20 upper_50 upper_90</span>
-<span class="co">#&gt; 1:       55       61       76</span>
-<span class="co">#&gt; 2:       70       77       97</span>
-<span class="co">#&gt; 3:       76       83      104</span>
-<span class="co">#&gt; 4:       77       85      106</span>
-<span class="co">#&gt; 5:      101      111      136</span>
-<span class="co">#&gt; 6:      135      148      181</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">estimates</span>, output <span class="op">=</span> <span class="st">"estimated_reported_cases"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          date  type median     mean       sd lower_90 lower_50 lower_20</span></span>
+<span><span class="co">#&gt; 1: 2020-02-22 gp_rt     52  52.4710 13.62152       32    43.00       48</span></span>
+<span><span class="co">#&gt; 2: 2020-02-23 gp_rt     66  67.3205 16.38692       43    56.00       62</span></span>
+<span><span class="co">#&gt; 3: 2020-02-24 gp_rt     72  72.9440 17.46079       47    60.00       68</span></span>
+<span><span class="co">#&gt; 4: 2020-02-25 gp_rt     72  74.3385 17.97564       47    62.00       69</span></span>
+<span><span class="co">#&gt; 5: 2020-02-26 gp_rt     95  96.7315 23.17449       61    81.00       90</span></span>
+<span><span class="co">#&gt; 6: 2020-02-27 gp_rt    128 129.6315 29.29839       85   108.75      121</span></span>
+<span><span class="co">#&gt;    upper_20 upper_50 upper_90</span></span>
+<span><span class="co">#&gt; 1:       55       61       76</span></span>
+<span><span class="co">#&gt; 2:       70       77       97</span></span>
+<span><span class="co">#&gt; 3:       76       83      104</span></span>
+<span><span class="co">#&gt; 4:       77       85      106</span></span>
+<span><span class="co">#&gt; 5:      101      111      136</span></span>
+<span><span class="co">#&gt; 6:      135      148      181</span></span></code></pre></div>
 <p>A range of plots are returned (with the single summary plot shown below). These plots can also be generated using the following <code>plot</code> method.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-14-1.png"><!-- --></p>
 </div>
 <div class="section level3">
@@ -264,41 +264,41 @@
 <p>The <code><a href="reference/regional_epinow.html">regional_epinow()</a></code> function runs the <code><a href="reference/epinow.html">epinow()</a></code> function across multiple regions in an efficient manner.</p>
 <p>Define cases in multiple regions delineated by the region variable.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,
-   <span class="va">reported_cases</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"realland"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span>
-<span class="co">#&gt;          date confirm   region</span>
-<span class="co">#&gt; 1: 2020-02-22      14 testland</span>
-<span class="co">#&gt; 2: 2020-02-23      62 testland</span>
-<span class="co">#&gt; 3: 2020-02-24      53 testland</span>
-<span class="co">#&gt; 4: 2020-02-25      97 testland</span>
-<span class="co">#&gt; 5: 2020-02-26      93 testland</span>
-<span class="co">#&gt; 6: 2020-02-27      78 testland</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html" class="external-link">rbindlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>   <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"testland"</span><span class="op">]</span>,</span>
+<span>   <span class="va">reported_cases</span><span class="op">[</span>, <span class="va">region</span> <span class="op">:=</span> <span class="st">"realland"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          date confirm   region</span></span>
+<span><span class="co">#&gt; 1: 2020-02-22      14 testland</span></span>
+<span><span class="co">#&gt; 2: 2020-02-23      62 testland</span></span>
+<span><span class="co">#&gt; 3: 2020-02-24      53 testland</span></span>
+<span><span class="co">#&gt; 4: 2020-02-25      97 testland</span></span>
+<span><span class="co">#&gt; 5: 2020-02-26      93 testland</span></span>
+<span><span class="co">#&gt; 6: 2020-02-27      78 testland</span></span></code></pre></div>
 <p>Calling <code><a href="reference/regional_epinow.html">regional_epinow()</a></code> runs the <code><a href="reference/epinow.html">epinow()</a></code> on each region in turn (or in parallel depending on the settings used).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/regional_epinow.html">regional_epinow</a></span><span class="op">(</span>reported_cases <span class="op">=</span> <span class="va">reported_cases</span>,
-                             generation_time <span class="op">=</span> <span class="va">generation_time</span>,
-                             delays <span class="op">=</span> <span class="fu"><a href="reference/delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,
-                             rt <span class="op">=</span> <span class="fu"><a href="reference/rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,
-                             stan <span class="op">=</span> <span class="fu"><a href="reference/stan_opts.html">stan_opts</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; INFO [2021-06-03 17:34:17] Producing following optional outputs: regions, summary, samples, plots, latest</span>
-<span class="co">#&gt; INFO [2021-06-03 17:34:17] Reporting estimates using data up to: 2020-05-21</span>
-<span class="co">#&gt; INFO [2021-06-03 17:34:17] No target directory specified so returning output</span>
-<span class="co">#&gt; INFO [2021-06-03 17:34:17] Producing estimates for: testland, realland</span>
-<span class="co">#&gt; INFO [2021-06-03 17:34:17] Regions excluded: none</span>
-<span class="co">#&gt; INFO [2021-06-03 17:38:59] Completed estimates for: testland</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:57] Completed estimates for: realland</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:57] Completed regional estimates</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:57] Regions with estimates: 2</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:57] Regions with runtime errors: 0</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:58] Producing summary</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:58] No summary directory specified so returning summary output</span>
-<span class="co">#&gt; INFO [2021-06-03 17:43:58] No target directory specified so returning timings</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">estimates</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/regional_epinow.html">regional_epinow</a></span><span class="op">(</span>reported_cases <span class="op">=</span> <span class="va">reported_cases</span>,</span>
+<span>                             generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span>
+<span>                             delays <span class="op">=</span> <span class="fu"><a href="reference/delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
+<span>                             rt <span class="op">=</span> <span class="fu"><a href="reference/rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                             stan <span class="op">=</span> <span class="fu"><a href="reference/stan_opts.html">stan_opts</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:34:17] Producing following optional outputs: regions, summary, samples, plots, latest</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:34:17] Reporting estimates using data up to: 2020-05-21</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:34:17] No target directory specified so returning output</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:34:17] Producing estimates for: testland, realland</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:34:17] Regions excluded: none</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:38:59] Completed estimates for: testland</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:57] Completed estimates for: realland</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:57] Completed regional estimates</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:57] Regions with estimates: 2</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:57] Regions with runtime errors: 0</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:58] Producing summary</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:58] No summary directory specified so returning summary output</span></span>
+<span><span class="co">#&gt; INFO [2021-06-03 17:43:58] No target directory specified so returning timings</span></span></code></pre></div>
 <p>Results from each region are stored in a <code>regional</code> list with across region summary measures and plots stored in a <code>summary</code> list. All results can be set to be internally saved by setting the <code>target_folder</code> and <code>summary_dir</code> arguments. Each region can be estimated in parallel using the <a href="https://future.futureverse.org" class="external-link">future</a> package (when in most scenarios <code>cores</code> should be set to 1). For routine use each MCMC chain can also be run in parallel (with <code>future</code> = TRUE) with a time out (<code>max_execution_time</code>) allowing for partial results to be returned if a subset of chains is running longer than expected. See the documentation for the <a href="https://future.futureverse.org" class="external-link">future</a> package for details on nested futures.</p>
 <p>Summary measures that are returned include a table formatted for reporting (along with raw results for further processing). Futures updated will extend the S3 methods used above to smooth access to this output.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">summarised_results</span><span class="op">$</span><span class="va">table</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">estimates</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">summarised_results</span><span class="op">$</span><span class="va">table</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -337,7 +337,7 @@
 </table>
 <p>A range of plots are again returned (with the single summary plot shown below).</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">estimates</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">summary_plot</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">estimates</span><span class="op">$</span><span class="va">summary</span><span class="op">$</span><span class="va">summary_plot</span></span></code></pre></div>
 <p><img src="reference/figures/unnamed-chunk-18-1.png"><!-- --></p>
 </div>
 <div class="section level3">
@@ -405,15 +405,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://github.com/epiforecasts/EpiNow2/actions" class="external-link"><img src="https://github.com/epiforecasts/EpiNow2/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/epiforecasts/EpiNow2?branch=master" class="external-link"><img src="https://codecov.io/gh/epiforecasts/EpiNow2/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=EpiNow2" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/EpiNow2?color=ff69b4" alt="metacran downloads"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -426,7 +418,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

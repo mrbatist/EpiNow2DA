@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -79,25 +79,17 @@
         </td>
         <td><p>Summary output from epinow</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="estimate-parameters">Estimate Parameters <a href="#estimate-parameters" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Function to estimate parameters of interest.</p>
+          <h2 id="estimate-simulate-and-forecast-parameters">Estimate, Simulate, and Forecast Parameters <a href="#estimate-simulate-and-forecast-parameters" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Function to estimate, simulate and forecast parameters of interest.</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="estimate_infections.html">estimate_infections()</a></code> </p>
         </td>
         <td><p>Estimate Infections, the Time-Varying Reproduction Number and the Rate of Growth</p></td>
       </tr><tr><td>
-          <p><code><a href="forecast_infections.html">forecast_infections()</a></code> </p>
+          <p><code><a href="simulate_infections.html">simulate_infections()</a></code> </p>
         </td>
-        <td><p>Forecast Infections and the Time-Varying Reproduction Number</p></td>
-      </tr><tr><td>
-          <p><code><a href="estimate_delay.html">estimate_delay()</a></code> </p>
-        </td>
-        <td><p>Estimate a Delay Distribution</p></td>
-      </tr><tr><td>
-          <p><code><a href="estimate_truncation.html">estimate_truncation()</a></code> </p>
-        </td>
-        <td><p>Estimate Truncation of Observed Data</p></td>
+        <td><p>Simulate infections using a given trajectory of the time-varying reproduction number</p></td>
       </tr><tr><td>
           <p><code><a href="estimate_secondary.html">estimate_secondary()</a></code> </p>
         </td>
@@ -106,6 +98,14 @@
           <p><code><a href="forecast_secondary.html">forecast_secondary()</a></code> </p>
         </td>
         <td><p>Forecast Secondary Observations Given a Fit from estimate_secondary</p></td>
+      </tr><tr><td>
+          <p><code><a href="estimate_delay.html">estimate_delay()</a></code> </p>
+        </td>
+        <td><p>Estimate a Delay Distribution</p></td>
+      </tr><tr><td>
+          <p><code><a href="estimate_truncation.html">estimate_truncation()</a></code> </p>
+        </td>
+        <td><p>Estimate Truncation of Observed Data</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="internal-epinow-functions">Internal epinow Functions <a href="#internal-epinow-functions" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Functions used internally by epinow</p>
@@ -118,10 +118,6 @@
           <p><code><a href="save_estimate_infections.html">save_estimate_infections()</a></code> </p>
         </td>
         <td><p>Save Estimated Infections</p></td>
-      </tr><tr><td>
-          <p><code><a href="save_forecast_infections.html">save_forecast_infections()</a></code> </p>
-        </td>
-        <td><p>Save Forecast Infections</p></td>
       </tr><tr><td>
           <p><code><a href="save_input.html">save_input()</a></code> </p>
         </td>
@@ -427,14 +423,6 @@
           <p class="section-desc"></p><p>Functions to help with simulating data or mapping to reported cases</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="simulate_infections.html">simulate_infections()</a></code> </p>
-        </td>
-        <td><p>Simulate infections using a given trajectory of the time-varying reproduction number</p></td>
-      </tr><tr><td>
-          <p><code><a href="simulate_cases.html">simulate_cases()</a></code> </p>
-        </td>
-        <td><p>Simulate Cases by Date of Infection, Onset and Report</p></td>
-      </tr><tr><td>
           <p><code><a href="adjust_infection_to_report.html">adjust_infection_to_report()</a></code> </p>
         </td>
         <td><p>Adjust from Case Counts by Infection Date to Date of Report</p></td>
@@ -531,22 +519,6 @@
         </td>
         <td><p>Create Clean Reported Cases</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="map-results">Map results <a href="#map-results" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Optional mapping functions (requires additional dependencies)</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="global_map.html">global_map()</a></code> </p>
-        </td>
-        <td><p>Generate a global map for a single variable.</p></td>
-      </tr><tr><td>
-          <p><code><a href="country_map.html">country_map()</a></code> </p>
-        </td>
-        <td><p>Generate a country map for a single variable.</p></td>
-      </tr><tr><td>
-          <p><code><a href="theme_map.html">theme_map()</a></code> </p>
-        </td>
-        <td><p>Custom Map Theme</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="setup-utilities">Setup Utilities <a href="#setup-utilities" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Function used for setting up functionality</p>
         </th>
@@ -623,7 +595,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -23,7 +23,7 @@ currently supported options."><meta property="og:image" content="epiforecasts.io
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@ currently supported options.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">secondary_opts</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"incidence"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">secondary_opts</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"incidence"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -91,14 +91,22 @@ disease predicted by reported cases of that disease (or estimated infections).</
 currently observed primary reports minus a convolution of secondary reports. An example
 application is hospital bed usage predicted by hospital admissions.</p></li>
 </ul></dd>
+
+
 <dt>...</dt>
 <dd><p>Overwrite options defined by type. See the returned values for all
 options that can be passed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of binary options summarising secondary model used in <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.
-Options returned are <code>cumulative</code> (should the secondary report be cumulative), <code>historic</code>(should a convolution of primary reported cases be used to predict secondary reported
+    
+
+<p>A list of binary options summarising secondary model used in <code><a href="estimate_secondary.html">estimate_secondary()</a></code>.
+Options returned are <code>cumulative</code> (should the secondary report be cumulative), <code>historic</code></p>
+
+
+<p>(should a convolution of primary reported cases be used to predict secondary reported
 cases), <code>primary_hist_additive</code> (should the historic convolution of primary reported cases
 be additive or subtractive), <code>current</code> (should currently observed primary reported cases
 contribute to current secondary reported cases), <code>primary_current_additive</code> (should current
@@ -111,8 +119,8 @@ primary reported cases be additive or subtractive).</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># incidence model</span></span>
-<span class="r-in"><span class="fu">secondary_opts</span><span class="op">(</span><span class="st">"incidence"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># incidence model</span></span></span>
+<span class="r-in"><span><span class="fu">secondary_opts</span><span class="op">(</span><span class="st">"incidence"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cumulative</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -128,9 +136,9 @@ primary reported cases be additive or subtractive).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $primary_current_additive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># prevalence model</span></span>
-<span class="r-in"><span class="fu">secondary_opts</span><span class="op">(</span><span class="st">"prevalence"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># prevalence model</span></span></span>
+<span class="r-in"><span><span class="fu">secondary_opts</span><span class="op">(</span><span class="st">"prevalence"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cumulative</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -160,7 +168,7 @@ primary reported cases be additive or subtractive).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

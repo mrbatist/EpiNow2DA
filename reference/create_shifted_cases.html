@@ -21,7 +21,7 @@ on which the back calculation method (see backcalc_opts()) is based."><meta prop
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -73,7 +73,7 @@ on which the back calculation method (see <code><a href="backcalc_opts.html">bac
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">shift</span>, <span class="va">smoothing_window</span>, <span class="va">horizon</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">shift</span>, <span class="va">smoothing_window</span>, <span class="va">horizon</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -81,22 +81,31 @@ on which the back calculation method (see <code><a href="backcalc_opts.html">bac
     <dl><dt>reported_cases</dt>
 <dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
 in date format.</p></dd>
+
+
 <dt>shift</dt>
 <dd><p>Numeric, mean delay shift to apply.</p></dd>
+
+
 <dt>smoothing_window</dt>
 <dd><p>Numeric, the rolling average smoothing window
 to apply. Must be odd in order to be defined as a centred average.</p></dd>
+
+
 <dt>horizon</dt>
 <dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame for shifted reported cases</p>
+    
+
+<p>A data frame for shifted reported cases</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">example_confirmed</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">7</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">create_shifted_cases</span><span class="op">(</span><span class="va">example_confirmed</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-03-07    3028</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-03-08    3407</span>
@@ -123,7 +132,7 @@ to apply. Must be odd in order to be defined as a centred average.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

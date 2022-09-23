@@ -19,7 +19,7 @@ internal usage"><meta property="og:image" content="epiforecasts.io/EpiNow2/refer
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,55 +69,64 @@ internal usage</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">match_output_arguments</span><span class="op">(</span>
-  input_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,
-  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,
-  logger <span class="op">=</span> <span class="cn">NULL</span>,
-  level <span class="op">=</span> <span class="st">"info"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">match_output_arguments</span><span class="op">(</span></span>
+<span>  input_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  logger <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  level <span class="op">=</span> <span class="st">"info"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>input_args</dt>
 <dd><p>A character vector of input arguments (can be partial).</p></dd>
+
+
 <dt>supported_args</dt>
 <dd><p>A character vector of supported output arguments.</p></dd>
+
+
 <dt>logger</dt>
 <dd><p>A character vector indicating the logger to target messages at. Defaults
 to no logging.</p></dd>
+
+
 <dt>level</dt>
 <dd><p>Character string defaulting to "info". Logging level see documentation
 of futile.logger for details. Supported options are "info" and "debug"</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A logical vector of named output arguments</p>
+    
+
+<p>A logical vector of named output arguments</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># select nothing</span></span>
-<span class="r-in"><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span>supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># select nothing</span></span></span>
+<span class="r-in"><span><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span>supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fit   plots samples </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   FALSE   FALSE   FALSE </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># select just plots</span></span>
-<span class="r-in"><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="st">"plots"</span>, supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># select just plots</span></span></span>
+<span class="r-in"><span><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="st">"plots"</span>, supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fit   plots samples </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   FALSE    TRUE   FALSE </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># select plots and samples</span></span>
-<span class="r-in"><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span>,</span>
-<span class="r-in">  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># select plots and samples</span></span></span>
+<span class="r-in"><span><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fit   plots samples </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   FALSE    TRUE    TRUE </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># lazily select arguments</span></span>
-<span class="r-in"><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="st">"p"</span>,</span>
-<span class="r-in">  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># lazily select arguments</span></span></span>
+<span class="r-in"><span><span class="fu">EpiNow2</span><span class="fu">:::</span><span class="fu">match_output_arguments</span><span class="op">(</span><span class="st">"p"</span>,</span></span>
+<span class="r-in"><span>  supported_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"plots"</span>, <span class="st">"samples"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     fit   plots samples </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   FALSE    TRUE    TRUE </span>
 </code></pre></div>
@@ -134,7 +143,7 @@ of futile.logger for details. Supported options are "info" and "debug"</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ rstan::sampling. Custom settings can be supplied which override the defaults."><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,18 +69,18 @@ Defines a list specifying the arguments passed to
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rstan_sampling_opts</span><span class="op">(</span>
-  cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">1L</span><span class="op">)</span>,
-  warmup <span class="op">=</span> <span class="fl">250</span>,
-  samples <span class="op">=</span> <span class="fl">2000</span>,
-  chains <span class="op">=</span> <span class="fl">4</span>,
-  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  save_warmup <span class="op">=</span> <span class="cn">FALSE</span>,
-  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1e+08</span><span class="op">)</span><span class="op">)</span>,
-  future <span class="op">=</span> <span class="cn">FALSE</span>,
-  max_execution_time <span class="op">=</span> <span class="cn">Inf</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rstan_sampling_opts</span><span class="op">(</span></span>
+<span>  cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"mc.cores"</span>, <span class="fl">1L</span><span class="op">)</span>,</span>
+<span>  warmup <span class="op">=</span> <span class="fl">250</span>,</span>
+<span>  samples <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  chains <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  save_warmup <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1e+08</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  future <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  max_execution_time <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,42 +89,65 @@ Defines a list specifying the arguments passed to
 <dd><p>Number of cores to use when executing the chains in parallel,
 which defaults to 1 but it is recommended to set the mc.cores option to be as
 many processors as the hardware and RAM allow (up to the number of chains).</p></dd>
+
+
 <dt>warmup</dt>
 <dd><p>Numeric, defaults to 250. Number of warmup samples per chain.</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Numeric, default 2000. Overall number of posterior samples.
 When using multiple chains iterations per chain is samples / chains.</p></dd>
+
+
 <dt>chains</dt>
 <dd><p>Numeric, defaults to 4. Number of MCMC chains to use.</p></dd>
+
+
 <dt>control</dt>
 <dd><p>List, defaults to empty. control parameters to pass to underlying
 <code>rstan</code> function. By default <code>adapt_delta = 0.95</code> and <code>max_treedepth = 15</code>
 though these settings can be overwritten.</p></dd>
+
+
 <dt>save_warmup</dt>
 <dd><p>Logical, defaults to FALSE. Should warmup progress be saved.</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>Numeric, defaults uniform random number between 1 and 1e8. Seed of
 sampling process.</p></dd>
+
+
 <dt>future</dt>
 <dd><p>Logical, defaults to <code>FALSE</code>. Should stan chains be run in parallel
 using <code>future</code>. This allows users to have chains fail gracefully (i.e when combined with
 <code>max_execution_time</code>). Should be combined with a call to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">future::plan</a></code></p></dd>
+
+
 <dt>max_execution_time</dt>
 <dd><p>Numeric, defaults to Inf (seconds). If set will kill off
 processing of each chain if not finished within the specified timeout. When more than 2 chains
 finish successfully estimates will still be returned. If less than 2 chains return within the
 allowed time then estimation will fail with an informative error.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional parameters to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of arguments to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code></p>
+    
+
+<p>A list of arguments to pass to <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code></p>
+
+
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">rstan_sampling_opts</span><span class="op">(</span>samples <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rstan_sampling_opts</span><span class="op">(</span>samples <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cores</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -171,7 +194,7 @@ allowed time then estimation will fail with an informative error.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

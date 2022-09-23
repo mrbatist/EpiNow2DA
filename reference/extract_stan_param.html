@@ -20,7 +20,7 @@ EpiNow2."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/f
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -71,29 +71,38 @@ Extracts summarised parameter posteriors from a <code>stanfit</code> object usin
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">extract_stan_param</span><span class="op">(</span>
-  <span class="va">fit</span>,
-  params <span class="op">=</span> <span class="cn">NULL</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,
-  var_names <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_stan_param</span><span class="op">(</span></span>
+<span>  <span class="va">fit</span>,</span>
+<span>  params <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>  var_names <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>fit</dt>
 <dd><p>A <code>stanfit</code> object</p></dd>
+
+
 <dt>params</dt>
 <dd><p>A character vector of parameters to extract. Defaults to all parameters.</p></dd>
+
+
 <dt>CrIs</dt>
 <dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+
+
 <dt>var_names</dt>
 <dd><p>Logical defaults to <code>FALSE</code>. Should variables be named. Automatically set
 to TRUE if multiple parameters are to be extracted.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.table</code> summarising parameter posteriors. Contains a following variables:
+    
+
+<p>A <code>data.table</code> summarising parameter posteriors. Contains a following variables:
 <code>variable</code>, <code>mean</code>, <code>mean_se</code>, <code>sd</code>, <code>median</code>, and <code>lower_</code>, <code>upper_</code> followed by
 credible interval labels indicating the credible intervals present.</p>
     </div>
@@ -110,7 +119,7 @@ credible interval labels indicating the credible intervals present.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

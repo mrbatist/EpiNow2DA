@@ -19,7 +19,7 @@ dates where appropriate."><meta property="og:image" content="epiforecasts.io/Epi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,36 +69,49 @@ dates where appropriate.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">extract_parameter_samples</span><span class="op">(</span>
-  <span class="va">stan_fit</span>,
-  <span class="va">data</span>,
-  <span class="va">reported_dates</span>,
-  <span class="va">reported_inf_dates</span>,
-  drop_length_1 <span class="op">=</span> <span class="cn">FALSE</span>,
-  merge <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_parameter_samples</span><span class="op">(</span></span>
+<span>  <span class="va">stan_fit</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">reported_dates</span>,</span>
+<span>  <span class="va">reported_inf_dates</span>,</span>
+<span>  drop_length_1 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  merge <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>stan_fit</dt>
 <dd><p>A fit Stan model as returned by <code>rstan:sampling</code></p></dd>
+
+
 <dt>data</dt>
 <dd><p>A list of the data supplied to the <code><a href="https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html" class="external-link">rstan::sampling</a></code> call.</p></dd>
+
+
 <dt>reported_dates</dt>
 <dd><p>A vector of dates to report estimates for.</p></dd>
+
+
 <dt>reported_inf_dates</dt>
 <dd><p>A vector of dates to report infection estimates for.</p></dd>
+
+
 <dt>drop_length_1</dt>
 <dd><p>Logical; whether the first dimension should be dropped if it
 is if length 1; this is necessary when processing simulation results</p></dd>
+
+
 <dt>merge</dt>
 <dd><p>if TRUE, merge samples and data so that parameters can be
 extracted from data</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of dataframes each containing the posterior of a parameter</p>
+    
+
+<p>A list of dataframes each containing the posterior of a parameter</p>
     </div>
 
   </div>
@@ -113,7 +126,7 @@ extracted from data</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -20,7 +20,7 @@ for details."><meta property="og:image" content="epiforecasts.io/EpiNow2/referen
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@ for details.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_clean_reported_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">horizon</span>, zero_threshold <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_clean_reported_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">horizon</span>, zero_threshold <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,17 +79,24 @@ for details.</p>
     <dl><dt>reported_cases</dt>
 <dd><p>A data frame of confirmed cases (confirm) by date (date). confirm must be integer and date must be
 in date format.</p></dd>
+
+
 <dt>horizon</dt>
 <dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
+
+
 <dt>zero_threshold</dt>
 <dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
 cases are meaningful by using a threshold of 50 cases on average over the last 7 days. If the average is
 above this threshold then the zero is replaced with the backwards looking rolling average. If set to infinity
 then no changes are made.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A cleaned data frame of reported cases</p>
+    
+
+<p>A cleaned data frame of reported cases</p>
     </div>
 
   </div>
@@ -104,7 +111,7 @@ then no changes are made.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

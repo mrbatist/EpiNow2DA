@@ -19,7 +19,7 @@ in later releases by functionality drawing on the stan implementation."><meta pr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">EpiNow2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3.2000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
       </span>
     </div>
 
@@ -69,75 +69,88 @@ in later releases by functionality drawing on the <code>stan</code> implementati
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">report_cases</span><span class="op">(</span>
-  <span class="va">case_estimates</span>,
-  case_forecast <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">delays</span>,
-  type <span class="op">=</span> <span class="st">"sample"</span>,
-  <span class="va">reporting_effect</span>,
-  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report_cases</span><span class="op">(</span></span>
+<span>  <span class="va">case_estimates</span>,</span>
+<span>  case_forecast <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">delays</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"sample"</span>,</span>
+<span>  <span class="va">reporting_effect</span>,</span>
+<span>  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>case_estimates</dt>
 <dd><p>A data.table of case estimates with the following variables: date, sample, cases</p></dd>
+
+
 <dt>case_forecast</dt>
 <dd><p>A data.table of case forecasts with the following variables: date, sample, cases. If not supplied the
 default is not to incorporate forecasts.</p></dd>
+
+
 <dt>delays</dt>
 <dd><p>A call to <code><a href="delay_opts.html">delay_opts()</a></code> defining delay distributions and options. See the documentation of <code><a href="delay_opts.html">delay_opts()</a></code>
 and the examples below for details.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character string indicating the method to use to transform counts. Supports either "sample"
 which approximates sampling or "median" would shift by the median of the distribution.</p></dd>
+
+
 <dt>reporting_effect</dt>
 <dd><p>A <code>data.table</code> giving the weekly reporting effect with the following variables:
 <code>sample</code> (must be the same as in <code>nowcast</code>), <code>effect</code> (numeric scaling factor for each weekday), <code>day</code>
 (numeric 1 - 7 (1 = Monday and 7 = Sunday)). If not supplied then no weekly reporting effect is assumed.</p></dd>
+
+
 <dt>CrIs</dt>
 <dd><p>Numeric vector of credible intervals to calculate.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of <code>data.table</code>s. The first entry contains the following variables <code>sample</code>, <code>date</code> and <code>cases</code> with the second
+    
+
+<p>A list of <code>data.table</code>s. The first entry contains the following variables <code>sample</code>, <code>date</code> and <code>cases</code> with the second
 being summarised across samples.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># define example cases</span></span>
-<span class="r-in"><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">40</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># set up example delays</span></span>
-<span class="r-in"><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="bootstrapped_dist_fit.html">bootstrapped_dist_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># run model</span></span>
-<span class="r-in"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="estimate_infections.html">estimate_infections</a></span><span class="op">(</span><span class="va">cases</span>,</span>
-<span class="r-in">  samples <span class="op">=</span> <span class="fl">100</span>,</span>
-<span class="r-in">  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span>
-<span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
-<span class="r-in">  rt <span class="op">=</span> <span class="cn">NULL</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># define example cases</span></span></span>
+<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">40</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># set up example delays</span></span></span>
+<span class="r-in"><span><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="bootstrapped_dist_fit.html">bootstrapped_dist_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">rlnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, max_value <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># run model</span></span></span>
+<span class="r-in"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="estimate_infections.html">estimate_infections</a></span><span class="op">(</span><span class="va">cases</span>,</span></span>
+<span class="r-in"><span>  samples <span class="op">=</span> <span class="fl">100</span>,</span></span>
+<span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  rt <span class="op">=</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in estimate_infections(cases, samples = 100, generation_time = generation_time,     delays = delay_opts(incubation_period, reporting_delay),     rt = NULL):</span> unused argument (samples = 100)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="fu">report_cases</span><span class="op">(</span></span>
-<span class="r-in">  case_estimates <span class="op">=</span></span>
-<span class="r-in">    <span class="va">out</span><span class="op">$</span><span class="va">samples</span><span class="op">[</span><span class="va">variable</span> <span class="op">==</span> <span class="st">"infections"</span><span class="op">]</span><span class="op">[</span></span>
-<span class="r-in">      ,</span>
-<span class="r-in">      <span class="va">cases</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">]</span><span class="op">[</span>, <span class="va">value</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span>,</span>
-<span class="r-in">  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"sample"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="fu">report_cases</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  case_estimates <span class="op">=</span></span></span>
+<span class="r-in"><span>    <span class="va">out</span><span class="op">$</span><span class="va">samples</span><span class="op">[</span><span class="va">variable</span> <span class="op">==</span> <span class="st">"infections"</span><span class="op">]</span><span class="op">[</span></span></span>
+<span class="r-in"><span>      ,</span></span>
+<span class="r-in"><span>      <span class="va">cases</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">]</span><span class="op">[</span>, <span class="va">value</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"sample"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in unique(case_estimates$sample):</span> object 'out' not found</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in print(reported_cases):</span> object 'reported_cases' not found</span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -152,7 +165,7 @@ being summarised across samples.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
