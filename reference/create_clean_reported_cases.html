@@ -71,7 +71,12 @@ for details.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_clean_reported_cases</span><span class="op">(</span><span class="va">reported_cases</span>, <span class="va">horizon</span>, zero_threshold <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_clean_reported_cases</span><span class="op">(</span></span>
+<span>  <span class="va">reported_cases</span>,</span>
+<span>  <span class="va">horizon</span>,</span>
+<span>  filter_leading_zeros <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  zero_threshold <span class="op">=</span> <span class="cn">Inf</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -85,11 +90,17 @@ in date format.</p></dd>
 <dd><p>Numeric, defaults to 7. Number of days into the future to forecast.</p></dd>
 
 
+<dt>filter_leading_zeros</dt>
+<dd><p>Logical, defaults to TRUE. Should zeros at the
+start of the time series be filtered out.</p></dd>
+
+
 <dt>zero_threshold</dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults to 50. Indicates if detected zero
-cases are meaningful by using a threshold of 50 cases on average over the last 7 days. If the average is
-above this threshold then the zero is replaced with the backwards looking rolling average. If set to infinity
-then no changes are made.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a> Numeric defaults
+to Inf. Indicates if detected zero cases are meaningful by using a threshold
+number of cases based on the 7 day average. If the average is above this
+threshold then the zero is replaced with the backwards looking rolling
+average. If set to infinity then no changes are made.</p></dd>
 
 </dl></div>
     <div id="value">
