@@ -10,7 +10,7 @@ stan."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/figu
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">EpiNow2</a>
 
@@ -22,25 +22,32 @@ stan."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/figu
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../index.html">Home</a>
+      <ul class="navbar-nav me-auto"><li class="active nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-model-definitions">Model definitions</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-model-definitions">
+    <a class="dropdown-item" href="../vignettes/estimate_infections.html">estimate_infections()</a>
+    <a class="dropdown-item" href="../vignettes/estimate_secondary.html">estimate_secondary()</a>
+    <a class="dropdown-item" href="../vignettes/estimate_truncation.html">estimate_truncation()</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-case-studies">Case studies</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-case-studies">
+    <a class="dropdown-item" href="../vignettes/case-studies.html">External case studies and use in the literature</a>
+  </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">News</a>
-</li>
-<li class="active nav-item">
-  <a class="nav-link" href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    Functions
-  </a>
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+  <a class="external-link nav-link" href="https://github.com/epiforecasts/EpiNow2/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -121,12 +128,9 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Rejecting initial value:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:   Log probability evaluates to log(0), i.e. negative infinity.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:   Stan can't start sampling from this initial value.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Rejecting initial value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:   Log probability evaluates to log(0), i.e. negative infinity.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:   Stan can't start sampling from this initial value.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 2.6e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.26 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 2.8e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -173,24 +177,15 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.069678 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.076728 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.146406 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.073461 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.077649 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.15111 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'exp' NOW (CHAIN 2).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Rejecting initial value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Log probability evaluates to log(0), i.e. negative infinity.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Stan can't start sampling from this initial value.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Rejecting initial value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Log probability evaluates to log(0), i.e. negative infinity.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Stan can't start sampling from this initial value.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Rejecting initial value:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Log probability evaluates to log(0), i.e. negative infinity.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:   Stan can't start sampling from this initial value.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 1.9e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.19 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 2.3e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.23 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
@@ -237,19 +232,19 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.069024 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.061767 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.130791 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.073784 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.073405 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.147189 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Stan model: exp.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 chains, each with iter=2000; warmup=1000; thin=1; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> post-warmup draws per chain=1000, total post-warmup draws=2000.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lambda   2.28    0.01 0.32   1.74   2.06   2.26   2.48   2.98   780    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lp__   -20.79    0.02 0.61 -22.54 -20.98 -20.54 -20.38 -20.33   807    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lambda   2.28    0.01 0.35   1.68   2.05   2.25   2.48   3.06   770    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lp__   -19.37    0.03 0.74 -21.47 -19.51 -19.07 -18.91 -18.87   675    1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 12:23:03 2022.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 19:52:22 2022.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For each parameter, n_eff is a crude measure of effective sample size,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and Rhat is the potential scale reduction factor on split chains (at </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> convergence, Rhat=1).</span>
@@ -263,8 +258,8 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'gamma' NOW (CHAIN 1).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 0.000222 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.22 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 0.000224 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 2.24 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -311,15 +306,15 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 1.29882 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                1.42007 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                2.7189 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 1.59871 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                1.05236 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                2.65107 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'gamma' NOW (CHAIN 2).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 0.000188 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.88 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Gradient evaluation took 0.000183 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.83 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
@@ -366,24 +361,28 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 1.33351 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                1.27983 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                2.61334 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 1.61184 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                1.67719 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                3.28904 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 5 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Stan model: gamma.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 chains, each with iter=2000; warmup=1000; thin=1; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> post-warmup draws per chain=1000, total post-warmup draws=2000.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha_raw   0.83    0.03 0.57   0.04   0.40   0.74   1.16   2.16   389    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> beta_raw    0.96    0.03 0.59   0.08   0.51   0.88   1.33   2.30   410    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alpha       6.08    0.03 0.57   5.28   5.64   5.99   6.41   7.40   389    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> beta        6.39    0.03 0.59   5.51   5.94   6.31   6.76   7.72   410    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mu          0.95    0.00 0.07   0.82   0.91   0.95   1.00   1.09  1028    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma       0.39    0.00 0.03   0.34   0.37   0.39   0.41   0.44   639    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lp__      -13.05    0.09 1.51 -17.09 -13.72 -12.58 -11.94 -11.47   280    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha_raw   0.92    0.03 0.57   0.05   0.45   0.83   1.32   2.12   291 1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> beta_raw    1.00    0.03 0.54   0.08   0.59   0.96   1.37   2.10   356 1.01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alpha       5.81    0.03 0.57   4.94   5.34   5.73   6.22   7.02   291 1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> beta        5.70    0.03 0.54   4.78   5.30   5.67   6.08   6.80   356 1.01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mu          1.02    0.00 0.08   0.87   0.97   1.02   1.07   1.18  1082 1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma       0.42    0.00 0.03   0.37   0.40   0.42   0.45   0.48   618 1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lp__      -17.13    0.11 1.56 -21.38 -17.79 -16.62 -15.98 -15.60   185 1.01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 12:23:08 2022.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 19:52:28 2022.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For each parameter, n_eff is a crude measure of effective sample size,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and Rhat is the potential scale reduction factor on split chains (at </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> convergence, Rhat=1).</span>
@@ -396,8 +395,8 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'lnorm' NOW (CHAIN 1).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 3.9e-05 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Gradient evaluation took 4.3e-05 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.43 seconds.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Adjust your expectations accordingly!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
@@ -444,9 +443,9 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.176697 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.172869 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.349566 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:  Elapsed Time: 0.17415 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.164918 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1:                0.339068 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 1: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> SAMPLING FOR MODEL 'lnorm' NOW (CHAIN 2).</span>
@@ -499,20 +498,20 @@ gamma (<code>"gamma"</code>) and lognormal (<code>"lognormal"</code>) are also s
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 1950 / 2000 [ 97%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.180303 seconds (Warm-up)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.160047 seconds (Sampling)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.34035 seconds (Total)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:  Elapsed Time: 0.183792 seconds (Warm-up)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.149111 seconds (Sampling)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2:                0.332903 seconds (Total)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Chain 2: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inference for Stan model: lnorm.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 chains, each with iter=2000; warmup=1000; thin=1; </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> post-warmup draws per chain=1000, total post-warmup draws=2000.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mu      1.59    0.00 0.02   1.55   1.58   1.59   1.61   1.63  1367    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma   0.17    0.00 0.02   0.14   0.16   0.17   0.18   0.21  1284    1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lp__  -74.86    0.03 0.93 -77.35 -75.24 -74.58 -74.18 -73.90   923    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mu      1.62    0.00 0.02   1.58   1.61   1.62   1.64   1.66  1256    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma   0.16    0.00 0.02   0.13   0.15   0.16   0.18   0.20  1374    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lp__  -74.54    0.03 0.98 -77.16 -74.95 -74.23 -73.84 -73.58   816    1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 12:23:09 2022.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Samples were drawn using NUTS(diag_e) at Sun Oct 16 19:52:29 2022.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For each parameter, n_eff is a crude measure of effective sample size,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and Rhat is the potential scale reduction factor on split chains (at </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> convergence, Rhat=1).</span>

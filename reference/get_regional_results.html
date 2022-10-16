@@ -10,7 +10,7 @@ details."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/f
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">EpiNow2</a>
 
@@ -22,25 +22,32 @@ details."><meta property="og:image" content="epiforecasts.io/EpiNow2/reference/f
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../index.html">Home</a>
+      <ul class="navbar-nav me-auto"><li class="active nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-model-definitions">Model definitions</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-model-definitions">
+    <a class="dropdown-item" href="../vignettes/estimate_infections.html">estimate_infections()</a>
+    <a class="dropdown-item" href="../vignettes/estimate_secondary.html">estimate_secondary()</a>
+    <a class="dropdown-item" href="../vignettes/estimate_truncation.html">estimate_truncation()</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-case-studies">Case studies</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-case-studies">
+    <a class="dropdown-item" href="../vignettes/case-studies.html">External case studies and use in the literature</a>
+  </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">News</a>
-</li>
-<li class="active nav-item">
-  <a class="nav-link" href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    Functions
-  </a>
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/epiforecasts/EpiNow2">
-    <span class="fa fa-github"></span>
+  <a class="external-link nav-link" href="https://github.com/epiforecasts/EpiNow2/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,21 +139,21 @@ data for. Defaults to "latest" which finds the latest results available.</p></dd
 <span class="r-in"><span>  target_folder <span class="op">=</span> <span class="va">dir</span>,</span></span>
 <span class="r-in"><span>  return_output <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:34:35] Producing following optional outputs: regions, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:05:27] Producing following optional outputs: regions, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpeon3vr/regional-epinow/2020-03-22.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplNgm2q/regional-epinow/2020-03-22.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpeon3vr/epinow/2020-03-22.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:34:35] Reporting estimates using data up to: 2020-03-22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:34:35] Saving estimates to : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpeon3vr/results</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:34:35] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:34:35] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:35:21] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:36:06] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:36:06] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:36:06] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:36:06] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 13:36:06] Saving timings information to : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpeon3vr/results</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplNgm2q/epinow/2020-03-22.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:05:27] Reporting estimates using data up to: 2020-03-22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:05:27] Saving estimates to : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplNgm2q/results</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:05:27] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:05:27] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:06:14] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:07:00] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:07:00] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:07:00] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:07:00] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-10-16 21:07:00] Saving timings information to : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplNgm2q/results</span>
 <span class="r-in"><span><span class="co"># from output</span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">get_regional_results</span><span class="op">(</span><span class="va">regional_out</span><span class="op">$</span><span class="va">regional</span>, samples <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></span>
