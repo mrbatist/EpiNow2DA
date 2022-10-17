@@ -30,15 +30,15 @@ which override the defaults."><meta property="og:image" content="epiforecasts.io
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-model-definitions">Model definitions</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-model-definitions">
-    <a class="dropdown-item" href="../vignettes/estimate_infections.html">estimate_infections()</a>
-    <a class="dropdown-item" href="../vignettes/estimate_secondary.html">estimate_secondary()</a>
-    <a class="dropdown-item" href="../vignettes/estimate_truncation.html">estimate_truncation()</a>
+    <a class="dropdown-item" href="../articles/estimate_infections.html">estimate_infections()</a>
+    <a class="dropdown-item" href="../articles/estimate_secondary.html">estimate_secondary()</a>
+    <a class="dropdown-item" href="../articles/estimate_truncation.html">estimate_truncation()</a>
   </div>
 </li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-case-studies">Case studies</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-case-studies">
-    <a class="dropdown-item" href="../vignettes/case-studies.html">External case studies and use in the literature</a>
+    <a class="dropdown-item" href="../articles/case-studies.html">External case studies and use in the literature</a>
   </div>
 </li>
 <li class="nav-item">
@@ -137,13 +137,15 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_cdf[i] = gamma_cdf(i,  alpha, beta);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // discretise</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1:n] = upper_cdf[2:(n+1)] - upper_cdf[1:n];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   for (i in 1:n) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[n+1-i] = upper_cdf[i+1] - upper_cdf[i];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pmf = pmf / (upper_cdf[n+1] - upper_cdf[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // discretised truncated lognormal pmf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_lognormal_pmf(real mu, real sigma, int max_val) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_lognormal_pmf(real mu, real sigma, int max_val, int rev) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int n = max_val;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] upper_cdf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf;</span>
@@ -151,8 +153,15 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_cdf[i] = lognormal_cdf(i,  mu, sigma);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // discretise</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1] = upper_cdf[1];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[2:n] = upper_cdf[2:n] - upper_cdf[1:(n-1)];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   if (rev) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[n] = upper_cdf[1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     for (i in 2:n) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf[n+1-i] = upper_cdf[i] - upper_cdf[i-1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }else{</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[1] = upper_cdf[1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[2:n] = upper_cdf[2:n] - upper_cdf[1:(n-1)];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // normalize</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pmf = pmf / upper_cdf[n];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
@@ -171,7 +180,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // discretised truncated gamma pmf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_delta_pmf(int n) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf = rep_vector(0, n);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1] = 1;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[n] = 1;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -201,8 +210,9 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:delays) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       vector[max_delay[s]] pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = discretised_lognormal_pmf(delay_mean[s], delay_sd[s], max_delay[s]);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = reverse_mf(pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = discretised_lognormal_pmf(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         delay_mean[s], delay_sd[s], max_delay[s], 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       unobs_reports = convolve(unobs_reports, pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
@@ -401,7 +411,6 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // SD == 0: use discretised delta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = discretised_delta_pmf(max_gt);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gt_pmf = reverse_mf(gt_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Initialise infections using daily growth</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   infections[1] = exp(initial_infections[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (uot &gt; 1) {</span>
@@ -488,7 +497,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector truncation_cmf(real trunc_mean, real trunc_sd, int trunc_max) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int  trunc_indexes[trunc_max];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[trunc_max] cmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = discretised_lognormal_pmf(trunc_mean, trunc_sd, trunc_max);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = discretised_lognormal_pmf(trunc_mean, trunc_sd, trunc_max, 0);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf[1] = cmf[1] + 1e-8;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = cumulative_sum(cmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = reverse_mf(cmf);</span>
@@ -931,13 +940,15 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_cdf[i] = gamma_cdf(i,  alpha, beta);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // discretise</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1:n] = upper_cdf[2:(n+1)] - upper_cdf[1:n];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   for (i in 1:n) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[n+1-i] = upper_cdf[i+1] - upper_cdf[i];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pmf = pmf / (upper_cdf[n+1] - upper_cdf[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // discretised truncated lognormal pmf</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_lognormal_pmf(real mu, real sigma, int max_val) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_lognormal_pmf(real mu, real sigma, int max_val, int rev) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int n = max_val;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] upper_cdf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf;</span>
@@ -945,8 +956,15 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     upper_cdf[i] = lognormal_cdf(i,  mu, sigma);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // discretise</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1] = upper_cdf[1];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[2:n] = upper_cdf[2:n] - upper_cdf[1:(n-1)];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   if (rev) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[n] = upper_cdf[1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     for (i in 2:n) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf[n+1-i] = upper_cdf[i] - upper_cdf[i-1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }else{</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[1] = upper_cdf[1];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pmf[2:n] = upper_cdf[2:n] - upper_cdf[1:(n-1)];</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // normalize</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pmf = pmf / upper_cdf[n];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
@@ -965,7 +983,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // discretised truncated gamma pmf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_delta_pmf(int n) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf = rep_vector(0, n);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[1] = 1;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   pmf[n] = 1;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -995,8 +1013,9 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:delays) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       vector[max_delay[s]] pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = discretised_lognormal_pmf(delay_mean[s], delay_sd[s], max_delay[s]);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = reverse_mf(pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       pmf = discretised_lognormal_pmf(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         delay_mean[s], delay_sd[s], max_delay[s], 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       unobs_reports = convolve(unobs_reports, pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
@@ -1195,7 +1214,6 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // SD == 0: use discretised delta</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = discretised_delta_pmf(max_gt);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gt_pmf = reverse_mf(gt_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Initialise infections using daily growth</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   infections[1] = exp(initial_infections[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (uot &gt; 1) {</span>
@@ -1282,7 +1300,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector truncation_cmf(real trunc_mean, real trunc_sd, int trunc_max) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int  trunc_indexes[trunc_max];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[trunc_max] cmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = discretised_lognormal_pmf(trunc_mean, trunc_sd, trunc_max);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = discretised_lognormal_pmf(trunc_mean, trunc_sd, trunc_max, 0);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf[1] = cmf[1] + 1e-8;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = cumulative_sum(cmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     cmf = reverse_mf(cmf);</span>
