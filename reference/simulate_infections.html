@@ -87,8 +87,9 @@ Simulations can be run in parallel using <code><a href="https://future.futurever
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>estimates</dt>
-<dd><p>The <code>estimates</code> element of an <code>epinow</code> run that has been done with
-output = "fit", or the result of <code>estimate_infections</code> with <code>return_fit</code> set to TRUE.</p></dd>
+<dd><p>The <code>estimates</code> element of an <code>epinow</code> run that
+has been done with output = "fit", or the result of
+<code>estimate_infections</code> with <code>return_fit</code> set to TRUE.</p></dd>
 
 
 <dt>R</dt>
@@ -119,12 +120,21 @@ simulations are done at once.</p></dd>
 shown.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A list of output as returned by <code><a href="estimate_infections.html">estimate_infections()</a></code> but based on
+results from the specified scenario rather than fitting.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># set number of cores to use</span></span></span>
+<span class="r-in"><span><span class="va">old_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get example case counts</span></span></span>
 <span class="r-in"><span><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
@@ -177,6 +187,8 @@ shown.</p></dd>
 <span class="r-in"><span><span class="va">sims</span> <span class="op">&lt;-</span> <span class="fu">simulate_infections</span><span class="op">(</span><span class="va">est</span>, <span class="va">R_samples</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">sims</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="simulate_infections-3.png" alt="" width="864" height="864"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_opts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
