@@ -23,6 +23,7 @@ transformed data{
   // observations
   int ot = t - seeding_time - horizon;  // observed time
   int ot_h = ot + horizon;  // observed time + forecast horizon
+  real gt_weight = gt_weigh_prior ? ot : 1;
   // gaussian process
   int noise_terms = setup_noise(ot_h, t, horizon, estimate_r, stationary, future_fixed, fixed_from);
   matrix[noise_terms, M] PHI = setup_gp(M, L, noise_terms);  // basis function
