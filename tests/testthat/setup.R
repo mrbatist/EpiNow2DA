@@ -1,5 +1,6 @@
 if (identical(Sys.getenv("NOT_CRAN"), "true")) {
   files <- c(
+    "gaussian_process.stan",
     "pmfs.stan", "convolve.stan", "observation_model.stan", "secondary.stan",
     "rt.stan", "infections.stan"
   )
