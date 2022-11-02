@@ -63,6 +63,14 @@ test_scenarios <- list(
     rt = rt_opts(prior = list(mean = 2, sd = 0.1)),
     gp = gp_opts(ls_min = 10, basis_prop = 0.1)
   ),
+  susceptible_depletion = list(
+    reported_cases,
+    rt = rt_opts(
+      prior = list(mean = 2, sd = 0.1),
+      pop = 1000000, future = "latest"
+    ),
+    gp = gp_opts(ls_min = 10, basis_prop = 0.1), horizon = 21
+  ),
   truncation = list(
     reported_cases,
     truncation = trunc_dist,
@@ -93,9 +101,14 @@ test_scenarios <- list(
     rt = rt_opts(prior = list(mean = 2, sd = 0.1)),
     gp = NULL
   ),
-  random_walk = list(
+  weekly_rw = list(
     reported_cases,
     rt = rt_opts(prior = list(mean = 2, sd = 0.1), rw = 7),
+    gp = NULL
+  ),
+  daily_rw = list(
+    reported_cases,
+    rt = rt_opts(prior = list(mean = 2, sd = 0.1), rw = 1),
     gp = NULL
   )
 )
@@ -105,13 +118,13 @@ rep <- 5
 scenarios <- list()
 timings <- list()
 for (method in names(methods)) {
-  scenarios[[method]] <- list()
+##  scenarios[[method]] <- list()
   method_options <- methods[[method]]
   for (gt_scenario in names(gt)) {
-    scenarios[[method]][[gt_scenario]] <- list()
+##    scenarios[[method]][[gt_scenario]] <- list()
     gt_options <- gt[[gt_scenario]]
     for (delay_scenario in names(delays)) {
-      scenarios[[method]][[gt_scenario]][[delay_scenario]] <- list()
+##      scenarios[[method]][[gt_scenario]][[delay_scenario]] <- list()
       delay_options <- delays[[delay_scenario]]
       for (test_scenario in names(test_scenarios)) {
         message(method, gt_scenario, delay_scenario, test_scenario)
@@ -119,20 +132,87 @@ for (method in names(methods)) {
         exec_times <- c()
         for (run in seq_len(rep)) {
           tic()
-          scenarios[[method]][[gt_scenario]][[delay_scenario]][[test_scenario]] <-
-            do.call(estimate_infections,
-                    c(list(generation_time = gt_options),
-                      list(delays = delay_options),
-                      test_options,
-                      method_options))
+          run_scenario <-
+            tryCatch({
+              do.call(estimate_infections,
+                      c(list(generation_time = gt_options),
+                        list(delays = delay_options),
+                        test_options,
+                        method_options))
+	    }, error = function(e) {
+              NULL
+	    })
           run_time <- toc()
-          exec_times[run] <- run_time$toc - run_time$tic
+          if (!is.null(run_scenario)) {
+            scenarios[[method]][[gt_scenario]][[delay_scenario]][[test_scenario]] <-
+	      run_scenario
+            exec_times <- c(exec_times, run_time$toc - run_time$tic)
+            scenarios[[method]][[gt_scenario]][[delay_scenario]][[test_scenario]]$exec_times <-
+	      exec_times
+	  }
         }
-        scenarios[[method]][[gt_scenario]][[delay_scenario]][[test_scenario]]$exec_times <-
-          exec_times
       }
     }
   }
 }
 
+extract_exec_times <- function(x) {
+  return(tibble(run = seq_along(x$exec_times),
+		exec_time = x$exec_times))
+}
+
+extract_summary <- function(x) {
+  summary <- tibble(x$summarised)
+  summary$strat <- NULL
+  return(summary)
+}
+
+tbl <- enframe(scenarios, name = "method") |>
+  unnest_wider(value) |>
+  pivot_longer(c(-method), names_to = "gt") |>
+  unnest_wider(value) |>
+  pivot_longer(c(-method, -gt), names_to = "delay") |>
+  unnest_wider(value) |>
+  pivot_longer(c(-method, -gt, -delay), names_to = "scenario")
+
+exec_times <- tbl |>
+  mutate(exec_times = map(value, extract_exec_times)) |>
+  unnest(exec_times) |>
+  select(-value) |>
+  mutate(scenario = recode(scenario, random_walk = "weekly_rw")) |>
+  mutate(scenario = factor(scenario, levels = unique(scenario))) |>
+  mutate(gt = factor(gt, levels = unique(gt))) |>
+  mutate(delay = factor(delay, levels = unique(delay)),
+         delay = relevel(delay, "var"))
+
+p <- ggplot(exec_times, aes(x = scenario, y = exec_time )) +
+  facet_grid(gt ~ delay, labeller = label_both) +
+  geom_point(alpha = 0.5) +
+  theme_bw() +
+  theme(axis.text.x=element_text(angle = 45, vjust = 1, hjust = 1))
+ggsave("exec_times.pdf", p, width = 8.5, height = 5)
+
+summaries <- tbl |>
+  mutate(summary = map(value, extract_summary)) |>
+  unnest(summary) |>
+  select(-value) |>
+  mutate(scenario = if_else(scenario == "random_walk", "weekly_rw", scenario)) |>
+  mutate(scenario = factor(scenario, levels = unique(scenario)))
+
+R <- summaries |>
+  filter(variable == "R", scenario != "later_snapshot") |>
+  mutate(scenario = factor(scenario))
+
+p <- ggplot(R, aes(x = date, y = mean, colour = scenario, linetype = method)) +
+  facet_grid(gt ~ delay) +
+  geom_line(alpha = 0.5) +
+  scale_colour_brewer(palette = "Paired") +
+  theme(axis.text.x=element_text(angle = 45, vjust = 1, hjust = 1)) +
+  coord_cartesian(ylim = c(0.8, 3))
+ggsave("R.pdf", p, width = 13.5, height = 8)
+
 saveRDS(scenarios, "scenarios.rds")
+saveRDS(exec_times, "exec_times.rds")
+saveRDS(summaries, "summaries.rds")
+
+
