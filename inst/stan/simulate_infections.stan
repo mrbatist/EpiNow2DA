@@ -27,10 +27,10 @@ transformed data {
 
 generated quantities {
   // generated quantities
-  matrix[n, t] infections; //latent infections
-  matrix[n, t - seeding_time] reports; // observed cases
+  vector[n] infections[t]; //latent infections
+  vector[n] reports[t - seeding_time]; // observed cases
   int imputed_reports[n, t - seeding_time];
-  real r[n, t - seeding_time];
+  vector[n] r[t - seeding_time];
   vector[seeding_time] uobs_inf;
   for (i in 1:n) {
     // generate infections from Rt trace
@@ -47,24 +47,21 @@ generated quantities {
 
     uobs_inf = generate_seed(initial_infections[i], initial_growth[i], seeding_time);
      // generate infections from Rt trace
-    infections[i] = to_row_vector(renewal_model(to_vector(R[i]), uobs_inf,
-                                                gt_rev_pmf, pop, future_time));
+    infections[i] = renewal_model(R[i], uobs_inf, gt_rev_pmf, pop, future_time);
     // convolve from latent infections to mean of observations
-    reports[i] = to_row_vector(convolve_to_report(
-      to_vector(infections[i]), delay_rev_pmf, seeding_time)
-    );
+    reports[i] = convolve_to_report(infections[i], delay_rev_pmf, seeding_time);
     // weekly reporting effect
     if (week_effect > 1) {
-      reports[i] = to_row_vector(
-        day_of_week_effect(to_vector(reports[i]), day_of_week,
-                           to_vector(day_of_week_simplex[i])));
+      reports[i] = day_of_week_effect(
+        reports[i], day_of_week, to_vector(day_of_week_simplex[i])
+      );
     }
     // scale observations
     if (obs_scale) {
-      reports[i] = to_row_vector(scale_obs(to_vector(reports[i]), frac_obs[i, 1]));
+      reports[i] = scale_obs(reports[i], frac_obs[i, 1]);
     }
    // simulate reported cases
-   imputed_reports[i] = report_rng(to_vector(reports[i]), rep_phi[i], obs_dist);
-   r[i] = calculate_growth(to_vector(infections[i]), seeding_time);
+   imputed_reports[i] = report_rng(reports[i], rep_phi[i], obs_dist);
+   r[i] = calculate_growth(infections[i], seeding_time);
   }
 }

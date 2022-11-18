@@ -1,5 +1,5 @@
 // update combined covariates
-vector update_covariate(vector log_cov_mean, vector cov_t,
+vector update_covariate(real[] log_cov_mean, vector cov_t,
                         vector noise, int[] bps,
                         real[] bp_effects, int stationary,
                         int t) {
@@ -10,7 +10,7 @@ vector update_covariate(vector log_cov_mean, vector cov_t,
   // define result vectors
   vector[t] bp = rep_vector(0, t);
   vector[t] gp = rep_vector(0, t);
-  vector[t] R;
+  vector[t] cov;
   // initialise breakpoints
   if (bp_n) {
     for (s in 1:t) {
@@ -35,7 +35,7 @@ vector update_covariate(vector log_cov_mean, vector cov_t,
     }
   }
   if (num_elements(log_cov_mean) > 0) {
-    cov = rep(log_cov_mean, t);
+    cov = rep_vector(log_cov_mean[1], t);
   } else {
     cov = log(cov_t);
   }
@@ -47,10 +47,10 @@ vector update_covariate(vector log_cov_mean, vector cov_t,
 
 void covariate_lp(real[] log_cov_mean,
                   real[] bp_effects, real[] bp_sd, int bp_n,
-                  real cov_mean_logmean, real cov_mean_logsd) {
+                  real[] cov_mean_logmean, real[] cov_mean_logsd) {
   // initial prior
   if (num_elements(log_cov_mean) > 0) {
-    log_cov_mean ~ normal(cov_mean_logmean, cov_mean_logsd);
+    log_cov_mean ~ normal(cov_mean_logmean[1], cov_mean_logsd[1]);
   }
   //breakpoint effects on Rt
   if (bp_n > 0) {

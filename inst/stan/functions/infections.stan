@@ -29,7 +29,7 @@ vector generate_seed(real[] initial_infections, real[] initial_growth, int uot) 
   return(seed_infs);
 }
 // generate infections using infectiousness
-vector renewal_model(vector oR, vector uobs_infs, vector gt_rev_pmf,
+vector renewal_model(vector oR, vector uobs_inf, vector gt_rev_pmf,
                       int pop, int ht) {
   // time indices and storage
   int ot = num_elements(oR);

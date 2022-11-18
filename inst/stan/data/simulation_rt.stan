@@ -4,5 +4,5 @@
   real<lower = 0> gt_sd[n, 1];   // sd of generation time
   int<lower = 1> gt_max[1];                    // maximum generation time
   int gt_dist[1];                    // 0 = lognormal; 1 = gamma
-  matrix[n, t - seeding_time] R; // reproduction number
+  vector[n] R[t - seeding_time]; // reproduction number
   int pop;                       // susceptible population

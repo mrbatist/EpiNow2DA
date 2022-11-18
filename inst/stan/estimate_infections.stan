@@ -28,8 +28,8 @@ transformed data{
   int noise_terms = setup_noise(ot_h, t, horizon, estimate_r, stationary, future_fixed, fixed_from);
   matrix[noise_terms, M] PHI = setup_gp(M, L, noise_terms);  // basis function
   // covariate mean
-  real cov_mean_logmean[cov_mean_const] = log(cov_mean^2 / sqrt(cov_sd^2 + cov_mean^2));
-  real cov_mean_logsd[cov_mean_const] = sqrt(log(1 + (cov_sd^2 / cov_mean^2)));
+  real cov_mean_logmean[cov_mean_const];
+  real cov_mean_logsd[cov_mean_const];
 
   int delay_max_fixed = (n_fixed_delays == 0 ? 0 :
     sum(delay_max[fixed_delays]) - num_elements(fixed_delays) + 1);
@@ -38,6 +38,11 @@ transformed data{
   vector[gt_fixed[1] ? gt_max[1] : 0] gt_fixed_pmf;
   vector[truncation && trunc_fixed[1] ? trunc_max[1] : 0] trunc_fixed_pmf;
   vector[delay_max_fixed] delays_fixed_pmf;
+
+  if (cov_mean_const) {
+    cov_mean_logmean[1] = log(cov_mean_mean[1]^2 / sqrt(cov_mean_sd[1]^2 + cov_mean_mean[1]^2));
+    cov_mean_logsd[1] = sqrt(log(1 + (cov_mean_sd[1]^2 / cov_mean_mean[1]^2)));
+  }
 
   if (gt_fixed[1]) {
     gt_fixed_pmf = discretised_pmf(gt_mean_mean[1], gt_sd_mean[1], gt_max[1], gt_dist[1], 1);
@@ -90,8 +95,10 @@ transformed parameters {
     noise = update_gp(PHI, M, L, alpha[1], rho[1], eta, gp_type);
   }
   // update covariates
-  cov = update_covariate(log_cov_mean, cov_t, noise, breakpoints, bp_effects,
-                         stationary, ot_h, 0);
+  cov = update_covariate(
+    log_cov_mean, cov_t, noise, breakpoints, bp_effects,
+    stationary, ot_h
+  );
   uobs_inf = generate_seed(initial_infections, initial_growth, seeding_time);
   // Estimate latent infections
   if (process_model == 0) {
@@ -157,20 +164,18 @@ model {
     trunc_dist, 1
   );
   if (estimate_r) {
-    // priors on Rt
-    rt_lp(
-      log_R, initial_infections, initial_growth, bp_effects, bp_sd, bp_n,
-      seeding_time, r_logmean, r_logsd, prior_infections, prior_growth
-    );
     // penalised_prior on generation interval
     delays_lp(
       gt_mean, gt_mean_mean, gt_mean_sd, gt_sd, gt_sd_mean, gt_sd_sd, gt_dist, gt_weight
     );
   }
-  // priors on Rt
-  covariate_lp(log_cov_mean, bp_effects, bp_sd, bp_n, cov_mean_logmean, cov_mean_logsd);
-  infections_lp(initial_infections, initial_growth, prior_infections, prior_growth,
-                seeding_time);
+  // priors on covariates and infections
+  covariate_lp(
+    log_cov_mean, bp_effects, bp_sd, bp_n, cov_mean_logmean, cov_mean_logsd
+  );
+  infections_lp(
+    initial_infections, initial_growth, prior_infections, prior_growth, seeding_time
+  );
   // prior observation scaling
   if (obs_scale) {
     frac_obs[1] ~ normal(obs_scale_mean, obs_scale_sd) T[0, 1];
@@ -185,33 +190,11 @@ model {
 
 generated quantities {
   int imputed_reports[ot_h];
-<<<<<<< HEAD
-<<<<<<< HEAD
-  vector[estimate_r > 0 ? 0: ot_h] gen_R;
-  real r[ot_h] - 1;
-  vector[return_likelihood ? ot : 0] log_lik;
-  if (estimate_r == 0){
-=======
   vector[estimate_r > 0 ? 0: ot_h] R;
-  real r[ot_h];
-  vector[return_likelihood > 1 ? ot : 0] log_lik;
-  if (estimate_r){
-    // estimate growth from estimated Rt
-    real set_gt_mean = (gt_mean_sd[1] > 0 ? gt_mean[1] : gt_mean_mean[1]);
-    real set_gt_sd = (gt_sd_sd [1]> 0 ? gt_sd[1] : gt_sd_mean[1]);
-    vector[gt_max[1]] gt_pmf = combine_pmfs(gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1);
-  } else {
->>>>>>> 7bc2510b (implement different model types)
-=======
-  vector[estimate_r > 0 ? ot_h : 0] R;
-  real r[ot_h];
-  vector[return_likelihood > 1 ? ot : 0] log_lik;
-<<<<<<< HEAD
-  if (estimate_r) {
->>>>>>> fe3d94be (generate R if estimate_r > 0)
-=======
+  real r[ot_h - 1];
+  vector[return_likelihood  ? ot : 0] log_lik;
   if (estimate_r == 0 && process_model != 2) {
->>>>>>> b520805f (update stan code to reflect model update)
+
     // sample generation time
     real gt_mean_sample[1];
     real gt_sd_sample[1];
@@ -225,19 +208,7 @@ generated quantities {
     );
 
     // calculate Rt using infections and generation time
-<<<<<<< HEAD
-<<<<<<< HEAD
-    gen_R = calculate_Rt(
-      infections, seeding_time, gt_rev_pmf, rt_half_window
-=======
-    // estimate growth from calculated Rt
-    R = calculate_Rt(
-      infections, seeding_time, gt_mean_sample, gt_sd_sample,
-      max_gt, rt_half_window
->>>>>>> 7bc2510b (implement different model types)
-    );
-=======
-    R = calculate_Rt(infections, seeding_time, gt_pmf);
+    R = calculate_Rt(infections, seeding_time, gt_rev_pmf);
   } else {
     R = cov;
   }
@@ -245,7 +216,6 @@ generated quantities {
     r = calculate_growth(infections, seeding_time);
   } else {
     r = cov;
->>>>>>> b520805f (update stan code to reflect model update)
   }
   // simulate reported cases
   imputed_reports = report_rng(reports, rep_phi, obs_dist);
