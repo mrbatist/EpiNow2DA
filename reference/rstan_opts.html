@@ -848,7 +848,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int imputed_reports[ot_h];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[estimate_r &gt; 0 ? 0: ot_h] gen_R;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real r[ot_h];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vector[return_likelihood &gt; 1 ? ot : 0] log_lik;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vector[return_likelihood ? ot : 0] log_lik;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r){</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // estimate growth from estimated Rt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real set_gt_mean = (gt_mean_sd &gt; 0 ? gt_mean[1] : gt_mean_mean);</span>
@@ -1651,7 +1651,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int imputed_reports[ot_h];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[estimate_r &gt; 0 ? 0: ot_h] gen_R;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real r[ot_h];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   vector[return_likelihood &gt; 1 ? ot : 0] log_lik;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   vector[return_likelihood ? ot : 0] log_lik;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r){</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // estimate growth from estimated Rt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real set_gt_mean = (gt_mean_sd &gt; 0 ? gt_mean[1] : gt_mean_mean);</span>
