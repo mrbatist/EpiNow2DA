@@ -9,7 +9,7 @@ by passing a named list of _opts() calls (with an entry per region) to the relev
 (opts_list) is available to facilitate building this list.
 Regions can be estimated in parallel using the {future} package (see setup_future). The progress of producing
 estimates across multiple regions is tracked using the progressr package. Modify this behaviour using
-progressr::handlers and enable it in batch by setting R_PROGRESSR_ENABLE=TRUE as an environment variable."><title>Real-time Rt Estimation, Forecasting and Reporting by Region — regional_epinow • EpiNow2</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Real-time Rt Estimation, Forecasting and Reporting by Region — regional_epinow"><meta property="og:description" content="
+progressr::handlers and enable it in batch by setting R_PROGRESSR_ENABLE=TRUE as an environment variable."><title>Real-time Rt Estimation, Forecasting and Reporting by Region — regional_epinow • EpiNow2</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Real-time Rt Estimation, Forecasting and Reporting by Region — regional_epinow"><meta property="og:description" content="
 Efficiently runs epinow() across multiple regions in an efficient manner and conducts basic data checks and
 cleaning such as removing regions with fewer than non_zero_points as these are unlikely to produce reasonable
 results whilst consuming significant resources. See the documentation for epinow for further information.
@@ -275,23 +275,23 @@ place to start.</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:10:01] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:24:31] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplpnNnl/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp8Yj0YB/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplpnNnl/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:10:01] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:10:01] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:10:01] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:10:01] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:15:30] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:16] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp8Yj0YB/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:24:31] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:24:31] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:24:31] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:24:31] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:30:02] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] No target directory specified so returning timings</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># apply a different rt method per region</span></span></span>
 <span class="r-in"><span><span class="co"># (here a gaussian process and a weekly random walk)</span></span></span>
@@ -310,23 +310,23 @@ place to start.</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplpnNnl/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp8Yj0YB/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmplpnNnl/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:20:17] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:25:22] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:13] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-12 03:31:14] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp8Yj0YB/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:34:50] Regions excluded: none</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:39:58] Completed estimates for: testland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] Completed estimates for: realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] Completed regional estimates</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] Regions with estimates: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] Regions with runtime errors: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] Producing summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:58] No summary directory specified so returning summary output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2022-12-19 03:45:59] No target directory specified so returning timings</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_opts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
@@ -341,7 +341,7 @@ place to start.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
     </footer></div>
