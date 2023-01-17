@@ -31,7 +31,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">EpiNow2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,8 @@
 
 
 
-<script src="estimate_secondary_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Model definition: estimate_secondary()</h1>
             
@@ -92,17 +93,57 @@
 
     
     
-<p><strong>This is a work in progress. Please consider submitting a PR to improve it.</strong></p>
-<p>This model is based on a discrete convolution of primary cases, scaled based on the fraction (here described as the secondary fraction but depending on application potentially being the case fatality ratio, case hospitalisation ratio, or the hospitalisation fatality ratio), and a delay distribution that is assumed to follow a discretised daily log normal distribution. This model can be thought of as a discrete time ordinary differential equation approximation generalised to log normal, rather than exponential, delay distributions.</p>
-<p>We generalise this simple model beyond the incidence cases to also include prevalence indicators (for example hospital admissions and occupancy) where the secondary notifications can be thought of as depending on secondary notifications from the previous timestep, scaled current primary notifications, and minus scaled historic primary notifications weighted by some delay distribution.</p>
+<p><strong>This is a work in progress. Please consider submitting a PR
+to improve it.</strong></p>
+<p>This model is based on a discrete convolution of primary cases,
+scaled based on the fraction (here described as the secondary fraction
+but depending on application potentially being the case fatality ratio,
+case hospitalisation ratio, or the hospitalisation fatality ratio), and
+a delay distribution that is assumed to follow a discretised daily log
+normal distribution. This model can be thought of as a discrete time
+ordinary differential equation approximation generalised to log normal,
+rather than exponential, delay distributions.</p>
+<p>We generalise this simple model beyond the incidence cases to also
+include prevalence indicators (for example hospital admissions and
+occupancy) where the secondary notifications can be thought of as
+depending on secondary notifications from the previous timestep, scaled
+current primary notifications, and minus scaled historic primary
+notifications weighted by some delay distribution.</p>
 <p>This model can be defined as follows,</p>
-<p><span class="math display">\[\begin{equation} 
-    \hat{S}_{t} = \delta_p S_{t} + \alpha \left( \delta_p P_{t} + \delta_c \sum_{\tau = 0}^{D} \xi(\tau | \mu, \sigma) P_{t-\tau} \right)
+<p><span class="math display">\[\begin{equation}
+    \hat{S}_{t} = \delta_p S_{t} + \alpha \left( \delta_p P_{t} +
+\delta_c \sum_{\tau = 0}^{D} \xi(\tau | \mu, \sigma) P_{t-\tau} \right)
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(S_t\)</span> and <span class="math inline">\(P_t\)</span> are observed primary and secondary notifications, <span class="math inline">\(\hat{S}_t\)</span> are expected secondary notifications, <span class="math inline">\(\delta_p = 1\)</span> and <span class="math inline">\(\delta_c = -1\)</span> when <span class="math inline">\(S_t\)</span> is a prevalence measure, <span class="math inline">\(delta_p = 0\)</span> and <span class="math inline">\(\delta_c = 1\)</span> when it is an incidence based measure. <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\xi\)</span> are defined as the secondary fraction and delay from primary to secondary notification (or delay from secondary notification to recovery etc in the prevalence case) with <span class="math inline">\(\alpha\)</span> typically being of most interest to those interpreting the models posterior estimates. We further assume that <span class="math inline">\(\xi\)</span> follows a discretised log normal distribution described by its mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> on the log scale (where we take the cumulative mass function for time <span class="math inline">\(t\)</span> minus the cumulative mass function for <span class="math inline">\(t-1\)</span>) normalised by the maximum allowed delay <span class="math inline">\(D\)</span> such that <span class="math inline">\(\sum^D_{\tau=0}{ \xi(\tau | \mu, \sigma)} = 1\)</span>.</p>
-<p>The above definition captures our mechanistic assumptions for the expectation of secondary notifications but does not account for potential observation noise or reporting patterns. Here we assume a negative binomial observation model (though our implementation also supports a Poisson observation model) in order to capture potential reporting overdispersion <span class="math inline">\(\phi\)</span> and adjust expected counts using an optional day of the week effect based on a simplex <span class="math inline">\(\omega_{(t \mod 7)}\)</span> (such that <span class="math inline">\(\sum^6_{t=0}{w_t} = 7\)</span> so the total effect over a week is balanced). This gives the following observation process,</p>
-<p><span class="math display">\[\begin{equation} 
-    S_{t} \sim \mathrm{NB}\left(\omega_{t \mod 7} \hat{S}_t,  \phi \right).
+<p>where <span class="math inline">\(S_t\)</span> and <span class="math inline">\(P_t\)</span> are observed primary and secondary
+notifications, <span class="math inline">\(\hat{S}_t\)</span> are
+expected secondary notifications, <span class="math inline">\(\delta_p =
+1\)</span> and <span class="math inline">\(\delta_c = -1\)</span> when
+<span class="math inline">\(S_t\)</span> is a prevalence measure, <span class="math inline">\(delta_p = 0\)</span> and <span class="math inline">\(\delta_c = 1\)</span> when it is an incidence
+based measure. <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\xi\)</span> are defined as the secondary fraction
+and delay from primary to secondary notification (or delay from
+secondary notification to recovery etc in the prevalence case) with
+<span class="math inline">\(\alpha\)</span> typically being of most
+interest to those interpreting the models posterior estimates. We
+further assume that <span class="math inline">\(\xi\)</span> follows a
+discretised log normal distribution described by its mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span> on the log scale (where we take
+the cumulative mass function for time <span class="math inline">\(t\)</span> minus the cumulative mass function for
+<span class="math inline">\(t-1\)</span>) normalised by the maximum
+allowed delay <span class="math inline">\(D\)</span> such that <span class="math inline">\(\sum^D_{\tau=0}{ \xi(\tau | \mu, \sigma)} =
+1\)</span>.</p>
+<p>The above definition captures our mechanistic assumptions for the
+expectation of secondary notifications but does not account for
+potential observation noise or reporting patterns. Here we assume a
+negative binomial observation model (though our implementation also
+supports a Poisson observation model) in order to capture potential
+reporting overdispersion <span class="math inline">\(\phi\)</span> and
+adjust expected counts using an optional day of the week effect based on
+a simplex <span class="math inline">\(\omega_{(t \mod 7)}\)</span> (such
+that <span class="math inline">\(\sum^6_{t=0}{w_t} = 7\)</span> so the
+total effect over a week is balanced). This gives the following
+observation process,</p>
+<p><span class="math display">\[\begin{equation}
+    S_{t} \sim \mathrm{NB}\left(\omega_{t \mod 7} \hat{S}_t,  \phi
+\right).
 \end{equation}\]</span></p>
   </main>
 </div>
@@ -116,7 +157,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>
