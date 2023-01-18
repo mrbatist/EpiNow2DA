@@ -80,7 +80,7 @@ for an application forecasting Covid-19 deaths in Germany and Poland."><meta pro
     </div>
 
     <div class="ref-description section level2">
-    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+    <p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="figures/lifecycle-stable.svg" alt="[Stable]"></a>
 Estimates the relationship between a primary and secondary observation, for
 example hospital admissions and deaths or hospital admissions and bed
 occupancy. See <code><a href="secondary_opts.html">secondary_opts()</a></code> for model structure options. See parameter
@@ -103,6 +103,7 @@ for an application forecasting Covid-19 deaths in Germany and Poland.</p>
 <span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  burn_in <span class="op">=</span> <span class="fl">14</span>,</span>
 <span>  CrIs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>  priors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -152,6 +153,13 @@ than the number of observations.</p></dd>
 <dd><p>Numeric vector of credible intervals to calculate.</p></dd>
 
 
+<dt>priors</dt>
+<dd><p>A <code>data.frame</code> of named priors to be used in model fitting
+rather than the defaults supplied from other arguments. This is typically
+useful if wanting to inform an estimate from the posterior of another model
+fit.</p></dd>
+
+
 <dt>model</dt>
 <dd><p>A compiled stan model to override the default model. May be
 useful for package developers or those developing extensions.</p></dd>
@@ -170,9 +178,11 @@ useful for package developers or those developing extensions.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A list containing: <code>predictions</code> (a data frame ordered by date with the primary,
-and secondary observations, and a summary of the model estimated secondary observations),
-<code>data</code> (a list of data used to fit the model), and <code>fit</code> (the <code>stanfit</code> object).</p>
+<p>A list containing: <code>predictions</code> (a data frame ordered by date with
+the primary, and secondary observations, and a summary of the model
+estimated secondary observations), <code>posterior</code> which contains a summary of
+the entire model posterior, <code>data</code> (a list of data used to fit the
+model), and <code>fit</code> (the <code>stanfit</code> object).</p>
     </div>
 
     <div class="section level2">
@@ -182,29 +192,8 @@ and secondary observations, and a summary of the model estimated secondary obser
 <span class="r-in"><span><span class="va">old_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>mc.cores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">#' # load data.table for manipulation</span></span></span>
+<span class="r-in"><span><span class="co"># load data.table for manipulation</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># load lubridate for dates</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: timechange</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘lubridate’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:data.table’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     hour, isoweek, mday, minute, month, quarter, second, wday, week,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     yday, year</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     date, intersect, setdiff, union</span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘purrr’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:data.table’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     transpose</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:EpiNow2’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     update_list</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#### Incidence data example ####</span></span></span>
 <span class="r-in"><span></span></span>
@@ -226,8 +215,8 @@ and secondary observations, and a summary of the model estimated secondary obser
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.4</span>
 <span class="r-in"><span><span class="co"># Parameters of the assumed log normal delay distribution</span></span></span>
-<span class="r-in"><span><span class="va">cases</span><span class="op">[</span>, <span class="va">meanlog</span> <span class="op">:=</span> <span class="fl">1.8</span><span class="op">]</span><span class="op">[</span>, <span class="va">sdlog</span> <span class="op">:=</span> <span class="fl">0.5</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm primary scaling meanlog sdlog</span>
+<span class="r-in"><span><span class="va">cases</span><span class="op">[</span>, <span class="va">logmean</span> <span class="op">:=</span> <span class="fl">1.8</span><span class="op">]</span><span class="op">[</span>, <span class="va">logsd</span> <span class="op">:=</span> <span class="fl">0.5</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm primary scaling logmean logsd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-02-22      14      14     0.4     1.8   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-02-23      62      62     0.4     1.8   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   3: 2020-02-24      53      53     0.4     1.8   0.5</span>
@@ -240,86 +229,80 @@ and secondary observations, and a summary of the model estimated secondary obser
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.4     1.8   0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.4     1.8   0.5</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># apply a convolution of a log normal to a vector of observations</span></span></span>
-<span class="r-in"><span><span class="va">weight_cmf</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">meanlog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.6</span>, <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">sdlog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="va">cmf</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">plnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="va">cmf</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">conv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">conv</span>, <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">conv</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="co"># roll over observed cases to produce a convolution</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">date</span>, primary <span class="op">=</span> <span class="va">confirm</span>, secondary <span class="op">=</span> <span class="va">confirm</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/froll.html" class="external-link">frollapply</a></span><span class="op">(</span><span class="va">secondary</span>, <span class="fl">15</span>, <span class="va">weight_cmf</span>, align <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">secondary</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="co"># add a day of the week effect and scale secondary observations at 40\% of primary</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html" class="external-link">wday</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">0.5</span> <span class="op">*</span> <span class="va">secondary</span>, <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">secondary</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">.N</span>, <span class="fl">0.4</span>, <span class="fl">0.025</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span><span class="va">secondary</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">secondary</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="co"># Simulate secondary cases</span></span></span>
+<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_secondary.html">simulate_secondary</a></span><span class="op">(</span><span class="va">cases</span>, type <span class="op">=</span> <span class="st">"incidence"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in vctrs_vec_compat(x, user_env):</span> object 'meanlog' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># fit model to example data assuming only a given fraction of primary observations</span></span></span>
-<span class="r-in"><span><span class="co"># become secondary observations</span></span></span>
+<span class="r-in"><span><span class="co"># fit model to example data specifying a weak prior for fraction reported</span></span></span>
+<span class="r-in"><span><span class="co"># with a secondary case</span></span></span>
 <span class="r-in"><span><span class="va">inc</span> <span class="op">&lt;-</span> <span class="fu">estimate_secondary</span><span class="op">(</span><span class="va">cases</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>,</span></span>
-<span class="r-in"><span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.2</span>, sd <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>, week_effect <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in data_list2array(x) : all elements of the list should be numeric</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to preprocess the data; sampling not done</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Stan model 'estimate_secondary' does not contain samples.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in setnames(x, value):</span> Can't assign 12 names to a 0 column data.table</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">inc</span>, primary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_secondary-1.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(inc, primary = TRUE):</span> object 'inc' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># forecast future secondary cases from primary</span></span></span>
 <span class="r-in"><span><span class="va">inc_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="forecast_secondary.html">forecast_secondary</a></span><span class="op">(</span><span class="va">inc</span>, <span class="va">cases</span><span class="op">[</span><span class="fl">61</span><span class="op">:</span><span class="va">.N</span><span class="op">]</span><span class="op">[</span>, <span class="va">value</span> <span class="op">:=</span> <span class="va">primary</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'object' in selecting a method for function 'extract': object 'inc' not found</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">inc_preds</span>, new_obs <span class="op">=</span> <span class="va">cases</span>, from <span class="op">=</span> <span class="st">"2020-05-01"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_secondary-2.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(inc_preds, new_obs = cases, from = "2020-05-01"):</span> object 'inc_preds' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#### Prevalence data example ####</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make some example prevalence data</span></span></span>
 <span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">date</span>,</span></span>
-<span class="r-in"><span>  primary <span class="op">=</span> <span class="va">confirm</span>,</span></span>
-<span class="r-in"><span>  scaled_primary <span class="op">=</span> <span class="va">confirm</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">.N</span>, <span class="fl">0.4</span>, <span class="fl">0.05</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="va">cases</span><span class="op">$</span><span class="va">secondary</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
-<span class="r-in"><span><span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">scaled_primary</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">meanlog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.6</span>, <span class="fl">0.1</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">sdlog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.8</span>, <span class="fl">0.05</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">20</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">dlnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">19</span>, <span class="va">i</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cmf</span> <span class="op">&lt;-</span> <span class="va">cmf</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html" class="external-link">plnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span>, <span class="fl">20</span><span class="op">)</span>, <span class="va">meanlog</span>, <span class="va">sdlog</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">reducing_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">scaled_primary</span><span class="op">[</span><span class="op">(</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">i</span> <span class="op">-</span> <span class="fl">20</span><span class="op">)</span><span class="op">]</span> <span class="op">*</span> <span class="va">cmf</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">reducing_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;</span> <span class="va">reducing_cases</span>,</span></span>
-<span class="r-in"><span>    <span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span>, <span class="va">reducing_cases</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span> <span class="op">-</span> <span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">cases</span><span class="op">$</span><span class="va">scaled_primary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">reducing_cases</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="fl">0</span>,</span></span>
-<span class="r-in"><span>    <span class="va">cases</span><span class="op">$</span><span class="va">secondary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="va">cases</span><span class="op">[</span>, <span class="va">secondary</span> <span class="op">:=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span><span class="va">secondary</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html" class="external-link">rpois</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">cases</span><span class="op">)</span><span class="op">[</span>, <span class="va">primary</span> <span class="op">:=</span> <span class="va">confirm</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="co"># Assume that only 30 percent of cases are reported</span></span></span>
+<span class="r-in"><span><span class="va">cases</span><span class="op">[</span>, <span class="va">scaling</span> <span class="op">:=</span> <span class="fl">0.3</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm primary scaling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-02-22      14      14     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-02-23      62      62     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3: 2020-02-24      53      53     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4: 2020-02-25      97      97     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5: 2020-02-26      93      93     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ---                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126: 2020-06-26     296     296     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127: 2020-06-27     255     255     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128: 2020-06-28     175     175     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.3</span>
+<span class="r-in"><span><span class="co"># Parameters of the assumed log normal delay distribution</span></span></span>
+<span class="r-in"><span><span class="va">cases</span><span class="op">[</span>, <span class="va">meanlog</span> <span class="op">:=</span> <span class="fl">1.6</span><span class="op">]</span><span class="op">[</span>, <span class="va">sdlog</span> <span class="op">:=</span> <span class="fl">0.8</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            date confirm primary scaling meanlog sdlog</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1: 2020-02-22      14      14     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2: 2020-02-23      62      62     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3: 2020-02-24      53      53     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4: 2020-02-25      97      97     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5: 2020-02-26      93      93     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  ---                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126: 2020-06-26     296     296     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127: 2020-06-27     255     255     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128: 2020-06-28     175     175     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.3     1.6   0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.3     1.6   0.8</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Simulate secondary cases</span></span></span>
+<span class="r-in"><span><span class="va">cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_secondary.html">simulate_secondary</a></span><span class="op">(</span><span class="va">cases</span>, type <span class="op">=</span> <span class="st">"prevalence"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># fit model to example prevalence data</span></span></span>
 <span class="r-in"><span><span class="va">prev</span> <span class="op">&lt;-</span> <span class="fu">estimate_secondary</span><span class="op">(</span><span class="va">cases</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,</span></span>
 <span class="r-in"><span>  secondary <span class="op">=</span> <span class="fu"><a href="secondary_opts.html">secondary_opts</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"prevalence"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    week_effect <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
-<span class="r-in"><span>    scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.3</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.4</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">prev</span>, primary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_secondary-3.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="estimate_secondary-1.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># forecast future secondary cases from primary</span></span></span>
 <span class="r-in"><span><span class="va">prev_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="forecast_secondary.html">forecast_secondary</a></span><span class="op">(</span><span class="va">prev</span>, <span class="va">cases</span><span class="op">[</span><span class="fl">101</span><span class="op">:</span><span class="va">.N</span><span class="op">]</span><span class="op">[</span>, <span class="va">value</span> <span class="op">:=</span> <span class="va">primary</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">prev_preds</span>, new_obs <span class="op">=</span> <span class="va">cases</span>, from <span class="op">=</span> <span class="st">"2020-06-01"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_secondary-4.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="estimate_secondary-2.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_opts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
