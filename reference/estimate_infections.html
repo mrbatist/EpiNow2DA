@@ -4,7 +4,7 @@ Uses a non-parametric approach to reconstruct cases by date of infection
 from reported cases. It uses either a generative Rt model or non-parametric
 back calculation to estimate underlying latent infections and then maps
 these infections to observed cases via uncertain reporting delays and a
-flexible observation model. See the examples and function arguments for the
+flexible observation model. See the examples and function arguments for th
 details of all options. The default settings may not be sufficient for your
 use case so the number of warmup samples (stan_args = list(warmup)) may
 need to be increased as may the overall number of samples. Follow the links
@@ -20,7 +20,7 @@ Uses a non-parametric approach to reconstruct cases by date of infection
 from reported cases. It uses either a generative Rt model or non-parametric
 back calculation to estimate underlying latent infections and then maps
 these infections to observed cases via uncertain reporting delays and a
-flexible observation model. See the examples and function arguments for the
+flexible observation model. See the examples and function arguments for th
 details of all options. The default settings may not be sufficient for your
 use case so the number of warmup samples (stan_args = list(warmup)) may
 need to be increased as may the overall number of samples. Follow the links
@@ -96,7 +96,7 @@ Uses a non-parametric approach to reconstruct cases by date of infection
 from reported cases. It uses either a generative Rt model or non-parametric
 back calculation to estimate underlying latent infections and then maps
 these infections to observed cases via uncertain reporting delays and a
-flexible observation model. See the examples and function arguments for the
+flexible observation model. See the examples and function arguments for th
 details of all options. The default settings may not be sufficient for your
 use case so the number of warmup samples (<code>stan_args = list(warmup)</code>) may
 need to be increased as may the overall number of samples. Follow the links
@@ -112,7 +112,7 @@ estimate Rt for Covid-19 in a country from the ECDC data source.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimate_infections</span><span class="op">(</span></span>
 <span>  <span class="va">reported_cases</span>,</span>
-<span>  generation_time <span class="op">=</span> <span class="fu"><a href="generation_time_opts.html">generation_time_opts</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">generation_time</span>,</span>
 <span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  truncation <span class="op">=</span> <span class="fu"><a href="trunc_opts.html">trunc_opts</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -137,9 +137,10 @@ estimate Rt for Covid-19 in a country from the ECDC data source.</p>
 
 
 <dt>generation_time</dt>
-<dd><p>A call to <code><a href="generation_time_opts.html">generation_time_opts()</a></code> defining the
-generation time distribution used. For backwards compatibility a list of
-summary parameters can also be passed.</p></dd>
+<dd><p>A list containing the mean, standard deviation of the
+mean (mean_sd), standard deviation (sd), standard deviation of the standard
+deviation and the maximum allowed value for the generation time (assuming a
+gamma distribution).</p></dd>
 
 
 <dt>delays</dt>
@@ -238,37 +239,34 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="va">reported_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># set up example generation time</span></span></span>
-<span class="r-in"><span><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="generation_time_opts.html">generation_time_opts</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span> disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># set delays between infection and case report</span></span></span>
-<span class="r-in"><span><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span> disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mean_sd <span class="op">=</span> <span class="fl">0</span>,</span></span>
-<span class="r-in"><span>  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, sd_sd <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span>  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, sd_sd <span class="op">=</span> <span class="fl">0.1</span>, max <span class="op">=</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># default settings but assuming that delays are fixed rather than uncertain</span></span></span>
+<span class="r-in"><span><span class="co"># default setting</span></span></span>
+<span class="r-in"><span><span class="co"># here we assume that the observed data is truncated by the same delay as</span></span></span>
 <span class="r-in"><span><span class="va">def</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 8 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 11 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-in"><span><span class="co"># real time estimates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2194 (1121 -- 4195)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2160 (1080 -- 3919)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.       0.8 (0.51 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.057 (-0.15 -- 0.052)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -12 (13 -- -4.7)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.85 (0.57 -- 1.1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.041 (-0.13 -- 0.038)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -17 (18 -- -5.5)</span>
 <span class="r-in"><span><span class="co"># summary plot</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_infections-1.png" alt="" width="864" height="864"></span>
@@ -277,29 +275,25 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="co"># These settings are an area of active research. See ?gp_opts for details.</span></span></span>
 <span class="r-in"><span><span class="va">agp</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 2 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2204 (1142 -- 4217)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2116 (1089 -- 3912)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.81 (0.52 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.055 (-0.14 -- 0.054)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -13 (13 -- -4.8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.      0.84 (0.58 -- 1.1)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.044 (-0.12 -- 0.035)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -16 (20 -- -5.7)</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_infections-2.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adjusting for future susceptible depletion</span></span></span>
 <span class="r-in"><span><span class="va">dep</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    pop <span class="op">=</span> <span class="fl">1000000</span>, future <span class="op">=</span> <span class="st">"latest"</span></span></span>
@@ -307,7 +301,7 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, horizon <span class="op">=</span> <span class="fl">21</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 13 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 15 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
@@ -316,21 +310,23 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adjusting for truncation of the most recent data</span></span></span>
 <span class="r-in"><span><span class="co"># See estimate_truncation for an approach to estimating this from data</span></span></span>
-<span class="r-in"><span><span class="va">trunc_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="trunc_opts.html">trunc_opts</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">trunc_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
 <span class="r-in"><span>  sd <span class="op">=</span> <span class="fu"><a href="convert_to_logsd.html">convert_to_logsd</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.5</span><span class="op">)</span>, sd_sd <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
 <span class="r-in"><span>  max <span class="op">=</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in trunc_opts(mean = convert_to_logmean(0.5, 0.5), mean_sd = 0.1,     sd = convert_to_logsd(0.5, 0.5), sd_sd = 0.1, max = 3):</span> unused arguments (mean = convert_to_logmean(0.5, 0.5), mean_sd = 0.1, sd = convert_to_logsd(0.5, 0.5), sd_sd = 0.1, max = 3)</span>
 <span class="r-in"><span><span class="va">trunc</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  truncation <span class="op">=</span> <span class="va">trunc_dist</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  truncation <span class="op">=</span> <span class="fu"><a href="trunc_opts.html">trunc_opts</a></span><span class="op">(</span><span class="va">trunc_dist</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_stan_data(reported_cases = reported_cases, generation_time = generation_time,     delays = delays, truncation = truncation, rt = rt, gp = gp,     obs = obs, backcalc = backcalc, shifted_cases = shifted_cases$confirm,     horizon = horizon):</span> object 'trunc_dist' not found</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 2 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_infections-4.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
@@ -342,7 +338,7 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="co"># other options</span></span></span>
 <span class="r-in"><span><span class="va">backcalc</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="cn">NULL</span>, backcalc <span class="op">=</span> <span class="fu"><a href="backcalc_opts.html">backcalc_opts</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.4</span>, sd <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  horizon <span class="op">=</span> <span class="fl">0</span></span></span>
@@ -353,13 +349,13 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="co"># Rt projected into the future using the Gaussian process</span></span></span>
 <span class="r-in"><span><span class="va">project_rt</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    future <span class="op">=</span> <span class="st">"project"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 8 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 5 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
@@ -370,10 +366,10 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="va">snapshot_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">80</span><span class="op">:</span><span class="fl">130</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">snapshot</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">snapshot_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
-<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 4 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 14 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
@@ -381,7 +377,6 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-plt img"><img src="estimate_infections-7.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># stationary Rt assumption (likely to provide biased real-time estimates)</span></span></span>
-<span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
 <span class="r-in"><span><span class="va">stat</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
@@ -391,7 +386,6 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-plt img"><img src="estimate_infections-8.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># no gaussian process (i.e fixed Rt assuming no breakpoints)</span></span></span>
-<span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
 <span class="r-in"><span><span class="va">fixed</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
@@ -402,7 +396,7 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># no delays</span></span></span>
 <span class="r-in"><span><span class="va">no_delay</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>, generation_time <span class="op">=</span> <span class="va">generation_time</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 6 divergent transitions after warmup. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 7 divergent transitions after warmup. See</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
@@ -410,7 +404,6 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-plt img"><img src="estimate_infections-10.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># break point but otherwise static Rt</span></span></span>
-<span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
 <span class="r-in"><span><span class="va">bp_cases</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html" class="external-link">copy</a></span><span class="op">(</span><span class="va">reported_cases</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bp_cases</span> <span class="op">&lt;-</span> <span class="va">bp_cases</span><span class="op">[</span>, <span class="va">breakpoint</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">date</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-03-16"</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">bkp</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">bp_cases</span>,</span></span>
@@ -422,14 +415,13 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span><span class="co"># break point effect</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">bkp</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type     median       mean         sd  lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.8693754 -0.8689949 0.03668125 -0.927442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     lower_50   lower_20   upper_20   upper_50   upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.893987 -0.8787851 -0.8615345 -0.8442223 -0.8064521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.6287818 -0.6295454 0.02759704 -0.675786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      lower_50   lower_20   upper_20   upper_50  upper_90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.6479615 -0.6357188 -0.6217697 -0.6100774 -0.585944</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">bkp</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_infections-11.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># weekly random walk</span></span></span>
-<span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
 <span class="r-in"><span><span class="va">rw</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
@@ -439,24 +431,22 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># random walk effects</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">rw</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type      median        mean         sd    lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt;  0.09530955  0.09751718 0.07490802 -0.01995843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt; breakpoints     2 &lt;NA&gt; -0.22346931 -0.22491108 0.10022833 -0.39280762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt; breakpoints     3 &lt;NA&gt; -0.26526927 -0.26583001 0.10382093 -0.43377008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt; breakpoints     4 &lt;NA&gt; -0.39081742 -0.39307652 0.11471402 -0.58267461</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt; breakpoints     5 &lt;NA&gt; -0.15655586 -0.15701451 0.11797240 -0.35802688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt; breakpoints     6 &lt;NA&gt;  0.01275156  0.01898578 0.12493343 -0.18009429</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; breakpoints     7 &lt;NA&gt; -0.04704448 -0.05058582 0.12592558 -0.26381234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;NA&gt; breakpoints     8 &lt;NA&gt; -0.01813240 -0.02219232 0.19612129 -0.34280130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       lower_50    lower_20    upper_20    upper_50    upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.04688614  0.07623598  0.11467708  0.14666570  0.22178775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: -0.29284294 -0.24850751 -0.19844591 -0.15638995 -0.06262737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: -0.33821481 -0.29166124 -0.23892291 -0.19853572 -0.09031971</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: -0.47307428 -0.42036630 -0.36509056 -0.31773254 -0.20854229</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: -0.23157309 -0.18183606 -0.12816670 -0.07940431  0.02938317</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: -0.06763721 -0.01875869  0.04564145  0.10213904  0.23182440</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: -0.13257433 -0.07790151 -0.02044372  0.03458374  0.14935846</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: -0.15394715 -0.06701555  0.02956416  0.11067981  0.28425969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type       median        mean         sd   lower_90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.257944090 -0.25763015 0.06701214 -0.3661341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt; breakpoints     2 &lt;NA&gt; -0.226438684 -0.22583609 0.08024086 -0.3586069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt; breakpoints     3 &lt;NA&gt; -0.274760574 -0.27946006 0.09318561 -0.4366784</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt; breakpoints     4 &lt;NA&gt; -0.020489362 -0.02069741 0.09553127 -0.1795070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt; breakpoints     5 &lt;NA&gt;  0.042566208  0.03967705 0.09556866 -0.1129426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt; breakpoints     6 &lt;NA&gt; -0.073512594 -0.07431227 0.11249102 -0.2596249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; breakpoints     7 &lt;NA&gt; -0.008774204 -0.01305680 0.18412689 -0.3250118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       lower_50    lower_20     upper_20    upper_50    upper_90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.30279852 -0.27457035 -0.240946616 -0.21267694 -0.14809465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2: -0.27825338 -0.24554415 -0.205565096 -0.17143511 -0.09715054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3: -0.34182327 -0.30008653 -0.252348751 -0.21585157 -0.13058103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4: -0.08403692 -0.04384410  0.002057587  0.04002761  0.13598880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5: -0.02591601  0.01606923  0.062252463  0.10336998  0.20155676</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6: -0.14668868 -0.10425465 -0.042632870  0.00168745  0.10766333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7: -0.12953400 -0.05649353  0.034301093  0.11088422  0.28731523</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">rw</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_infections-12.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
