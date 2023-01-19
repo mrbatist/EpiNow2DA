@@ -75,6 +75,9 @@
 <li>Updated <code>report_cases</code> to work with the new <code>delay_opts</code> helper function.</li>
 <li>Added test coverage for <code>report_cases</code> though note this function will likely be deprecated in future releases.</li>
 <li>Adds a new function <code><a href="../reference/simulate_secondary.html">simulate_secondary()</a></code> for simulating secondary observations under the generative process model assumed by <code>estimate_secondary</code>.</li>
+<li>Adds support for fixed delays (mean only or fixed lognormal distributed) or truncations (fixed lognormal distributed), and for pre-computing these delays as well as generation times if they are fixed. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a> and <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</li>
+<li>Updated examples to make use of fixed distributions to improve run-times where appropriate.</li>
+<li>The range of the <code>frac_obs</code> parameter has restricted with an upper bound of 1 to reflect its name and description. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a> in <a href="https://github.com/epiforecasts/EpiNow2/issues/340" class="external-link">#340</a>.</li>
 <li>Switched to <code>linewidth</code> in <code>plot_CrIs</code> rather than <code>size</code> to avoid issues with <code>ggplot2</code> 3.4.0.</li>
 </ul></div>
 </div>
