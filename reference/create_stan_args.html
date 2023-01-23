@@ -174,6 +174,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve two vectors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // length of x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // produces a convolution across the lenght specified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve(vector x, vector y, int len) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int xlen = num_elements(x);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int ylen = num_elements(y);</span>
@@ -186,6 +187,23 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(convolution);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // convolve two vectors as a backwards dot product</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // y vector shoud be reversed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // limited to the length of x and backwards looking for x indexes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // designed for use convolve a case vector and a delay pmf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_dot_product(vector x, vector y, int len) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     int ylen = num_elements(y);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[len] z;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:len) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = 1e-5 + // add a small value to ensure numerical stability</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           dot_product(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             x[max(1, (s - ylen + 1)):s], tail(y, min(ylen, s))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           );</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    return(z);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve latent infections to reported (but still unobserved) cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_to_report(vector infections,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_pmf,</span>
@@ -195,7 +213,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] unobs_reports = infections;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve(unobs_reports, delay_pmf, t);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_pmf, t);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = infections[(seeding_time + 1):t];</span>
@@ -933,7 +951,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 28855388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 93037446</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -1016,6 +1034,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve two vectors</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // length of x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // produces a convolution across the lenght specified</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve(vector x, vector y, int len) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int xlen = num_elements(x);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int ylen = num_elements(y);</span>
@@ -1028,6 +1047,23 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(convolution);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // convolve two vectors as a backwards dot product</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // y vector shoud be reversed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // limited to the length of x and backwards looking for x indexes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> // designed for use convolve a case vector and a delay pmf</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_dot_product(vector x, vector y, int len) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     int ylen = num_elements(y);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[len] z;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:len) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = 1e-5 + // add a small value to ensure numerical stability</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           dot_product(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             x[max(1, (s - ylen + 1)):s], tail(y, min(ylen, s))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           );</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    return(z);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve latent infections to reported (but still unobserved) cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_to_report(vector infections,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_pmf,</span>
@@ -1037,7 +1073,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] unobs_reports = infections;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve(unobs_reports, delay_pmf, t);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_pmf, t);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = infections[(seeding_time + 1):t];</span>
@@ -1775,7 +1811,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 52970113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 40711316</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
