@@ -167,14 +167,14 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve latent infections to reported (but still unobserved) cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_to_report(vector infections,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           int seeding_time) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t - seeding_time] reports;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] unobs_reports = infections;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_rev_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_pmf, t);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_rev_pmf, t);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = infections[(seeding_time + 1):t];</span>
@@ -413,9 +413,9 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // calculate infectiousness (weighted sum of the generation time and infections)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // for a single time point</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> real update_infectiousness(vector infections, vector gt_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> real update_infectiousness(vector infections, vector gt_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            int seeding_time, int index){</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_max = num_elements(gt_pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_max = num_elements(gt_rev_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // work out where to start the convolution of past infections with the</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // generation time distribution: (current_time - maximal generation time) if</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // that is &gt;= 1, otherwise 1</span>
@@ -426,12 +426,12 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int pmf_accessed = min(gt_max, index + seeding_time - 1);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // calculate the elements of the convolution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real new_inf = dot_product(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     infections[inf_start:inf_end], gt_pmf[1:pmf_accessed]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     infections[inf_start:inf_end], tail(gt_rev_pmf, pmf_accessed)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(new_inf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // generate infections by using Rt = Rt-1 * sum(reversed generation time pmf * infections)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector generate_infections(vector oR, int uot, vector gt_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector generate_infections(vector oR, int uot, vector gt_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            real[] initial_infections, real[] initial_growth,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            int pop, int ht) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // time indices and storage</span>
@@ -456,7 +456,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // iteratively update infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   for (s in 1:ot) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(infections, gt_pmf, uot, s);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(infections, gt_rev_pmf, uot, s);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (pop &amp;&amp; s &gt; nht) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       exp_adj_Rt = exp(-R[s] * infectiousness[s] / (pop - cum_infections[nht]));</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       exp_adj_Rt = exp_adj_Rt &gt; 1 ? 1 : exp_adj_Rt;</span>
@@ -526,17 +526,17 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(scaled_reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // Truncate observed data by some truncation distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector truncate(vector reports, vector trunc_cmf, int reconstruct) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector truncate(vector reports, vector trunc_rev_cmf, int reconstruct) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] trunc_reports = reports;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Calculate cmf of truncation delay</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int trunc_max = num_elements(trunc_cmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int trunc_max = num_elements(trunc_rev_cmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int first_t = t - trunc_max + 1;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Apply cdf of truncation delay to truncation max last entries in reports</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (reconstruct) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] ./ trunc_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] ./ trunc_rev_cmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }else{</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] .* trunc_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] .* trunc_rev_cmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(trunc_reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
@@ -628,7 +628,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // calculate Rt directly from inferred infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector calculate_Rt(vector infections, int seeding_time,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     vector gt_pmf, int smooth) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     vector gt_rev_pmf, int smooth) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int ot = t - seeding_time;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[ot] R;</span>
@@ -637,7 +637,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // calculate Rt using Cori et al. approach</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   for (s in 1:ot) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, gt_pmf, seeding_time, s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, gt_rev_pmf, seeding_time, s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     R[s] = infections[s + seeding_time] / infectiousness[s];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
@@ -827,15 +827,15 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Estimate latent infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // via Rt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_rev_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     R = update_Rt(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       ot_h, log_R[estimate_r], noise, breakpoints, bp_effects, stationary</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     infections = generate_infections(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       R, seeding_time, gt_pmf, initial_infections, initial_growth, pop,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       R, seeding_time, gt_rev_pmf, initial_infections, initial_growth, pop,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       future_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
@@ -846,11 +846,11 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // convolve from latent infections to mean of observations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[delay_max_total] delay_pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[delay_max_total] delay_rev_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       delays_fixed_pmf, delay_mean, delay_sd, delay_max, delay_dist, delay_max_total, 0, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     reports = convolve_to_report(infections, delay_pmf, seeding_time);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     reports = convolve_to_report(infections, delay_rev_pmf, seeding_time);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  // weekly reporting effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  if (week_effect &gt; 1) {</span>
@@ -862,11 +862,11 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  // truncate near time cases to observed reports</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  if (truncation) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vector[trunc_max[1]] trunc_cmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    trunc_cmf = reverse_mf(cumulative_sum(combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    vector[trunc_max[1]] trunc_rev_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    trunc_rev_cmf = reverse_mf(cumulative_sum(combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      trunc_fixed_pmf, trunc_mean, trunc_sd, trunc_max, trunc_dist, trunc_max[1], 0, 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    )));</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = truncate(reports[1:ot], trunc_cmf, 0);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = truncate(reports[1:ot], trunc_rev_cmf, 0);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = reports[1:ot];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  }</span>
@@ -929,18 +929,18 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // sample generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real gt_mean_sample[1];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real gt_sd_sample[1];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_rev_pmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_mean_sample[1] = (gt_mean_sd[1] &gt; 0 ? normal_rng(gt_mean_mean[1], gt_mean_sd[1]) : gt_mean_mean[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_sd_sample[1] = (gt_sd_sd[1] &gt; 0 ? normal_rng(gt_sd_mean[1], gt_sd_sd[1]) : gt_sd_mean[1]);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       gt_fixed_pmf, gt_mean_sample, gt_sd_sample, gt_max, gt_dist, gt_max[1],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // calculate Rt using infections and generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gen_R = calculate_Rt(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, seeding_time, gt_pmf, rt_half_window</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, seeding_time, gt_rev_pmf, rt_half_window</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // estimate growth from calculated Rt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     r = R_to_growth(gen_R, gt_mean_sample[1], gt_sd_sample[1]);</span>
@@ -1034,14 +1034,14 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // convolve latent infections to reported (but still unobserved) cases</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector convolve_to_report(vector infections,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           vector delay_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           int seeding_time) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t - seeding_time] reports;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] unobs_reports = infections;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int delays = num_elements(delay_rev_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (delays) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_pmf, t);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     unobs_reports = convolve_dot_product(unobs_reports, delay_rev_pmf, t);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = unobs_reports[(seeding_time + 1):t];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     reports = infections[(seeding_time + 1):t];</span>
@@ -1280,9 +1280,9 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // calculate infectiousness (weighted sum of the generation time and infections)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // for a single time point</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> real update_infectiousness(vector infections, vector gt_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> real update_infectiousness(vector infections, vector gt_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            int seeding_time, int index){</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_max = num_elements(gt_pmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_max = num_elements(gt_rev_pmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // work out where to start the convolution of past infections with the</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // generation time distribution: (current_time - maximal generation time) if</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // that is &gt;= 1, otherwise 1</span>
@@ -1293,12 +1293,12 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int pmf_accessed = min(gt_max, index + seeding_time - 1);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // calculate the elements of the convolution</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real new_inf = dot_product(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     infections[inf_start:inf_end], gt_pmf[1:pmf_accessed]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     infections[inf_start:inf_end], tail(gt_rev_pmf, pmf_accessed)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(new_inf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // generate infections by using Rt = Rt-1 * sum(reversed generation time pmf * infections)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector generate_infections(vector oR, int uot, vector gt_pmf,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector generate_infections(vector oR, int uot, vector gt_rev_pmf,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            real[] initial_infections, real[] initial_growth,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                            int pop, int ht) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // time indices and storage</span>
@@ -1323,7 +1323,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // iteratively update infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   for (s in 1:ot) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(infections, gt_pmf, uot, s);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(infections, gt_rev_pmf, uot, s);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (pop &amp;&amp; s &gt; nht) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       exp_adj_Rt = exp(-R[s] * infectiousness[s] / (pop - cum_infections[nht]));</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       exp_adj_Rt = exp_adj_Rt &gt; 1 ? 1 : exp_adj_Rt;</span>
@@ -1393,17 +1393,17 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(scaled_reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // Truncate observed data by some truncation distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector truncate(vector reports, vector trunc_cmf, int reconstruct) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector truncate(vector reports, vector trunc_rev_cmf, int reconstruct) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[t] trunc_reports = reports;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Calculate cmf of truncation delay</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int trunc_max = num_elements(trunc_cmf);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int trunc_max = num_elements(trunc_rev_cmf);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int first_t = t - trunc_max + 1;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Apply cdf of truncation delay to truncation max last entries in reports</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (reconstruct) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] ./ trunc_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] ./ trunc_rev_cmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }else{</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] .* trunc_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_reports[first_t:t] = trunc_reports[first_t:t] .* trunc_rev_cmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(trunc_reports);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
@@ -1495,7 +1495,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // calculate Rt directly from inferred infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector calculate_Rt(vector infections, int seeding_time,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     vector gt_pmf, int smooth) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     vector gt_rev_pmf, int smooth) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int t = num_elements(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int ot = t - seeding_time;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[ot] R;</span>
@@ -1504,7 +1504,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // calculate Rt using Cori et al. approach</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   for (s in 1:ot) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     infectiousness[s] += update_infectiousness(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, gt_pmf, seeding_time, s</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, gt_rev_pmf, seeding_time, s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     R[s] = infections[s + seeding_time] / infectiousness[s];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
@@ -1694,15 +1694,15 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // Estimate latent infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // via Rt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_rev_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     R = update_Rt(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       ot_h, log_R[estimate_r], noise, breakpoints, bp_effects, stationary</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     infections = generate_infections(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       R, seeding_time, gt_pmf, initial_infections, initial_growth, pop,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       R, seeding_time, gt_rev_pmf, initial_infections, initial_growth, pop,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       future_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   } else {</span>
@@ -1713,11 +1713,11 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // convolve from latent infections to mean of observations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[delay_max_total] delay_pmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[delay_max_total] delay_rev_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       delays_fixed_pmf, delay_mean, delay_sd, delay_max, delay_dist, delay_max_total, 0, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     reports = convolve_to_report(infections, delay_pmf, seeding_time);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     reports = convolve_to_report(infections, delay_rev_pmf, seeding_time);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  // weekly reporting effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  if (week_effect &gt; 1) {</span>
@@ -1729,11 +1729,11 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  // truncate near time cases to observed reports</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  if (truncation) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    vector[trunc_max[1]] trunc_cmf;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    trunc_cmf = reverse_mf(cumulative_sum(combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    vector[trunc_max[1]] trunc_rev_cmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    trunc_rev_cmf = reverse_mf(cumulative_sum(combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      trunc_fixed_pmf, trunc_mean, trunc_sd, trunc_max, trunc_dist, trunc_max[1], 0, 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    )));</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = truncate(reports[1:ot], trunc_cmf, 0);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = truncate(reports[1:ot], trunc_rev_cmf, 0);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    obs_reports = reports[1:ot];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  }</span>
@@ -1796,18 +1796,18 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // sample generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real gt_mean_sample[1];</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     real gt_sd_sample[1];</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_pmf;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     vector[gt_max[1]] gt_rev_pmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_mean_sample[1] = (gt_mean_sd[1] &gt; 0 ? normal_rng(gt_mean_mean[1], gt_mean_sd[1]) : gt_mean_mean[1]);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gt_sd_sample[1] = (gt_sd_sd[1] &gt; 0 ? normal_rng(gt_sd_mean[1], gt_sd_sd[1]) : gt_sd_mean[1]);</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_pmf = combine_pmfs(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gt_rev_pmf = combine_pmfs(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       gt_fixed_pmf, gt_mean_sample, gt_sd_sample, gt_max, gt_dist, gt_max[1],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // calculate Rt using infections and generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gen_R = calculate_Rt(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, seeding_time, gt_pmf, rt_half_window</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       infections, seeding_time, gt_rev_pmf, rt_half_window</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // estimate growth from calculated Rt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     r = R_to_growth(gen_R, gt_mean_sample[1], gt_sd_sample[1]);</span>
