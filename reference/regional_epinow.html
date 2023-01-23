@@ -247,6 +247,7 @@ place to start.</p></dd>
 <span class="r-in"><span><span class="co"># construct example distributions</span></span></span>
 <span class="r-in"><span><span class="va">generation_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_generation_time.html">get_generation_time</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"ganyani"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">incubation_period</span> <span class="op">&lt;-</span> <span class="fu"><a href="get_incubation_period.html">get_incubation_period</a></span><span class="op">(</span>disease <span class="op">=</span> <span class="st">"SARS-CoV-2"</span>, source <span class="op">=</span> <span class="st">"lauer"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_dist(EpiNow2::incubation_periods, disease = disease, source = source,     max_value = max_value, fixed = fixed):</span> object 'fixed' not found</span>
 <span class="r-in"><span><span class="va">reporting_delay</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  mean <span class="op">=</span> <span class="fu"><a href="convert_to_logmean.html">convert_to_logmean</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  mean_sd <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
@@ -274,23 +275,16 @@ place to start.</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:03:58] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /tmp/RtmpDWN3Jy/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /tmp/Rtmpl3uUmO/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /tmp/RtmpDWN3Jy/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:03:58] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:03:58] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:03:58] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:03:58] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:05:03] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /tmp/Rtmpl3uUmO/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Regions excluded: none</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in delay_opts(incubation_period, reporting_delay):</span> object 'incubation_period' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># apply a different rt method per region</span></span></span>
 <span class="r-in"><span><span class="co"># (here a gaussian process and a weekly random walk)</span></span></span>
@@ -308,23 +302,16 @@ place to start.</p></dd>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Producing following optional outputs: regions, summary, samples, plots, latest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Producing following optional outputs: regions, summary, samples, plots, latest</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2 logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /tmp/RtmpDWN3Jy/regional-epinow/2020-04-21.log</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2 logs to the console and: /tmp/Rtmpl3uUmO/regional-epinow/2020-04-21.log</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Logging threshold set at INFO for the EpiNow2.epinow logger</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /tmp/RtmpDWN3Jy/epinow/2020-04-21.log</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Reporting estimates using data up to: 2020-04-21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] No target directory specified so returning output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Producing estimates for: testland, realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:06:06] Regions excluded: none</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:04] Completed estimates for: testland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] Completed estimates for: realland</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] Completed regional estimates</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] Regions with estimates: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] Regions with runtime errors: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] Producing summary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:25] No summary directory specified so returning summary output</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:07:26] No target directory specified so returning timings</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Writing EpiNow2.epinow logs to: /tmp/Rtmpl3uUmO/epinow/2020-04-21.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Reporting estimates using data up to: 2020-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] No target directory specified so returning output</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Producing estimates for: testland, realland</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO [2023-01-23 11:30:46] Regions excluded: none</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in delay_opts(incubation_period, reporting_delay):</span> object 'incubation_period' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_opts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>

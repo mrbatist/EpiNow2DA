@@ -132,19 +132,20 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // Adapted from https://github.com/epiforecasts/epinowcast</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // @author Sam Abbott</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // @author Adrian Lison</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_pmf(real mu, real sigma, int n, int dist, int truncate) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_pmf(real mu, real sigma, int n, int dist,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        int left_truncate) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (sigma &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[n + 1] upper_cdf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (dist == 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for (i in 1:(n + 1)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = lognormal_cdf(i - 1 + truncate, mu, sigma);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = lognormal_cdf(i - 1 + left_truncate, mu, sigma);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     } else if (dist == 1) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       real alpha = mu^2 / sigma^2;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       real beta = mu / sigma^2;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for (i in 1:(n + 1)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = gamma_cdf(i - 1 + truncate, alpha, beta);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = gamma_cdf(i - 1 + left_truncate, alpha, beta);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       reject("Unknown distribution function provided.");</span>
@@ -951,7 +952,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 93037446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20591565</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -992,19 +993,20 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // Adapted from https://github.com/epiforecasts/epinowcast</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // @author Sam Abbott</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // @author Adrian Lison</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_pmf(real mu, real sigma, int n, int dist, int truncate) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> vector discretised_pmf(real mu, real sigma, int n, int dist,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        int left_truncate) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[n] pmf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (sigma &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[n + 1] upper_cdf;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (dist == 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for (i in 1:(n + 1)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = lognormal_cdf(i - 1 + truncate, mu, sigma);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = lognormal_cdf(i - 1 + left_truncate, mu, sigma);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     } else if (dist == 1) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       real alpha = mu^2 / sigma^2;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       real beta = mu / sigma^2;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for (i in 1:(n + 1)) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = gamma_cdf(i - 1 + truncate, alpha, beta);</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         upper_cdf[i] = gamma_cdf(i - 1 + left_truncate, alpha, beta);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     } else {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       reject("Unknown distribution function provided.");</span>
@@ -1811,7 +1813,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 40711316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 46322533</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
