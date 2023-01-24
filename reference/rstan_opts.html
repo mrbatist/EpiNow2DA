@@ -863,10 +863,11 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], delay_dist[uncertain_mean_delays], t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // priors for truncation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   truncation_lp(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   delays_lp(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_mean, trunc_sd,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_mean_mean, trunc_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_sd_mean, trunc_sd_sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_sd_mean, trunc_sd_sd,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_dist, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // priors on Rt</span>
@@ -1721,10 +1722,11 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], delay_dist[uncertain_mean_delays], t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // priors for truncation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   truncation_lp(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   delays_lp(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_mean, trunc_sd,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_mean_mean, trunc_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_sd_mean, trunc_sd_sd</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_sd_mean, trunc_sd_sd,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     trunc_dist, 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   if (estimate_r) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // priors on Rt</span>
