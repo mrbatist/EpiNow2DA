@@ -77,33 +77,42 @@ of cases. Only used if <code>rt = NULL</code>.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>prior</dt>
-<dd><p>A character string defaulting to "reports". Defines the prior to use
-when deconvolving. Currently implemented options are to use smoothed mean delay
-shifted reported cases ("reports"), to use the estimated infections from the
-previous time step seeded for the first time step using mean shifted reported cases
-("infections"), or no prior ("none"). Using no prior will result in poor real time performance.
-No prior and using infections are only supported when a Gaussian process is present. If observed
-data is not reliable then it a sensible first step is to explore increasing the <code>prior_window</code> with
-a sensible second step being to no longer use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></dd>
+<dd><p>A character string defaulting to "reports". Defines the prior
+to use when deconvolving. Currently implemented options are to use smoothed
+mean delay shifted reported cases ("reports"), to use the estimated
+infections from the previous time step seeded for the first time step using
+mean shifted reported cases ("infections"), or no prior ("none"). Using no
+prior will result in poor real time performance. No prior and using
+infections are only supported when a Gaussian process is present . If
+observed data is not reliable then it a sensible first step is to explore
+increasing the <code>prior_window</code> wit a sensible second step being to no longer
+use reported cases as a prior (i.e set <code>prior = "none"</code>).</p></dd>
 
 
 <dt>prior_window</dt>
-<dd><p>Integer, defaults to 14 days. The mean centred smoothing window
-to apply to mean shifted reports (used as a prior during back calculation). 7 days is minimum recommended
-settings as this smooths day of the week effects but depending on the quality of the data and the
-amount of information users wish to use as a prior (higher values equalling a less informative prior).</p></dd>
+<dd><p>Integer, defaults to 14 days. The mean centred smoothing
+windo to apply to mean shifted reports (used as a prior during back
+calculation). 7 days is minimum recommended settings as this smooths day of
+the week effects but depending on the quality of the data and the amount of
+information users wish to use as a prior (higher values equalling a less
+informative prior).</p></dd>
 
 
 <dt>rt_window</dt>
-<dd><p>Integer, defaults to 1. The size of the centred rolling average to use when estimating
-Rt. This must be odd so that the central estimate is included.</p></dd>
+<dd><p>Integer, defaults to 1. The size of the centred rolling
+average to use when estimating Rt. This must be odd so that the central
+estimate is included.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A list of back calculation settings</p>
+<p>A list of back calculation settings.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>Sam Abbott</p>
     </div>
 
     <div class="section level2">
