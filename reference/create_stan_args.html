@@ -247,7 +247,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> void delays_lp(real[] delay_mean, real[] delay_mean_mean, real[] delay_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd, int weight){</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                int[] delay_dist, int weight) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int mean_delays = num_elements(delay_mean);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int sd_delays = num_elements(delay_sd);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (mean_delays) {</span>
@@ -255,6 +256,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         if (delay_mean_sd[s] &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           // uncertain mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           // if a distribution with postive support only truncate the prior</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           if (delay_dist[s]) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             target += -normal_lccdf(0 | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
@@ -263,11 +268,11 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         if (delay_sd_sd[s] &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           // uncertain sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           target += -normal_lccdf(0 | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // eigenvalues for approximate hilbert space gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // see here for details: https://arxiv.org/pdf/2004.11408.pdf</span>
@@ -489,17 +494,6 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> // Update the log density for the generation time distribution mean and sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> void generation_time_lp(real[] gt_mean, real[] gt_mean_mean, real[] gt_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         real[] gt_sd, real[] gt_sd_mean, real[] gt_sd_sd, int weight) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   if (gt_mean_sd[1] &gt; 0) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     target += normal_lpdf(gt_mean[1] | gt_mean_mean[1], gt_mean_sd[1]) * weight;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   if (gt_sd_sd[1] &gt; 0) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     target += normal_lpdf(gt_sd[1] | gt_sd_mean[1], gt_sd_sd[1]) * weight;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // apply day of the week effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector day_of_week_effect(vector reports, int[] day_of_week, vector effect) {</span>
@@ -696,8 +690,6 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_sd_sd[delays];    // prior sd of sd of incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; delay_max[delays];       // maximum incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delay_dist[delays];       // 0 = lognormal; 1 = gamma</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   // lower bound on each uncertain delay distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_mean_lower[delays];     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real L;				                     // boundary value for infections gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower=1&gt; M;			               // basis functions for infections gp</span>
@@ -717,8 +709,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; gt_max[1];                        // maximum generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_fixed[1];                      // 0 = variable gt; 1 = fixed gt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_dist[1];                    // distribution (0 = lognormal, 1 = gamma)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                    // distribution (0 = lognormal, 1 = gamma)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real gt_mean_lower[1];                  // lower bound on generation time</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int estimate_r;                    // should the reproduction no be estimated (1 = yes)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real prior_infections;             // prior for initial infections</span>
@@ -884,7 +875,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_mean, delay_mean_mean[uncertain_mean_delays],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_mean_sd[uncertain_mean_delays],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd, delay_sd_mean[uncertain_sd_delays],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], delay_dist[uncertain_mean_delays], t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // priors for truncation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   truncation_lp(</span>
@@ -899,8 +890,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seeding_time, r_logmean, r_logsd, prior_infections, prior_growth</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // penalised_prior on generation interval</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     generation_time_lp(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       gt_mean, gt_mean_mean, gt_mean_sd, gt_sd, gt_sd_mean, gt_sd_sd, gt_weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delays_lp(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       gt_mean, gt_mean_mean, gt_mean_sd, gt_sd, gt_sd_mean, gt_sd_sd, gt_dist, gt_weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // prior observation scaling</span>
@@ -971,7 +962,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13914009</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 59354321</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -1123,7 +1114,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> void delays_lp(real[] delay_mean, real[] delay_mean_mean, real[] delay_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd, int weight){</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                real[] delay_sd, real[] delay_sd_mean, real[] delay_sd_sd,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                int[] delay_dist, int weight) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int mean_delays = num_elements(delay_mean);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int sd_delays = num_elements(delay_sd);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (mean_delays) {</span>
@@ -1131,6 +1123,10 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         if (delay_mean_sd[s] &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           // uncertain mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           target += normal_lpdf(delay_mean[s] | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           // if a distribution with postive support only truncate the prior</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           if (delay_dist[s]) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             target += -normal_lccdf(0 | delay_mean_mean[s], delay_mean_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
@@ -1139,11 +1135,11 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         if (delay_sd_sd[s] &gt; 0) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           // uncertain sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           target += normal_lpdf(delay_sd[s] | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           target += -normal_lccdf(0 | delay_sd_mean[s], delay_sd_sd[s]) * weight;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // eigenvalues for approximate hilbert space gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // see here for details: https://arxiv.org/pdf/2004.11408.pdf</span>
@@ -1365,17 +1361,6 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   return(infections);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> // Update the log density for the generation time distribution mean and sd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> void generation_time_lp(real[] gt_mean, real[] gt_mean_mean, real[] gt_mean_sd,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         real[] gt_sd, real[] gt_sd_mean, real[] gt_sd_sd, int weight) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   if (gt_mean_sd[1] &gt; 0) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     target += normal_lpdf(gt_mean[1] | gt_mean_mean[1], gt_mean_sd[1]) * weight;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   if (gt_sd_sd[1] &gt; 0) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     target += normal_lpdf(gt_sd[1] | gt_sd_mean[1], gt_sd_sd[1]) * weight;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> // apply day of the week effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> vector day_of_week_effect(vector reports, int[] day_of_week, vector effect) {</span>
@@ -1572,8 +1557,6 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_sd_sd[delays];    // prior sd of sd of incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; delay_max[delays];       // maximum incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delay_dist[delays];       // 0 = lognormal; 1 = gamma</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   // lower bound on each uncertain delay distribution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_mean_lower[delays];     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real L;				                     // boundary value for infections gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower=1&gt; M;			               // basis functions for infections gp</span>
@@ -1593,8 +1576,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; gt_max[1];                        // maximum generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_fixed[1];                      // 0 = variable gt; 1 = fixed gt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_dist[1];                    // distribution (0 = lognormal, 1 = gamma)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                    // distribution (0 = lognormal, 1 = gamma)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real gt_mean_lower[1];                  // lower bound on generation time</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int estimate_r;                    // should the reproduction no be estimated (1 = yes)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real prior_infections;             // prior for initial infections</span>
@@ -1760,7 +1742,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_mean, delay_mean_mean[uncertain_mean_delays],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_mean_sd[uncertain_mean_delays],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd, delay_sd_mean[uncertain_sd_delays],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delay_sd_sd[uncertain_sd_delays], delay_dist[uncertain_mean_delays], t</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // priors for truncation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   truncation_lp(</span>
@@ -1775,8 +1757,8 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       seeding_time, r_logmean, r_logsd, prior_infections, prior_growth</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     // penalised_prior on generation interval</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     generation_time_lp(</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       gt_mean, gt_mean_mean, gt_mean_sd, gt_sd, gt_sd_mean, gt_sd_sd, gt_weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     delays_lp(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       gt_mean, gt_mean_mean, gt_mean_sd, gt_sd, gt_sd_mean, gt_sd_sd, gt_dist, gt_weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   // prior observation scaling</span>
@@ -1847,7 +1829,7 @@ as supplied by <code>create_intitial_conditions</code>).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 61127264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 41775413</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
