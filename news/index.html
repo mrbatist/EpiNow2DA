@@ -68,19 +68,23 @@
 <li><p>Updated the handling of generation times in the renewal equation to be left truncation adjusted for the zeroth day. This more accurately the typical approach taken to estimate generation times but may slightly impact estimates vs those produced using previous versions. ## Features</p></li>
 <li><p>Adds a new function <code><a href="../reference/simulate_secondary.html">simulate_secondary()</a></code> for simulating secondary observations under the generative process model assumed by <code>estimate_secondary</code>.</p></li>
 <li><p>Adds support for fixed delays (mean only or fixed lognormal distributed) or truncations (fixed lognormal distributed), and for pre-computing these delays as well as generation times if they are fixed. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a> and <a href="https://github.com/seabbs" class="external-link">@seabbs</a>.</p></li>
-<li><p>The range of the <code>frac_obs</code> parameter has restricted with an upper bound of 1 to reflect its name and description. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a> in <a href="https://github.com/epiforecasts/EpiNow2/issues/340" class="external-link">#340</a>. ## Package</p></li>
-<li><p>Update the GitHub Action files to new versions.</p></li>
-<li><p>Switched to using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> rather than <code>1:length()</code> in all package code.</p></li>
-<li><p>Fixed a broken example in the documentation for <code><a href="../reference/regional_runtimes.html">regional_runtimes()</a></code>.</p></li>
-<li><p>Add compatibility changes for the latest version of <code>rstan</code> and <code>rstantools</code>.</p></li>
-<li><p>Remove legacy use of <code>pkgnet</code> for package dependency visualisation.</p></li>
-<li><p>Restyled all code using <code>styler</code>.</p></li>
-<li><p>Dropped dependency on <code>RcppParallel</code>.</p></li>
-<li><p>Updated <code>report_cases</code> to work with the new <code>delay_opts</code> helper function.</p></li>
-<li><p>Added test coverage for <code>report_cases</code> though note this function will likely be deprecated in future releases.</p></li>
-<li><p>Switched to <code>linewidth</code> in <code>plot_CrIs</code> rather than <code>size</code> to avoid issues with <code>ggplot2</code> 3.4.0.</p></li>
-<li><p>Set up validation against synthetic data to run as a CI check.</p></li>
-<li><p>Added tests for internal stan convolution functions.</p></li>
+<li><p>The range of the <code>frac_obs</code> parameter has restricted with an upper bound of 1 to reflect its name and description. By <a href="https://github.com/sbfnk" class="external-link">@sbfnk</a> in <a href="https://github.com/epiforecasts/EpiNow2/issues/340" class="external-link">#340</a>.</p></li>
+<li><p>Support for gamma distributed delays and log-normal distributed generation times.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="package-1-3-4">Package<a class="anchor" aria-label="anchor" href="#package-1-3-4"></a></h3>
+<ul><li>Update the GitHub Action files to new versions.</li>
+<li>Switched to using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> rather than <code>1:length()</code> in all package code.</li>
+<li>Fixed a broken example in the documentation for <code><a href="../reference/regional_runtimes.html">regional_runtimes()</a></code>.</li>
+<li>Add compatibility changes for the latest version of <code>rstan</code> and <code>rstantools</code>.</li>
+<li>Remove legacy use of <code>pkgnet</code> for package dependency visualisation.</li>
+<li>Restyled all code using <code>styler</code>.</li>
+<li>Dropped dependency on <code>RcppParallel</code>.</li>
+<li>Updated <code>report_cases</code> to work with the new <code>delay_opts</code> helper function.</li>
+<li>Added test coverage for <code>report_cases</code> though note this function will likely be deprecated in future releases.</li>
+<li>Switched to <code>linewidth</code> in <code>plot_CrIs</code> rather than <code>size</code> to avoid issues with <code>ggplot2</code> 3.4.0.</li>
+<li>Set up validation against synthetic data to run as a CI check.</li>
+<li>Added tests for internal stan convolution functions.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-3-4">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-3-4"></a></h3>

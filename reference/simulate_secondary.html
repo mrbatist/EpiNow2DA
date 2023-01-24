@@ -82,13 +82,15 @@ cases as a numeric vector.</p></dd>
 
 
 <dt>type</dt>
-<dd><p>A character string indicating the type of observation the secondary reports
-are. Options include:</p><ul><li><p>"incidence": Assumes that secondary reports equal a convolution of previously
-observed primary reported cases. An example application is deaths from an infectious
-disease predicted by reported cases of that disease (or estimated infections).</p></li>
-<li><p>"prevalence": Assumes that secondary reports are cumulative and are defined by
-currently observed primary reports minus a convolution of secondary reports. An example
-application is hospital bed usage predicted by hospital admissions.</p></li>
+<dd><p>A character string indicating the type of observation the
+secondary reports are. Options include:</p><ul><li><p>"incidence": Assumes that secondary reports equal a convolution of
+previously observed primary reported cases. An example application is deaths
+from an infectious disease predicted by reported cases of that disease (or
+estimated infections).</p></li>
+<li><p>"prevalence": Assumes that secondary reports are cumulative and are
+defined by currently observed primary reports minus a convolution of
+secondary reports. An example application is hospital bed usage predicted by
+hospital admissions.</p></li>
 </ul></dd>
 
 
@@ -118,6 +120,11 @@ the convolution model.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>estimate_secondary</p></div>
+    </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>Sam Abbott</p>
+<p>Sebastian Funk</p>
     </div>
 
     <div class="section level2">
@@ -177,17 +184,17 @@ the convolution model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.4     1.8   0.5   129   69.6 109.079519</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.4     1.8   0.5   130   50.4 109.018943</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      secondary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1:         7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2:         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3:         8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   4:        19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   5:        13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1:         6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2:         7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3:        14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4:        16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5:        15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ---          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126:        77</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127:       100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128:        97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129:       120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130:        89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126:        90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127:        93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128:       107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129:       114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130:       104</span>
 <span class="r-in"><span><span class="co">#### Prevalence data example ####</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make some example prevalence data</span></span></span>
@@ -240,17 +247,17 @@ the convolution model.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129: 2020-06-29     174     174     0.3     1.6   0.8   129   52.2 80.055418</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130: 2020-06-30     126     126     0.3     1.6   0.8   130   37.8 75.242850</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      secondary</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1:         4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2:        21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3:        20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   4:        33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   5:        43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1:         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2:        17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3:        22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4:        43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5:        46</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ---          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126:       283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127:       243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128:       246</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129:       225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130:       176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126:       275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127:       269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128:       263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129:       202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130:       155</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -205,8 +205,9 @@ average. If set to infinity then no changes are made.</p></dd>
 
 
 <dt>id</dt>
-<dd><p>A character string used to assign logging information on error. Used by <code>regional_epinow</code>
-to assign errors to regions. Alter the default to run with error catching.</p></dd>
+<dd><p>A character string used to assign logging information on error.
+Used by <code>regional_epinow</code> to assign errors to regions. Alter the default to
+run with error catching.</p></dd>
 
 
 <dt>verbose</dt>
@@ -226,6 +227,10 @@ samples, data used to fit the model, and the fit object itself.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>epinow regional_epinow forecast_infections simulate_infections</p></div>
+    </div>
+    <div class="section level2">
+    <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
+    <p>Sam Abbott</p>
     </div>
 
     <div class="section level2">
@@ -258,21 +263,16 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 2 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="co"># real time estimates</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure                estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date     2165 (1125 -- 4300)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases       Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.        0.8 (0.5 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.057 (-0.15 -- 0.056)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)        -12 (12 -- -4.6)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in summary(def):</span> object 'def' not found</span>
 <span class="r-in"><span><span class="co"># summary plot</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">def</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-1.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(def):</span> object 'def' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># decreasing the accuracy of the approximate Gaussian to speed up computation.</span></span></span>
 <span class="r-in"><span><span class="co"># These settings are an area of active research. See ?gp_opts for details.</span></span></span>
@@ -283,19 +283,14 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 5 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  measure               estimate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: New confirmed cases by infection date    2252 (1242 -- 4367)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2:        Expected change in daily cases      Likely decreasing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3:            Effective reproduction no.     0.82 (0.54 -- 1.2)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4:                        Rate of growth -0.05 (-0.14 -- 0.057)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5:          Doubling/halving time (days)       -14 (12 -- -5.1)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in summary(agp):</span> object 'agp' not found</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">agp</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-2.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(agp):</span> object 'agp' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adjusting for future susceptible depletion</span></span></span>
 <span class="r-in"><span><span class="va">dep</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
@@ -308,12 +303,12 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, horizon <span class="op">=</span> <span class="fl">21</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 6 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">dep</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-3.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(dep):</span> object 'dep' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Adjusting for truncation of the most recent data</span></span></span>
 <span class="r-in"><span><span class="co"># See estimate_truncation for an approach to estimating this from data</span></span></span>
@@ -331,15 +326,21 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="fu"><a href="gp_opts.html">gp_opts</a></span><span class="op">(</span>ls_min <span class="op">=</span> <span class="fl">10</span>, basis_prop <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  stan <span class="op">=</span> <span class="fu"><a href="stan_opts.html">stan_opts</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>adapt_delta <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-4.png" alt="" width="864" height="864"></span>
+<span class="r-plt img"><img src="estimate_infections-1.png" alt="" width="864" height="864"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># using back calculation (combined here with under reporting)</span></span></span>
-<span class="r-in"><span><span class="co"># this model is in the order of 10 ~ 100 faster than the gaussian process method</span></span></span>
-<span class="r-in"><span><span class="co"># it is likely robust for retrospective Rt but less reliable for real time estimates</span></span></span>
-<span class="r-in"><span><span class="co"># the width of the prior window controls the reliance on observed data and can be</span></span></span>
-<span class="r-in"><span><span class="co"># optionally switched off using backcalc_opts(prior = "none"), see ?backcalc_opts for</span></span></span>
-<span class="r-in"><span><span class="co"># other options</span></span></span>
+<span class="r-in"><span><span class="co"># this model is in the order of 10 ~ 100 faster than the gaussian process</span></span></span>
+<span class="r-in"><span><span class="co"># method</span></span></span>
+<span class="r-in"><span><span class="co"># it is likely robust for retrospective Rt but less reliable for real time</span></span></span>
+<span class="r-in"><span><span class="co"># estimates</span></span></span>
+<span class="r-in"><span><span class="co"># the width of the prior window controls the reliance on observed data and</span></span></span>
+<span class="r-in"><span><span class="co"># can be optionally switched off using backcalc_opts(prior = "none"),</span></span></span>
+<span class="r-in"><span><span class="co"># see ?backcalc_opts for other options</span></span></span>
 <span class="r-in"><span><span class="va">backcalc</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
 <span class="r-in"><span>  generation_time <span class="op">=</span> <span class="va">generation_time</span>,</span></span>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
@@ -347,8 +348,12 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  obs <span class="op">=</span> <span class="fu"><a href="obs_opts.html">obs_opts</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0.4</span>, sd <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  horizon <span class="op">=</span> <span class="fl">0</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">backcalc</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-5.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(backcalc):</span> object 'backcalc' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Rt projected into the future using the Gaussian process</span></span></span>
 <span class="r-in"><span><span class="va">project_rt</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>,</span></span>
@@ -359,12 +364,12 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>    future <span class="op">=</span> <span class="st">"project"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 10 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">project_rt</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-6.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(project_rt):</span> object 'project_rt' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># default settings on a later snapshot of data</span></span></span>
 <span class="r-in"><span><span class="va">snapshot_cases</span> <span class="op">&lt;-</span> <span class="va">example_confirmed</span><span class="op">[</span><span class="fl">80</span><span class="op">:</span><span class="fl">130</span><span class="op">]</span></span></span>
@@ -373,12 +378,12 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span>, fixed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>There were 1 divergent transitions after warmup. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> to find out why this is a problem and how to eliminate them.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Examine the pairs() plot to diagnose sampling problems</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">snapshot</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-7.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(snapshot):</span> object 'snapshot' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># stationary Rt assumption (likely to provide biased real-time estimates)</span></span></span>
 <span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
@@ -387,8 +392,12 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, gp_on <span class="op">=</span> <span class="st">"R0"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">stat</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-8.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(stat):</span> object 'stat' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># no gaussian process (i.e fixed Rt assuming no breakpoints)</span></span></span>
 <span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
@@ -397,12 +406,16 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  delays <span class="op">=</span> <span class="fu"><a href="delay_opts.html">delay_opts</a></span><span class="op">(</span><span class="va">incubation_period</span>, <span class="va">reporting_delay</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">fixed</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-9.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(fixed):</span> object 'fixed' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># no delays</span></span></span>
 <span class="r-in"><span><span class="va">no_delay</span> <span class="op">&lt;-</span> <span class="fu">estimate_infections</span><span class="op">(</span><span class="va">reported_cases</span>, generation_time <span class="op">=</span> <span class="va">generation_time</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: mismatch in dimension declared and found in context; processing stage=data initialization; variable name=delay_mean_lower; position=0; dims declared=(0); dims found=(1)  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
@@ -419,14 +432,15 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="co"># break point effect</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">bkp</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type     median       mean         sd   lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt; -0.8712401 -0.8697808 0.03679842 -0.9280868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      lower_50  lower_20   upper_20   upper_50   upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: -0.8943184 -0.880716 -0.8611044 -0.8465034 -0.8072986</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in summary(bkp, type = "parameters", params = "breakpoints"):</span> object 'bkp' not found</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">bkp</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-10.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(bkp):</span> object 'bkp' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># weekly random walk</span></span></span>
 <span class="r-in"><span><span class="co"># with uncertain reporting delays</span></span></span>
@@ -436,29 +450,16 @@ samples, data used to fit the model, and the fit object itself.</p>
 <span class="r-in"><span>  rt <span class="op">=</span> <span class="fu"><a href="rt_opts.html">rt_opts</a></span><span class="op">(</span>prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>, rw <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  gp <span class="op">=</span> <span class="cn">NULL</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Exception: variable does not exist; processing stage=data initialization; variable name=delay_mean_lower; base type=double  (in 'data/delays.stan' at line 16; included from 'model_estimate_infections' at line 14)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> failed to create the sampler; sampling not done</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dimnames(x)$parameters:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># random walk effects</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="summary.epinow.html">summary</a></span><span class="op">(</span><span class="va">rw</span>, type <span class="op">=</span> <span class="st">"parameters"</span>, params <span class="op">=</span> <span class="st">"breakpoints"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date    variable strat type      median        mean         sd    lower_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1: &lt;NA&gt; breakpoints     1 &lt;NA&gt;  0.09610722  0.09698421 0.07927586 -0.03147608</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: &lt;NA&gt; breakpoints     2 &lt;NA&gt; -0.22108133 -0.22250333 0.09942951 -0.38919366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: &lt;NA&gt; breakpoints     3 &lt;NA&gt; -0.27297919 -0.27299843 0.10594778 -0.44359799</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: &lt;NA&gt; breakpoints     4 &lt;NA&gt; -0.38139019 -0.38237712 0.11489416 -0.57544158</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: &lt;NA&gt; breakpoints     5 &lt;NA&gt; -0.16932185 -0.16636983 0.11849833 -0.35881207</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: &lt;NA&gt; breakpoints     6 &lt;NA&gt;  0.02809099  0.02701326 0.12445452 -0.17436325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: &lt;NA&gt; breakpoints     7 &lt;NA&gt; -0.06088000 -0.05872025 0.12895914 -0.26975367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: &lt;NA&gt; breakpoints     8 &lt;NA&gt; -0.02326186 -0.02500967 0.20167572 -0.35050406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       lower_50    lower_20    upper_20    upper_50    upper_90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1:  0.03846920  0.07520720  0.11684477  0.15116910  0.22774317</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2: -0.28813502 -0.24671174 -0.19499908 -0.15330715 -0.06499094</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3: -0.35107864 -0.29973471 -0.24575010 -0.19842788 -0.09996517</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4: -0.45645681 -0.40776715 -0.35217489 -0.30445416 -0.19731883</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5: -0.24209273 -0.19854290 -0.13630115 -0.08798832  0.02652286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6: -0.05692787 -0.00511558  0.06146232  0.11153312  0.22879610</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7: -0.14290419 -0.09305341 -0.02776816  0.02850891  0.15525133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8: -0.15259458 -0.07168703  0.02682347  0.11022772  0.30535200</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in summary(rw, type = "parameters", params = "breakpoints"):</span> object 'rw' not found</span>
 <span class="r-in"><span><span class="fu"><a href="plot.estimate_infections.html">plot</a></span><span class="op">(</span><span class="va">rw</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="estimate_infections-11.png" alt="" width="864" height="864"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(rw):</span> object 'rw' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_opts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
