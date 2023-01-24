@@ -699,6 +699,8 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_sd_sd[delays];    // prior sd of sd of incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; delay_max[delays];       // maximum incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delay_dist[delays];       // 0 = lognormal; 1 = gamma</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   // lower bound on each uncertain delay distribution</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_mean_lower[delays];     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real L;				                     // boundary value for infections gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower=1&gt; M;			               // basis functions for infections gp</span>
@@ -719,6 +721,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_fixed[1];                      // 0 = variable gt; 1 = fixed gt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_dist[1];                    // distribution (0 = lognormal, 1 = gamma)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                    // distribution (0 = lognormal, 1 = gamma)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real gt_mean_lower[1];                  // lower bound on generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int estimate_r;                    // should the reproduction no be estimated (1 = yes)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real prior_infections;             // prior for initial infections</span>
@@ -800,7 +803,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[estimate_r] log_R;                // baseline reproduction number estimate (log)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real initial_infections[estimate_r] ;    // seed infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real initial_growth[estimate_r &amp;&amp; seeding_time &gt; 1 ? 1 : 0]; // seed growth rate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0, upper = gt_max[1]&gt; gt_mean[estimate_r &amp;&amp; gt_mean_sd[1] &gt; 0]; // mean of generation time (if uncertain)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;upper = gt_max[1]&gt; gt_mean[estimate_r &amp;&amp; gt_mean_sd[1] &gt; 0]; // mean of generation time (if uncertain)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0&gt; gt_sd[estimate_r &amp;&amp; gt_sd_sd[1] &gt; 0];       // sd of generation time (if uncertain)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0&gt; bp_sd[bp_n &gt; 0 ? 1 : 0]; // standard deviation of breakpoint effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real bp_effects[bp_n];                   // Rt breakpoint effects</span>
@@ -1566,6 +1569,8 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_sd_sd[delays];    // prior sd of sd of incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower = 1&gt; delay_max[delays];       // maximum incubation period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int delay_dist[delays];       // 0 = lognormal; 1 = gamma</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   // lower bound on each uncertain delay distribution</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real delay_mean_lower[delays];     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real L;				                     // boundary value for infections gp</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int&lt;lower=1&gt; M;			               // basis functions for infections gp</span>
@@ -1586,6 +1591,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_fixed[1];                      // 0 = variable gt; 1 = fixed gt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_dist[1];                    // distribution (0 = lognormal, 1 = gamma)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int gt_weight;                    // distribution (0 = lognormal, 1 = gamma)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real gt_mean_lower[1];                  // lower bound on generation time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   int estimate_r;                    // should the reproduction no be estimated (1 = yes)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real prior_infections;             // prior for initial infections</span>
@@ -1667,7 +1673,7 @@ authored by James Scott.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   vector[estimate_r] log_R;                // baseline reproduction number estimate (log)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real initial_infections[estimate_r] ;    // seed infections</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real initial_growth[estimate_r &amp;&amp; seeding_time &gt; 1 ? 1 : 0]; // seed growth rate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0, upper = gt_max[1]&gt; gt_mean[estimate_r &amp;&amp; gt_mean_sd[1] &gt; 0]; // mean of generation time (if uncertain)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;upper = gt_max[1]&gt; gt_mean[estimate_r &amp;&amp; gt_mean_sd[1] &gt; 0]; // mean of generation time (if uncertain)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0&gt; gt_sd[estimate_r &amp;&amp; gt_sd_sd[1] &gt; 0];       // sd of generation time (if uncertain)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real&lt;lower = 0&gt; bp_sd[bp_n &gt; 0 ? 1 : 0]; // standard deviation of breakpoint effect</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   real bp_effects[bp_n];                   // Rt breakpoint effects</span>
