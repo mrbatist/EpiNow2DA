@@ -138,8 +138,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int ylen = num_elements(y);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[len] z;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:len) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = 1e-5 + // add a small value to ensure numerical stability</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           dot_product(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = dot_product(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             x[max(1, (s - ylen + 1)):s], tail(y, min(ylen, s))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
@@ -948,7 +947,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $seed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 50569631</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 97720352</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $future</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -997,8 +996,7 @@ When using multiple chains iterations per chain is samples / chains.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     int ylen = num_elements(y);</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     vector[len] z;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     for (s in 1:len) {</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = 1e-5 + // add a small value to ensure numerical stability</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           dot_product(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         z[s] = dot_product(</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             x[max(1, (s - ylen + 1)):s], tail(y, min(ylen, s))</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           );</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
