@@ -122,13 +122,11 @@
 #' }
 estimate_secondary <- function(reports,
                                secondary = secondary_opts(),
-                               delays = delay_opts(
-                                 list(
-                                   mean = 2.5, mean_sd = 0.5,
-                                   sd = 0.47, sd_sd = 0.25, max = 30
-                                 )
+                               delays = dist_spec(
+                                 mean = 2.5, mean_sd = 0.5,
+                                 sd = 0.47, sd_sd = 0.25, max = 30
                                ),
-                               truncation = trunc_opts(),
+                               truncation = dist_spec(),
                                obs = obs_opts(),
                                burn_in = 14,
                                CrIs = c(0.2, 0.5, 0.9),
@@ -152,9 +150,25 @@ estimate_secondary <- function(reports,
   # secondary model options
   data <- c(data, secondary)
   # delay data
+  delays <- unclass(delays)
+  names(delays) <- paste0("delay_", names(delays))
+  truncation <- unclass(truncation)
+  names(truncation) <- paste0("trunc_", names(truncation))
+
   data <- c(data, delays)
   data$seeding_time <- 0
-  # truncation data
+  data$delays <- length(data$delay_mean_mean)
+  data$uncertain_mean_delays <- array(which(data$delay_mean_sd > 0))
+  data$uncertain_sd_delays <- array(which(data$delay_sd_sd > 0))
+  data$fixed_delays <- array(
+    which(data$delay_mean_sd == 0 & data$delay_sd_sd == 0)
+  )
+
+  data$n_uncertain_mean_delays <- length(data$uncertain_mean_delays)
+  data$n_uncertain_sd_delays <- length(data$uncertain_sd_delays)
+  data$n_fixed_delays <- length(data$fixed_delays)
+
+   # truncation data
   data <- c(data, truncation)
   # observation model data
   data <- c(data, create_obs_model(obs, dates = reports$date))

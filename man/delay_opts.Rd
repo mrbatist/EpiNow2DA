@@ -23,8 +23,9 @@ or not.}
 A list summarising the input delay distributions.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-Returns delay distributions formatted for usage by downstream
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+Deprecated and superseded by \code{dist_spec}. Returns delay distributions
+formatted for usage by downstream
 functions.
 }
 \examples{

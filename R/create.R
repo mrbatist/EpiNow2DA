@@ -378,6 +378,36 @@ create_obs_model <- function(obs = obs_opts(), dates) {
   ))
   return(data)
 }
+
+##' Create seeding time from delays and generation time
+##'
+##' The seeding time is calculated as the sum of the means of the given
+##' delay distribution, but at least the maximum generation time.
+##' @param delays An object of type `delay_dist()`, representing the delays
+##' @param generation_time An object of type `delay_dist()`, representing the
+##' generation_time
+##' @return Integer; the seeding time
+##' @author Sebastian Funk
+create_seeding_time <- function(delays, generation_time) {
+  ## Estimate the mean delay and set seeding time
+  seeding_time <- sum(purrr::pmap_dbl(
+    list(delays$mean_mean, delays$sd_mean, delays$dist),
+    function(.x, .y, .z) {
+      ifelse(.z == 0, exp(.x + .y^2 / 2), .x)
+    }
+  ))
+  if (seeding_time < 1) {
+    seeding_time <- 1L
+  } else {
+    seeding_time <- as.integer(seeding_time)
+  }
+
+  ## make sure we have at least gt_max seeding time
+  seeding_time <- max(seeding_time, generation_time$max)
+
+  return(seeding_time)
+}
+
 #' Create Stan Data Required for estimate_infections
 #'
 #' @description`r lifecycle::badge("stable")`
@@ -401,38 +431,53 @@ create_obs_model <- function(obs = obs_opts(), dates) {
 #' @importFrom purrr safely
 #' @return A list of stan data
 #' @author Sam Abbott
+#' @author Sebastian Funk
 #' @export
 create_stan_data <- function(reported_cases, generation_time,
                              rt, gp, obs, delays, horizon,
                              backcalc, shifted_cases,
-                             truncation) {
-  ## make sure we have at least gt_max seeding time
-  delays$seeding_time <- max(delays$seeding_time, generation_time$max)
+                             truncation, seeding_time) {
+  ## convert to plain lists and give unique names for stan
+  generation_time <- unclass(generation_time)
+  names(generation_time) <- paste0("gt_", names(generation_time))
+  delays <- unclass(delays)
+  names(delays) <- paste0("delay_", names(delays))
+  truncation <- unclass(truncation)
+  names(truncation) <- paste0("trunc_", names(truncation))
 
-  ## for backwards compatibility call generation_time_opts internally
-  if (is.list(generation_time) &&
-    all(c("mean", "mean_sd", "sd", "sd_sd") %in% names(generation_time))) {
-    generation_time <- do.call(generation_time_opts, generation_time)
-  }
+  # add gt data
+  data <- c(generation_time, delays, truncation)
+  data$seeding_time <- seeding_time
 
-  cases <- reported_cases[(delays$seeding_time + 1):(.N - horizon)]$confirm
+  ## assign certain/uncertain delays
+  data$delays <- length(data$delay_mean_mean)
 
-  data <- list(
+  data$uncertain_mean_delays <- array(which(data$delay_mean_sd > 0))
+  data$uncertain_sd_delays <- array(which(data$delay_sd_sd > 0))
+  data$fixed_delays <- array(
+    which(data$delay_mean_sd == 0 & data$delay_sd_sd == 0)
+  )
+
+  data$n_uncertain_mean_delays <- length(data$uncertain_mean_delays)
+  data$n_uncertain_sd_delays <- length(data$uncertain_sd_delays)
+  data$n_fixed_delays <- length(data$fixed_delays)
+
+  ## check if truncation will be applied
+  data$truncation <- as.integer(length(data$trunc_max) > 0)
+
+  ## set cases
+  cases <- reported_cases[(data$seeding_time + 1):(.N - horizon)]$confirm
+
+  data <- c(data, list(
     cases = cases,
     shifted_cases = shifted_cases,
     t = length(reported_cases$date),
     horizon = horizon,
     burn_in = 0
-  )
-  # add gt data
-  data <- c(data, generation_time)
-  # add delay data
-  data <- c(data, delays)
-  # add truncation data
-  data <- c(data, truncation)
+  ))
+
   # add Rt data
-  data <- c(
-    data,
+  data <- c(data,
     create_rt_data(rt,
       breakpoints = reported_cases[(data$seeding_time + 1):.N]$breakpoint,
       delay = data$seeding_time, horizon = data$horizon

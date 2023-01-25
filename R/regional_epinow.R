@@ -93,9 +93,9 @@
 #' options(old_opts)
 #' }
 regional_epinow <- function(reported_cases,
-                            generation_time,
-                            delays = delay_opts(),
-                            truncation = trunc_opts(),
+                            generation_time = dist_spec(mean = 1),
+                            delays = dist_spec(),
+                            truncation = dist_spec(),
                             rt = rt_opts(),
                             backcalc = backcalc_opts(),
                             gp = gp_opts(),

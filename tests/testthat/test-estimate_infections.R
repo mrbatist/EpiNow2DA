@@ -5,7 +5,7 @@ futile.logger::flog.threshold("FATAL")
 reported_cases <- EpiNow2::example_confirmed[1:30]
 generation_time <- get_generation_time(disease = "SARS-CoV-2", source = "ganyani", max_value = 10)
 incubation_period <- get_incubation_period(disease = "SARS-CoV-2", source = "lauer", max_value = 10)
-reporting_delay <- list(
+reporting_delay <- dist_spec(
   mean = convert_to_logmean(2, 1), mean_sd = 0.1,
   sd = convert_to_logsd(2, 1), sd_sd = 0.1, max = 10
 )
@@ -20,9 +20,15 @@ default_estimate_infections <- function(..., add_stan = list(), delay = TRUE) {
   stan_args <- def_stan[setdiff(names(def_stan), names(add_stan))]
   stan_args <- c(stan_args, add_stan)
 
+  if (delay) {
+    delays <- reporting_delay
+    } else {
+    delays <- dist_spec()
+  }
+
   suppressWarnings(estimate_infections(...,
     generation_time = generation_time,
-    delays = ifelse(delay, list(delay_opts(reporting_delay)), list(delay_opts()))[[1]],
+    delays = delays,
     stan = stan_args, verbose = FALSE
   ))
 }

@@ -59,6 +59,9 @@ report_cases <- function(case_estimates,
                          CrIs = c(0.2, 0.5, 0.9)) {
   samples <- length(unique(case_estimates$sample))
 
+  delays <- unclass(delays)
+  names(delays) <- paste0("delay_", names(delays))
+
   # define delay distributions
   delay_defs <- purrr::map(
     seq_along(delays$delay_mean_mean),

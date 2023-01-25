@@ -20,9 +20,9 @@ report_cases(
 variables: date, sample, cases. If not supplied the default is not to
 incorporate forecasts.}
 
-\item{delays}{A call to \code{delay_opts()} defining delay distributions and
-options. See the documentation of \code{delay_opts()} and the examples below for
-details.}
+\item{delays}{A call to \code{dist_spec()} defining a delay distribution.
+Multiple such calls can be chained together using \code{c()} to represent
+mutliple delay distributions.}
 
 \item{type}{Character string indicating the method to use to transform counts. Supports either "sample"
 which approximates sampling or "median" would shift by the median of the distribution.}

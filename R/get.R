@@ -230,7 +230,7 @@ get_generation_time <- function(disease, source, max_value = 15,
     max_value = max_value, fixed = fixed
   )
 
-  return(dist)
+  return(do.call(dist_spec, dist))
 }
 #'  Get a Literature Distribution for the Incubation Period
 #'
@@ -250,7 +250,7 @@ get_incubation_period <- function(disease, source, max_value = 15,
     max_value = max_value, fixed = fixed
   )
 
-  return(dist)
+  return(do.call(dist_spec, dist))
 }
 #' Get Regions with Most Reported Cases
 #'

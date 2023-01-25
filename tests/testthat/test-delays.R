@@ -1,6 +1,6 @@
-test_stan_data <- function(generation_time = generation_time_opts(),
-                           delays = delay_opts(),
-                           truncation = trunc_opts(),
+test_stan_data <- function(generation_time = dist_spec(mean = 1),
+                           delays = dist_spec(),
+                           truncation = dist_spec(),
                            params = c()) {
   data <- create_stan_data(
     reported_cases = example_confirmed,
@@ -12,7 +12,8 @@ test_stan_data <- function(generation_time = generation_time_opts(),
     obs = obs_opts(),
     backcalc = backcalc_opts(),
     shifted_cases = NULL,
-    horizon = 7
+    horizon = 7,
+    seeding_time = 0
   )
   return(unlist(unname(data[params])))
 }
@@ -26,38 +27,27 @@ test_that("generation times can be specified in different ways", {
   )
   expect_equal(
     test_stan_data(
-      generation_time = generation_time_opts(mean = 3),
+      generation_time = dist_spec(mean = 3),
       params = gt_params
     ),
     c(3, 0, 0, 0, 3)
   )
   expect_equal(
     test_stan_data(
-      generation_time = generation_time_opts(mean = 3, sd = 1, max = 5),
+      generation_time = dist_spec(mean = 3, sd = 1, max = 5),
       params = gt_params
     ),
     c(3, 0, 1, 0, 5)
   )
   expect_equal(
     round(test_stan_data(
-      generation_time = generation_time_opts(
-        get_generation_time(
-          disease = "SARS-CoV-2", source = "ganyani",
-          max = 10, fixed = TRUE
-        )
+      generation_time = get_generation_time(
+        disease = "SARS-CoV-2", source = "ganyani",
+        max = 10, fixed = TRUE
       ),
       params = gt_params
     ), digits = 2),
     c(3.64, 0, 3.08, 0, 10)
-  )
-  expect_equal(
-    round(test_stan_data(
-      generation_time = generation_time_opts(
-        disease = "SARS-CoV-2", source = "ganyani", max = 10
-      ),
-      params = gt_params
-    ), digits = 2),
-    c(3.64, 0.71, 3.08, 0.77, 10)
   )
 })
 
@@ -69,14 +59,14 @@ test_that("delay parameters can be specified in different ways", {
     )
   expect_equal(
     test_stan_data(
-      delays = delay_opts(list(mean = 3)),
+      delays = dist_spec(mean = 3),
       params = delay_params
     ),
     c(3, 0, 0, 0, 3)
   )
   expect_equal(
     test_stan_data(
-      delays = delay_opts(list(mean = 3, sd = 1, max = 5)),
+      delays = dist_spec(mean = 3, sd = 1, max = 5),
       params = delay_params
     ),
     c(3, 0, 1, 0, 5)
@@ -91,7 +81,7 @@ test_that("truncation parameters can be specified in different ways", {
     )
   expect_equal(
     test_stan_data(
-      truncation = trunc_opts(dist = list(mean = 3, sd = 1, max = 5)),
+      truncation = dist_spec(mean = 3, sd = 1, max = 5),
       params = trunc_params
     ),
     c(3, 0, 1, 0, 5)
@@ -99,20 +89,20 @@ test_that("truncation parameters can be specified in different ways", {
 })
 
 test_that("contradictory generation times are caught", {
-  expect_error(generation_time_opts(mean = 3.5), "must be an integer")
+  expect_error(dist_spec(mean = 3.5), "must be an integer")
   expect_error(
-    generation_time_opts(mean = 3, mean_sd = 1),
+    dist_spec(mean = 3, mean_sd = 1),
     "must be 0"
   )
 })
 
 test_that("contradictory delays are caught", {
   expect_error(
-    test_stan_data(delays = delay_opts(list(mean = 3.5))),
+    test_stan_data(delays = dist_spec(mean = 3.5)),
     "must be an integer"
   )
   expect_error(
-    test_stan_data(delays = delay_opts(list(mean = 3, mean_sd = 1))),
+    test_stan_data(delays = dist_spec(mean = 3, mean_sd = 1)),
     "must be 0"
   )
 })

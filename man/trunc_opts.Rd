@@ -14,10 +14,10 @@ trunc_opts(dist = list())
 A list summarising the input truncation distribution.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-Returns a truncation distribution formatted for usage by
-downstream functions. See \code{estimate_truncation()} for an approach to
-estimate these distributions.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+Deprecated and superceded by \code{dist_spec}. Returns a truncation distribution
+formatted for usage by downstream functions. See \code{estimate_truncation()}
+for an approach to estimate these distributions.
 }
 \examples{
 # no truncation

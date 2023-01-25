@@ -10,8 +10,9 @@ rt_opts(
   rw = 0,
   use_breakpoints = TRUE,
   future = "latest",
+  pop = 0,
   gp_on = "R_t-1",
-  pop = 0
+  gt_prior_weight = NULL
 )
 }
 \arguments{
@@ -38,6 +39,11 @@ options are to project using the Rt model ("project"), to use the latest estimat
 to use the latest estimate based on data that is over 50\% complete ("estimate"). If an integer is supplied then the Rt estimate
 from this many days into the future (or past if negative) past will be used forwards in time.}
 
+\item{pop}{Integer, defaults to 0. Susceptible population initially present.
+Used to adjust Rt estimates when otherwise fixed based on the proportion of
+the population that is susceptible. When set to 0 no population adjustment
+is done.}
+
 \item{gp_on}{Character string, defaulting to  "R_t-1". Indicates how the
 Gaussian process, if in use, should be applied to Rt. Currently supported
 options are applying the Gaussian process to the last estimated Rt (i.e
@@ -46,10 +52,11 @@ Rt = Rt-1 * GP), and applying the Gaussian process to a global mean (i.e Rt
 but the method relying on a global mean will revert to this for real time
 estimates, which may not be desirable.}
 
-\item{pop}{Integer, defaults to 0. Susceptible population initially present.
-Used to adjust Rt estimates when otherwise fixed based on the proportion of
-the population that is susceptible. When set to 0 no population adjustment
-is done.}
+\item{gt_prior_weight}{numeric, weight given to the generation time prior.
+By default the generation time prior will be weighted by the number of
+observation data points, usually preventing the posteriors from shifting
+much from the given distribution. Another sensible option would be 1,
+i.e. treating the generation time distribution as a single parameter.}
 }
 \value{
 A list of settings defining the time-varying reproduction number.

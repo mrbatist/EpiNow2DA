@@ -1,101 +1,8 @@
-#' Generation Time Distribution Options
-#'
-#' @description `r lifecycle::badge("stable")`
-#' Returns generation time parameters in a format for lower level model use. The
-#' generation time can either be given as a \code{disease} and \code{source} to
-#' be passed to [get_generation_time], or as parameters of a distribution to be
-#' passed to [dist_spec].
-#'
-#' @param ... Any parameters to be passed to [dist_spec()], if the generation
-#' time is given as parameters of a distribution rather than a \code{disease}
-#' and \code{source}. In this case if the \code{mean} parameter is not set a
-#' mean of 1 will be assumed, if the \code{max} parameter not set then the
-#' \code{max} will be set to 15 to ensure backwards compatibility, and if no
-#' \code{dist} parameter is given then a gamma distribution will be used for
-#' backwards compatibility. As for [delay_opts()] a list of parameters can
-#' also be supplied that describe a distribution (but unlike [delay_opts()]
-#' multiple distributions may not currently be used (for example as output by
-#' get_generation_time()).
-#'
-#' @param max Integer, defaults to 15. Maximum generation time. This will
-#' not be used if a maximum is set in the distribution parameters.
-#'
-#' @param fixed Logical, defaults to `FALSE`. Should the generation time be
-#' treated as coming from fixed (vs uncertain) distributions.
-#'
-#' @param prior_weight numeric, weight given to the generation time prior.
-#' By default the generation time prior will be weighted by the number of
-#' observation data points, usually preventing the posteriors from shifting
-#' much from the given distribution. Another sensible option would be 1,
-#' i.e. treating the generation time distribution as a single parameter.
-#'
-#' @return A list summarising the input delay distributions.
-#' @author Sebastian Funk
-#' @author Sam Abbott
-#' @inheritParams get_generation_time
-#' @seealso convert_to_logmean convert_to_logsd bootstrapped_dist_fit dist_spec
-#' @export
-#' @examples
-#' # default settings with a fixed generation time
-#' generation_time_opts()
-#'
-#' # A fixed gamma distributed generation time
-#' generation_time_opts(mean = 3, sd = 2)
-#'
-#' # An uncertain gamma distributed generation time
-#' generation_time_opts(mean = 3, sd = 2, mean_sd = 1, sd_sd = 0.5)
-#'
-generation_time_opts <- function(..., disease, source, max = 15L,
-                                 fixed = FALSE, prior_weight = NULL) {
-  dot_options <- list(...) ## options for dist_spec
-  ## check consistent options are given
-  type_options <- (length(dot_options) > 0) + ## distributional parameters
-    (!missing(disease) && !missing(source)) ## from included distributions
-  if (type_options > 1) {
-    stop(
-      "Generation time should be given either as distributional options  ",
-      "or as disease/source, but not both."
-    )
-  }
-
-  ## check to see if options have been passed in as a list
-  if (length(dot_options) == 1 && is.list(dot_options[[1]])) {
-    dot_options <- dot_options[[1]]
-  }
-
-  if (!missing(disease) && !missing(source)) { ## generation time provided as disease/source
-    dist <- get_generation_time(
-      disease = disease, source = source, max_value = max
-    )
-    dist$fixed <- fixed
-    gt <- do.call(dist_spec, dist)
-  } else { ## generation time provided as distributional parameters or not at all
-    ## make gamma default for backwards compatibility
-    if (!("dist" %in% names(dot_options))) {
-      dot_options$dist <- "gamma"
-    }
-    ## set max
-    if (!("max" %in% names(dot_options))) {
-      dot_options$max <- max
-    }
-    ## set default of mean=1 for backwards compatibility
-    if (!("mean" %in% names(dot_options))) {
-      dot_options$mean <- 1
-    }
-    dot_options$fixed <- fixed
-    gt <- do.call(dist_spec, dot_options)
-  }
-  gt$weight <- prior_weight
-
-  names(gt) <- paste0("gt_", names(gt))
-
-  return(gt)
-}
-
 #' Delay Distribution Options
 #'
-#' @description `r lifecycle::badge("stable")`
-#' Returns delay distributions formatted for usage by downstream
+#' @description `r lifecycle::badge("superseded")`
+#' Deprecated and superseded by `dist_spec`. Returns delay distributions 
+#' formatted for usage by downstream
 #' functions.
 #' @param ... A list of lists specifying distributions of reporting delays.
 #' Each list is passed to [dist_spec()] and so should contain parameters linked
@@ -131,8 +38,9 @@ generation_time_opts <- function(..., disease, source, max = 15L,
 #' # Multiple delays
 #' delay_opts(delay, delay)
 delay_opts <- function(..., fixed = FALSE) {
-  delays <- list(...)
-  data <- lapply(delays, do.call, what = dist_spec)
+  warning("`delay_opts` is deprecated and will be removed in a future ",
+	  "version of `EpiNow2`. Use `dist_spec` instead.")
+  data <- lapply(list(...), do.call, what = dist_spec)
 
   if (fixed) { ## set all to fixed
     data <- lapply(data, function(x) {
@@ -144,48 +52,22 @@ delay_opts <- function(..., fixed = FALSE) {
   }
 
   if (length(data) > 0) {
-    data <- purrr::transpose(data)
-    ## convert back to arrays
-    data <- lapply(data, function(x) array(unlist(x)))
+    ## convert to flat vector
+    data <- do.call(c, data)
   } else {
     data <- dist_spec()
   }
-
-  names(data) <- paste0("delay_", names(data))
-  # Estimate the mean delay -----------------------------------------------
-  data$seeding_time <- sum(purrr::pmap_dbl(
-    list(data$delay_mean_mean, data$delay_sd_mean, data$delay_dist),
-    function(.x, .y, .z) {
-      ifelse(.z == 0, exp(.x + .y^2 / 2), .x)
-    }
-  ))
-  if (data$seeding_time < 1) {
-    data$seeding_time <- 1
-  } else {
-    data$seeding_time <- as.integer(data$seeding_time)
-  }
-
-  data$delays <- length(delays)
-
-  data$uncertain_mean_delays <- array(which(data$delay_mean_sd > 0))
-  data$uncertain_sd_delays <- array(which(data$delay_sd_sd > 0))
-  data$fixed_delays <- array(
-    which(data$delay_mean_sd == 0 & data$delay_sd_sd == 0)
-  )
-
-  data$n_uncertain_mean_delays <- length(data$uncertain_mean_delays)
-  data$n_uncertain_sd_delays <- length(data$uncertain_sd_delays)
-  data$n_fixed_delays <- length(data$fixed_delays)
 
   return(data)
 }
 
 #' Truncation Distribution Options
 #'
-#' @description `r lifecycle::badge("stable")`
-#' Returns a truncation distribution formatted for usage by
-#' downstream functions. See `estimate_truncation()` for an approach to
-#' estimate these distributions.
+#' @description `r lifecycle::badge("superseded")`
+#' Deprecated and superceded by `dist_spec`. Returns a truncation distribution 
+#' formatted for usage by downstream functions. See `estimate_truncation()` 
+#' for an approach to estimate these distributions. 
+#'
 #'
 #' @param dist Parameters of a distribution as supported by
 #' [dist_spec()].
@@ -203,9 +85,10 @@ delay_opts <- function(..., fixed = FALSE) {
 #' # truncation dist
 #' trunc_opts(dist = list(mean = 3, sd = 2))
 trunc_opts <- function(dist = list()) {
+  warning("`trunc_opts` is deprecated and will be removed in a future ",
+	  "version of `EpiNow2`. Use `dist_spec` instead.")
   data <- do.call(dist_spec, dist)
   names(data) <- paste0("trunc_", names(data))
-  data$truncation <- as.integer(length(data$trunc_max) > 0)
   return(data)
 }
 
@@ -247,6 +130,12 @@ trunc_opts <- function(dist = list()) {
 #' but the method relying on a global mean will revert to this for real time
 #' estimates, which may not be desirable.
 #'
+#' @param gt_prior_weight numeric, weight given to the generation time prior.
+#' By default the generation time prior will be weighted by the number of
+#' observation data points, usually preventing the posteriors from shifting
+#' much from the given distribution. Another sensible option would be 1,
+#' i.e. treating the generation time distribution as a single parameter.
+#'
 #' @return A list of settings defining the time-varying reproduction number.
 #' @author Sam Abbott
 #' @inheritParams create_future_rt
@@ -265,8 +154,9 @@ rt_opts <- function(prior = list(mean = 1, sd = 1),
                     rw = 0,
                     use_breakpoints = TRUE,
                     future = "latest",
-                    gp_on = "R_t-1",
-                    pop = 0) {
+                    pop = 0,
+		    gp_on = "R_t-1",
+		    gt_prior_weight = NULL) {
   rt <- list(
     prior = prior,
     use_rt = use_rt,
@@ -274,7 +164,8 @@ rt_opts <- function(prior = list(mean = 1, sd = 1),
     use_breakpoints = use_breakpoints,
     future = future,
     pop = pop,
-    gp_on = match.arg(gp_on, choices = c("R_t-1", "R0"))
+    gp_on = match.arg(gp_on, choices = c("R_t-1", "R0")),
+    gt_weight = gt_prior_weight
   )
 
   # replace default settings with those specified by user

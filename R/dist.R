@@ -873,5 +873,35 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
     }
     ret$dist <- which(eval(formals()[["dist"]]) == dist) - 1
   }
-  return(lapply(ret, array))
+  ret <- lapply(ret, array)
+  attr(ret, "class") <- c("list", "delay_dist")
+  return(ret)
+}
+
+##' Combines multiple delay distributions into a new delay distribution
+##'
+##' At the moment all this does is concatenate the parameters so that they can
+##' be fed as multiple delay distributions to [epinow()] or [estimate_infections()].
+##'
+##' In the future this might be extended to simplify distributions,  e.g. when
+##' multiple gamma distributions are used.
+##' @param ... The delay distributions (from calls to [dist_spec()]) to combine
+##' @return Combined delay distributions (with class [dist_spec()]`)
+##' @author Sebastian Funk
+##' @method c delay_dist
+##' @importFrom purrr transpose map
+##' @export
+`c.delay_dist` <- function(...) {
+  ## process delay distributions
+  delays <- list(...)
+  if (any(!vapply(delays, is, FALSE, "delay_dist"))) {
+    stop("Delay distribution can only be concatenated with other delay ",
+	 "distributions.")
+  }
+  ## transpose delays
+  delays <- purrr::transpose(delays)
+  ## convert back to arrays
+  delays <- purrr::map(delays, function(x) array(unlist(x)))
+  attr(delays, "class") <- c("list", "delay_dist")
+  return(delays)
 }
