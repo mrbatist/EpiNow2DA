@@ -110,9 +110,12 @@ transformed parameters {
   } else if (process_model == 2) {
     // via Rt
     vector[gt_max[1]] gt_pmf;
-    gt_rev_pmf = combine_pmfs(gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1, 1);
-    infections = renewal_model(cov, uobs_inf, gt_rev_pmf,
-                               pop, future_time);
+    gt_rev_pmf = combine_pmfs(
+      gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1, 1
+    );
+    infections = renewal_model(
+      cov, uobs_inf, gt_rev_pmf, pop, future_time
+    );
   }
   // convolve from latent infections to mean of observations
   {
@@ -210,7 +213,7 @@ generated quantities {
     // calculate Rt using infections and generation time
     R = calculate_Rt(infections, seeding_time, gt_rev_pmf);
   } else {
-    R = cov;
+    R = exp(cov);
   }
   if (process_model != 1) {
     r = calculate_growth(infections, seeding_time);
