@@ -197,14 +197,17 @@ generated quantities {
   real r[ot_h - 1];
   vector[return_likelihood  ? ot : 0] log_lik;
   if (estimate_r == 0 && process_model != 2) {
-
     // sample generation time
     real gt_mean_sample[1];
     real gt_sd_sample[1];
     vector[gt_max[1]] gt_rev_pmf;
 
-    gt_mean_sample[1] = (gt_mean_sd[1] > 0 ? normal_rng(gt_mean_mean[1], gt_mean_sd[1]) : gt_mean_mean[1]);
-    gt_sd_sample[1] = (gt_sd_sd[1] > 0 ? normal_rng(gt_sd_mean[1], gt_sd_sd[1]) : gt_sd_mean[1]);
+    gt_mean_sample[1] = (gt_mean_sd[1] > 0 ?
+      normal_rng(gt_mean_mean[1], gt_mean_sd[1]) : gt_mean_mean[1]
+    );
+    gt_sd_sample[1] = (gt_sd_sd[1] > 0 ?
+      normal_rng(gt_sd_mean[1], gt_sd_sd[1]) : gt_sd_mean[1]
+    );
     gt_rev_pmf = combine_pmfs(
       gt_fixed_pmf, gt_mean_sample, gt_sd_sample, gt_max, gt_dist, gt_max[1],
       1, 1
