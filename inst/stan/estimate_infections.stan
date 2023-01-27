@@ -109,7 +109,7 @@ transformed parameters {
     infections = growth_model(cov, uobs_inf, future_time);
   } else if (process_model == 2) {
     // via Rt
-    vector[gt_max[1]] gt_pmf;
+    vector[gt_max[1]] gt_rev_pmf;
     gt_rev_pmf = combine_pmfs(
       gt_fixed_pmf, gt_mean, gt_sd, gt_max, gt_dist, gt_max[1], 1, 1
     );
@@ -194,7 +194,7 @@ model {
 generated quantities {
   int imputed_reports[ot_h];
   vector[estimate_r > 0 ? 0: ot_h] R;
-  real r[ot_h - 1];
+  vector[ot_h - 1] r;
   vector[return_likelihood  ? ot : 0] log_lik;
   if (estimate_r == 0 && process_model != 2) {
     // sample generation time
