@@ -39,6 +39,13 @@ example_data <- purrr::map(c(20, 15, 10, 0),
   cases = reported_cases,
   dist = trunc_dist
 )
+weekly_example_data <- purrr::map(example_data, \(x) {
+  x <- x[, date := lubridate::ceiling_date(date, unit = "week", week_start = 6)]
+  x <- x[, list(confirm = sum(confirm), n = .N), by = date]
+  x <- x[n == 7]
+  x <- x[, n := NULL]
+  return(x)
+})
 
 test_that("estimate_truncation can return values from simulated data and plot
            them", {
@@ -46,6 +53,24 @@ test_that("estimate_truncation can return values from simulated data and plot
   est <- estimate_truncation(example_data,
     verbose = interactive(), refresh = 0,
     chains = 2, iter = 1000, warmup = 250
+  )
+  expect_equal(
+    names(est),
+    c("dist", "obs", "last_obs", "cmf", "data", "fit")
+  )
+  expect_equal(
+    names(est$dist),
+    c("mean", "mean_sd", "sd", "sd_sd", "max")
+  )
+  expect_error(plot(est), NA)
+})
+
+test_that("estimate_truncation works on weekly data", {
+  # fit model to example data
+  est <- estimate_truncation(weekly_example_data,
+    verbose = interactive(), refresh = 0,
+    chains = 2, iter = 1000, warmup = 250,
+    trunc_max = 14
   )
   expect_equal(
     names(est),

@@ -36,12 +36,14 @@
 #' @param obs A list of data frames each containing a date variable
 #' and a confirm (integer) variable. Each data set should be a snapshot
 #' of the reported data over time. All data sets must contain a complete vector
-#' of dates.
+#' of dates (with arbitrary but fixed reporting frequency).
 #'
 #' @param max_truncation Deprecated; use `trunc_max` instead.
 #'
 #' @param trunc_max Integer, defaults to 10. Maximum number of
-#' days to include in the truncation distribution.
+#' days to include in the truncation distribution. If the reporting frequency is
+#' less than one per day this needs to be a multiple of the gap between
+#' observations
 #'
 #' @param trunc_dist Character, defaults to "lognormal". The parametric
 #' distribution to be used for truncation.
@@ -62,6 +64,7 @@
 #' used for fitting (`data`) and the fit object (`fit`).
 #'
 #' @author Sam Abbott
+#' @author Sebastian Funk
 #' @export
 #' @inheritParams calc_CrIs
 #' @importFrom purrr map reduce map_dbl
@@ -148,7 +151,16 @@ estimate_truncation <- function(obs, max_truncation, trunc_max = 10,
     confirm := NULL
   ])
   obs <- purrr::reduce(obs, merge, all = TRUE)
-  obs_start <- nrow(obs) - trunc_max - sum(is.na(obs$`1`)) + 1
+  freq <- unique(diff(obs$date))
+  if (length(freq) > 1) {
+    stop("All observations have to be complete and equally ",
+         "spaced for `estimate_Truncation`.")
+  }
+  freq_trunc_max <- trunc_max %/% freq
+  if (freq_trunc_max * freq != trunc_max) {
+    stop("`trunc_max` must be a multiple of the data frequency.")
+  }
+  obs_start <- nrow(obs) - freq_trunc_max - sum(is.na(obs$`1`)) + 1
   obs_dist <- purrr::map_dbl(2:(ncol(obs)), ~ sum(is.na(obs[[.]])))
   obs_data <- obs[, -1][, purrr::map(.SD, ~ ifelse(is.na(.), 0, .))]
   obs_data <- obs_data[obs_start:.N]
@@ -159,7 +171,7 @@ estimate_truncation <- function(obs, max_truncation, trunc_max = 10,
     obs_dist = obs_dist,
     t = nrow(obs_data),
     obs_sets = ncol(obs_data),
-    trunc_max = trunc_max,
+    trunc_max = freq_trunc_max,
     trunc_dist = trunc_dist
   )
 
@@ -190,12 +202,14 @@ estimate_truncation <- function(obs, max_truncation, trunc_max = 10,
   )
 
   out <- list()
+  logmean <- rstan::extract(fit, pars = "logmean")$logmean + log(freq)
+  logsd <- rstan::extract(fit, pars = "logsd")$logs
   # Summarise fit truncation distribution for downstream usage
   out$dist <- list(
-    mean = round(rstan::summary(fit, pars = "logmean")$summary[1], 3),
-    mean_sd = round(rstan::summary(fit, pars = "logmean")$summary[3], 3),
-    sd = round(rstan::summary(fit, pars = "logsd")$summary[1], 3),
-    sd_sd = round(rstan::summary(fit, pars = "logsd")$summary[3], 3),
+    mean = round(mean(logmean), 3),
+    mean_sd = round(sd(logmean), 3),
+    sd = round(mean(logsd), 3),
+    sd_sd = round(sd(logsd), 3),
     max = trunc_max
   )
 
@@ -219,7 +233,7 @@ estimate_truncation <- function(obs, max_truncation, trunc_max = 10,
     ]
   link_obs <- function(index) {
     target_obs <- dirty_obs[[index]][, index := .N - 0:(.N - 1)]
-    target_obs <- target_obs[index < trunc_max]
+    target_obs <- target_obs[index < freq_trunc_max]
     estimates <- recon_obs[dataset == index][, c("id", "dataset") := NULL]
     estimates <- estimates[, lapply(.SD, as.integer)]
     estimates <- estimates[, index := .N - 0:(.N - 1)]
