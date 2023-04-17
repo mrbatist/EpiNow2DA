@@ -17,4 +17,4 @@ reporting_delay <- list(
   sd = convert_to_logsd(2, 1), sd_sd = 0, max = 10
 )
 
-delays <- delay_opts(incubation_period, reporting_delay)
+delays <- delay_opts(c(incubation_period, reporting_delay))
