@@ -583,7 +583,7 @@ bootstrapped_dist_fit <- function(values, dist = "lognormal",
 #'
 #' @param ... Arguments to pass to internal methods.
 #'
-#' @return A list summarising the bootstrapped distribution
+#' @return A `dist_spec` summarising the bootstrapped distribution
 #' @author Sam Abbott
 #' @export
 #' @seealso bootstrapped_dist_fit
@@ -597,7 +597,7 @@ estimate_delay <- function(delays, ...) {
     values = delays,
     dist = "lognormal", ...
   )
-  return(do.call(dist_spec, fit))
+  return(fit)
 }
 
 #' Approximate Sampling a Distribution using Counts
