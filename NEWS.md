@@ -4,12 +4,13 @@ This release is in development. For a stable release install 1.3.5 from CRAN.
 
 ## Package
 
-* Model description has been expanded to include more detail.
-* Moved to a GitHub Action to only lint changed files.
-* Linted the package with a wider range of default linters.
-* Added a GitHub Action to build the README when it is altered.
+* Model description has been expanded to include more detail. By @sbfnk in #373.
+* Moved to a GitHub Action to only lint changed files. By @seabbs in #378.
+* Linted the package with a wider range of default linters. By @seabbs in #378.
+* Added a GitHub Action to build the README when it is altered. By @seabbs.
 * Added handling of edge case where we sample from the negative binomial with
   mean close or equal to 0. By @sbfnk in #366.
+* The internal distribution interface has been streamlined to reduce code duplication. By @sbfnk in #363.
 
 # EpiNow2 1.3.5
 
