@@ -12,7 +12,7 @@ incubation_period <- get_incubation_period(
   disease = "SARS-CoV-2", source = "lauer", fixed = TRUE
 )
 
-reporting_delay <- list(
+reporting_delay <- dist_spec(
   mean = convert_to_logmean(2, 1), mean_sd = 0,
   sd = convert_to_logsd(2, 1), sd_sd = 0, max = 10
 )
