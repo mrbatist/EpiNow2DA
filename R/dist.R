@@ -15,13 +15,15 @@
 #' distribution be cumulative.
 #'
 #' @param model Character string, defining the model to be used. Supported
-#' options are exponential ("exp"), gamma ("gamma"), and log normal ("lognormal")
+#'   options are exponential ("exp"), gamma ("gamma"), and log normal
+#'   ("lognormal")
 #'
-#' @param discrete Logical,  defaults to `FALSE`. Should the probability distribution
-#' be discretised. In this case each entry of the probability mass function corresponds
-#' to the 1-length interval ending at the entry, i.e. the probability mass function is a
-#' vector where the first entry corresponds to the integral over the (0,1] interval of
-#' the continuous distribution, the second entry corresponds to the (1,2] interval etc.
+#' @param discrete Logical,  defaults to `FALSE`. Should the probability
+#'   distribution be discretised. In this case each entry of the probability
+#'   mass function corresponds to the 1-length interval ending at the entry,
+#'   i.e. the probability mass function is a vector where the first entry
+#'   corresponds to the integral over the (0,1] interval of the continuous
+#'   distribution, the second entry corresponds to the (1,2] interval etc.
 #'
 #' @param params A list of parameters values (by name) required for each model.
 #' For the exponential model this is a rate parameter and for the gamma model
@@ -325,7 +327,7 @@ gamma_dist_def <- function(shape, shape_sd,
                            mean, mean_sd,
                            sd, sd_sd,
                            max_value, samples) {
-  if (missing(shape) & missing(scale) & !missing(mean) & !missing(sd)) {
+  if (missing(shape) && missing(scale) && !missing(mean) && !missing(sd)) {
     if (!missing(mean_sd)) {
       mean <- truncnorm::rtruncnorm(samples, a = 0, mean = mean, sd = mean_sd)
     }
@@ -337,7 +339,9 @@ gamma_dist_def <- function(shape, shape_sd,
     scale <- 1 / scale
   } else {
     if (!missing(shape_sd)) {
-      shape <- truncnorm::rtruncnorm(samples, a = 0, mean = shape, sd = shape_sd)
+      shape <- truncnorm::rtruncnorm(
+        samples, a = 0, mean = shape, sd = shape_sd
+      )
     }
     if (!missing(scale_sd)) {
       scale <- 1 / truncnorm::rtruncnorm(
@@ -415,7 +419,7 @@ lognorm_dist_def <- function(mean, mean_sd,
   }
 
   if (missing(mean_sd)) {
-    sample_means <- mean
+    sampled_means <- mean
   } else {
     sampled_means <- truncnorm::rtruncnorm(
       samples, a = 0, mean = mean, sd = mean_sd
@@ -934,7 +938,9 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
   } else {
     if (!all(missing(sd), missing(mean_sd),
       missing(sd_sd), missing(distribution), missing(max))) {
-        stop("If any distributional parameters are given then so must the mean.")
+        stop(
+          "If any distributional parameters are given then so must the mean."
+        )
     }
   }
 
@@ -972,8 +978,8 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
               sd = sd, sd_sd = sd_sd, max_value = max, samples = 1)
           }
           pmf <- dist_skel(
-            n = seq_len(max) - 1, dist = TRUE, cum = FALSE, model = distribution,
-            params = params$params[[1]], max_value = max,
+            n = seq_len(max) - 1, dist = TRUE, cum = FALSE,
+            model = distribution, params = params$params[[1]], max_value = max,
             discrete = TRUE
           )
         }
@@ -1040,12 +1046,12 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
   delays <- c(e1, e2)
   ## combine any nonparametric delays that can be combined
   if (sum(delays$fixed) > 1) {
-    new_pmf <- c(1)
-    group_starts <- c(1, cumsum(delays$np_pmf_length) + 1)
-    for (i in seq_len(length(group_starts) - 1)) {
+    new_pmf <- 1L
+    group_starts <- c(1L, cumsum(delays$np_pmf_length) + 1L)
+    for (i in seq_len(length(group_starts) - 1L)) {
       new_pmf <- stats::convolve(
         new_pmf,
-        rev(delays$np_pmf[seq(group_starts[i], group_starts[i + 1] - 1)]),
+        rev(delays$np_pmf[seq(group_starts[i], group_starts[i + 1L] - 1L)]),
         type = "open"
       )
     }
@@ -1061,8 +1067,8 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
 
 ##' Combines multiple delay distributions for further processing
 ##'
-##' This combines the parameters so that they can
-##' be fed as multiple delay distributions to [epinow()] or [estimate_infections()].
+##' This combines the parameters so that they can be fed as multiple delay
+##' distributions to [epinow()] or [estimate_infections()].
 ##'
 ##' @param ... The delay distributions (from calls to [dist_spec()]) to combine
 ##' @return Combined delay distributions (with class [dist_spec()]`)
@@ -1072,7 +1078,7 @@ dist_spec <- function(mean, sd = 0, mean_sd = 0, sd_sd = 0,
 c.dist_spec <- function(...) {
   ## process delay distributions
   delays <- list(...)
-  if (any(!vapply(delays, is, FALSE, "dist_spec"))) {
+  if (!(all(vapply(delays, is, FALSE, "dist_spec")))) {
     stop(
       "Delay distribution can only be concatenated with other delay ",
       "distributions."
@@ -1108,7 +1114,7 @@ mean.dist_spec <- function(x, ...) {
     ret[x$fixed == 1L] <- vapply(seq_along(init_id), function(id) {
       pmf <- x$np_pmf[seq(init_id[id], cumsum(x$np_pmf_length)[id])]
       return(sum((seq_len(x$np_pmf_length[id]) - 1) * pmf))
-    }, .0)
+    }, 0)
   }
   ## parametric
   if (x$n_p > 0) {
@@ -1118,7 +1124,7 @@ mean.dist_spec <- function(x, ...) {
       } else if (x$dist[id] == 1) { ## gamma
         return(x$mean_mean[id])
       }
-    }, .0)
+    }, 0)
   }
   return(ret)
 }
