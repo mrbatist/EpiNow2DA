@@ -41,7 +41,7 @@ vector update_Rt(int t, real log_R, vector noise, int[] bps,
 void rt_lp(vector log_R, real[] initial_infections, real[] initial_growth,
            real[] bp_effects, real[] bp_sd, int bp_n, int seeding_time,
            real r_logmean, real r_logsd, real prior_infections,
-           real prior_growth) {
+           real prior_growth, int obs_scale, real[] frac_obs) {
   // prior on R
   log_R ~ normal(r_logmean, r_logsd);
   //breakpoint effects on Rt
@@ -50,8 +50,11 @@ void rt_lp(vector log_R, real[] initial_infections, real[] initial_growth,
     bp_effects ~ normal(0, bp_sd[1]);
   }
   // initial infections
-  initial_infections ~ normal(prior_infections, 0.2);
+  initial_infections ~ normal(
+    prior_infections * (obs_scale ? 1 / frac_obs[1] : 1),
+    1 + log(seeding_time)
+  );
   if (seeding_time > 1) {
-    initial_growth ~ normal(prior_growth, 0.2);
+    initial_growth ~ normal(prior_growth, 1);
   }
 }

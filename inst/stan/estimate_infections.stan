@@ -138,7 +138,8 @@ model {
     // priors on Rt
     rt_lp(
       log_R, initial_infections, initial_growth, bp_effects, bp_sd, bp_n,
-      seeding_time, r_logmean, r_logsd, prior_infections, prior_growth
+      seeding_time, r_logmean, r_logsd, prior_infections, prior_growth,
+      obs_scale, frac_obs
     );
   }
   // prior observation scaling
