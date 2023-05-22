@@ -50,14 +50,14 @@ vector generate_infections(real aa, vector oR, int uot, vector gt_rev_pmf,
           R[s] = exp(log(R[s-1]) - aa*infections[s-1]);
         }
       }
-      if( R[s] < 0){
-        R[s] = 0;
+      if( R[s] < 0.00001){
+        R[s] = 0.00001;
       }
       infections[s + uot] += R[s] * infectiousness[s];
       if( infections[s+uot] < 0 ){
         infections[s + uot] = 0;
       }
-      if (pop && s < ot) {
+      if ( s < ot) {
         cum_infections[s + 1] = cum_infections[s] + infections[s + uot];
       }
 
