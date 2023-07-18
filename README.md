@@ -1,5 +1,5 @@
 
-# EpiNow2D: Estimate real-time case counts and time-varying epidemiological parameters
+# EpiNow2DA: Estimate real-time case counts and time-varying epidemiological parameters
 
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
@@ -84,14 +84,14 @@ admissions) using `estimate_secondary()`.
 Install the development version of the package with:
 
 ``` r
-install.packages("EpiNow2", repos = "https://github.com/mrbatist/EpiNow2.git")
+install.packages("EpiNow2", repos = "https://github.com/mrbatist/EpiNow2DA.git")
 ```
 
 Alternatively, download locally as zip and use:
 
 ``` r
 library(devtools)
-install_local("~/GitHub/EpiNow2.zip")
+install_local("~/GitHub/EpiNow2DA.zip")
 ```
 
 Windows users will need a working installation of Rtools in order to
