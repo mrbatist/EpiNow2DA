@@ -656,7 +656,7 @@ calc_CrI <- function(samples, summarise_by = NULL, CrI = 0.9) {
 #' calc_CrIs(samples)
 #' # add 90% credible interval grouped by type
 #' calc_CrIs(samples, summarise_by = "type")
-calc_CrIs <- function(samples, summarise_by = NULL, CrIs = c(0.2, 0.5, 0.9)) {
+calc_CrIs <- function(samples, summarise_by = NULL, CrIs = c(0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95, 0.975,0.99)) {
   CrIs <- CrIs[order(CrIs)]
   with_CrIs <- purrr::map(CrIs, ~ calc_CrI(
     samples = samples,
@@ -751,7 +751,7 @@ calc_summary_stats <- function(samples, summarise_by = NULL) {
 calc_summary_measures <- function(samples,
                                   summarise_by = NULL,
                                   order_by = NULL,
-                                  CrIs = c(0.2, 0.5, 0.9)) {
+                                  CrIs = c(0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95, 0.975,0.99)) {
   if (is.null(summarise_by)) {
     summarise_by <- setdiff(names(samples), "value")
   }

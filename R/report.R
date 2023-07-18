@@ -61,7 +61,7 @@ report_cases <- function(case_estimates,
                          delays,
                          type = "sample",
                          reporting_effect,
-                         CrIs = c(0.2, 0.5, 0.9)) {
+                         CrIs = c(0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95, 0.975,0.99)) {
   samples <- length(unique(case_estimates$sample))
 
   # define delay distributions

@@ -227,14 +227,14 @@ estimate_infections <- function(reported_cases,
                                 generation_time = generation_time_opts(),
                                 delays = delay_opts(),
                                 truncation = trunc_opts(),
-                                aa = 0,
+                                aa = c( 0,  0.1),
                                 rt = rt_opts(),
                                 backcalc = backcalc_opts(),
                                 gp = gp_opts(),
                                 obs = obs_opts(),
                                 stan = stan_opts(),
                                 horizon = 7,
-                                CrIs = c(0.2, 0.5, 0.9),
+                                CrIs = c(0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95, 0.975,0.99),
                                 filter_leading_zeros = TRUE,
                                 zero_threshold = Inf,
                                 id = "estimate_infections",
@@ -302,7 +302,8 @@ estimate_infections <- function(reported_cases,
     shifted_cases = shifted_cases$confirm,
     horizon = horizon
   )
-  data$aa <- aa 
+  data$aa_mean <- aa[1]
+  data$aa_sd <- aa[2]
   # Set up default settings
   args <- create_stan_args(
     stan = stan,

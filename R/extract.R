@@ -235,7 +235,7 @@ extract_parameter_samples <- function(stan_fit, data, reported_dates,
 #' @importFrom data.table as.data.table :=
 #' @importFrom rstan summary
 extract_stan_param <- function(fit, params = NULL,
-                               CrIs = c(0.2, 0.5, 0.9), var_names = FALSE) {
+                               CrIs = c(0.55, 0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.95, 0.975,0.99), var_names = FALSE) {
   # generate symmetric CrIs
   CrIs <- CrIs[order(CrIs)]
   sym_CrIs <- c(0.5, 0.5 - CrIs / 2, 0.5 + CrIs / 2)

@@ -16,7 +16,8 @@ data {
 #include data/rt.stan
 #include data/backcalc.stan
 #include data/observation_model.stan
-  real aa;
+  real aa_mean;
+  real aa_sd;
 }
 
 transformed data{
@@ -74,6 +75,7 @@ parameters{
   real trunc_mean[truncation && !trunc_fixed[1]];        // mean of truncation
   real<lower = 0> trunc_sd[truncation && !trunc_fixed[1]]; // sd of truncationa
   real<lower = 0> rep_phi[model_type];     // overdispersion of the reporting process
+  real<lower = 0> aa;
 }
 
 transformed parameters {
@@ -170,6 +172,7 @@ model {
   if (obs_scale) {
     frac_obs[1] ~ normal(obs_scale_mean, obs_scale_sd) T[0, 1];
   }
+  aa ~ normal(aa_mean, aa_sd);
   // observed reports from mean of reports (update likelihood)
   if (likelihood) {
     report_lp(

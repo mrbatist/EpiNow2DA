@@ -45,10 +45,8 @@ vector generate_infections(real aa, vector oR, int uot, vector gt_rev_pmf,
   // iteratively update infections
   for (s in 1:ot) {
     infectiousness[s] += update_infectiousness(infections, gt_rev_pmf, uot, s);
-      if(aa > 0){  
-        if (s > nht ){
-          R[s] = exp(log(R[s-1]) - aa*infections[s-1]);
-        }
+      if (s > 1 ){
+        R[s] = exp(log(R[s-1]) - aa*infections[s-1]);
       }
       if( R[s] < 0.00001){
         R[s] = 0.00001;
