@@ -219,7 +219,7 @@ estimates <- epinow(
   generation_time = generation_time_opts(generation_time),
   delays = delay_opts(incubation_period, reporting_delay),
   rt = rt_opts(prior = list(mean = 2, sd = 0.2)),
-  aa = 0,
+  aa = c(1000/pop,1/pop),
   stan = stan_opts(cores = 4, control = list(adapt_delta = 0.99)),
   verbose = interactive()
 )
