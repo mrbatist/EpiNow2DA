@@ -84,7 +84,8 @@ admissions) using `estimate_secondary()`.
 Install the development version of the package with:
 
 ``` r
-install.packages("EpiNow2", repos = "https://github.com/mrbatist/EpiNow2DA.git")
+library(devtools)
+install_github("mbatist/EpiNow2DA")
 ```
 
 Alternatively, download locally as zip and use:
